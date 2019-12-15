@@ -42,7 +42,7 @@ $wgAutoloadClasses['CAP_TagCloud'] = __DIR__ . '/includes/CAP_TagCloud.php';
 $wgAutoloadClasses['CreateMultiPage'] = __DIR__ . '/includes/CreateMultiPage.php';
 $wgAutoloadClasses['CreatePage'] = __DIR__ . '/includes/specials/SpecialCreatePage.body.php';
 $wgAutoloadClasses['CreatePageEditor'] = __DIR__ . '/includes/CreatePageEditor.php';
-$wgAutoloadClasses['CreatePageMultiEditor'] = __DIR__ . '/includes/CreatePageEditor.php';
+$wgAutoloadClasses['CreatePageMultiEditor'] = __DIR__ . '/includes/CreatePageMultiEditor.php';
 $wgAutoloadClasses['CreatePageCreateplateForm'] = __DIR__ . '/includes/CreatePageCreateplateForm.php';
 $wgAutoloadClasses['CreatePageImageUploadForm'] = __DIR__ . '/includes/CreatePageImageUploadForm.php';
 
