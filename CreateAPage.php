@@ -35,21 +35,21 @@ $wgMultiEditPageSimpleTags = [ 'lbl', 'categories', 'pagetitle', 'imageupload', 
 $wgMessagesDirs['CreateAPage'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['CreatePageAliases'] = __DIR__ . '/CreatePage.alias.php';
 
-$wgAutoloadClasses['CreateAPageUtils'] = __DIR__ . '/CreateAPageUtils.php';
-$wgAutoloadClasses['CreateAPageHooks'] = __DIR__ . '/CreateAPageHooks.php';
-$wgAutoloadClasses['EasyTemplate'] = __DIR__ . '/EasyTemplate.php'; // @todo FIXME: kill templates and remove this class
-$wgAutoloadClasses['CAP_TagCloud'] = __DIR__ . '/CAP_TagCloud.php';
-$wgAutoloadClasses['CreateMultiPage'] = __DIR__ . '/CreateMultiPage.php';
-$wgAutoloadClasses['CreatePage'] = __DIR__ . '/SpecialCreatePage.body.php';
-$wgAutoloadClasses['CreatePageEditor'] = __DIR__ . '/CreatePageEditor.php';
-$wgAutoloadClasses['CreatePageMultiEditor'] = __DIR__ . '/CreatePageEditor.php';
-$wgAutoloadClasses['CreatePageCreateplateForm'] = __DIR__ . '/CreatePageCreateplateForm.php';
-$wgAutoloadClasses['CreatePageImageUploadForm'] = __DIR__ . '/CreatePageImageUploadForm.php';
+$wgAutoloadClasses['CreateAPageUtils'] = __DIR__ . '/includes/CreateAPageUtils.php';
+$wgAutoloadClasses['CreateAPageHooks'] = __DIR__ . '/includes/CreateAPageHooks.php';
+$wgAutoloadClasses['EasyTemplate'] = __DIR__ . '/includes/EasyTemplate.php'; // @todo FIXME: kill templates and remove this class
+$wgAutoloadClasses['CAP_TagCloud'] = __DIR__ . '/includes/CAP_TagCloud.php';
+$wgAutoloadClasses['CreateMultiPage'] = __DIR__ . '/includes/CreateMultiPage.php';
+$wgAutoloadClasses['CreatePage'] = __DIR__ . '/includes/specials/SpecialCreatePage.body.php';
+$wgAutoloadClasses['CreatePageEditor'] = __DIR__ . '/includes/CreatePageEditor.php';
+$wgAutoloadClasses['CreatePageMultiEditor'] = __DIR__ . '/includes/CreatePageEditor.php';
+$wgAutoloadClasses['CreatePageCreateplateForm'] = __DIR__ . '/includes/CreatePageCreateplateForm.php';
+$wgAutoloadClasses['CreatePageImageUploadForm'] = __DIR__ . '/includes/CreatePageImageUploadForm.php';
 
 $wgSpecialPages['CreatePage'] = 'CreatePage';
 
 // Load AJAX functions, too
-require_once __DIR__ . '/SpecialCreatePage_ajax.php';
+require_once __DIR__ . '/includes/specials/SpecialCreatePage_ajax.php';
 
 // ResourceLoader support for MediaWiki 1.17+
 $wgResourceModules['ext.createAPage'] = [
