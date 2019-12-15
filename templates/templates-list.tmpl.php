@@ -70,7 +70,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 		</div>
 	</div>
 	<?php
-	} // foreach
+		} // foreach
 	?>
 </div>
 
