@@ -1306,6 +1306,11 @@ $( function() {
 
 	$( 'body' ).on( 'click', '#wpPreview', function ( e ) {
 		CreateAPage.enableSubmit( e );
+		// Even when a CAPTCHA *is* required to _create_ a page, it oughta not be
+		// required for merely _previewing_ your changes
+		if ( $( '#wpCaptchaWord' ).length > 0 ) {
+			$( '#wpCaptchaWord' ).prop( 'required', false );
+		}
 	} );
 
 	$( 'body' ).on( 'click', '#wpCancel', function ( e ) {
