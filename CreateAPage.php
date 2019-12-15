@@ -24,7 +24,7 @@ $wgExtensionCredits['specialpage'][] = [
 		'Jack Phoenix'
 	],
 	'version' => '4.00-super-alpha',
-	'description' => '[[Special:CreatePage|Easy to use interface]] for creating new articles',
+	'descriptionmsg' => 'createpage-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:CreateAPage',
 ];
 

@@ -9,6 +9,7 @@
 	"createpage-hide": "Piilota",
 	"createpage-show": "Näytä",
 	"createpage": "Luo uusi artikkeli",
+	"createpage-desc": "[[Special:CreatePage|Helppokäyttöinen käyttöliittymä]] uusien artikkelien luomiseen",
 	"createpage-title": "Luo uusi artikkeli",
 	"createpage-title-additional": "Olet seurannut linkkiä sivulle, jota ei ole vielä olemassa. Aloita kirjoittaminen allaolevaan laatikkoon luodaksesi sivun",
 	"createpage-title-caption": "Artikkelin otsikko",

@@ -13,6 +13,7 @@
 	"createpage-hide": "Hide",
 	"createpage-show": "Show",
 	"createpage": "Create a new article",
+	"createpage-desc": "[[Special:CreatePage|Easy to use interface]] for creating new articles",
 	"createpage-title": "Create a new article",
 	"createpage-title-additional": "You've followed a link to a page that doesn't exist yet. To create the page, start typing in the box below",
 	"createpage-title-caption": "Article Title",
