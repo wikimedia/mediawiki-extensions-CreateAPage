@@ -68,7 +68,7 @@ $wgResourceModules['ext.createAPage'] = [
 		'createpage-advanced-warning',
 		'createpage-yes', 'createpage-no'
 	],
-	'dependencies' => [ 'jquery.ui.dialog', 'jquery.spinner', 'mediawiki.util' ],
+	'dependencies' => [ 'jquery.ui', 'jquery.spinner', 'mediawiki.util' ],
 	'localBasePath' => __DIR__ . '/resources',
 	'remoteExtPath' => 'CreateAPage/resources'
 ];
