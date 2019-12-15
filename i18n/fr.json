@@ -2,7 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Alexandre Emsenhuber",
-			"Jack Phoenix <jack@countervandalism.net>",
+			"Jack Phoenix",
 			"Peter17"
 		]
 	},
@@ -42,7 +42,6 @@
 	"createpage-login-required2": "pour importer des images",
 	"createpage-please-wait": "Veuillez patienter...",
 	"createpage-upload-directory-read-only": "Le dossier d'import n'est pas inscriptible par le serveur web",
-	"headline-tip-3": "Titre de niveau 3",
 	"createpage-about-info": "Ceci est l'éditeur simplifié. Pour en savoir plus, allez sur [[s:Help:CreatePage|ShoutWiki Hub]].",
 	"createpage-advanced-text": "Vous pouvez également utiliser l'$1.",
 	"createpage-advanced-edit": "éditeur avancé",

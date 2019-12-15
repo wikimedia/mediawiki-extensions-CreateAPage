@@ -41,7 +41,6 @@
 	"createpage-login-required2": "Refer to {{msg-mw|createpage-login-required}} for documentation about how this message is used.",
 	"createpage-please-wait": "Used as an <code>alt</code> text on a progress bar image element; realistically only users with a super-slow Internet connection will ever see this",
 	"createpage-upload-directory-read-only": "Error message shown via JavaScript if for some reason CreateAPage is installed and a user tries to upload an image via the upload form on Special:CreatePage, but the upload directory is not writable by the webserver",
-	"headline-tip-3": "UNUSED, REMOVE ME EVENTUALLY.",
 	"createpage-about-info": "Text shown on Special:CreatePage when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration and a user follows a red link, which then takes them to the Special:CreatePage-like editor, which however is not technically Special:CreatePage, it just looks literally like Special:CreatePage.",
 	"createpage-advanced-text": "$1 is {{msg-mw|createpage-advanced-edit}}",
 	"createpage-advanced-edit": "Link title, see {{msg-mw|createpage-advanced-text}}",

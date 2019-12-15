@@ -32,123 +32,6 @@ class CreateMultiPage {
 		return $text;
 	}
 
-	public static function getToolArray() {
-		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
-		$toolarray = [
-			[
-				'image' => 'button_bold.png',
-				'id'	=> 'mw-editbutton-bold',
-				'open'  => '\\\'\\\'\\\'',
-				'close' => '\\\'\\\'\\\'',
-				'sample' => wfMessage( 'bold_sample' )->escaped(),
-				'tip'   => wfMessage( 'bold_tip' )->escaped(),
-				'key'   => 'B'
-			],
-			[
-				'image' => 'button_italic.png',
-				'id'	=> 'mw-editbutton-italic',
-				'open'  => '\\\'\\\'',
-				'close' => '\\\'\\\'',
-				'sample' => wfMessage( 'italic_sample' )->escaped(),
-				'tip'   => wfMessage( 'italic_tip' )->escaped(),
-				'key'   => 'I'
-			],
-			[
-				'image' => 'button_link.png',
-				'id'	=> 'mw-editbutton-link',
-				'open'  => '[[',
-				'close' => ']]',
-				'sample' => wfMessage( 'link_sample' )->escaped(),
-				'tip'   => wfMessage( 'link_tip' )->escaped(),
-				'key'   => 'L'
-			],
-			[
-				'image' => 'button_extlink.png',
-				'id'	=> 'mw-editbutton-extlink',
-				'open'  => '[',
-				'close' => ']',
-				'sample' => wfMessage( 'extlink_sample' )->escaped(),
-				'tip'   => wfMessage( 'extlink_tip' )->escaped(),
-				'key'   => 'X'
-			],
-			[
-				'image' => 'button_headline.png',
-				'id'	=> 'mw-editbutton-headline',
-				'open'  => "\\n=== ",
-				'close' => " ===\\n",
-				'sample' => wfMessage( 'headline_sample' )->escaped(),
-				'tip'   => wfMessage( 'headline_tip_3' )->escaped(),
-				'key'   => 'H'
-			],
-			[
-				'image' => 'button_image.png',
-				'id'	=> 'mw-editbutton-image',
-				'open'  => '[[' . $contLang->getNsText( NS_FILE ) . ':',
-				'close' => ']]',
-				'sample' => wfMessage( 'image_sample' )->escaped(),
-				'tip'   => wfMessage( 'image_tip' )->escaped(),
-				'key'   => 'D'
-			],
-			[
-				'image' => 'button_media.png',
-				'id'	=> 'mw-editbutton-media',
-				'open'  => '[[' . $contLang->getNsText( NS_MEDIA ) . ':',
-				'close' => ']]',
-				'sample' => wfMessage( 'media_sample' )->escaped(),
-				'tip'   => wfMessage( 'media_tip' )->escaped(),
-				'key'   => 'M'
-			],
-			[
-				'image' => 'button_math.png',
-				'id'	=> 'mw-editbutton-math',
-				'open'  => '<math>',
-				'close' => "<\\/math>",
-				'sample' => wfMessage( 'math_sample' )->escaped(),
-				'tip'   => wfMessage( 'math_tip' )->escaped(),
-				'key'   => 'C'
-			],
-			[
-				'image' => 'button_nowiki.png',
-				'id'	=> 'mw-editbutton-nowiki',
-				'open'  => '<nowiki>',
-				'close' => "<\\/nowiki>",
-				'sample' => wfMessage( 'nowiki_sample' )->escaped(),
-				'tip'   => wfMessage( 'nowiki_tip' )->escaped(),
-				'key'   => 'N'
-			],
-			[
-				'image' => 'button_sig.png',
-				'id'	=> 'mw-editbutton-signature',
-				'open'  => '--~~~~',
-				'close' => '',
-				'sample' => '',
-				'tip'   => wfMessage( 'sig_tip' )->escaped(),
-				'key'   => 'Y'
-			],
-			[
-				'image' => 'button_hr.png',
-				'id'	=> 'mw-editbutton-hr',
-				'open'  => "\\n----\\n",
-				'close' => '',
-				'sample' => '',
-				'tip'   => wfMessage( 'hr_tip' )->escaped(),
-				'key'   => 'R'
-			]
-		];
-
-		Hooks::run( 'ToolbarGenerate', [ &$toolarray ] );
-		return $toolarray;
-	}
-
-	// modified a bit standard editToolbar function from EditPage class
-	public static function getMultiEditToolbar( $toolbar_id ) {
-		// $toolarray = CreateMultiPage::getToolArray();
-		// multiple toolbars...
-		$toolbar = "<div id='toolbar" . $toolbar_id . "' style='display: none'>\n";
-		$toolbar .= "\n</div>";
-		return $toolbar;
-	}
-
 	// @todo FIXME: remove $ew parameter, it appears to be always '?' and serves no purpose whatsoever
 	public static function multiEditParse( $rows, $cols, $ew, $sourceText, $optional_sections = null ) {
 		global $wgTitle, $wgExtensionAssetsPath;
@@ -172,10 +55,8 @@ class CreateMultiPage {
 
 				// fire off a special one textarea template
 				$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-				$toolbar_text = self::getMultiEditToolbar( 0 );
 				$tmpl->set_vars( [
-					'box' => $sourceText,
-					'toolbar' => $toolbar_text,
+					'box' => $sourceText
 				] );
 				$me_content .= $tmpl->render( 'bigarea' );
 
@@ -448,12 +329,10 @@ class CreateMultiPage {
 					case 'optional': { // <!---optional---> tag support
 						$text_html = str_replace( $other_tags[0], '', $text ); // strip the tag
 						$text_html = trim( $text_html );
-						$toolbarid = count( $boxes );
-						$toolbar_text = self::getMultiEditToolbar( $toolbarid );
 						$boxes[] = [
 							'type' => 'optional_textarea',
 							'value' => $text_html,
-							'toolbar' => $toolbar_text,
+							'toolbar' => '',
 							'display' => 1
 						];
 
@@ -479,14 +358,10 @@ class CreateMultiPage {
 
 						$text = str_replace( $other_tags[0], '', $text );
 
-						// get the toolbar
-						$toolbarid = count( $boxes );
-						$toolbar_text = self::getMultiEditToolbar( $toolbarid );
-
 						$boxes[] = [
 							'type' => 'textarea',
 							'value' => $text,
-							'toolbar' => $toolbar_text,
+							'toolbar' => '',
 							'display' => 1
 						];
 
@@ -510,14 +385,10 @@ class CreateMultiPage {
 					}
 				}
 			} elseif ( $specialTag == 'generic' ) { // generic textarea
-				// get the toolbar
-				$toolbarid = count( $boxes );
-				$toolbar_text = self::getMultiEditToolbar( $toolbarid );
-
 				$boxes[] = [
 					'type' => 'textarea',
 					'value' => $text,
-					'toolbar' => $toolbar_text,
+					'toolbar' => '',
 					'display' => 1
 				];
 			}

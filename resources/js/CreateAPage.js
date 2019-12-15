@@ -127,12 +127,6 @@ var CreateAPage = {
 
 	disabledCr: false,
 
-	toolbarButtons: [],
-
-	multiEditTextboxes: [],
-	multiEditButtons: [],
-	multiEditCustomButtons: [],
-
 	foundCategories: [],
 
 	myId: 0,
@@ -714,15 +708,9 @@ var CreateAPage = {
 		} );
 	},
 
+	// @todo FIXME: rename to a more descriptive name now that old toolbar stuff is gone
 	textareaAddToolbar: function( el ) {
 		var el_id = parseInt( el.id.replace( 'wpTextboxes', '' ) );
-		CreateAPage.multiEditTextboxes[CreateAPage.multiEditTextboxes.length] = el_id;
-		CreateAPage.multiEditButtons[el_id] = [];
-		CreateAPage.multiEditCustomButtons[el_id] = [];
-
-		$( '#' + el.id ).focus( function( e ) {
-			CreateAPage.showThisBox( e, { 'toolbarId': el_id } );
-		} );
 
 		$( '#wpTextIncrease' + el_id ).click( function( e ) {
 			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': 1 } );
@@ -730,18 +718,6 @@ var CreateAPage = {
 		$( '#wpTextDecrease' + el_id ).click( function( e ) {
 			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': -1 } );
 		} );
-
-		for ( var i = 0; i < CreateAPage.toolbarButtons.length; i++ ) {
-			CreateAPage.addMultiEditButton(
-				CreateAPage.toolbarButtons[i]['image'],
-				CreateAPage.toolbarButtons[i]['tip'],
-				CreateAPage.toolbarButtons[i]['open'],
-				CreateAPage.toolbarButtons[i]['close'],
-				CreateAPage.toolbarButtons[i]['sample'],
-				CreateAPage.toolbarButtons[i]['id'] + el_id,
-				el_id
-			);
-		}
 	},
 
 	checkCategoryCloud: function() {
@@ -811,24 +787,6 @@ var CreateAPage = {
 		}
 	},
 
-	addMultiEditButton: function( imageFile, speedTip, tagOpen, tagClose, sampleText, imageId, toolbarId ) {
-		CreateAPage.multiEditButtons[toolbarId][CreateAPage.multiEditButtons[toolbarId].length] = {
-			'imageId': imageId,
-			'toolbarId': toolbarId,
-			'imageFile': imageFile,
-			'speedTip': speedTip,
-			'tagOpen': tagOpen,
-			'tagClose': tagClose,
-			'sampleText': sampleText
-		};
-	},
-
-	showThisBox: function( e, o ) {
-		e.preventDefault();
-		document.getElementById( 'toolbar' + o.toolbarId ).style.display = '';
-		CreateAPage.hideOtherBoxes( o.toolbarId );
-	},
-
 	/**
 	 * Onclick handler for the up/down images, for making the given textarea
 	 * either smaller or larger
@@ -848,38 +806,6 @@ var CreateAPage = {
 		{
 			r_textarea.prop( 'rows', r_textarea.prop( 'rows' ) + o.numRows );
 		}
-	},
-
-	hideOtherBoxes: function( boxId ) {
-		for ( var i = 0; i < CreateAPage.multiEditTextboxes.length; i++ ) {
-			if ( CreateAPage.multiEditTextboxes[i] !== boxId ) {
-				$( '#toolbar' + CreateAPage.multiEditTextboxes[i] ).hide();
-			}
-		}
-	},
-
-	multiEditSetupToolbar: function() {
-		for ( var j = 0; j < CreateAPage.multiEditButtons.length; j++ ) {
-			var toolbar = document.getElementById( 'toolbar' + j );
-			if ( toolbar ) {
-				var textbox = document.getElementById( 'wpTextboxes' + j );
-				if ( !textbox ) {
-					return false;
-				}
-				if (
-					!( document.selection && document.selection.createRange ) &&
-					textbox.selectionStart === null
-				)
-				{
-					return false;
-				}
-
-				for ( var i = 0; i < CreateAPage.multiEditButtons[j].length; i++ ) {
-					CreateAPage.insertMultiEditButton( toolbar, CreateAPage.multiEditButtons[j][i] );
-				}
-			}
-		}
-		return true;
 	},
 
 	multiEditSetupOptionalSections: function() {
@@ -903,105 +829,6 @@ var CreateAPage = {
 					CreateAPage.toggleSection( e, { num: snum } );
 				} );
 			}
-		}
-	},
-
-	insertMultiEditButton: function( parent, item ) {
-		var image = document.createElement( 'img' );
-		image.width = 23;
-		image.height = 22;
-		image.className = 'mw-toolbar-editbutton';
-		if ( item.imageId ) {
-			image.id = item.imageId;
-		}
-		image.src = item.imageFile;
-		image.border = 0;
-		image.alt = item.speedTip;
-		image.title = item.speedTip;
-		image.style.cursor = 'pointer';
-
-		parent.appendChild( image );
-
-		$( '#' + item.imageId ).click( function( e ) {
-			CreateAPage.insertTags( e, {
-				'tagOpen': item.tagOpen,
-				'tagClose': item.tagClose,
-				'sampleText': item.sampleText,
-				'textareaId': 'wpTextboxes' + item.toolbarId
-			} );
-		} );
-
-		return true;
-	},
-
-	insertTags: function( e, o ) {
-		e.preventDefault();
-		var textarea = document.getElementById( o.textareaId );
-		if ( !textarea ) {
-			return;
-		}
-		var selText, isSample = false;
-
-		if ( document.selection && document.selection.createRange ) {
-			var winScroll;
-			if ( document.documentElement && document.documentElement.scrollTop ) {
-				winScroll = document.documentElement.scrollTop;
-			} else if ( document.body ) {
-				winScroll = document.body.scrollTop;
-			}
-			textarea.focus();
-			var range = document.selection.createRange();
-			selText = range.text;
-
-			if ( !selText ) {
-				selText = o.sampleText;
-				isSample = true;
-			} else if ( selText.charAt( selText.length - 1 ) === ' ' ) {
-				selText = selText.substring( 0, selText.length - 1 );
-				o.tagClose += ' ';
-			}
-
-			range.text = o.tagOpen + selText + o.tagClose;
-			if ( isSample && range.moveStart ) {
-				if ( window.opera ) {
-					o.tagClose = o.tagClose.replace( /\n/g, '' );
-				}
-				range.moveStart( 'character', - o.tagClose.length - selText.length );
-				range.moveEnd( 'character', - o.tagClose.length );
-			}
-			range.select();
-			if ( document.documentElement && document.documentElement.scrollTop ) {
-				document.documentElement.scrollTop = winScroll;
-			} else if ( document.body ) {
-				document.body.scrollTop = winScroll;
-			}
-		} else if ( textarea.selectionStart || textarea.selectionStart === '0' ) {
-			var textScroll = textarea.scrollTop;
-			textarea.focus();
-			var startPos = textarea.selectionStart;
-			var endPos = textarea.selectionEnd;
-			selText = textarea.value.substring( startPos, endPos );
-
-			if ( !selText ) {
-				selText = o.sampleText;
-				isSample = true;
-			} else if ( selText.charAt( selText.length - 1 ) === ' ' ) {
-				selText = selText.substring( 0, selText.length - 1 );
-				o.tagClose += ' ';
-			}
-
-			textarea.value = textarea.value.substring( 0, startPos ) +
-				o.tagOpen + selText + o.tagClose +
-				textarea.value.substring( endPos, textarea.value.length );
-			if ( isSample ) {
-				textarea.selectionStart = startPos + o.tagOpen.length;
-				textarea.selectionEnd = startPos + o.tagOpen.length + selText.length;
-			} else {
-				textarea.selectionStart = startPos + o.tagOpen.length +
-					selText.length + o.tagClose.length;
-				textarea.selectionEnd = textarea.selectionStart;
-			}
-			textarea.scrollTop = textScroll;
 		}
 	},
 
@@ -1032,13 +859,8 @@ var CreateAPage = {
 
 		if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
 			edit_textareas[0].focus();
-		} else {
-			var el_id = parseInt( edit_textareas[0].id.replace( 'wpTextboxes', '' ) );
-			document.getElementById( 'toolbar' + el_id ).style.display = '';
-			CreateAPage.hideOtherBoxes( el_id );
 		}
 
-		CreateAPage.multiEditSetupToolbar();
 		CreateAPage.multiEditSetupOptionalSections();
 		CreateAPage.checkCategoryCloud();
 	},
@@ -1192,10 +1014,6 @@ var CreateAPage = {
 				CreateAPage.resizeOverlay( 20 );
 			}
 
-			CreateAPage.multiEditTextboxes = [];
-			CreateAPage.multiEditButtons = [];
-			CreateAPage.multiEditCustomButtons = [];
-
 			var edit_textareas = CreateAPage.getElementsBy(
 				CreateAPage.editTextareaTest,
 				'textarea',
@@ -1205,10 +1023,6 @@ var CreateAPage = {
 
 			if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
 				edit_textareas[0].focus();
-			} else {
-				var el_id = parseInt( edit_textareas[0].id.replace( 'wpTextboxes', '' ) );
-				document.getElementById( 'toolbar' + el_id ).style.display = '';
-				CreateAPage.hideOtherBoxes( el_id );
 			}
 
 			// Load WikiEditor for the newly created textarea elements, provided that
@@ -1226,7 +1040,6 @@ var CreateAPage = {
 				}
 			}
 
-			CreateAPage.multiEditSetupToolbar();
 			CreateAPage.multiEditSetupOptionalSections();
 		} );
 	},
@@ -1577,17 +1390,6 @@ $( function() {
 			CreateAPage.clearInput( { num: ourInfoboxElement.attr( 'id' ).replace( /wpInfoboxPar/, '' ) } );
 		} );
 	}
-
-	// Moved from CreateMultiPage.php on 8 December 2019
-	// @todo FIXME: This is probably dead code given that MW core no longer has old-school editing toolbar and that we now support WikiEditor
-	$( 'div[id^="toolbar"]' ).each( function ( idx ) {
-		CreateAPage.multiEditTextboxes[CreateAPage.multiEditTextboxes.length] = idx;
-		CreateAPage.multiEditButtons[idx] = [];
-		CreateAPage.multiEditCustomButtons[idx] = [];
-		$( '#wpTextboxes' + idx ).focus( function ( e ) {
-			CreateAPage.showThisBox( e, { 'toolbarId': idx } );
-		} );
-	} );
 
 	// "or click here to go to the normal editor" link at the start of Special:CreatePage
 	// Moved from CreatePageCreateplateForm.php on 8 December 2019

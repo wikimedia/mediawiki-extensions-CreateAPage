@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jack Phoenix <jack@countervandalism.net>"
+			"Jack Phoenix"
 		]
 	},
 	"createpage-edit-normal": "Kehittynyt muokkaus",
@@ -40,7 +40,6 @@
 	"createpage-login-required2": "tallentaaksesi kuvia",
 	"createpage-please-wait": "Odota...",
 	"createpage-upload-directory-read-only": "Web-palvelin ei voi kirjoittaa tallennuskansioon",
-	"headline-tip-3": "Kolmostason otsikko",
 	"createpage-about-info": "Tämä on yksinkertaistettu editori. Katso [[s:w:fi:Ohje:CreatePage|ShoutWikin ohjeista]] saadaksesi lisätietoja.",
 	"createpage-advanced-text": "Voit myös käyttää $1.",
 	"createpage-advanced-edit": "kehittynyttä editoria",

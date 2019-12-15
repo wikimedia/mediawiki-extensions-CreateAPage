@@ -35,30 +35,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 </style>
 </noscript>
 
-<script type="text/javascript">
-/*<![CDATA[*/
-<?php
-$tool_arr = CreateMultiPage::getToolArray();
-$tool_num = 0;
-if ( false ) { // ashley 8 December 2019: @todo FIXME, shitty hack to kill JS errors for dev only
-foreach ( $tool_arr as $single_tool ) { ?>
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>] = [];
-	// @todo FIXME: bad path
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['image'] = stylepath + '/common/images/' + '<?php echo $single_tool['image'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['id'] = '<?php echo $single_tool['id'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['open'] = '<?php echo $single_tool['open'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['close'] = '<?php echo $single_tool['close'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['sample'] = '<?php echo $single_tool['sample'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['tip'] = '<?php echo $single_tool['tip'] ?>';
-CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['key'] = '<?php echo $single_tool['key'] ?>';
-<?php
-	$tool_num++;
-}
-} // if false
-?>
-/*]]>*/
-</script>
-
 <?php if ( !$ispreview ) { ?>
 
 <div id="templateThumbs">
