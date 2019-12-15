@@ -42,8 +42,7 @@ class CreateAPageHooks {
 		if (
 			( $user->getOption( 'createpage-redlinks', 1 ) == 0 ) ||
 			!in_array( $namespace, $wgContentNamespaces )
-		)
-		{
+		) {
 			return true;
 		}
 
@@ -51,8 +50,7 @@ class CreateAPageHooks {
 		if (
 			$article->getTitle()->exists() ||
 			( $wgRequest->getVal( 'editmode' ) == 'nomulti' )
-		)
-		{
+		) {
 			return true;
 		} else {
 			if ( $wgRequest->getCheck( 'wpPreview' ) ) {

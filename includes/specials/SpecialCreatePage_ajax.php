@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AJAX functions for CreateAPage extension.
  */
@@ -95,13 +96,13 @@ function axMultiEditImageUpload() {
 		];
 	} else {
 		if ( $uploadedfile['once'] ) {
-			#if ( !$error_once ) {
+			# if ( !$error_once ) {
 				$res = [
 					'error' => 1,
 					'msg' => $uploadedfile['msg'],
 					'num' => $postfix,
 				];
-			#}
+			# }
 			$error_once = true;
 		} else {
 			$res = [

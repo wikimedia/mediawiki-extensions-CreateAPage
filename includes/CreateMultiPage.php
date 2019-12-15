@@ -6,7 +6,7 @@
  * @author Piotr Molski <moli@wikia-inc.com>
  * @author Bartek Łapiński <bartek@wikia-inc.com>
  * @copyright Copyright © 2007 Piotr Molski, Wikia Inc.
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  */
 
 class CreateMultiPage {
@@ -19,7 +19,7 @@ class CreateMultiPage {
 	const IMAGEUPLOAD_TAG_SPECIFIC = '/\<!---imageupload---\>/is'; // used outside this class in templates/infobox.tmpl.php
 	const INFOBOX_SEPARATOR = '/\<!---separator---\>/is'; // used _only_ outside this class in templates/infobox.tmpl.php
 	const ISBLANK_TAG_SPECIFIC = '<!---blanktemplate--->';
-	//const TEMPLATE_INFOBOX_FORMAT = '/\{\{[^\{\}]*Infobox.*\}\}/is'; // replaced by [[MediaWiki:Createpage-template-infobox-format]]
+	// const TEMPLATE_INFOBOX_FORMAT = '/\{\{[^\{\}]*Infobox.*\}\}/is'; // replaced by [[MediaWiki:Createpage-template-infobox-format]]
 	//const TEMPLATE_OPENING = '/\{\{[^\{\}]*Infobox[^\|]*/i'; // literally unused
 	const TEMPLATE_CLOSING = '/\}\}/';
 
@@ -40,7 +40,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-bold',
 				'open'  => '\\\'\\\'\\\'',
 				'close' => '\\\'\\\'\\\'',
-				'sample'=> wfMessage( 'bold_sample' )->escaped(),
+				'sample' => wfMessage( 'bold_sample' )->escaped(),
 				'tip'   => wfMessage( 'bold_tip' )->escaped(),
 				'key'   => 'B'
 			],
@@ -49,7 +49,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-italic',
 				'open'  => '\\\'\\\'',
 				'close' => '\\\'\\\'',
-				'sample'=> wfMessage( 'italic_sample' )->escaped(),
+				'sample' => wfMessage( 'italic_sample' )->escaped(),
 				'tip'   => wfMessage( 'italic_tip' )->escaped(),
 				'key'   => 'I'
 			],
@@ -58,7 +58,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-link',
 				'open'  => '[[',
 				'close' => ']]',
-				'sample'=> wfMessage( 'link_sample' )->escaped(),
+				'sample' => wfMessage( 'link_sample' )->escaped(),
 				'tip'   => wfMessage( 'link_tip' )->escaped(),
 				'key'   => 'L'
 			],
@@ -67,7 +67,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-extlink',
 				'open'  => '[',
 				'close' => ']',
-				'sample'=> wfMessage( 'extlink_sample' )->escaped(),
+				'sample' => wfMessage( 'extlink_sample' )->escaped(),
 				'tip'   => wfMessage( 'extlink_tip' )->escaped(),
 				'key'   => 'X'
 			],
@@ -76,7 +76,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-headline',
 				'open'  => "\\n=== ",
 				'close' => " ===\\n",
-				'sample'=> wfMessage( 'headline_sample' )->escaped(),
+				'sample' => wfMessage( 'headline_sample' )->escaped(),
 				'tip'   => wfMessage( 'headline_tip_3' )->escaped(),
 				'key'   => 'H'
 			],
@@ -85,7 +85,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-image',
 				'open'  => '[[' . $contLang->getNsText( NS_FILE ) . ':',
 				'close' => ']]',
-				'sample'=> wfMessage( 'image_sample' )->escaped(),
+				'sample' => wfMessage( 'image_sample' )->escaped(),
 				'tip'   => wfMessage( 'image_tip' )->escaped(),
 				'key'   => 'D'
 			],
@@ -94,7 +94,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-media',
 				'open'  => '[[' . $contLang->getNsText( NS_MEDIA ) . ':',
 				'close' => ']]',
-				'sample'=> wfMessage( 'media_sample' )->escaped(),
+				'sample' => wfMessage( 'media_sample' )->escaped(),
 				'tip'   => wfMessage( 'media_tip' )->escaped(),
 				'key'   => 'M'
 			],
@@ -103,7 +103,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-math',
 				'open'  => '<math>',
 				'close' => "<\\/math>",
-				'sample'=> wfMessage( 'math_sample' )->escaped(),
+				'sample' => wfMessage( 'math_sample' )->escaped(),
 				'tip'   => wfMessage( 'math_tip' )->escaped(),
 				'key'   => 'C'
 			],
@@ -112,7 +112,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-nowiki',
 				'open'  => '<nowiki>',
 				'close' => "<\\/nowiki>",
-				'sample'=> wfMessage( 'nowiki_sample' )->escaped(),
+				'sample' => wfMessage( 'nowiki_sample' )->escaped(),
 				'tip'   => wfMessage( 'nowiki_tip' )->escaped(),
 				'key'   => 'N'
 			],
@@ -121,7 +121,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-signature',
 				'open'  => '--~~~~',
 				'close' => '',
-				'sample'=> '',
+				'sample' => '',
 				'tip'   => wfMessage( 'sig_tip' )->escaped(),
 				'key'   => 'Y'
 			],
@@ -130,7 +130,7 @@ class CreateMultiPage {
 				'id'	=> 'mw-editbutton-hr',
 				'open'  => "\\n----\\n",
 				'close' => '',
-				'sample'=> '',
+				'sample' => '',
 				'tip'   => wfMessage( 'hr_tip' )->escaped(),
 				'key'   => 'R'
 			]
@@ -172,7 +172,7 @@ class CreateMultiPage {
 
 				// fire off a special one textarea template
 				$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
-				$toolbar_text = CreateMultiPage::getMultiEditToolbar( 0 );
+				$toolbar_text = self::getMultiEditToolbar( 0 );
 				$tmpl->set_vars( [
 					'box' => $sourceText,
 					'toolbar' => $toolbar_text,
@@ -368,7 +368,7 @@ class CreateMultiPage {
 											"<!---{$_tag}={$brt}" . $special_tags[$_tag] . "{$brt}--->",
 											'[[' . $contLang->getNsText( NS_CATEGORY ) .
 												':' . sprintf( $format_tag_text, $special_tags[$_tag] ) . ']]',
-											//'[[Category:' . sprintf( $format_tag_text, $special_tags[$_tag] ) . ']]',
+											// '[[Category:' . sprintf( $format_tag_text, $special_tags[$_tag] ) . ']]',
 											$text
 										);
 									}
@@ -449,7 +449,7 @@ class CreateMultiPage {
 						$text_html = str_replace( $other_tags[0], '', $text ); // strip the tag
 						$text_html = trim( $text_html );
 						$toolbarid = count( $boxes );
-						$toolbar_text = CreateMultiPage::getMultiEditToolbar( $toolbarid );
+						$toolbar_text = self::getMultiEditToolbar( $toolbarid );
 						$boxes[] = [
 							'type' => 'optional_textarea',
 							'value' => $text_html,
@@ -460,7 +460,7 @@ class CreateMultiPage {
 						$optionals[] = count( $boxes ) - 1;
 						break;
 					}
-					case 'imageupload': { //<!---imageupload---> tag support
+					case 'imageupload': { // <!---imageupload---> tag support
 						// do a match here, and for each do the thing, yeah
 						preg_match_all( self::IMAGEUPLOAD_TAG_SPECIFIC, $text, $image_tags );
 
@@ -481,7 +481,7 @@ class CreateMultiPage {
 
 						// get the toolbar
 						$toolbarid = count( $boxes );
-						$toolbar_text = CreateMultiPage::getMultiEditToolbar( $toolbarid );
+						$toolbar_text = self::getMultiEditToolbar( $toolbarid );
 
 						$boxes[] = [
 							'type' => 'textarea',
@@ -512,7 +512,7 @@ class CreateMultiPage {
 			} elseif ( $specialTag == 'generic' ) { // generic textarea
 				// get the toolbar
 				$toolbarid = count( $boxes );
-				$toolbar_text = CreateMultiPage::getMultiEditToolbar( $toolbarid );
+				$toolbar_text = self::getMultiEditToolbar( $toolbarid );
 
 				$boxes[] = [
 					'type' => 'textarea',

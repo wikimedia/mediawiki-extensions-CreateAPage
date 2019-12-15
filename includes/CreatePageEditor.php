@@ -4,7 +4,7 @@
  * @ingroup Extensions
  * @author Bartek Łapiński <bartek@wikia-inc.com>
  * @copyright Copyright © 2007 Bartek Łapiński, Wikia Inc.
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  */
 
 // all editor-related functions will go there
@@ -16,6 +16,7 @@ abstract class CreatePageEditor {
 	}
 
 	abstract public function generateForm();
+
 	abstract public function glueArticle();
 }
 
@@ -138,14 +139,14 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		$wgOut->addHTML( $html );
 		*/
-		$wgOut->addHTML( '
-			<div id="cp-restricted">
+		$wgOut->addHTML(
+			'<div id="cp-restricted">
 			<div id="createpageoverlay">
 				<div class="hd"></div>
 				<div class="bd"></div>
 				<div class="ft"></div>
-			</div>
-		');
+			</div>'
+		);
 
 		$wgOut->addHTML( "<div id=\"cp-multiedit\">{$me}</div>" );
 		// check for already submitted values - for a preview, for example
@@ -200,8 +201,8 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			'</div>'
 		);
 
-		$wgOut->addHTML('
-			<div class="actionBar buttonBar">
+		$wgOut->addHTML(
+			'<div class="actionBar buttonBar">
 		<input type="submit" id="wpSave" name="wpSave" value="' . wfMessage( 'createpage-save' )->escaped() . '" class="button color1" />
 		<input type="submit" id="wpPreview" name="wpPreview" value="' . wfMessage( 'preview' )->escaped() . '" class="button color1" />
 		<input type="submit" id="wpCancel" name="wpCancel" value="' . wfMessage( 'cancel' )->escaped() . '" class="button color1" />
@@ -314,7 +315,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			if ( strpos( $key, 'wpOptionals' ) !== false ) {
 				if ( $render_option ) {
 					// build optional data
-					$optionals = explode( ',', $value  );
+					$optionals = explode( ',', $value );
 				}
 			} elseif ( strpos( $key, 'wpTextboxes' ) !== false ) {
 				// check if this was optional

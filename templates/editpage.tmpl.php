@@ -36,8 +36,7 @@ foreach ( $boxes as $id => $box ) {
 				if (
 					( $boxes[$i]['type'] == 'title' ) ||
 					( $boxes[$i]['type'] == 'optional_textarea' )
-				)
-				{
+				) {
 					$title_found = true;
 					if ( $boxes[$i]['type'] == 'optional_textarea' ) {
 						$optionalSections[] = [ $sections, $box['value'] ];

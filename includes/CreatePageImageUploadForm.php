@@ -204,7 +204,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 				// It is perfectly kosher for there to be an upload field and for the user
 				// to choose _not_ to upload an image...
 				return;
-			//	return wfMessage( 'emptyfile' )->escaped();
+				// return wfMessage( 'emptyfile' )->escaped();
 
 			case self::MIN_LENGTH_PARTNAME:
 				return wfMessage( 'minlength1' )->escaped();
@@ -317,9 +317,11 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		 * If the image is protected, non-sysop users won't be able
 		 * to modify it by uploading a new revision.
 		 */
-//		if ( !$nt->userCan( 'edit' ) ) {
-//			return self::PROTECTED_PAGE;
-//		}
+		/*
+		if ( !$nt->userCan( 'edit' ) ) {
+			return self::PROTECTED_PAGE;
+		}
+		*/
 
 		/**
 		 * In some cases we may forbid overwriting of existing files.
@@ -348,7 +350,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$img_found = wfFindFile( $tempname );
 		}
 
-		if ( $tmpCount > 0 )  {
+		if ( $tmpCount > 0 ) {
 			wfLocalFile( $nt );
 			$tempName = preg_replace( "/[^" . Title::legalChars() . "]|:/", '-', $tempName );
 			$nt = Title::makeTitleSafe( NS_FILE, $tempName );
@@ -394,7 +396,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$this->mComment,
 			$pageText,
 			$this->mWatchthis, // File::DELETE_SOURCE,
-			$wgUser,// $this->mFileProps
+			$wgUser, // $this->mFileProps
 			[] // $tags
 		);
 
@@ -416,7 +418,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		}
 	}
 
-	function showSuccess() { }
+	function showSuccess() {
+	}
 
 	/**
 	 * Ported from UploadBase@REL1_33 b/c it's private (d'oh...) with some tweaks

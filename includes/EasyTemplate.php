@@ -91,7 +91,7 @@ class EasyTemplate {
 	 * Check if template file exists
 	 *
 	 * @param $file String: path to file with template
-	 * @return boolean
+	 * @return bool
 	 */
 	public function template_exists( $file ) {
 		if ( !strstr( $file, '.tmpl.php' ) ) {

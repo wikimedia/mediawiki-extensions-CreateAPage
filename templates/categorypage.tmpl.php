@@ -49,7 +49,6 @@ $xnum = 0;
 foreach ( $cloud->tags as $xname => $xtag ) {
 	$checked = ( array_key_exists( $xname, $array_category ) && ( $array_category[$xname] ) ) ? ' checked="checked"' : '';
 	$array_category[$xname] = 0;
-	#$xtag['size']
 ?>
 	<span id="tag_njs_<?php echo $xnum ?>" style="font-size:9pt">
 		<input<?php echo $checked ?> type="checkbox" name="category_<?php echo $xnum ?>" id="category_<?php echo $xnum ?>" value="<?php echo $xname ?>">&nbsp;<?php echo $xname ?>

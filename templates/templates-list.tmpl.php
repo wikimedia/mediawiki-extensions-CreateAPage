@@ -74,9 +74,17 @@ CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['key'] = '<?php echo $single
 			if ( !empty( $element['preview'] ) ) {
 				$thumb = "<img id=\"cp-template-$name-thumb\" src=\"" . $element['preview'] . "\" alt=\"$name\" />";
 			}
+
+			$divClasses = 'templateFrame';
+			if ( $e == count( $data ) - 1 ) {
+				$divClasses .= ' templateFrameLast';
+			}
+			if ( $selected[$name] == 'checked' ) {
+				$divClasses .= ' templateFrameSelected';
+			}
 			?>
 
-	<div class="templateFrame<?php if ( $e == count( $data ) - 1 ) { ?> templateFrameLast<?php } ?><?php if ( $selected[$name] == 'checked' ) { ?> templateFrameSelected<?php } ?>" id="cp-template-<?php echo $name ?>">
+	<div class="templateFrame<?php echo $divClasses ?>" id="cp-template-<?php echo $name ?>">
 		<label for="cp-template-<?php echo $name ?>-radio">
 		<?php echo $thumb ?>
 		</label>
@@ -85,7 +93,9 @@ CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['key'] = '<?php echo $single
 			<label for="cp-template-<?php echo $name ?>-radio"><?php echo $label ?></label>
 		</div>
 	</div>
-	<?php } // foreach ?>
+	<?php
+	} // foreach
+	?>
 </div>
 
 <?php
