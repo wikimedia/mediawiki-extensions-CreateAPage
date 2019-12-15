@@ -84,7 +84,7 @@ CreateAPage.toolbarButtons[<?php echo $tool_num ?>]['key'] = '<?php echo $single
 			}
 			?>
 
-	<div class="templateFrame<?php echo $divClasses ?>" id="cp-template-<?php echo $name ?>">
+	<div class="<?php echo $divClasses ?>" id="cp-template-<?php echo $name ?>">
 		<label for="cp-template-<?php echo $name ?>-radio">
 		<?php echo $thumb ?>
 		</label>

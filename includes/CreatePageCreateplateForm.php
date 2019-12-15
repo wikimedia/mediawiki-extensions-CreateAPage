@@ -334,7 +334,7 @@ class CreatePageCreateplateForm {
 			$aboutInfo = '';
 		}
 
-		$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+		$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 		$tmpl->set_vars( [
 			'data' => $createplates,
 			'selected' => $check,

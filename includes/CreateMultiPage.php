@@ -171,7 +171,7 @@ class CreateMultiPage {
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC, '', $sourceText );
 
 				// fire off a special one textarea template
-				$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+				$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 				$toolbar_text = self::getMultiEditToolbar( 0 );
 				$tmpl->set_vars( [
 					'box' => $sourceText,
@@ -180,7 +180,7 @@ class CreateMultiPage {
 				$me_content .= $tmpl->render( 'bigarea' );
 
 				$cloud = new CAP_TagCloud();
-				$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+				$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 				$tmpl->set_vars( [
 					'num' => 0,
 					'cloud' => $cloud,
@@ -247,7 +247,7 @@ class CreateMultiPage {
 			array_walk( $fixed_par_array, 'CreateAPageUtils::unescapeKnownMarkupTags' );
 
 			$num = 0;
-			$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+			$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 			$tmpl->set_vars( [
 				'num' => $num,
 				'infoboxes' => $to_parametrize,
@@ -493,7 +493,7 @@ class CreateMultiPage {
 						$current = count( $boxes ) - count( $image_tags[0] ) - 1;
 						$add_img_num = 0;
 						foreach ( $image_tags[0] as $image_tag ) {
-							$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+							$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 							$tmpl->set_vars( [
 								'imagenum' => $all_image_num,
 								'target_tag' => $current + $add_img_num
@@ -530,7 +530,7 @@ class CreateMultiPage {
 			$num++;
 		}
 
-		$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+		$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 		$tmpl->set_vars( [
 			'boxes' => $boxes,
 			'cols' => $cols,
@@ -562,7 +562,7 @@ class CreateMultiPage {
 
 			$cloud = new CAP_TagCloud();
 
-			$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+			$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
 			$tmpl->set_vars( [
 				'num' => $num,
 				'cloud' => $cloud,
