@@ -17,7 +17,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 <?php
 
 $sections = 0;
-$optionalSections = array();
+$optionalSections = [];
 
 foreach ( $boxes as $id => $box ) {
 	$display = ( empty( $box['display'] ) ) ? 'none' : 'block';
@@ -26,12 +26,12 @@ foreach ( $boxes as $id => $box ) {
 	$value = '';
 	$clear = ' class="createpage-clear"';
 
-	switch( $box['type'] ) {
+	switch ( $box['type'] ) {
 		case 'section_display': {
 			$i = $id;
 			$title_found = false;
 			$visible = '';
-			while( $i < count( $boxes ) - 1 ) {
+			while ( $i < count( $boxes ) - 1 ) {
 				$i++;
 				if (
 					( $boxes[$i]['type'] == 'title' ) ||
@@ -40,7 +40,7 @@ foreach ( $boxes as $id => $box ) {
 				{
 					$title_found = true;
 					if ( $boxes[$i]['type'] == 'optional_textarea' ) {
-						$optionalSections[] = array( $sections, $box['value'] );
+						$optionalSections[] = [ $sections, $box['value'] ];
 					}
 					break;
 				}
@@ -94,13 +94,13 @@ foreach ( $boxes as $id => $box ) {
 ?>
 </div>
 <?php
-if( !empty( $optionalSections ) ) {
+if ( !empty( $optionalSections ) ) {
 ?>
-	<div id="createpage_optionals"><span id="createpage_optionals_text"><?php echo wfMsg( 'createpage-optionals-text' ) ?></span><br />
+	<div id="createpage_optionals"><span id="createpage_optionals_text"><?php echo wfMessage( 'createpage-optionals-text' )->escaped() ?></span><br />
 	<span id="createpage_optionals_content">
 <?php
 	$check = '';
-	foreach( $optionalSections as $opt ) {
+	foreach ( $optionalSections as $opt ) {
 		if ( in_array( $opt[0], $optional_sections ) ) {
 			$check = 'checked="checked"';
 		}
@@ -117,9 +117,6 @@ if( !empty( $optionalSections ) ) {
 <?php
 }
 ?>
-
-
-
 
 </div>
 <!-- e:<?php echo __FILE__ ?> -->

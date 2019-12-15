@@ -35,34 +35,34 @@ class EasyTemplate {
 
 	/**
 	 * Public constructor
-	 * @example new EasyTemplate( dirname( __FILE__ ) . '/templates/' );
+	 * @example new EasyTemplate( __DIR__ . '/templates/' );
 	 */
 	public function __construct( $path ) {
 		$this->mPath = rtrim( $path, '/' );
-		$this->mVars = array();
+		$this->mVars = [];
 	}
 
 	/**
 	 * Set a bunch of variables at once using an associative array.
 	 *
-	 * @param $vars Array: array of variables to set
-	 * @param $clear Boolean: whether to completely overwrite the existing vars
+	 * @param array $vars Variables to set
+	 * @param bool $clear Whether to completely overwrite the existing vars
 	 */
 	public function set_vars( $vars, $clear = false ) {
-		if( $clear ) {
+		if ( $clear ) {
 			$this->mVars = $vars;
 		} else {
 			$this->mVars = is_array( $vars )
 				? array_merge( $this->mVars, $vars )
-				: array_merge( $this->mVars, array() );
+				: array_merge( $this->mVars, [] );
 		}
 	}
 
 	/**
 	 * Set a variable
 	 *
-	 * @param $name String: variable name
-	 * @param $value Mixed: variable value
+	 * @param string $name Variable name
+	 * @param mixed $value Variable value
 	 */
 	public function set( $name, $value ) {
 		$this->mVars[$name] = $value;
@@ -71,22 +71,19 @@ class EasyTemplate {
 	/**
 	 * Open, parse, and return the template file.
 	 *
-	 * @param $file String: the template file name
+	 * @param string $file The template file name
 	 * @return string
 	 */
 	public function render( $file ) {
-		wfProfileIn( __METHOD__ );
-
-		if( !strstr( $file, '.tmpl.php' ) ) {
+		if ( !strstr( $file, '.tmpl.php' ) ) {
 			$file .= '.tmpl.php';
 		}
 
 		extract( $this->mVars );
 		ob_start();
-		include( $this->mPath . '/' . $file );
+		include $this->mPath . '/' . $file;
 		$contents = ob_get_clean();
 
-		wfProfileOut( __METHOD__ );
 		return $contents;
 	}
 
@@ -97,7 +94,7 @@ class EasyTemplate {
 	 * @return boolean
 	 */
 	public function template_exists( $file ) {
-		if( !strstr( $file, '.tmpl.php' ) ) {
+		if ( !strstr( $file, '.tmpl.php' ) ) {
 			$file .= '.tmpl.php';
 		}
 		return file_exists( $this->mPath . '/' . $file );
@@ -107,6 +104,6 @@ class EasyTemplate {
 	 * Reset variables array
 	 */
 	public function reset() {
-		$this->mVars = array();
+		$this->mVars = [];
 	}
 }

@@ -2,58 +2,22 @@
  * JavaScript for the CreateAPage extension (its Special:CreatePage page).
  *
  * Classes:
+ *
  * CreateAPage
  * -main class
+ *
  * CreateAPageInfobox
  * -class for uploading images from infoboxes (I think)
+ *
  * CreateAPageCategoryTagCloud
  * -class for managing the category tag cloud
- * CreateAPageListeners
- * -a small class used to handle clicking of the "hide/show" link on
- * Special:CreatePage which hides or shows the list of available createplates
- *
- * Rewritten by Jack Phoenix <jack@countervandalism.net> from YUI to jQuery and
- * to be object-oriented in late September/early October 2011.
  *
  * @file
  */
-
-/**
- * @file
- */
-var CreateAPageListeners = {
-	/**
-	 * @param e Event
-	 * @param data Array: [ div, link ]
-	 */
-	toggle: function( e, data ) {
-		e.preventDefault();
-		var display = '', text = '', opacity;
-
-		if ( jQuery( '#' + data[0] ).css( 'display' ) !== 'none' ) {
-			display = 'none';
-			text = mw.msg( 'createpage-show' );
-			opacity = 0;
-
-			jQuery( '#' + data[0] ).fadeIn( 5000, function() {
-				jQuery( '#' + data[0] ).css( 'display', display );
-				jQuery( '#' + data[1] ).text( text );
-			});
-		} else {
-			display = 'block';
-			text = mw.msg( 'createpage-hide' );
-			opacity = 1;
-
-			jQuery( '#' + data[0] ).css( 'opacity', opacity );
-			jQuery( '#' + data[0] ).css( 'display', display );
-
-			jQuery( '#' + data[1] ).text( text );
-		}
-	}
-};
 
 /**
  * A class for managing the category tag cloud.
+ * Click handlers are set up elsewhere in this huge file.
  */
 var CreateAPageCategoryTagCloud = {
 	add: function( category, num ) { // previously cloudAdd
@@ -66,11 +30,13 @@ var CreateAPageCategoryTagCloud = {
 		}
 
 		var this_button = document.getElementById( 'cloud' + num );
-		this_button.onclick = function() {
-			this.remove( category, num );
-			return false;
-		};
-		this_button.style.color = '#419636';
+		if ( this_button ) {
+			this_button.onclick = function() {
+				CreateAPageCategoryTagCloud.remove( category, num );
+				return false;
+			};
+			this_button.style.color = '#419636';
+		}
 		return false;
 	},
 
@@ -81,7 +47,7 @@ var CreateAPageCategoryTagCloud = {
 		categories = categories.split( '|' );
 		for ( var i = 0; i < categories.length; i++ ) {
 			if ( categories[i] !== '' ) {
-				new_text += '[[' + wgFormattedNamespaces[14] + ':' +
+				new_text += '[[' + mw.config.get( 'wgFormattedNamespaces' )[14] + ':' +
 					categories[i] + ']]';
 			}
 		}
@@ -147,7 +113,7 @@ var CreateAPageCategoryTagCloud = {
 		}
 		var this_button = document.getElementById( 'cloud' + num );
 		this_button.onclick = function() {
-			this.add( category, num );
+			CreateAPageCategoryTagCloud.add( category, num );
 			return false;
 		};
 		this_button.style.color = '';
@@ -170,12 +136,16 @@ var CreateAPage = {
 	foundCategories: [],
 
 	myId: 0,
-	//previewMode: '<?php echo !$ispreview ? 'No' : 'Yes' ?>';
-	//redLinkMode: '<?php echo !$isredlink ? 'No' : 'Yes' ?>';
+	previewMode: ( mw.util.getParamValue( 'wpPreview' ) !== null ) ? 'Yes' : 'No',
+	redLinkMode: (
+		mw.util.getParamValue( 'Redlinkmode' ) !== null ||
+		mw.util.getParamValue( 'Createtitle' ) !== '' && mw.util.getParamValue( 'Createtitle' ) !== null
+	) ? 'Yes' : 'No',
 
 	/**
 	 * Copy of CreatePageNormalEdit from extensions/wikiwyg/share/MediaWiki/extensions/CreatePage/js/createpage.js
 	 * with a few tweaks (the textarea stuff + i18n).
+	 *
 	 * Asks the user for a confirmation if they want to discard all changes
 	 * done via Special:CreatePage and if the answer is yes, takes them to
 	 * ?action=edit (normal edit mode).
@@ -216,7 +186,8 @@ var CreateAPage = {
 			}
 		}
 
-		var fixedArticlePath = wgArticlePath.replace( '$1', '' );
+		// @todo Might be able to simply do window.location = mw.util.getUrl( title.value, { 'action': 'edit' } );
+		var fixedArticlePath = mw.config.get( 'wgArticlePath' ).replace( '$1', '' );
 		fixedArticlePath = fixedArticlePath.replace( 'index.php[^\/]', 'index.php?title=' );
 
 		window.location = fixedArticlePath + title.value + '?action=edit';
@@ -225,7 +196,7 @@ var CreateAPage = {
 	callbackTitle: function( data ) {
 		var res = '', helperButton;
 		document.getElementById( 'cp-title-check' ).innerHTML = '';
-		if( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
+		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
 			res = eval( '(' + data + ')' );
 		}
 		if ( ( res['text'] !== false ) && ( res['empty'] !== true ) ) {
@@ -237,7 +208,7 @@ var CreateAPage = {
 				url + '?action=edit" title="' + text + '">' + text +
 				'</a>' + mw.msg( 'createpage-article-exists2' ) + '</span>';
 			if ( CreateAPage.Overlay ) {
-				CreateAPage.Overlay.show(); // @todo FIXME
+				CreateAPage.Overlay.show();
 				helperButton = document.getElementById( 'wpRunInitialCheck' );
 				helperButton.style.display = '';
 			} else {
@@ -250,7 +221,7 @@ var CreateAPage = {
 				'</span>';
 			if ( CreateAPage.Overlay ) {
 				CreateAPage.resizeOverlay( 0 );
-				CreateAPage.Overlay.show(); // @todo FIXME
+				CreateAPage.Overlay.show();
 				helperButton = document.getElementById( 'wpRunInitialCheck' );
 				helperButton.style.display = '';
 			} else {
@@ -258,7 +229,7 @@ var CreateAPage = {
 			}
 		} else {
 			if ( CreateAPage.Overlay ) {
-				CreateAPage.Overlay.hide(); // @todo FIXME
+				CreateAPage.Overlay.hide();
 				helperButton = document.getElementById( 'wpRunInitialCheck' );
 				helperButton.style.display = 'none';
 			}
@@ -284,83 +255,118 @@ var CreateAPage = {
 	 */
 	watchTitle: function() {
 		document.getElementById( 'cp-title-check' ).innerHTML =
-			'<img src="' + wgServer + wgScriptPath +
-			'/extensions/CreateAPage/images/progress_bar.gif" width="70" height="11" alt="' +
+			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
+			'/CreateAPage/resources/images/progress_bar.gif" width="70" height="11" alt="' +
 			mw.msg( 'createpage-please-wait' ) + '" border="0" />';
 		CreateAPage.noCanDo = true;
 
-		jQuery.ajax({ // using .ajax instead of .get for better flexibility
-			url: wgScript,
+		$.ajax( { // using .ajax instead of .get for better flexibility
+			url: mw.config.get( 'wgScript' ),
 			data: {
 				action: 'ajax',
 				rs: 'axTitleExists',
 				title: document.getElementById( 'Createtitle' ).value
-			},
-			success: function( data, textStatus, jqXHR ) {
-				CreateAPage.callbackTitle( data );
-			},
-			error: function( jqXHR, textStatus, errorThrown ) {
-				document.getElementById( 'cp-title-check' ).innerHTML = '';
 			}
-		});
+		} ).done( function( data, textStatus, jqXHR ) {
+			CreateAPage.callbackTitle( data );
+		} ).fail( function() {
+			document.getElementById( 'cp-title-check' ).innerHTML = '';
+		} );
 	},
 
 	clearInput: function( o ) {
 		var cDone = false;
-		jQuery( '#wpInfoboxPar' + o.num ).bind( 'focus', function() {
-			var previewarea = jQuery( '#createpagepreview' );
+		$( '#wpInfoboxPar' + o.num ).on( 'focus', function() {
+			var previewarea = $( '#createpagepreview' );
 			if ( !cDone && ( previewarea === null ) ) {
 				cDone = true;
 				document.getElementById( 'wpInfoboxPar' + o.num ).value = '';
 			}
-		});
+		} );
 	},
 
+	/**
+	 * @param {jQuery.Event} e
+	 */
 	goToEdit: function( e ) {
 		e.preventDefault();
-		jQuery.post(
-			wgScript,//mw.config.get( 'wgScript' ),
+		$.post(
+			mw.config.get( 'wgScript' ),
 			{
 				action: 'ajax',
 				rs: 'axCreatepageAdvancedSwitch'
 			},
-			function( data ) {
-				window.location = wgServer + wgScript + '?title=' +
-					encodeURIComponent( document.getElementById( 'Createtitle' ).value ) +
-					'&action=edit&editmode=nomulti&createpage=true';
+			function ( data ) {
+				window.location = mw.util.getUrl(
+					document.getElementById( 'Createtitle' ).value,
+					{
+						'action': 'edit',
+						'editmode': 'nomulti',
+						'createpage': 'true'
+					}
+				);
 			}
 		);
-		CreateAPage.warningPanel.hide(); // @todo FIXME
+		CreateAPage.warningPanel.hide();
 	},
 
+	/**
+	 * Takes the user to Special:UserLogin, the login page, and sets the returnto
+	 * URL parameter value appropriately, depending on whether CreateAPage is
+	 * operating on all red links or not.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	goToLogin: function( e ) {
 		e.preventDefault();
+		var returnto = '';
 		if ( CreateAPage.redLinkMode ) {
-			window.location = wgServer + wgScript +
-				'?title=Special:UserLogin&returnto=' +
-				encodeURIComponent( document.getElementById( 'Createtitle' ).value );
+			returnto = document.getElementById( 'Createtitle' ).value;
 		} else {
-			window.location = wgServer + wgScript +
-				'?title=Special:UserLogin&returnto=Special:CreatePage';
+			returnto = 'Special:CreatePage';
 		}
+		window.location = mw.util.getUrl( 'Special:UserLogin', { 'returnto': returnto } );
 	},
 
+	/**
+	 * If a warning panel element exists, hides it.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	hideWarningPanel: function( e ) {
 		if ( CreateAPage.warningPanel ) {
-			CreateAPage.warningPanel.hide(); // @todo FIXME
+			CreateAPage.warningPanel.hide();
 		}
 	},
 
+	/**
+	 * If a warning panel element does not yet exist, builds it and then displays
+	 * it.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	showWarningPanel: function( e ) {
-		e.preventDefault();
+		// e.preventDefault();
 		if ( document.getElementById( 'Createtitle' ).value !== '' ) {
 			if ( !CreateAPage.warningPanel ) {
-				CreateAPage.buildWarningPanel();
+				CreateAPage.buildWarningPanel( e );
 			}
-			CreateAPage.warningPanel.show(); // @todo FIXME
-			jQuery( '#wpCreatepageWarningYes' ).focus();
+			// GODFORSAKEN FILTHY HACK!
+			// @todo FIXME
+			// For whatever reason the dialog stuff doesn't quite work as expected
+			// Ideally you should be able to click on the "Advanced Edit" button as many times as you
+			// want, and each time the dialog would show up, and once you click on a button (Yes or No),
+			// it goes away. In reality, as of 8 December 2019, it shows up -- seemingly -- only once,
+			// and after you click on a button, "another" "empty" dialog (probably in reality
+			// the same dialog but with #createpage_warning_copy having display: none; set) shows up.
+			if ( $( '#createpage_warning_copy' ).length > 0 && $( '#createpage_warning_copy' ).parent().is( ':hidden' ) ) {
+				$( '#createpage_warning_copy' ).parent().show();
+			}
+			// </hack>
+			CreateAPage.warningPanel.show();
+			$( '#wpCreatepageWarningYes' ).focus();
 		} else {
-			jQuery( '#cp-title-check' ).html(
+			$( '#cp-title-check' ).html(
 				'<span style="color: red;">' +
 				mw.msg( 'createpage-give-title' ) +
 				'</span>'
@@ -368,12 +374,18 @@ var CreateAPage = {
 		}
 	},
 
+	/**
+	 * @param {jQuery.Event} e
+	 */
 	hideWarningLoginPanel: function( e ) {
 		if ( CreateAPage.warningLoginPanel ) {
-			CreateAPage.warningLoginPanel.hide(); // @todo FIXME
+			CreateAPage.warningLoginPanel.hide();
 		}
 	},
 
+	/**
+	 * @param {jQuery.Event} e
+	 */
 	showWarningLoginPanel: function( e ) {
 		e.preventDefault();
 		if ( document.getElementById( 'Createtitle' ).value !== '' ) {
@@ -381,9 +393,9 @@ var CreateAPage = {
 				CreateAPage.buildWarningLoginPanel( e );
 			}
 			CreateAPage.warningLoginPanel.show();
-			jQuery( '#wpCreatepageWarningYes' ).focus();
+			$( '#wpCreatepageWarningYes' ).focus();
 		} else {
-			jQuery( '#cp-title-check' ).html(
+			$( '#cp-title-check' ).html(
 				'<span style="color: red;">' +
 				mw.msg( 'createpage-give-title' ) +
 				'</span>'
@@ -393,7 +405,7 @@ var CreateAPage = {
 
 	uploadCallback: function( oResponse ) {
 		var aResponse = []; // initialize it as an empty array so that JSHint can STFU
-		if( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
+		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
 			aResponse = eval( '(' + oResponse.responseText + ')' );
 		}
 		var ProgressBar = document.getElementById( 'createpage_upload_progress_section' + aResponse['num'] );
@@ -401,7 +413,7 @@ var CreateAPage = {
 		if ( aResponse['error'] !== 1 ) {
 			ProgressBar.innerHTML = mw.msg( 'createpage-img-uploaded' );
 			var target_info = document.getElementById( 'wpAllUploadTarget' + aResponse['num'] ).value;
-			var target_tag = jQuery( target_info );
+			var target_tag = $( target_info );
 			target_tag.value = '[[' + aResponse['msg'] + '|thumb]]';
 
 			var ImageThumbnail = document.getElementById( 'createpage_image_thumb_section' + aResponse['num'] );
@@ -417,17 +429,17 @@ var CreateAPage = {
 			}
 			document.getElementById( 'wpAllLastTimestamp' + oResponse.argument ).value = aResponse['timestamp'];
 		} else if ( ( aResponse['error'] === 1 ) && ( aResponse['msg'] === 'cp_no_login' ) ) {
-			// @todo FIXME: oh my fucking god this is UGLY
+			// @todo FIXME: this is UGLY!
 			ProgressBar.innerHTML = '<span style="color: red">' +
 				mw.msg( 'createpage-login-required' ) +
-				'<a href="' + wgServer + wgScript +'?title=Special:Userlogin&returnto=Special:Createpage" id="createpage_login' +
+				'<a href="' + mw.config.get( 'wgServer' ) + mw.config.get( 'wgScript' ) + '?title=Special:Userlogin&returnto=Special:Createpage" id="createpage_login' +
 				oResponse.argument + '">' +
 					mw.msg( 'createpage-login-href' ) + '</a>' +
 					mw.msg( 'createpage-login-required2' ) +
 				'</span>';
-			jQuery( '#createpage_login' + oResponse.argument ).click( function( e ) {
+			$( '#createpage_login' + oResponse.argument ).click( function( e ) {
 				CreateAPage.showWarningLoginPanel( e );
-			});
+			} );
 		} else {
 			ProgressBar.innerHTML = '<span style="color: red">' + aResponse['msg'] + '</span>';
 		}
@@ -439,6 +451,7 @@ var CreateAPage = {
 	},
 
 	failureCallback: function( response ) {
+		var response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text_section' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress_section' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
 		document.getElementById( 'createpage_upload_file_section' + response.argument ).style.display = '';
@@ -450,7 +463,7 @@ var CreateAPage = {
 		var sectionContent = CreateAPage.getElementsBy(
 			CreateAPage.optionalContentTest, '', section
 		);
-		for( var i = 0; i < sectionContent.length; i++ ) {
+		for ( var i = 0; i < sectionContent.length; i++ ) {
 			text = text.replace( sectionContent[i].id, '' );
 		}
 		section.style.display = 'block';
@@ -497,36 +510,35 @@ var CreateAPage = {
 		var oForm = document.getElementById( 'createpageform' );
 		e.preventDefault();
 
-		var ProgressBar = document.getElementById( 'createpage_upload_progress_section' + o.num );
-		ProgressBar.style.display = 'block';
-		ProgressBar.innerHTML = '<img src="' + stylepath +
-			'/common/images/spinner.gif" width="16" height="16" alt="' +
-			mw.msg( 'createpage-please-wait' ) + '" border="0" />&nbsp;';
+		var ProgressBar = $( '#createpage_upload_progress_section' + o.num ).show().html( $.createSpinner( 'createpage' ) );
 
-		var sent_request = jQuery.ajax({ // using .ajax instead of .post for better flexibility
+		// Use HTML5 magic to do the file upload without having to resort to super
+		// heavy jQuery plugins or anything like that
+		var formData = new FormData();
+		formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[0] );
+
+		var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
 			type: 'POST',
-			url: wgScript,
-			data: {
-				action: 'ajax',
-				rs: 'axMultiEditImageUpload',
-				infix: 'All',
-				num: o.num
-			},
-			success: function( data, textStatus, jqXHR ) {
-				// @todo FIXME/CHECKME: make sure that the num (o.num) is passed as response.argument to uploadCallback
-				CreateAPageInfobox.uploadCallback( jqXHR );
-			},
-			error: function( jqXHR, textStatus, errorThrown ) {
-				CreateAPageInfobox.failureCallback( jqXHR );
-			},
+			url: mw.config.get( 'wgScript' ) + '?action=ajax&rs=axMultiEditImageUpload&infix=All&num=' + o.num,
+			data: formData,
+			contentType: false,
+			cache: false,
+			processData: false,
 			timeout: 240000
-		});
+		} ).done( function ( result ) {
+			$.removeSpinner( 'createpage' );
+			CreateAPageInfobox.uploadCallback( result );
+		} ).fail( function ( code, result ) {
+			$.removeSpinner( 'createpage' );
+			CreateAPageInfobox.failureCallback( result );
+		} );
+
 		document.getElementById( 'createpage_image_cancel_section' + o.num ).style.display = '';
 		document.getElementById( 'createpage_image_text_section' + o.num ).style.display = 'none';
 
-		jQuery( '#createpage_image_cancel_section' + o.num ).click( function( e ) {
+		$( '#createpage_image_cancel_section' + o.num ).click( function( e ) {
 			sent_request.abort();
-		});
+		} );
 
 		var neoInput = document.createElement( 'input' );
 		var thisInput = document.getElementById( 'createpage_upload_file_section' + o.num );
@@ -539,47 +551,61 @@ var CreateAPage = {
 		neoInput.setAttribute( 'tabindex', '-1' );
 
 		thisContainer.appendChild( neoInput );
-		jQuery( '#createpage_upload_file_section' + o.num ).change( function( e ) {
+		$( '#createpage_upload_file_section' + o.num ).change( function( e ) {
 			CreateAPage.upload( e, { 'num': o.num } );
-		});
+		} );
 
 		document.getElementById( 'createpage_upload_file_section' + o.num ).style.display = 'none';
 	},
 
+	/**
+	 * Render the dialog which warns the user that switching to advanced (regular)
+	 * edit mode may break stuff.
+	 * Triggered when the user clicks on the "Advanced Edit" button on Special:CreatePage.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	buildWarningPanel: function( e ) {
-		var editwarn = document.getElementById( 'createpage_advanced_warning' );
+		// No longer exists in DOM, I removed it from templates-list.tmpl.php b/c
+		// we should be building the entire dialog via jQuery anyway
+		// var editwarn = document.getElementById( 'createpage_advanced_warning' );
 		var editwarn_copy = document.createElement( 'div' );
 		editwarn_copy.id = 'createpage_warning_copy';
-		editwarn_copy.innerHTML = editwarn.innerHTML;
+		editwarn_copy.innerHTML = mw.msg( 'createpage-advanced-warning' ); // editwarn.innerHTML;
 		document.body.appendChild( editwarn_copy );
 
-		CreateAPage.warningPanel = jQuery( '#createpage_warning_copy' ).dialog({
+		CreateAPage.warningPanel = $( '#createpage_warning_copy' ).dialog( {
 			draggable: false,
 			modal: true,
 			resizable: false,
-			width: 250
-		});
-		/*
-		CreateAPage.warningPanel = new YAHOO.widget.Panel( 'createpage_warning_copy', {
-			width: '250px',
-			modal: true,
-			constraintoviewport: true,
-			draggable: false,
-			fixedcenter: true,
-			underlay: 'none'
+			width: 250,
+			title: mw.msg( 'createpage-edit-normal' ),
+			text: mw.msg( 'createpage-advanced-warning' ),
+			buttons: [
+				{
+					text: mw.msg( 'createpage-yes' ),
+					id: 'wpCreatepageWarningYes',
+					click: function () {
+						CreateAPage.goToEdit( e );
+					}
+				},
+				{
+					text: mw.msg( 'createpage-no' ),
+					id: 'wpCreatepageWarningNo',
+					click: function () {
+						CreateAPage.hideWarningPanel( e );
+						$( this ).dialog( 'close' );
+					}
+				},
+			]
 		} );
-		CreateAPage.warningPanel.cfg.setProperty( 'zIndex', 1000 );
-		CreateAPage.warningPanel.render( document.body );
-		*/
-
-		jQuery( '#wpCreatepageWarningYes' ).click( function( e ) {
-			CreateAPage.goToEdit( e );
-		});
-		jQuery( '#wpCreatepageWarningNo' ).click( function( e ) {
-			CreateAPage.hideWarningPanel( e );
-		});
 	},
 
+	/**
+	 * Build the login warning panel and set up its event listeners.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	buildWarningLoginPanel: function( e ) {
 		var editwarn = document.getElementById( 'createpage_advanced_warning' );
 		var editwarn_copy = document.createElement( 'div' );
@@ -589,31 +615,20 @@ var CreateAPage = {
 		editwarn_copy.childNodes[3].innerHTML = mw.msg( 'createpage-login-warning' );
 		document.body.appendChild( editwarn_copy );
 
-		CreateAPage.warningLoginPanel = jQuery( '#createpage_warning_copy2' ).dialog({
+		CreateAPage.warningLoginPanel = $( '#createpage_warning_copy2' ).dialog( {
 			draggable: false,
 			modal: true,
 			resizable: false,
 			width: 250
-		});
-		/*
-		CreateAPage.warningLoginPanel = new YAHOO.widget.Panel( 'createpage_warning_copy2', {
-			width: '250px',
-			modal: true,
-			constraintoviewport: true,
-			draggable: false,
-			fixedcenter: true,
-			underlay: 'none'
 		} );
-		CreateAPage.warningLoginPanel.cfg.setProperty( 'zIndex', 1000 );
-		CreateAPage.warningLoginPanel.render( document.body );
-		*/
 
-		jQuery( '#wpCreatepageWarningYes' ).click( function( e ) {
+		// @todo FIXME: these probably won't work
+		$( '#wpCreatepageWarningYes' ).click( function( e ) {
 			CreateAPage.goToLogin( e );
-		});
-		jQuery( '#wpCreatepageWarningNo' ).click( function( e ) {
+		} );
+		$( '#wpCreatepageWarningNo' ).click( function( e ) {
 			CreateAPage.hideWarningLoginPanel( e );
-		});
+		} );
 	},
 
 	onclickCategoryFn: function( cat, id ) {
@@ -694,9 +709,9 @@ var CreateAPage = {
 
 	uploadEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file_section', '' ) );
-		jQuery( '#createpage_upload_file_section' + j ).change( function( e ) {
+		$( '#createpage_upload_file_section' + j ).change( function( e ) {
 			CreateAPage.upload( e, { num : j } );
-		});
+		} );
 	},
 
 	textareaAddToolbar: function( el ) {
@@ -705,16 +720,16 @@ var CreateAPage = {
 		CreateAPage.multiEditButtons[el_id] = [];
 		CreateAPage.multiEditCustomButtons[el_id] = [];
 
-		jQuery( '#' + el.id ).focus( function( e ) {
+		$( '#' + el.id ).focus( function( e ) {
 			CreateAPage.showThisBox( e, { 'toolbarId': el_id } );
-		});
+		} );
 
-		jQuery( '#wpTextIncrease' + el_id ).click( function( e ) {
+		$( '#wpTextIncrease' + el_id ).click( function( e ) {
 			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': 1 } );
-		});
-		jQuery( '#wpTextDecrease' + el_id ).click( function( e ) {
+		} );
+		$( '#wpTextDecrease' + el_id ).click( function( e ) {
 			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': -1 } );
-		});
+		} );
 
 		for ( var i = 0; i < CreateAPage.toolbarButtons.length; i++ ) {
 			CreateAPage.addMultiEditButton(
@@ -814,23 +829,31 @@ var CreateAPage = {
 		CreateAPage.hideOtherBoxes( o.toolbarId );
 	},
 
+	/**
+	 * Onclick handler for the up/down images, for making the given textarea
+	 * either smaller or larger
+	 *
+	 * @param e Event
+	 * @param o Object Object containing a textareaId (numeric ID of a #wpTextboxes<num>
+	 *   element) and numRows (amount of rows to increase or decrease)
+	 */
 	resizeThisTextarea: function( e, o ) {
 		e.preventDefault();
-		var r_textarea = jQuery( '#wpTextboxes' + o.textareaId );
+		var r_textarea = $( '#wpTextboxes' + o.textareaId );
 
 		if (
-			!( ( r_textarea.rows < 4 ) && ( o.numRows < 0 ) ) &&
-			!( ( r_textarea.rows > 10 ) && ( o.numRows > 0 ) )
+			!( ( r_textarea.prop( 'rows' ) < 4 ) && ( o.numRows < 0 ) ) &&
+			!( ( r_textarea.prop( 'rows' ) > 10 ) && ( o.numRows > 0 ) )
 		)
 		{
-			r_textarea.rows = r_textarea.rows + o.numRows;
+			r_textarea.prop( 'rows', r_textarea.prop( 'rows' ) + o.numRows );
 		}
 	},
 
 	hideOtherBoxes: function( boxId ) {
 		for ( var i = 0; i < CreateAPage.multiEditTextboxes.length; i++ ) {
 			if ( CreateAPage.multiEditTextboxes[i] !== boxId ) {
-				document.getElementById( 'toolbar' + CreateAPage.multiEditTextboxes[i] ).style.display = 'none';
+				$( '#toolbar' + CreateAPage.multiEditTextboxes[i] ).hide();
 			}
 		}
 	},
@@ -876,9 +899,9 @@ var CreateAPage = {
 						optionalsElements.value
 					);
 				}
-				jQuery( '#' + optionals[i] ).change( function( e ) {
+				$( '#' + optionals[i] ).change( function( e ) {
 					CreateAPage.toggleSection( e, { num: snum } );
-				});
+				} );
 			}
 		}
 	},
@@ -899,14 +922,14 @@ var CreateAPage = {
 
 		parent.appendChild( image );
 
-		jQuery( '#' + item.imageId ).click( function( e ) {
+		$( '#' + item.imageId ).click( function( e ) {
 			CreateAPage.insertTags( e, {
 				'tagOpen': item.tagOpen,
 				'tagClose': item.tagClose,
 				'sampleText': item.sampleText,
 				'textareaId': 'wpTextboxes' + item.toolbarId
-			});
-		});
+			} );
+		} );
 
 		return true;
 	},
@@ -994,7 +1017,9 @@ var CreateAPage = {
 				newCatlink.innerHTML = catlink.innerHTML;
 				catlink.parentNode.removeChild( catlink );
 				var previewArea = document.getElementById( 'createpagepreview' );
-				previewArea.insertBefore( newCatlink, document.getElementById( 'createpage_preview_delimiter' ) );
+				if ( previewArea !== null ) {
+					previewArea.insertBefore( newCatlink, document.getElementById( 'createpage_preview_delimiter' ) );
+				}
 			}
 		}
 
@@ -1004,6 +1029,7 @@ var CreateAPage = {
 			document.getElementById( 'wpTableMultiEdit' ),
 			CreateAPage.textareaAddToolbar
 		);
+
 		if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
 			edit_textareas[0].focus();
 		} else {
@@ -1023,32 +1049,26 @@ var CreateAPage = {
 	 * does not exist yet on the wiki.
 	 */
 	contentOverlay: function() {
-		/*
-		CreateAPage.Overlay = new YAHOO.widget.Overlay( 'createpageoverlay' );
-		CreateAPage.resizeOverlay( 20 );
-		CreateAPage.Overlay.render();
-		*/
-
 		// Based on the MIT-licensed jquery.overlay plugin by Tom McFarlin
-		CreateAPage.Overlay = jQuery( '#createpageoverlay' ).css({
+		CreateAPage.Overlay = $( '#createpageoverlay' ).css( {
 			background: '#000',
 			display: 'none',
 			// throw in an extra 25px to make sure that we *really* cover all
 			// the editing buttons, the whole textarea *and* the buttons
-			height: jQuery( '#cp-restricted' ).height() + 25,
-			//left: jQuery( '#cp-restricted' ).offset().left, // more harmful than useful
+			height: $( '#cp-restricted' ).height() + 25,
+			//left: $( '#cp-restricted' ).offset().left, // more harmful than useful
 			opacity: 0.5,
 			overflow: 'hidden',
 			position: 'absolute',
-			//top: jQuery( '#cp-restricted' ).offset().top, // more harmful than useful
-			width: jQuery( '#cp-restricted' ).width(),
+			//top: $( '#cp-restricted' ).offset().top, // more harmful than useful
+			width: $( '#cp-restricted' ).width(),
 			zIndex: 1000
-		}).show();
+		} ).show();
 
 		var helperButton = document.getElementById( 'wpRunInitialCheck' );
-		jQuery( '#wpRunInitialCheck' ).click( function() {
+		$( '#wpRunInitialCheck' ).click( function() {
 			CreateAPage.watchTitle();
-		});
+		} );
 		helperButton.style.display = '';
 	},
 
@@ -1059,10 +1079,17 @@ var CreateAPage = {
 		return x_fixed_height;
 	},
 
+	/**
+	 * Resize the overlay which blocks touching the textarea elements before the
+	 * title check is complete.
+	 *
+	 * @param {number} [number] Amount of pixels to resize
+	 */
 	resizeOverlay: function( number ) {
-		var cont_elem = jQuery( '#cp-restricted' );
+		var cont_elem = $( '#cp-restricted' );
 		var fixed_height;
 		var fixed_width;
+
 		if ( cont_elem.css( 'height' ) === 'auto' ) {
 			fixed_height = document.getElementById( 'cp-restricted' ).offsetHeight + number;
 			fixed_width = document.getElementById( 'cp-restricted' ).offsetWidth;
@@ -1072,229 +1099,184 @@ var CreateAPage = {
 			fixed_width = cont_elem.css( 'width' );
 		}
 
-		// @todo FIXME: commented out for now to prevent JS errors
-		//CreateAPage.Overlay.cfg.setProperty( 'height', fixed_height );
-		//CreateAPage.Overlay.cfg.setProperty( 'width', fixed_width );
+		CreateAPage.Overlay.css( 'height', fixed_height );
+		CreateAPage.Overlay.css( 'width', fixed_width );
 	},
 
-	testInfoboxToggle: function() {
-		var listeners = jQuery( '#cp-infobox-toggle' ).data( 'events' );
-		if ( listeners ) {
-			for ( var i = 0; i < listeners.length; ++i ) {
-				var listener = listeners[i];
-				if ( listener.type !== 'click' ) {
-					jQuery( '#cp-infobox-toggle' ).click( function( e ) {
-						CreateAPageListeners.toggle( e, ['cp-infobox', 'cp-infobox-toggle'] );
-					});
-				}
-			}
-		} else {
-			jQuery( '#cp-infobox-toggle' ).click( function( e ) {
-				CreateAPageListeners.toggle( e, ['cp-infobox', 'cp-infobox-toggle'] );
-			});
-		}
-	},
-
+	/**
+	 * Initialize the createplate switcher at the top of the Special:CreatePage page.
+	 */
 	initializeMultiEdit: function() {
-		// Original PHP implementation was: join( ', ', $elements_for_yui )
-		var elements = wgCreateAPageElementsForJavaScript; //[ Array.prototype.join.call( wgCreateAPageElementsForJavaScript, ', ' ) ];
+		$( 'div[id^="cp-template-"]' ).click( function ( e ) {
+			CreateAPage.switchTemplate( e, $( this ).attr( 'id' ) );
+		} );
 
-		for ( var i = 0; i < wgCreateAPageElementsForJavaScript.length; i++ ) {
-			jQuery( '#' + wgCreateAPageElementsForJavaScript[i] ).click( function( e ) {
-				CreateAPage.switchTemplate( e, wgCreateAPageElementsForJavaScript[i], this );
-			});
-		}
-
-		var src, tt;
 		// Hide the radio buttons on the left side of each createplate's name,
 		// they look ugly in here
-		for ( i in elements ) {
-			jQuery( '#' + elements[i] + '-radio' ).hide();
-		}
+		$( 'div[id^="cp-template-"]' ).each( function ( idx ) {
+			$( '#' + $( this ).attr( 'id' ) + '-radio' ).hide();
+		} );
 	},
 
 	/**
 	 * Whenever a user clicks on one of the various createplate names, this
 	 * function is called.
 	 *
-	 * @param e Event
-	 * @param elementId String: name of the createplate template (i.e.
-	 * cp-template-Name) -- actually doesn't seem to work, which is why we pass
-	 * fullElement into this function and use it to get the ID instead
-	 * @param fullElement
+	 * @param {jQuery.Event} e
+	 * @param {String} [elementId] Name of the createplate template (i.e.
+	 * cp-template-Name) for a createplate named "Name"
 	 */
-	switchTemplate: function( e, elementId, fullElement ) {
-		CreateAPage.myId = fullElement.id;
+	switchTemplate: function( e, elementId ) {
+		CreateAPage.myId = elementId;
 		e.preventDefault();
 
 		document.getElementById( 'cp-multiedit' ).innerHTML =
-			'<img src="' + wgScriptPath + '/extensions/CreateAPage/images/progress_bar.gif" width="70" height="11" alt="' +
+			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) + '/CreateAPage/resources/images/progress_bar.gif" width="70" height="11" alt="' +
 			mw.msg( 'createpage-please-wait' ) + '" border="0" />';
 		if ( CreateAPage.Overlay ) {
 			CreateAPage.resizeOverlay( 20 );
 		}
 
-		jQuery.ajax({ // using .ajax instead of .get for better flexibility
-			url: wgScript,
+		$.ajax( { // using .ajax instead of .get for better flexibility
+			url: mw.config.get( 'wgScript' ),
 			data: {
 				action: 'ajax',
 				rs: 'axMultiEditParse',
-				template: fullElement.id.replace( 'cp-template-', '' )
-			},
-			success: function( data, textStatus, jqXHR ) {
-				document.getElementById( 'cp-multiedit' ).innerHTML = '';
-
-				var res = '';
-				if( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( jqXHR.responseText ) ) {
-					res = eval( '(' + jqXHR.responseText + ')' );
-				}
-				if ( res !== '' ) {
-					document.getElementById( 'cp-multiedit' ).innerHTML = res;
-				}
-
-				var elements = wgCreateAPageElementsForJavaScript;
-				for ( var i in elements ) {
-					jQuery( '#' + elements[i] ).addClass( 'templateFrame' );
-					if ( jQuery( '#' + elements[i] ).hasClass( 'templateFrameSelected' ) ) {
-						jQuery( '#' + elements[i] ).removeClass( 'templateFrameSelected' );
-					}
-				}
-
-				// Make the recently selected createplate active!
-				jQuery( '#' + CreateAPage.myId ).addClass( 'templateFrameSelected' );
-
-				var infoboxToggle = jQuery( '#cp-infobox-toggle' );
-				if ( infoboxToggle.length > 0 ) {
-					CreateAPage.testInfoboxToggle();
-					//YAHOO.util.Event.onAvailable( 'cp-infobox-toggle', CreateAPage.testInfoboxToggle );
-				}
-
-				var infobox_root = document.getElementById( 'cp-infobox' );
-				var infobox_inputs = CreateAPage.getElementsBy(
-					CreateAPageInfobox.inputTest,
-					'input',
-					infobox_root,
-					CreateAPageInfobox.inputEvent
-				);
-				var infobox_uploads = CreateAPage.getElementsBy(
-					CreateAPageInfobox.uploadTest,
-					'input',
-					infobox_root,
-					CreateAPageInfobox.uploadEvent
-				);
-				var content_root = document.getElementById( 'wpTableMultiEdit' );
-				var section_uploads = CreateAPage.getElementsBy(
-					CreateAPage.uploadTest,
-					'input',
-					content_root,
-					CreateAPage.uploadEvent
-				);
-
-				var cloud_div = document.getElementById( 'createpage_cloud_div' );
-				if ( cloud_div !== null ) {
-					cloud_div.style.display = 'block';
-				}
-				CreateAPage.checkCategoryCloud();
-
-				if (
-					CreateAPage.Overlay &&
-					( document.getElementById( 'createpageoverlay' ).style.visibility !== 'hidden' )
-				)
-				{
-					CreateAPage.resizeOverlay( 20 );
-				}
-
-				CreateAPage.multiEditTextboxes = [];
-				CreateAPage.multiEditButtons = [];
-				CreateAPage.multiEditCustomButtons = [];
-
-				var edit_textareas = CreateAPage.getElementsBy(
-					CreateAPage.editTextareaTest,
-					'textarea',
-					content_root,
-					CreateAPage.textareaAddToolbar
-				);
-
-				if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( 'wpTextboxes0' === edit_textareas[0].id ) ) {
-					edit_textareas[0].focus();
-				} else {
-					var el_id = parseInt( edit_textareas[0].id.replace( 'wpTextboxes', '' ) );
-					document.getElementById( 'toolbar' + el_id ).style.display = '';
-					CreateAPage.hideOtherBoxes( el_id );
-				}
-
-				var edittools_div = document.getElementById( 'createpage_editTools' );
-				if ( edittools_div ) {
-					if ( CreateAPage.myId != 'cp-template-Blank' ) {
-						edittools_div.style.display = 'none';
-					} else {
-						edittools_div.style.display = '';
-					}
-				}
-
-				CreateAPage.multiEditSetupToolbar();
-				CreateAPage.multiEditSetupOptionalSections();
-			},
-			error: function( jqXHR, textStatus, errorThrown ) {
-				document.getElementById( 'cp-multiedit' ).innerHTML = '';
+				template: elementId.replace( 'cp-template-', '' )
 			},
 			timeout: 50000
-		});
+		} ).fail( function ( code, result ) {
+			document.getElementById( 'cp-multiedit' ).innerHTML = '';
+		} ).done( function ( result ) {
+			var res = JSON.parse( result );
+			$( '#cp-multiedit' ).html( res );
+
+			$( 'div[id^="cp-template-"]' ).each( function ( idx ) {
+				$( this ).addClass( 'templateFrame' );
+				if ( $( this ).hasClass( 'templateFrameSelected' ) ) {
+					$( this ).removeClass( 'templateFrameSelected' );
+				}
+			} );
+
+			// Make the recently selected createplate active!
+			$( '#' + CreateAPage.myId ).addClass( 'templateFrameSelected' );
+
+			var infobox_root = document.getElementById( 'cp-infobox' );
+			var infobox_inputs = CreateAPage.getElementsBy(
+				CreateAPageInfobox.inputTest,
+				'input',
+				infobox_root,
+				CreateAPageInfobox.inputEvent
+			);
+			var infobox_uploads = CreateAPage.getElementsBy(
+				CreateAPageInfobox.uploadTest,
+				'input',
+				infobox_root,
+				CreateAPageInfobox.uploadEvent
+			);
+			var content_root = document.getElementById( 'wpTableMultiEdit' );
+			var section_uploads = CreateAPage.getElementsBy(
+				CreateAPage.uploadTest,
+				'input',
+				content_root,
+				CreateAPage.uploadEvent
+			);
+
+			var cloud_div = document.getElementById( 'createpage_cloud_div' );
+			if ( cloud_div !== null ) {
+				cloud_div.style.display = 'block';
+			}
+			CreateAPage.checkCategoryCloud();
+
+			if ( CreateAPage.Overlay && $( '#createpageoverlay' ).is( ':visible' ) ) {
+				CreateAPage.resizeOverlay( 20 );
+			}
+
+			CreateAPage.multiEditTextboxes = [];
+			CreateAPage.multiEditButtons = [];
+			CreateAPage.multiEditCustomButtons = [];
+
+			var edit_textareas = CreateAPage.getElementsBy(
+				CreateAPage.editTextareaTest,
+				'textarea',
+				content_root,
+				CreateAPage.textareaAddToolbar
+			);
+
+			if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
+				edit_textareas[0].focus();
+			} else {
+				var el_id = parseInt( edit_textareas[0].id.replace( 'wpTextboxes', '' ) );
+				document.getElementById( 'toolbar' + el_id ).style.display = '';
+				CreateAPage.hideOtherBoxes( el_id );
+			}
+
+			// Load WikiEditor for the newly created textarea elements, provided that
+			// WikiEditor is installed an' all...
+			if ( typeof $.wikiEditor === 'object' ) {
+				loadWikiEditorForTextboxes();
+			}
+
+			var edittools_div = document.getElementById( 'createpage_editTools' );
+			if ( edittools_div ) {
+				if ( CreateAPage.myId != 'cp-template-Blank' ) {
+					edittools_div.style.display = 'none';
+				} else {
+					edittools_div.style.display = '';
+				}
+			}
+
+			CreateAPage.multiEditSetupToolbar();
+			CreateAPage.multiEditSetupOptionalSections();
+		} );
 	},
 
+	/**
+	 * Checks the user-supplied page title to see if there is such a page already
+	 * and thus the user should be asked to either edit that page or choose a different
+	 * title for their page, or whether we're good to remove the overlay and enable
+	 * the editing areas.
+	 *
+	 * @param {jQuery.Event} e
+	 */
 	checkExistingTitle: function( e ) {
 		if ( document.getElementById( 'Createtitle' ).value === '' ) {
 			e.preventDefault();
 			document.getElementById( 'cp-title-check' ).innerHTML = '<span style="color: red;">' +
 				mw.msg( 'createpage-give-title' ) + '</span>';
 			window.location.hash = 'title_loc';
-			CreateAPage.SubmitEnabled = false;
+			CreateAPage.submitEnabled = false;
 		} else if ( CreateAPage.noCanDo === true ) {
-			CreateAPage.warningPanel = jQuery( '#dlg' ).dialog({
+			CreateAPage.warningPanel = $( '#dlg' ).dialog( {
 				//autoOpen: false,
 				draggable: false,
 				hide: 'slide',
 				modal: true,
 				resizable: false,
 				title: mw.msg( 'createpage-title-check-header' ),
+				text: mw.msg( 'createpage-title-check-text' ),
 				// original YUI code used 20em, but I don't think jQuery supports that.
 				// So I went to PXtoEM.com to convert 20em to pixels; I used
 				// 20.5 as the base font size in pixels, because we set the
 				// font size to 127% in Monobook's main.css and according to
 				// their conversion tables, 20px is 125%
 				width: 410
-			});
-			/*
-			TitleDialog = new YAHOO.widget.SimpleDialog( 'dlg', {
-				width: '20em',
-				effect: {
-					effect: YAHOO.widget.ContainerEffect.FADE,
-					duration: 0.4
-				},
-				fixedcenter: true,
-				modal: true,
-				visible: false,
-				draggable: false
-			});
-			TitleDialog.setHeader( mw.msg( 'createpage-title-check-header' ) );
-			TitleDialog.setBody( mw.msg( 'createpage-title-check-text' ) );
-			TitleDialog.cfg.setProperty( 'icon', YAHOO.widget.SimpleDialog.ICON_WARN );
-			TitleDialog.cfg.setProperty( 'zIndex', 1000 );
-			TitleDialog.render( document.body );
-			TitleDialog.show();
-			*/
+			} );
 			e.preventDefault();
 			CreateAPage.submitEnabled = false;
 		}
 		if (
 			( CreateAPage.submitEnabled !== true ) ||
-			( CreateAPage.Overlay && ( document.getElementById( 'createpageoverlay' ).style.visibility != 'hidden' ) )
+			( CreateAPage.Overlay && ( !$( '#createpageoverlay' ).is( ':hidden' ) ) )
 		)
 		{
 			e.preventDefault();
 		}
 	},
 
+	/**
+	 * @param {jQuery.Event} e
+	 */
 	enableSubmit: function( e ) {
 		CreateAPage.submitEnabled = true;
 	},
@@ -1309,7 +1291,7 @@ var CreateAPage = {
 	getElementsBy: function( method, tag, root, apply ) {
 		tag = tag || '*';
 
-		root = ( root ) ? /*jQuery( */root /*)*/ : null || document;
+		root = ( root ) ? /*$( */root /*)*/ : null || document;
 
 		if ( !root ) {
 			return [];
@@ -1332,17 +1314,20 @@ var CreateAPage = {
 	}
 }; // end of the CreateAPage class
 
-window.onresize = function() {
-	if ( CreateAPage.Overlay && ( document.getElementById( 'createpageoverlay' ).style.visibility !== 'hidden' ) ) {
-		//CreateAPage.resizeOverlay( 0 );
-	}
-};
+$( function () {
+	$( window ).resize( function () {
+		if ( CreateAPage.Overlay && !$( 'createpageoverlay' ).is( ':hidden' ) ) {
+			CreateAPage.resizeOverlay( 0 );
+		}
+	} );
+} );
 
 /**
  * Class for uploading images from an infobox on the Special:CreatePage page.
  */
 var CreateAPageInfobox = {
 	failureCallback: function( response ) {
+		var response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
 		document.getElementById( 'createpage_upload_file' + response.argument ).style.display = '';
@@ -1350,39 +1335,45 @@ var CreateAPageInfobox = {
 		document.getElementById( 'createpage_image_cancel' + response.argument ).style.display = 'none';
 	},
 
+	/**
+	 * @param {jQuery.Event} e
+	 * @param {Object} o Object containing the number ('num') of the upload field
+	 */
 	upload: function( e, o ) {
 		var n = o.num;
 		var oForm = document.getElementById( 'createpageform' );
 		if ( oForm ) {
 			e.preventDefault();
-			var ProgressBar = document.getElementById( 'createpage_upload_progress' + o.num );
-			ProgressBar.style.display = 'block';
-			ProgressBar.innerHTML = '<img src="' + stylepath + '/common/images/spinner.gif" width="16" height="16" alt="' +
-				mw.msg( 'createpage-please-wait' ) + '" border="0" />&nbsp;';
 
-			var sent_request = jQuery.ajax({ // using .ajax instead of .post for better flexibility
+			var ProgressBar = $( '#createpage_upload_progress' + o.num ).show().html( $.createSpinner( 'createpage' ) );
+
+			// Use HTML5 magic to do the file upload without having to resort to super
+			// heavy jQuery plugins or anything like that
+			var formData = new FormData();
+			formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[0] );
+
+			var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
 				type: 'POST',
-				url: wgScript,
-				data: {
-					action: 'ajax',
-					rs: 'axMultiEditImageUpload',
-					num: n
-				},
-				success: function( data, textStatus, jqXHR ) {
-					// @todo FIXME/CHECKME: make sure that the num (n) is passed as response.argument to uploadCallback
-					CreateAPageInfobox.uploadCallback( jqXHR );
-				},
-				error: function( jqXHR, textStatus, errorThrown ) {
-					CreateAPageInfobox.failureCallback( jqXHR );
-				},
+				url: mw.config.get( 'wgScript' ) + '?action=ajax&rs=axMultiEditImageUpload&num=' + n,
+				data: formData,
+				contentType: false,
+				cache: false,
+				processData: false,
 				timeout: 60000
-			});
+			} ).done( function( response ) {
+				$.removeSpinner( 'createpage' );
+				CreateAPageInfobox.uploadCallback( response );
+			} ).fail( function( code, result ) {
+				$.removeSpinner( 'createpage' );
+				CreateAPageInfobox.failureCallback( result );
+			} );
+
 			document.getElementById( 'createpage_image_cancel' + o.num ).style.display = '';
 			document.getElementById( 'createpage_image_text' + o.num ).style.display = 'none';
 
-			jQuery( '#createpage_image_cancel' + o.num ).click( function( e ) {
+			$( '#createpage_image_cancel' + o.num ).click( function( e ) {
 				sent_request.abort();
-			});
+			} );
 
 			var neoInput = document.createElement( 'input' );
 			var thisInput = document.getElementById( 'createpage_upload_file' + o.num );
@@ -1395,93 +1386,93 @@ var CreateAPageInfobox = {
 			neoInput.setAttribute( 'tabindex', '-1' );
 
 			thisContainer.appendChild( neoInput );
-			jQuery( '#createpage_upload_file' + o.num ).change( function( e ) {
+			$( '#createpage_upload_file' + o.num ).change( function( e ) {
 				CreateAPageInfobox.upload( e, { 'num': o.num } );
-			});
+			} );
 
 			document.getElementById( 'createpage_upload_file' + o.num ).style.display = 'none';
 		}
 	},
 
 	uploadCallback: function( response ) {
-		var aResponse = []; // initialize it as an empty array so that JSHint can STFU
-		if( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( response.responseText ) ) {
-			aResponse = eval( '(' + response.responseText + ')' );
-		}
-		var ProgressBar = document.getElementById( 'createpage_upload_progress' + response.argument );
-		if ( aResponse['error'] != 1 ) {
-			var xInfoboxText = document.getElementById( 'wpInfoboxValue' ).value;
-			var xImageHelper = document.getElementById( 'wpInfImg' + response.argument ).value;
-			document.getElementById( 'wpInfImg' + response.argument ).value = aResponse['msg'];
-			document.getElementById( 'wpNoUse' + response.argument ).value = 'Yes';
-			ProgressBar.innerHTML = mw.msg( 'createpage-img-uploaded' );
-			var ImageThumbnail = document.getElementById( 'createpage_image_thumb' + response.argument );
-			var thumb_container = document.getElementById( 'createpage_main_thumb' + response.argument );
+		var response = JSON.parse( response );
+		var ProgressBar = $( '#createpage_upload_progress' + response.num );
+
+		if ( response.error !== 1 ) {
+			$( '#wpInfImg' + response.num ).val( response.msg );
+			$( '#wpNoUse' + response.num ).val( 'Yes' );
+
+			ProgressBar.html( mw.msg( 'createpage-img-uploaded' ) );
+			var ImageThumbnail = $( '#createpage_image_thumb' + response.num );
+			var thumb_container = $( '#createpage_main_thumb' + response.num );
 			var tempstamp = new Date();
-			ImageThumbnail.src = aResponse['url'] + '?' + tempstamp.getTime();
-			if ( document.getElementById( 'wpLastTimestamp' + response.argument ).value == 'None' ) {
+			ImageThumbnail.attr( 'src', response.url + '?' + tempstamp.getTime() );
+
+			if ( $( '#wpLastTimestamp' + response.num ).val() === 'None' ) {
 				var break_tag = document.createElement( 'br' );
-				thumb_container.style.display = '';
-				var label_node = document.getElementById( 'createpage_image_label' + response.argument );
+				thumb_container.css( 'display', '' );
+				var label_node = document.getElementById( 'createpage_image_label' + response.num );
 				var par_node = label_node.parentNode;
 				par_node.insertBefore( break_tag, label_node );
 			}
-			document.getElementById( 'wpLastTimestamp' + response.argument ).value = aResponse['timestamp'];
-		} else if ( ( aResponse['error'] == 1 ) && ( aResponse['msg'] == 'cp_no_login' ) ) {
-			ProgressBar.innerHTML = '<span style="color: red">' +
-				mw.msg( 'createpage-login-required' ) + '<a href="' + wgServer +
-					wgScript + '?title=Special:UserLogin&returnto=Special:CreatePage" id="createpage_login_infobox' +
-					response.argument + '">' + mw.msg( 'createpage-login-href' ) +
+
+			$( '#wpLastTimestamp' + response.num ).val( response.timestamp );
+		} else if ( ( response.error === 1 ) && ( response.msg === 'cp_no_login' ) ) {
+			ProgressBar.html(
+				'<span style="color: red">' +
+				mw.msg( 'createpage-login-required' ) + '<a href="' + mw.config.get( 'wgServer' ) +
+					mw.config.get( 'wgScript' ) + '?title=Special:UserLogin&returnto=Special:CreatePage" id="createpage_login_infobox' +
+					response.num + '">' + mw.msg( 'createpage-login-href' ) +
 					'</a>' + mw.msg( 'createpage-login-required2' ) +
-				'</span>';
-			jQuery( '#createpage_login_infobox' + response.argument ).click(
-				function( e ) {
-					CreateAPage.showWarningLoginPanel( e );
-				}
+				'</span>'
 			);
 		} else {
-			ProgressBar.innerHTML = '<span style="color: red">' + aResponse['msg'] + '</span>';
+			ProgressBar.html( '<span style="color: red">' + response.msg + '</span>' );
 		}
-		document.getElementById( 'createpage_image_text' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
-		document.getElementById( 'createpage_upload_file' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_text' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_cancel' + response.argument ).style.display = 'none';
+
+		document.getElementById( 'createpage_image_text' + response.num ).innerHTML = mw.msg( 'createpage-insert-image' );
+		document.getElementById( 'createpage_upload_file' + response.num ).style.display = '';
+		document.getElementById( 'createpage_image_text' + response.num ).style.display = '';
+		document.getElementById( 'createpage_image_cancel' + response.num ).style.display = 'none';
 	},
 
+	/**
+	 * Is the supplied HTMLElement an infobox parameter element?
+	 *
+	 * @param {HTMLElement} el
+	 * @return {boolean} True if it is, otherwise false
+	 */
 	inputTest: function( el ) {
-		if ( el.id.match( 'wpInfoboxPar' ) ) {
-			return true;
-		} else {
-			return false;
-		}
+		return !!el.id.match( 'wpInfoboxPar' );
 	},
 
 	inputEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'wpInfoboxPar', '' ) );
-		if ( jQuery( '#wpInfoboxPar' + j ).length > 0 ) {
+		if ( $( '#wpInfoboxPar' + j ).length > 0 ) {
 			CreateAPage.clearInput( { num: j } );
 		}
-		//YAHOO.util.Event.onContentReady( 'wpInfoboxPar' + j, CreateAPage.clearInput, { num: j } );
 	},
 
+	/**
+	 * Is the supplied HTMLElement a file upload element?
+	 *
+	 * @param {HTMLElement} el
+	 * @return {boolean} True if it is, otherwise false
+	 */
 	uploadTest: function( el ) {
-		if ( el.id.match( 'createpage_upload_file' ) ) {
-			return true;
-		} else {
-			return false;
-		}
+		return !!el.id.match( 'createpage_upload_file' );
 	},
 
 	uploadEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file', '' ) );
-		jQuery( '#createpage_upload_file' + j ).change( function( e ) {
+		$( '#createpage_upload_file' + j ).change( function( e ) {
 			CreateAPageInfobox.upload( e, { 'num' : j } );
 		} );
 	}
 };
 
 // Initialize stuff when the DOM is ready
-jQuery( document ).ready( function() {
+$( function() {
 	// This creates the overlay over the editor and effectively blocks the user
 	// from typing text on the textarea and thus forces them to supply the page
 	// title first.
@@ -1490,63 +1481,123 @@ jQuery( document ).ready( function() {
 
 	CreateAPage.initializeMultiEdit();
 
-	jQuery( '#createpageform' ).submit( function( e ) {
+	$( '#createpageform' ).submit( function( e ) {
 		CreateAPage.checkExistingTitle( e );
-	});
+	} );
 
-	jQuery( '#wpSave' ).click( function( e ) {
+	// Need to attach the selector on body so that the three buttons will work
+	// even after switching to a different createplate
+	$( 'body' ).on( 'click', '#wpSave', function ( e ) {
 		CreateAPage.enableSubmit( e );
-	});
+	} );
 
-	jQuery( '#wpPreview' ).click( function( e ) {
+	$( 'body' ).on( 'click', '#wpPreview', function ( e ) {
 		CreateAPage.enableSubmit( e );
-	});
+	} );
 
-	jQuery( '#wpCancel' ).click( function( e ) {
+	$( 'body' ).on( 'click', '#wpCancel', function ( e ) {
 		CreateAPage.enableSubmit( e );
-	});
+	} );
 
-	jQuery( '#cp-chooser-toggle' ).click( function( e ) {
-		CreateAPageListeners.toggle( e, ['cp-chooser', 'cp-chooser-toggle'] );
-	});
-
-	// FIXME onAvailable?
-	var listeners = jQuery( '#cp-infobox-toggle' ).data( 'events' );
-	if ( listeners ) {
-		for ( var i = 0; i < listeners.length; ++i ) {
-			var listener = listeners[i];
-			if ( listener.type !== 'click' ) {
-				jQuery( '#cp-infobox-toggle' ).click( function( e ) {
-					CreateAPageListeners.toggle( e, ['cp-infobox', 'cp-infobox-toggle'] );
-				});
-			}
+	// [Hide]/[Show] links for the createplate selector
+	$( '#cp-chooser-toggle' ).click( function ( e ) {
+		e.preventDefault();
+		// Note: I wanted to use .toggle( 500 ) or so for consistency with the old
+		// code, but 1) it doesn't actually seem that smooth, and 2) it breaks the
+		// code below which updates the hide/show text. With plain .toggle() the text
+		// is updated correctly.
+		$( '#cp-chooser' ).toggle();
+		// Update label accordingly
+		if ( $( '#cp-chooser' ).is( ':visible' ) ) {
+			$( this ).text( mw.msg( 'createpage-hide' ) );
+		} else {
+			$( this ).text( mw.msg( 'createpage-show' ) );
 		}
-	} else {
-		jQuery( '#cp-chooser-toggle' ).click( function( e ) {
-			CreateAPageListeners.toggle( e, ['cp-infobox', 'cp-infobox-toggle'] );
-		});
-	}
+	} );
+
+	// [Hide]/[Show] links for a createplate's infobox
+	// Using the $( 'body' ) pattern instead of $( '#cp-infobox-toggle' ) b/c switching
+	// a createplate using the selector would render those links non-functional
+	$( 'body' ).on( 'click', '#cp-infobox-toggle', function ( e ) {
+		e.preventDefault();
+		$( '#cp-infobox' ).toggle();
+		// Update label accordingly
+		if ( $( '#cp-infobox' ).is( ':visible' ) ) {
+			$( this ).text( mw.msg( 'createpage-hide' ) );
+		} else {
+			$( this ).text( mw.msg( 'createpage-show' ) );
+		}
+	} );
 
 	// "Add a category" input (see categorypage.tmpl.php)
-	var categoryButton = jQuery( '#wpCategoryButton' );
-	if ( categoryButton.length > 0 ) {
-		categoryButton.click( function( e ) {
-			CreateAPageCategoryTagCloud.inputAdd();
-			return false;
-		});
-	}
+	$( '#wpCategoryButton' ).click( function ( e ) {
+		e.preventDefault();
+		CreateAPageCategoryTagCloud.inputAdd();
+	} );
 
-	jQuery( '#Createtitle' ).change( CreateAPage.watchTitle );
+	// Handle clicks on category tags in the cloud
+	// Moved from checkCategoryCloud() on 12 December 2019
+	$( '#createpage_cloud_section a' ).click( function ( e ) {
+		e.preventDefault();
+		var tagName = $( this ).text();
+		var num = $( this ).parent().attr( 'id' ).replace( /tag/, '' );
+		// @todo FIXME: Clicking on a previously added category to remove it does not work (12 December 2019)
+		CreateAPageCategoryTagCloud.add( encodeURIComponent( tagName ), num );
+	} );
+
+	$( '#Createtitle' ).change( CreateAPage.watchTitle );
+	// Clicking on the "Article Title" input clears any "This article already
+	// exists" messages
+	$( '#Createtitle' ).on( 'focus', function( e ) {
+		CreateAPage.clearTitleMessage( e );
+	} );
 
 	// Clicking on the "Advanced Edit" button shows a modal dialog asking the
 	// user, "Switching editing modes may break page formatting, do you want to continue?"
-	jQuery( '#wpAdvancedEdit' ).bind( 'click', function( e ) {
+	$( '#wpAdvancedEdit' ).on( 'click', function( e ) {
+		// Prevent default action, which would be to follow the link to index.php
+		// (which would then likely take the user to the wiki's Main Page)
+		e.preventDefault();
 		CreateAPage.showWarningPanel( e );
-	});
+	} );
 
-	// Clicking on the "Article Title" input clears any "This article already
-	// exists" messages
-	jQuery( '#Createtitle' ).bind( 'focus', function( e ) {
-		CreateAPage.clearTitleMessage( e );
-	});
-});
+	// File upload stuff, main infobox image(s) and article sections
+	$( 'input[id^="createpage_upload_file"]' ).change( function ( e ) {
+		CreateAPageInfobox.upload( e, { 'num': $( this ).attr( 'id' ).replace( /createpage_upload_file/, '' ) } );
+	} );
+
+	$( 'input[id^="createpage_upload_file_section"]' ).change( function ( e ) {
+		CreateAPage.upload( e, { 'num': $( this ).attr( 'id' ).replace( /createpage_upload_file_section/, '' ) } );
+	} );
+
+	// Moved from infobox.tmpl.php on 8 December 2019
+	var ourInfoboxElement = $( 'input[id^="wpInfoboxPar"]' );
+	if ( ourInfoboxElement.length > 0 ) {
+		$( function( e ) {
+			CreateAPage.clearInput( { num: ourInfoboxElement.attr( 'id' ).replace( /wpInfoboxPar/, '' ) } );
+		} );
+	}
+
+	// Moved from CreateMultiPage.php on 8 December 2019
+	// @todo FIXME: This is probably dead code given that MW core no longer has old-school editing toolbar and that we now support WikiEditor
+	$( 'div[id^="toolbar"]' ).each( function ( idx ) {
+		CreateAPage.multiEditTextboxes[CreateAPage.multiEditTextboxes.length] = idx;
+		CreateAPage.multiEditButtons[idx] = [];
+		CreateAPage.multiEditCustomButtons[idx] = [];
+		$( '#wpTextboxes' + idx ).focus( function ( e ) {
+			CreateAPage.showThisBox( e, { 'toolbarId': idx } );
+		} );
+	} );
+
+	// "or click here to go to the normal editor" link at the start of Special:CreatePage
+	// Moved from CreatePageCreateplateForm.php on 8 December 2019
+	$( '#createapage-go-to-normal-editor' ).on( 'click', function ( e ) {
+		e.preventDefault();
+		CreateAPage.goToNormalEditMode();
+	} );
+
+	// Login dialog shown to users who try to upload images w/o being logged in
+	$( 'a[id^="createpage_login_infobox"]' ).click( function ( e ) {
+		CreateAPage.showWarningLoginPanel( e );
+	} );
+} );

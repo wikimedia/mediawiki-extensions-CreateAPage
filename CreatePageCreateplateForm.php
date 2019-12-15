@@ -5,12 +5,34 @@
  * @file
  */
 class CreatePageCreateplateForm {
-	var $mCreateplatesLocation;
-	var $mTitle, $mNamespace, $mCreateplate;
-	var $mRedLinked;
+	/**
+	 * @var string $mCreateplatesLocation Name of the MediaWiki: msg containing the
+	 *   list of createplates (without the MediaWiki: namespace)
+	 */
+	public $mCreateplatesLocation;
 
-	// constructor
-	function __construct( $par = null ) {
+	/**
+	 * @var string $mTitle User-supplied name of the page to be created
+	 */
+	public $mTitle;
+
+	/**
+	 * @var string $mCreateplate Name of the createplate to use, e.g. "character"
+	 *   for [[MediaWiki:Createplate-character]]
+	 */
+	public $mCreateplate;
+
+	/**
+	 * @var bool $mRedLinked Are we previewing a page in the "red link" mode?
+	 */
+	public $mRedLinked;
+
+	/**
+	 * Constructor
+	 *
+	 * @param mixed|null $par Parameter passed to the Special:CreatePage page in the URL, if any
+	 */
+	public function __construct( $par = null ) {
 		global $wgRequest;
 
 		$this->mCreateplatesLocation = 'Createplate-list';
@@ -35,73 +57,125 @@ class CreatePageCreateplateForm {
 		}
 	}
 
-	function makePrefix( $title ) {
+	private function makePrefix( $title ) {
 		$title = str_replace( '_', ' ', $title );
 		return $title;
 	}
 
 	// show form
-	function showForm( $err, $content_prev = false, $formCallback = null ) {
+	public function showForm( $err, $content_prev = false, $formCallback = null ) {
 		global $wgOut, $wgUser, $wgRequest;
 
 		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
-			$wgOut->setPageTitle( wfMsg( 'preview' ) );
+			$wgOut->setPageTitle( wfMessage( 'preview' )->text() );
 		} else {
 			if ( $this->mRedLinked ) {
-				$wgOut->setPageTitle( wfMsg( 'editing', $this->makePrefix( $this->mTitle ) ) );
+				$wgOut->setPageTitle( wfMessage( 'editing', $this->makePrefix( $this->mTitle ) )->text() );
 			} else {
-				$wgOut->setPageTitle( wfMsg( 'createpage-title' ) );
+				$wgOut->setPageTitle( wfMessage( 'createpage-title' )->text() );
 			}
 		}
 
-		if ( $wgUser->isLoggedIn() ) {
-			$token = htmlspecialchars( $wgUser->editToken() );
-		} else {
-			$token = EDIT_TOKEN_SUFFIX;
-		}
+		$token = htmlspecialchars( $wgUser->getEditToken() );
 		$titleObj = SpecialPage::getTitleFor( 'CreatePage' );
-		$action = $titleObj->escapeLocalURL( 'action=submit' );
+		$action = htmlspecialchars( $titleObj->getLocalURL( 'action=submit' ) );
 
 		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
 			$wgOut->addHTML(
 				'<div class="previewnote"><p>' .
-				wfMsg( 'previewnote' ) .
+				wfMessage( 'previewnote' )->text() .
 				'</p></div>'
 			);
 		} else {
-			$wgOut->addHTML( wfMsg( 'createpage-title-additional' ) );
+			$wgOut->addHTML( wfMessage( 'createpage-title-additional' )->text() );
 		}
 
 		if ( $err != '' ) {
-			$wgOut->setSubtitle( wfMsgHtml( 'formerror' ) );
+			$wgOut->setSubtitle( wfMessage( 'formerror' )->text() );
 			$wgOut->addHTML( "<p class='error'>{$err}</p>\n" );
 		}
 
 		// show stuff like on normal edit page, but just for red links
 		if ( $this->mRedLinked ) {
-			if( $wgUser->isLoggedIn() ) {
-				$wgOut->addWikiMsg( 'newarticletext' );
+			$helpLink = wfExpandUrl( Skin::makeInternalOrExternalUrl(
+				wfMessage( 'helppage' )->inContentLanguage()->text()
+			) );
+			if ( $wgUser->isLoggedIn() ) {
+				$wgOut->wrapWikiMsg(
+					// Suppress the external link icon, consider the help URL an internal one
+					"<div class=\"mw-newarticletext plainlinks\">\n$1\n</div>",
+					[
+						'newarticletext',
+						$helpLink
+					]
+				);
 			} else {
-				$wgOut->addWikiMsg( 'newarticletextanon' );
+				$wgOut->wrapWikiMsg(
+					// Suppress the external link icon, consider the help URL an internal one
+					"<div class=\"mw-newarticletextanon plainlinks\">\n$1\n</div>",
+					[
+						'newarticletextanon',
+						$helpLink
+					]
+				);
 			}
-			if( $wgUser->isAnon() && !$wgRequest->getCheck( 'wpPreview' ) ) {
-				$wgOut->addWikiMsg( 'anoneditwarning' );
-			}
+			if ( $wgUser->isAnon() ) {
+				if ( !$wgRequest->getCheck( 'wpPreview' ) ) {
+					$returnToQuery = array_diff_key(
+						$wgRequest->getValues(),
+						[
+							'title' => false,
+							'returnto' => true,
+							'returntoquery' => true
+						]
+					);
+					$returnToPageTitle = $wgRequest->getVal( 'title' );
+					// Note: in red link mode, regular redlink URLs behave as if they were Special:CreatePage.
+					// That's why returnto is not Special:CreatePage but the page title of the new page
+					// to be created.
+					$wgOut->wrapWikiMsg(
+						"<div id='mw-anon-edit-warning' class='warningbox'>\n$1\n</div>",
+						[ 'anoneditwarning',
+							// Log-in link
+							SpecialPage::getTitleFor( 'Userlogin' )->getFullURL( [
+								'returnto' => Title::newFromText( $returnToPageTitle )->getPrefixedDBkey(),
+								'returntoquery' => wfArrayToCgi( $returnToQuery ),
+							] ),
+							// Sign-up link
+							SpecialPage::getTitleFor( 'CreateAccount' )->getFullURL( [
+								'returnto' => Title::newFromText( $returnToPageTitle )->getPrefixedDBkey(),
+								'returntoquery' => wfArrayToCgi( $returnToQuery ),
+							] )
+						]
+					);
+				} else {
+					$wgOut->wrapWikiMsg(
+						"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
+						'anonpreviewwarning'
+					);
+				}
+			} // "user is anon" check
 		}
 
 		// Add CSS & JS
-		$wgOut->addModuleStyles( 'ext.createAPage' );
-		$wgOut->addModuleScripts( 'ext.createAPage' );
-		/*if( $wgUser->getOption( 'disablelinksuggest' ) != true ) {
-			$wgOut->addHTML( '<div id="wpTextbox1_container" class="yui-ac-container"></div> ');
-			$wgOut->addScriptFile( $wgScriptPath . '/extensions/LinkSuggest/LinkSuggest.js' );
-		}*/
+		$wgOut->addModuleStyles( 'ext.createAPage.styles' );
+		$wgOut->addModules( 'ext.createAPage' );
 
-		$alternateLink = '<a href="#" onclick="CreateAPage.goToNormalEditMode(); return false;">' .
-			wfMsg( 'createpage-here' ) . '</a>';
+		// Add WikiEditor to the textarea(s) if enabled for the current user
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $wgUser->getOption( 'usebetatoolbar' ) ) {
+			$wgOut->addModules( 'ext.createAPage.wikiEditor' );
+		}
+
+		// @todo This was originally used by the Wikia CreatePage ([sic]! it's different from
+		// _this_ extension) extension, which was once a part of the Wikiwyg extension
+		// (super legacy WYSIWYG editing extension that was relevant circa 2007 or so)
+		// Nothing in CreateAPage seems to use this, i.e. this element will always
+		// remain hidden. Can we safely just ditch this? --ashley, 10 December 2019
+		$alternateLink = '<a href="#" id="createapage-go-to-normal-editor">' .
+			wfMessage( 'createpage-here' )->text() . '</a>';
 		$wgOut->addHTML(
 			'<div id="createpage_subtitle" style="display:none">' .
-				wfMsg( 'createpage-alternate-creation', $alternateLink ) .
+				wfMessage( 'createpage-alternate-creation', $alternateLink )->text() .
 			'</div>'
 		);
 
@@ -126,8 +200,8 @@ class CreatePageCreateplateForm {
 
 		$wgOut->addHTML( $html );
 		// adding this for CAPTCHAs and the like
-		if( is_callable( $formCallback ) ) {
-			call_user_func_array( $formCallback, array( &$wgOut ) );
+		if ( is_callable( $formCallback ) ) {
+			call_user_func_array( $formCallback, [ &$wgOut ] );
 		}
 
 		$parsedTemplates = $this->getCreateplates();
@@ -139,13 +213,14 @@ class CreatePageCreateplateForm {
 		if ( !$wgRequest->getCheck( 'wpPreview' ) ) {
 			$wgOut->addHTML(
 				'<fieldset id="cp-chooser-fieldset"' . $showField . '>
-				<legend>' . wfMsg( 'createpage-choose-createplate' ) .
-				'<span style="font-size: small; font-weight: normal; margin-left: 5px">[<a id="cp-chooser-toggle" title="toggle" href="#">'
-				. wfMsg( 'createpage-hide' ) . '</a>]</span>
+				<legend>' . wfMessage( 'createpage-choose-createplate' )->text() .
+				'<span>[<a id="cp-chooser-toggle" title="toggle" href="#">'
+				. wfMessage( 'createpage-hide' )->text() . '</a>]</span>
 				</legend>' . "\n"
 			);
 			$wgOut->addHTML( '<div id="cp-chooser" style="display: block;">' . "\n" );
 		}
+
 		$this->produceRadioList( $parsedTemplates );
 	}
 
@@ -153,15 +228,15 @@ class CreatePageCreateplateForm {
 	 * Get the list of createplates from a MediaWiki namespace page,
 	 * parse the content into an array and return it.
 	 *
-	 * @return Mixed: array on success, boolean false if the message is empty
+	 * @return array|bool Array on success, boolean false if the message is empty
 	 */
-	function getCreateplates() {
-		$createplates_txt = wfMsgForContent( $this->mCreateplatesLocation );
+	private function getCreateplates() {
+		$createplates_txt = wfMessage( $this->mCreateplatesLocation )->inContentLanguage()->text();
 		if ( $createplates_txt != '' ) {
 			$lines = preg_split( "/[\n]+/", $createplates_txt );
 		}
 
-		$createplates = array();
+		$createplates = [];
 		if ( !empty( $lines ) ) {
 			// each createplate is listed in a new line, has two required and one optional
 			// parameter, all separated by pipes
@@ -169,18 +244,18 @@ class CreatePageCreateplateForm {
 				if ( preg_match( "/^[^\|]+\|[^\|]+\|[^\|]+$/", $line ) ) {
 					// three parameters
 					$line_pars = preg_split( "/\|/", $line );
-					$createplates[] = array(
+					$createplates[] = [
 						'page' 	=> $line_pars[0],
 						'label' => $line_pars[1],
 						'preview' => $line_pars[2]
-					);
-				} elseif( preg_match( "/^[^\|]+\|[^\|]+$/", $line ) ) {
+					];
+				} elseif ( preg_match( "/^[^\|]+\|[^\|]+$/", $line ) ) {
 					// two parameters
 					$line_pars = preg_split( "/\|/", $line );
-					$createplates[] = array(
+					$createplates[] = [
 						'page' 	=> $line_pars[0],
 						'label' => $line_pars[1]
-					);
+					];
 				}
 			}
 		}
@@ -193,7 +268,7 @@ class CreatePageCreateplateForm {
 	}
 
 	// return checked createplate
-	function getChecked( $createplate, $current, &$checked ) {
+	private function getChecked( $createplate, $current, &$checked ) {
 		if ( !$createplate ) {
 			if ( !$checked ) {
 				$this->mCreateplate = $current;
@@ -215,9 +290,9 @@ class CreatePageCreateplateForm {
 	 * Produce a list of radio buttons from the given createplate array and
 	 * output the generated HTML.
 	 *
-	 * @param $createplates Array: array of createplates
+	 * @param array $createplates Array of createplates
 	 */
-	function produceRadioList( $createplates ) {
+	private function produceRadioList( $createplates ) {
 		global $wgOut, $wgRequest, $wgServer, $wgScript;
 
 		// this checks radio buttons when we have no JavaScript...
@@ -226,40 +301,48 @@ class CreatePageCreateplateForm {
 			$selected = $this->mCreateplate;
 		}
 		$checked = false;
-		$check = array();
+		$check = [];
 		foreach ( $createplates as $createplate ) {
 			$check[$createplate['page']] = $this->getChecked(
-				$selected, $createplate['page'], $checked
+				$selected,
+				$createplate['page'],
+				$checked
 			);
 		}
 
 		if ( $this->mRedLinked ) {
-			global $wgParser, $wgUser;
+			global $wgUser;
+			$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+			// @todo FIXME: should probably be $parserOptions = ParserOptions::newCanonical();
+			// also the second line does nothing as the method is <s>deprecated</s> gone as of MW 1.34rc1
 			$parserOptions = ParserOptions::newFromUser( $wgUser );
-			$parserOptions->setEditSection( false );
+			// $parserOptions->setEditSection( false );
 			$rtitle = Title::newFromText( $this->mTitle );
-			$parsedInfo = $wgParser->parse(
-				wfMsg( 'createpage-about-info' ), $rtitle, $parserOptions
+			$parsedInfo = $parser->parse(
+				wfMessage( 'createpage-about-info' )->text(),
+				$rtitle,
+				$parserOptions
 			);
-			$aboutinfo = str_replace( '</p>', '', $parsedInfo->mText );
-			$aboutinfo .= wfMsg(
+			// @todo FIXME/CHECKME: Probably should _not_ use mText, @see showPreview() method
+			$aboutInfo = str_replace( '</p>', '', $parsedInfo->mText );
+			$aboutInfo .= wfMessage(
 				'createpage-advanced-text',
 				'<a href="' . $wgServer . $wgScript . '" id="wpAdvancedEdit">' .
-					wfMsg( 'createpage-advanced-edit' ) . '</a>'
-			) . '</p>';
+					wfMessage( 'createpage-advanced-edit' )->text() . '</a>'
+			)->text() . '</p>';
 		} else {
-			$aboutinfo = '';
+			$aboutInfo = '';
 		}
 
-		$tmpl = new EasyTemplate( dirname( __FILE__ ) . '/templates/' );
-		$tmpl->set_vars(array(
+		$tmpl = new EasyTemplate( __DIR__ . '/templates/' );
+		$tmpl->set_vars( [
 			'data' => $createplates,
 			'selected' => $check,
 			'createtitle' => $this->makePrefix( $this->mTitle ),
 			'ispreview' => $wgRequest->getCheck( 'wpPreview' ),
 			'isredlink' => $this->mRedLinked,
-			'aboutinfo' => $aboutinfo,
-		));
+			'aboutinfo' => $aboutInfo,
+		] );
 
 		$wgOut->addHTML( $tmpl->render( 'templates-list' ) );
 	}
@@ -267,12 +350,12 @@ class CreatePageCreateplateForm {
 	/**
 	 * Check whether the given page exists.
 	 *
-	 * @param $given String: name of the page whose existence we're checking
-	 * @param $ajax Boolean: are we in AJAX mode? Defaults to false.
-	 * @return Mixed: string (error message) if the title is missing, the page
+	 * @param string $given Name of the page whose existence we're checking
+	 * @param bool $ajax Are we in AJAX mode? Defaults to false.
+	 * @return string|bool Error message if the title is missing, the page
 	 *                exists and we're not in AJAX mode
 	 */
-	function checkArticleExists( $given, $ajax = false ) {
+	public function checkArticleExists( $given, $ajax = false ) {
 		global $wgOut;
 
 		if ( $ajax ) {
@@ -280,19 +363,19 @@ class CreatePageCreateplateForm {
 		}
 
 		if ( empty( $given ) && !$ajax ) {
-			return wfMsg( 'createpage-give-title' );
+			return wfMessage( 'createpage-give-title' )->text();
 		}
 
 		$title = Title::newFromText( $given );
 		if ( is_object( $title ) ) {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$exists = $dbr->selectField(
 				'page',
 				'page_title',
-				array(
+				[
 					'page_title' => $title->getDBkey(),
 					'page_namespace' => $title->getNamespace()
-				),
+				],
 				__METHOD__
 			);
 			if ( $exists != '' ) {
@@ -301,9 +384,10 @@ class CreatePageCreateplateForm {
 				} else {
 					// Mimick the way AJAX version displays things and use the
 					// same two messages. 2 are needed for full i18n support.
-					return wfMsg( 'createpage-article-exists' ) . ' ' .
-						Linker::linkKnown( $title, '', array(), array( 'action' => 'edit' ) ) .
-						wfMsg( 'createpage-article-exists2' );
+					return wfMessage( 'createpage-article-exists' )->text() . ' ' .
+						// @todo Use LinkRenderer instead.
+						Linker::linkKnown( $title, '', [], [ 'action' => 'edit' ] ) .
+						wfMessage( 'createpage-article-exists2' )->text();
 				}
 			}
 			if ( !$ajax ) {
@@ -311,7 +395,7 @@ class CreatePageCreateplateForm {
 			}
 		} else {
 			if ( !$ajax ) {
-				return wfMsg( 'createpage-title-invalid' );
+				return wfMessage( 'createpage-title-invalid' )->escaped();
 			}
 		}
 	}
@@ -319,16 +403,17 @@ class CreatePageCreateplateForm {
 	/**
 	 * Try to submit the form.
 	 *
-	 * @return Mixed: boolean false on failure, nothing on success; if
+	 * @return bool|void False on failure, nothing on success; if
 	 *                everything went well, the user is redirected to their new
 	 *                page
 	 */
-	function submitForm() {
-		global $wgOut, $wgRequest, $wgServer, $wgScript, $wgScriptPath;
+	public function submitForm() {
+		global $wgOut, $wgRequest, $wgServer, $wgScript, $wgScriptPath, $wgUser;
+
+		$mainform = new CreatePageCreateplateForm();
 
 		// check if we are editing in red link mode
 		if ( $wgRequest->getCheck( 'wpSubmitCreateplate' ) ) {
-			$mainform = new CreatePageCreateplateForm();
 			$mainform->showForm( '' );
 			$mainform->showCreateplate();
 			return false;
@@ -336,55 +421,106 @@ class CreatePageCreateplateForm {
 			$valid = $this->checkArticleExists( $wgRequest->getVal( 'Createtitle' ) );
 			if ( $valid != '' ) {
 				// no title? this means overwriting Main Page...
-				$mainform = new CreatePageCreateplateForm();
 				$mainform->showForm( $valid );
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$editor->generateForm( $editor->glueArticle() );
 				return false;
 			}
 
-			if ( $wgRequest->getCheck( 'wpSave' ) ) {
+			if ( $wgRequest->getVal( 'wpSave' ) && $wgRequest->wasPosted() && $wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$rtitle = Title::newFromText( $wgRequest->getVal( 'Createtitle' ) );
+				// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
 				$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
 				$editpage = new EditPage( $rarticle );
 				$editpage->mTitle = $rtitle;
 				$editpage->mArticle = $rarticle;
+
+				// ashley 8 December 2019: need this so that edits don't fail due to wpUnicodeCheck being ''...
+				$editpage->importFormData( $wgRequest );
+
+				// Order matters! importFormData overwrites textbox1 so we must define it _after_ calling it, obviously
 				$editpage->textbox1 = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 
 				$editpage->minoredit = $wgRequest->getCheck( 'wpMinoredit' );
 				$editpage->watchthis = $wgRequest->getCheck( 'wpWatchthis' );
 				$editpage->summary = $wgRequest->getVal( 'wpSummary' );
+
 				$_SESSION['article_createplate'] = $this->mCreateplate;
+
 				// pipe tags to pipes
-				wfCreatePageUnescapeKnownMarkupTags( $editpage->textbox1 );
-				$editpage->attemptSave();
+				CreateAPageUtils::unescapeKnownMarkupTags( $editpage->textbox1 );
+
+				$status = $editpage->attemptSave();
+
+				// Redirect to the brand new page on success or in case of a failure, display
+				// an error msg
+				// This first loop has been copied from PostComment
+				if ( !$status->isGood() ) {
+					$errors = $status->getErrorsArray();
+					$errorMsg = '';
+					foreach ( $errors as $error ) {
+						if ( is_array( $error ) ) {
+							$errorMsg = count( $error ) ? $error[0] : '';
+						}
+					}
+					// Hacks' galore continues...
+					// $errorMsg can be 'hookaborted' (e.g. the SpamRegex ext., if a user enters
+					// a SpamRegexed edit summary), but it can _also_ be something like
+					// '<div class="errorbox">Incorrect or missing CAPTCHA.</div>'
+					// Obviously 'hookaborted' is an i18n msg key and the latter is something
+					// that should be output as-is...
+					if ( !preg_match( '/</', $errorMsg ) ) {
+						$errorMsg = wfMessage( $errorMsg )->text();
+					}
+					// This is literally copypasted from the wpPreview loop below
+					// with one '' changed to $errorMsg, that's it
+					$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
+					$content = $editor->glueArticle( true, false );
+					$content_static = $editor->glueArticle( true );
+					$mainform->showForm( $errorMsg, $content_static );
+					$editor->generateForm( $content );
+					return false;
+				} elseif ( $status->value == EditPage::AS_SUCCESS_NEW_ARTICLE ) {
+					$wgOut->redirect( Title::newFromText( $wgRequest->getVal( 'Createtitle' ) )->getFullURL() );
+				}
+
 				return false;
-			} elseif( $wgRequest->getCheck( 'wpPreview' ) ) {
-				$mainform = new CreatePageCreatePlateForm();
+			} elseif ( $wgRequest->getVal( 'wpSave' ) && $wgRequest->wasPosted() && !$wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
+				// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
+				// CSRF attempt?
+				$errorMsg = wfMessage( 'sessionfailure' )->escaped();
+				// This is literally copypasted from the wpPreview loop below
+				// with one '' changed to $errorMsg, that's it
+				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
+				$content = $editor->glueArticle( true, false );
+				$content_static = $editor->glueArticle( true );
+				$mainform->showForm( $errorMsg, $content_static );
+				$editor->generateForm( $content );
+				return false;
+			} elseif ( $wgRequest->getCheck( 'wpPreview' ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
 				$content = $editor->glueArticle( true, false );
 				$content_static = $editor->glueArticle( true );
 				$mainform->showForm( '', $content_static );
 				$editor->generateForm( $content );
 				return false;
-			} elseif( $wgRequest->getCheck( 'wpAdvancedEdit' ) ) {
+			} elseif ( $wgRequest->getCheck( 'wpAdvancedEdit' ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
-				wfCreatePageUnescapeKnownMarkupTags( $content );
+				CreateAPageUtils::unescapeKnownMarkupTags( $content );
 				$_SESSION['article_content'] = $content;
 				$wgOut->redirect(
 					$wgServer . $wgScript . '?title=' .
 					$wgRequest->getVal( 'Createtitle' ) .
 					'&action=edit&createpage=true'
 				);
-			} elseif( $wgRequest->getCheck( 'wpImageUpload' ) ) {
-				$mainform = new CreatePageCreatePlateForm();
+			} elseif ( $wgRequest->getCheck( 'wpImageUpload' ) ) {
 				$mainform->showForm( '' );
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$content = $editor->glueArticle();
 				$editor->generateForm( $content );
-			} elseif( $wgRequest->getCheck( 'wpCancel' ) ) {
+			} elseif ( $wgRequest->getCheck( 'wpCancel' ) ) {
 				if ( $wgRequest->getVal( 'Createtitle' ) != '' ) {
 					$wgOut->redirect( $wgServer . $wgScript . '?title=' . $wgRequest->getVal( 'Createtitle' ) );
 				} else {
@@ -394,33 +530,50 @@ class CreatePageCreateplateForm {
 		}
 	}
 
-	// display the preview in another div
-	function showPreview( $content, $title ) {
-		global $wgOut, $wgUser, $wgParser;
+	/**
+	 * Display the preview in another div
+	 *
+	 * @param string $content Wikitext content to parse
+	 * @param string $title Page title of the page we're creating
+	 */
+	private function showPreview( $content, $title ) {
+		global $wgOut, $wgUser;
 
+		// @todo FIXME: should probably be $parserOptions = ParserOptions::newCanonical();
+		// also the second line does nothing as the method is <s>deprecated</s> gone as of MW 1.34rc1
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
-		$parserOptions->setEditSection( false );
+		// $parserOptions->setEditSection( false );
 		$rtitle = Title::newFromText( $title );
 
 		if ( is_object( $rtitle ) ) {
-			wfCreatePageUnescapeKnownMarkupTags( $content );
-			$pre_parsed = $wgParser->preSaveTransform(
-				$content, $rtitle, $wgUser, $parserOptions, true
+			CreateAPageUtils::unescapeKnownMarkupTags( $content );
+			$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+			$pre_parsed = $parser->preSaveTransform(
+				$content,
+				$rtitle,
+				$wgUser,
+				$parserOptions,
+				true
 			);
-			$output = $wgParser->parse( $pre_parsed, $rtitle, $parserOptions );
-			$wgOut->addParserOutputNoText( $output );
+			$output = $parser->parse( $pre_parsed, $rtitle, $parserOptions );
+			$wgOut->addParserOutputMetadata( $output );
+			// @todo CHECKME: Used to be $output->mText but that would cause parser
+			// internal stuff like mw:toc being exposed and thus it would seem to the
+			// average user who's previewing stuff that headlines etc. are duplicated.
+			// --ashley, 8 December 2019
+			$previewableText = $wgOut->parseAsContent( $pre_parsed ); // $output->mText;
 			$wgOut->addHTML(
 				"<div id=\"createpagepreview\">
-					$output->mText
+					$previewableText
 					<div id=\"createpage_preview_delimiter\" class=\"actionBar actionBarStrong\">" .
-						wfMsg( 'createpage-preview-end' ) .
+						wfMessage( 'createpage-preview-end' )->escaped() .
 					'</div>
 				</div>'
 			);
 		}
 	}
 
-	function showCreateplate( $isInitial = false ) {
+	public function showCreateplate( $isInitial = false ) {
 		if ( $this->mCreateplate ) {
 			$editor = new CreatePageMultiEditor( $this->mCreateplate );
 		} else {

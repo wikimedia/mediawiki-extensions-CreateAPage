@@ -10,29 +10,38 @@ class CreatePage extends SpecialPage {
 	}
 
 	/**
+	 * Group this special page under the correct group in Special:SpecialPages
+	 *
+	 * @return string
+	 */
+	protected function getGroupName() {
+		return 'pagetools';
+	}
+
+	/**
+	 * @see https://phabricator.wikimedia.org/T123591
+	 * @return bool
+	 */
+	public function doesWrites() {
+		return true;
+	}
+
+	/**
 	 * Show the special page
 	 *
-	 * @param $par Mixed: parameter passed to the page or null
+	 * @param string|null $par Parameter passed to the page, if any
 	 */
 	public function execute( $par ) {
-		global $wgOut, $wgUser, $wgRequest;
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+		$user = $this->getUser();
 
-		// If user is blocked, s/he doesn't need to access this page
-		if ( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage();
-			return;
-		}
+		$this->checkPermissions();
 
-		// Is the database locked?
-		if( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
-			return;
-		}
+		$this->checkReadOnly();
 
-		// Do we have the required permissions?
-		if( !$wgUser->isAllowed( 'createpage' ) ) {
-			$wgOut->permissionRequired( 'createpage' );
-			return;
+		if ( !$user->isAllowed( 'createpage' ) ) {
+			throw new PermissionsError( 'createpage' );
 		}
 
 		// Set the page title, robot policies, etc.
@@ -40,11 +49,11 @@ class CreatePage extends SpecialPage {
 
 		$mainForm = new CreatePageCreateplateForm( $par );
 
-		$action = $wgRequest->getVal( 'action' );
-		if ( $wgRequest->wasPosted() && $action == 'submit' ) {
+		$action = $request->getVal( 'action' );
+		if ( $request->wasPosted() && $action == 'submit' ) {
 			$mainForm->submitForm();
-		} elseif( $action == 'check' ) {
-			$mainForm->checkArticleExists( $wgRequest->getVal( 'to_check' ), true );
+		} elseif ( $action == 'check' ) {
+			$mainForm->checkArticleExists( $request->getVal( 'to_check' ), true );
 		} else {
 			$mainForm->showForm( '' );
 			$mainForm->showCreateplate( true );

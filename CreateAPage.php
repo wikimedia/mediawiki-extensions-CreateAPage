@@ -5,53 +5,56 @@
  *
  * @file
  * @ingroup Extensions
- * @version 3.91 (r15554)
+ * @version 4.00 (Based on Wikia SVN r15554)
  * @author Bartek Łapiński <bartek@wikia-inc.com>
- * @author Jack Phoenix <jack@countervandalism.net>
+ * @author Jack Phoenix
  * @copyright Copyright © 2007-2008 Wikia Inc.
- * @copyright Copyright © 2009-2011 Jack Phoenix
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
- * @link http://www.mediawiki.org/wiki/Extension:CreateAPage Documentation
+ * @copyright Copyright © 2009-2011, 2019 Jack Phoenix
+ * @license https://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @link https://www.mediawiki.org/wiki/Extension:CreateAPage Documentation
+ * @note Removed from Wikia's repository in February 2012 after having been unused for two years, see https://github.com/Wikia/app/commit/e52d845350c8c49c6b39a4399b3d6e8f91e0461f
  */
 
-if( !defined( 'MEDIAWIKI' ) ) {
-	die();
-}
-
 // Extension credits that will show up on Special:Version
-$wgExtensionCredits['specialpage'][] = array(
+$wgExtensionCredits['specialpage'][] = [
 	'name' => 'CreateAPage',
-	'author' => array(
-		'Bartek Łapiński', 'Łukasz Garczewski', 'Przemek Piotrowski',
+	'license-name' => 'GPL-2.0-or-later',
+	'author' => [
+		'Bartek Łapiński', 'Piotr Molski', 'Łukasz Garczewski', 'Przemek Piotrowski',
 		'Jack Phoenix'
-	),
-	'version' => '3.91',
+	],
+	'version' => '4.00-super-alpha',
 	'description' => '[[Special:CreatePage|Easy to use interface]] for creating new articles',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:CreateAPage',
-);
+];
+
+$wgMultiEditPageTags = [ 'title', 'descr', 'category' ];
+$wgMultiEditPageSimpleTags = [ 'lbl', 'categories', 'pagetitle', 'imageupload', 'optional' ];
 
 // Autoload classes and set up the new special page(s)
-$dir = dirname( __FILE__ ) . '/';
-$wgExtensionMessagesFiles['CreateAPage'] = $dir . 'CreateAPage.i18n.php';
-$wgAutoloadClasses['EasyTemplate'] = $dir . 'EasyTemplate.php'; // @todo FIXME: kill templates and remove this class
-$wgAutoloadClasses['CreateMultiPage'] = $dir . 'CreateMultiPage.php';
-$wgAutoloadClasses['CreatePage'] = $dir . 'SpecialCreatePage.body.php';
-$wgAutoloadClasses['CreatePageEditor'] = $dir . 'CreatePageEditor.php';
-$wgAutoloadClasses['CreatePageMultiEditor'] = $dir . 'CreatePageEditor.php';
-$wgAutoloadClasses['CreatePageCreateplateForm'] = $dir . 'CreatePageCreateplateForm.php';
-$wgAutoloadClasses['CreatePageImageUploadForm'] = $dir . 'CreatePageImageUploadForm.php';
-$wgAutoloadClasses['PocketSilentArticle'] = $dir . 'CreatePageEditor.php';
+$wgMessagesDirs['CreateAPage'] = __DIR__ . '/i18n';
+$wgExtensionMessagesFiles['CreatePageAliases'] = __DIR__ . '/CreatePage.alias.php';
+
+$wgAutoloadClasses['CreateAPageUtils'] = __DIR__ . '/CreateAPageUtils.php';
+$wgAutoloadClasses['CreateAPageHooks'] = __DIR__ . '/CreateAPageHooks.php';
+$wgAutoloadClasses['EasyTemplate'] = __DIR__ . '/EasyTemplate.php'; // @todo FIXME: kill templates and remove this class
+$wgAutoloadClasses['CAP_TagCloud'] = __DIR__ . '/CAP_TagCloud.php';
+$wgAutoloadClasses['CreateMultiPage'] = __DIR__ . '/CreateMultiPage.php';
+$wgAutoloadClasses['CreatePage'] = __DIR__ . '/SpecialCreatePage.body.php';
+$wgAutoloadClasses['CreatePageEditor'] = __DIR__ . '/CreatePageEditor.php';
+$wgAutoloadClasses['CreatePageMultiEditor'] = __DIR__ . '/CreatePageEditor.php';
+$wgAutoloadClasses['CreatePageCreateplateForm'] = __DIR__ . '/CreatePageCreateplateForm.php';
+$wgAutoloadClasses['CreatePageImageUploadForm'] = __DIR__ . '/CreatePageImageUploadForm.php';
+
 $wgSpecialPages['CreatePage'] = 'CreatePage';
-$wgSpecialPageGroups['CreatePage'] = 'pagetools';
 
 // Load AJAX functions, too
-require_once $dir . 'SpecialCreatePage_ajax.php';
+require_once __DIR__ . '/SpecialCreatePage_ajax.php';
 
 // ResourceLoader support for MediaWiki 1.17+
-$wgResourceModules['ext.createAPage'] = array(
-	'styles' => 'CreatePage.css',
+$wgResourceModules['ext.createAPage'] = [
 	'scripts' => 'js/CreateAPage.js',
-	'messages' => array(
+	'messages' => [
 		'createpage-insert-image', 'createpage-upload-aborted',
 		'createpage-img-uploaded', 'createpage-login-required',
 		'createpage-login-href', 'createpage-login-required2',
@@ -60,13 +63,28 @@ $wgResourceModules['ext.createAPage'] = array(
 		'createpage-title-invalid', 'createpage-please-wait',
 		'createpage-show', 'createpage-hide',
 		'createpage-must-specify-title', 'createpage-unsaved-changes',
-		'createpage-unsaved-changes-details'
-	),
-	'dependencies' => array( 'jquery.ui', 'jquery.ui.dialog' ),
-	'localBasePath' => dirname( __FILE__ ),
-	'remoteExtPath' => 'CreateAPage',
-	'position' => 'top' // available since r85616
-);
+		'createpage-unsaved-changes-details',
+		'createpage-edit-normal',
+		'createpage-advanced-warning',
+		'createpage-yes', 'createpage-no'
+	],
+	'dependencies' => [ 'jquery.ui.dialog', 'jquery.spinner', 'mediawiki.util' ],
+	'localBasePath' => __DIR__ . '/resources',
+	'remoteExtPath' => 'CreateAPage/resources'
+];
+
+$wgResourceModules['ext.createAPage.wikiEditor'] = [
+	'scripts' => 'js/WikiEditorIntegration.js',
+	'dependencies' => 'ext.wikiEditor',
+	'localBasePath' => __DIR__ . '/resources',
+	'remoteExtPath' => 'CreateAPage/resources'
+];
+
+$wgResourceModules['ext.createAPage.styles'] = [
+	'styles' => 'css/CreatePage.css',
+	'localBasePath' => __DIR__ . '/resources',
+	'remoteExtPath' => 'CreateAPage/resources'
+];
 
 // Our only configuration setting -- use CreateAPage on redlinks (i.e. clicking
 // on a redlink takes you to index.php?title=Special:CreatePage&Createtitle=Title_of_our_page
@@ -74,125 +92,6 @@ $wgResourceModules['ext.createAPage'] = array(
 $wgCreatePageCoverRedLinks = false;
 
 // Hooked functions
-$wgHooks['EditPage::showEditForm:initial'][] = 'wfCreatePagePreloadContent';
-// I'm not sure if this and the related, custom Article class are even needed
-// nowadays, so I'm disabling it for the time being.
-//$wgHooks['Image::RecordUpload:article'][] = 'wfCreatePageShowNoImagePage';
-$wgHooks['CustomEditor'][] = 'wfCreatePageRedLinks';
-$wgHooks['ConfirmEdit::onConfirmEdit'][] = 'wfCreatePageConfirmEdit'; // ConfirmEdit CAPTCHA
-
-$wgHooks['GetPreferences'][] = 'wfCreatePageToggle';
-
-// handle ConfirmEdit CAPTCHA, only for CreatePage, which will be treated a bit differently (edits in special page)
-function wfCreatePageConfirmEdit( &$captcha, &$editPage, $newtext, $section, $merged, &$result ) {
-	global $wgTitle, $wgCreatePageCoverRedLinks;
-
-	// Enable only if the configuration global is set to true,
-	// only for Special:CreatePage and only when ConfirmEdit is installed
-	$canonspname = SpecialPage::resolveAlias( $wgTitle->getDBkey() );
-	if ( !$wgCreatePageCoverRedLinks ) {
-		return true;
-	}
-	if ( $canonspname != 'CreatePage' ) {
-		return true;
-	}
-	if ( !class_exists( 'SimpleCaptcha' ) ) {
-		return true;
-	}
-
-	if( $captcha->shouldCheck( $editPage, $newtext, $section, $merged ) ) {
-		if( $captcha->passCaptcha() ) {
-			$result = true;
-			return false;
-		} else {
-			// display CAP page
-			$mainform = new CreatePageCreatePlateForm();
-			$mainform->showForm( '', false, array( &$captcha, 'editCallback' ) );
-			$editor = new CreatePageMultiEditor( $_SESSION['article_createplate'] );
-			$editor->generateForm( $newtext );
-
-			$result = false;
-			return false;
-		}
-	} else {
-		return true;
-	}
-}
-
-// when AdvancedEdit button is used, the existing content is preloaded
-function wfCreatePagePreloadContent( $editpage ) {
-	global $wgRequest;
-	if( $wgRequest->getCheck( 'createpage' ) ) {
-		$editpage->textbox1 = $_SESSION['article_content'];
-	}
-	return true;
-}
-
-// because MediaWiki jumps happily to the article page
-// when we create it - in this case, for image upload
-function wfCreatePageShowNoImagePage( $article, $title ) {
-	$article = new PocketSilentArticle( $title );
-	return true;
-}
-
-function wfCreatePageRedLinks( $article, $user ) {
-	global $wgRequest, $wgContentNamespaces, $wgCreatePageCoverRedLinks;
-
-	if ( !$wgCreatePageCoverRedLinks ) {
-		return true;
-	}
-
-	$namespace = $article->getTitle()->getNamespace();
-	if (
-		( $user->getOption( 'createpage-redlinks', 1 ) == 0 ) ||
-		!in_array( $namespace, $wgContentNamespaces )
-	)
-	{
-		return true;
-	}
-
-	// nomulti should always bypass that (this is for AdvancedEdit mode)
-	if (
-		$article->getTitle()->exists() ||
-		( $wgRequest->getVal( 'editmode' ) == 'nomulti' )
-	)
-	{
-		return true;
-	} else {
-		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
-			return true;
-		}
-		$mainform = new CreatePageCreateplateForm();
-		$mainform->mTitle = $wgRequest->getVal( 'title' );
-		$mainform->mRedLinked = true;
-		$mainform->showForm( '' );
-		$mainform->showCreateplate( true );
-		return false;
-	}
-}
-
-/**
- * Adds a new toggle into Special:Preferences when $wgCreatePageCoverRedLinks
- * is set to true.
- *
- * @param $user Object: current User object
- * @param $preferences Object: Preferences object
- * @return Boolean: true
- */
-function wfCreatePageToggle( $user, &$preferences ) {
-	global $wgCreatePageCoverRedLinks;
-	if ( $wgCreatePageCoverRedLinks ) {
-		$preferences['create-page-redlinks'] = array(
-			'type' => 'toggle',
-			'section' => 'editing/advancedediting',
-			'label-message' => 'tog-createpage-redlinks',
-		);
-	}
-	return true;
-}
-
-// Restore what we temporarily encoded
-// moved from CreateMultiPage.php
-function wfCreatePageUnescapeKnownMarkupTags( &$text ) {
-	$text = str_replace( '<!---pipe--->', '|', $text );
-}
+$wgHooks['EditPage::showEditForm:initial'][] = 'CreateAPageHooks::preloadContent';
+$wgHooks['CustomEditor'][] = 'CreateAPageHooks::onCustomEditor';
+$wgHooks['GetPreferences'][] = 'CreateAPageHooks::onGetPreferences';

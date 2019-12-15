@@ -1,0 +1,41 @@
+<!-- This template is not yet used. See CreatePageMultiEditor#generateForm. -->
+	<div id="cp-restricted">
+		<div id="createpageoverlay">
+			<div class="hd"></div>
+			<div class="bd"></div>
+			<div class="ft"></div>
+		</div>
+		<div id="cp-multiedit">{{{me}}}</div>
+		<div id="editpage-copywarn">
+			{{{copyright-warning}}}
+		</div>
+		<div id="createpagebottom">
+			<span id="wpSummaryLabel">
+				<label for="wpSummary">{{summary}}</label>
+			</span>
+			<input type="text" value="{{summaryVal}}" name="wpSummary" id="wpSummary" maxlength="200" size="60" /><br />
+			{{{captchaForm}}}
+			<input id="wpMinoredit" type="checkbox" accesskey="i" value="1" name="wpMinoredit"{{#minorEditCheck}} checked="checked"{{/minorEditCheck}} />
+			<label accesskey="i" title="{{tooltip-minoredit}} [alt-shift-i]" for="wpMinoredit">
+				{{minoredit}}
+			</label>
+			<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis"{{#watchThisCheck}} checked="checked"{{/watchThisCheck}} />
+			<label accesskey="w" title="{{tooltip-watch}} [alt-shift-w]" for="wpWatchthis">
+				{{watchthis}}
+			</label>
+		</div>
+		<div class="actionBar buttonBar">
+			<input type="submit" id="wpSave" name="wpSave" value="{{createpage-save}}" class="button color1" />
+			<input type="submit" id="wpPreview" name="wpPreview" value="{{preview}}" class="button color1" />
+			<input type="submit" id="wpCancel" name="wpCancel" value="{{cancel}}" class="button color1" />
+		</div>
+		<input type="hidden" value="{{{unicodeCheck}}}" name="wpUnicodeCheck" />
+		{{! Marker for detecting truncated form data. This must be the last parameter sent in order to be of use, so do not move me.}}
+		<input type="hidden" value="true" name="wpUltimateParam" />
+		{{#showEditTools}}
+		<div id="createpage_editTools" class="mw-editTools">
+			{{{edittools}}}
+		</div>
+		{{/showEditTools}}
+	</form>
+</div>

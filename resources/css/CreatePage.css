@@ -5,6 +5,12 @@
 	clear: both;
 }
 
+#createpageform #cp-chooser-fieldset legend span {
+	font-size: small;
+	font-weight: normal;
+	margin-left: 5px;
+}
+
 #createpageform .normal-input,
 #createpageform textarea {
 	border: solid 1px #a0a0a0;
@@ -27,10 +33,11 @@
 
 #createpagepreview .actionBar,
 #createpageform .actionBar {
-	border-bottom: 1px solid #CCCCCC;
-	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 	clear: both;
-	margin-top: -12 px;
+	/* this looks just bad these days, so taking out */
+	/*margin-top: -12px;*/
 	padding: 4px 8px;
 	text-align: right;
 }
@@ -54,14 +61,14 @@
 
 #createpagepreview .actionBarStrong,
 #createpageform .actionBarStrong {
-	background:#e9e9e9 none repeat scroll 0%;
-	border-bottom: 1px solid #000000;
-	border-top: 1px solid #000000;
+	background: #e9e9e9 none repeat scroll 0%;
+	border-bottom: 1px solid #000;
+	border-top: 1px solid #000;
 	margin-top: 10px;
 	padding-left: 6px;
 	text-align: left;
 	font-weight: bold;
-	color: #000000;
+	color: #000;
 }
 
 #createpageform .buttonBar {
@@ -76,8 +83,8 @@
 	margin-left: 132px;
 	margin-bottom: 4px;
 	background: #3366CC none repeat scroll 0%;
-	border: 4px double #FFFFFF;
-	color: #FFFFFF;
+	border: 4px double #fff;
+	color: #fff;
 	cursor: pointer;
 	font-family: "Lucida Grande", sans-serif;
 	font-size: 8pt;
@@ -121,7 +128,8 @@ legend {
 #Createtitlelabel {
 	float: left;
 	font-weight: bold;
-	width: 85px;
+	/* ashley 8 December 2019: this makes it so that the "Article Title" text overflows, so taking out */
+	/*width: 85px;*/
 	padding-left: 5px;
 	padding-right: 10px;
 	text-align: left;
@@ -178,9 +186,9 @@ legend {
 	-webkit-border-bottom-right-radius: 8px;
 }
 
-#wpTableMultiEdit div div .createpage_input_file_no_path label ,
+#wpTableMultiEdit div div .createpage_input_file_no_path label,
 #cp-infobox div .createpage_input_file_no_path label {
-	float:left;
+	float: left;
 }
 
 #wpTableMultiEdit div div .createpage_input_file label input,
@@ -199,7 +207,7 @@ legend {
 
 #wpTableMultiEdit div div .createpage_input_file_no_path label,
 #cp-infobox div .createpage_input_file_no_path label {
-	-webkit-border-radius:8px;
+	-webkit-border-radius: 8px;
 }
 
 #Createtitle,
@@ -217,12 +225,12 @@ legend {
 #Createtitle {
 	float: left;
 	margin-top: 4px;
-	border: 1px solid #A0A0A0;
+	border: 1px solid #a0a0a0;
 	padding: 2px 3px;
 }
 
 .bordered {
-	border: 1px solid gray;
+	border: 1px solid #808080;
 	margin-left: 20px;
 	width: 450px;
 	padding-top: 4px;
@@ -283,7 +291,8 @@ legend {
 	width: 2000px;
 }
 
-#cp-scroller-list, #cp-scroller-list li {
+#cp-scroller-list,
+#cp-scroller-list li {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
@@ -302,15 +311,21 @@ legend {
 	border: 2px 1px 1px 1px;
 }
 
+#cp-infobox-fieldset legend span {
+	font-size: small;
+	font-weight: normal;
+	margin-left: 5px;
+}
+
 /* template chooser */
 #createpageform div.templateFrame {
-	border-right: 1px solid #CCCCCC;
+	border-right: 1px solid #ccc;
 	float: left;
 	padding: 10px;
 }
 
 #createpageform div.templateFrame:hover {
-	background-color: #F1F1F1;
+	background-color: #f1f1f1;
 	color: #000;
 	cursor: pointer;
 }
@@ -321,16 +336,16 @@ legend {
 	border: solid 1px #2f6fab;
 }
 
-/* disabled on November 30, 2009 by Jack
+/* disabled on November 30, 2009
 #createpageform div.templateFrameLast {
 	border-right: none;
 }*/
 
 #createpage_warning_copy,
 #createpage_warning_copy2 {
-	background-color: #FFFFFF;
-	border: 1px solid #AAAAAA;
-	color: #000000;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	color: #000;
 }
 
 #createpage_warning_copy .boxHeader,
@@ -357,8 +372,9 @@ legend {
 	margin: 0 5px;
 }
 
-#createpage_cloud_section, #createpage_cloud_section_njs {
-	border: 1px solid lightgray;
+#createpage_cloud_section,
+#createpage_cloud_section_njs {
+	border: 1px solid #d3d3d3;
 	padding: 15px 15px 15px 15px;
 }
 
@@ -386,6 +402,13 @@ legend {
 .createpage-lower {
 	margin-top: 5px;
 }
+
+/**
+ * @todo FIXME: For WikiEditor integration:
+- get rid of the above .createpage-lower rule
+- change .createpage-controller's margin-right from 24px to ~2px or so
+- consider dropping #createpage textarea width rule
+ */
 
 .createpage-textarea {
 	float: left;

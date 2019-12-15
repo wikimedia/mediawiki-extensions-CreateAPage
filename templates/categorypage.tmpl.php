@@ -14,7 +14,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 </style>
 
 <div id="createpage_cloud_div" style="display: none;">
-<div style="font-weight: bold;"><?php echo wfMsg( 'createpage-categories' ) ?></div>
+<div style="font-weight: bold;"><?php echo wfMessage( 'createpage-categories' )->escaped() ?></div>
 <?php if ( isset( $cloud->tags ) ) { ?>
 <div id="createpage_cloud_section">
 <?php
@@ -22,16 +22,16 @@ $xnum = 0;
 foreach ( $cloud->tags as $xname => $xtag ) {
 ?>
 	<span id="tag<?php echo $xnum ?>" style="font-size:<?php echo $xtag['size'] ?>pt">
-		<a href="#" id="cloud<?php echo $xnum ?>" onclick="CreateAPageCategoryTagCloud.add(escape('<?php echo $xname ?>'), <?php echo $xnum ?>); return false;"><?php echo $xname ?></a>
+		<a href="#" id="cloud<?php echo $xnum ?>"><?php echo $xname ?></a>
 	</span>
 <?php
-$xnum++;
+	$xnum++;
 }
 ?>
 </div>
 <?php } // if ( $cloud->tags ) ?>
 <textarea accesskey="," name="wpCategoryTextarea" id="wpCategoryTextarea" rows="3" cols="<?php echo $cols ?>"<?php echo $ew ?>><?php echo $text_category ?></textarea>
-<input type="button" name="wpCategoryButton" id="wpCategoryButton" class="button color1" value="<?php echo wfMsg( 'createpage-addcategory' ) ?>" />
+<input type="button" name="wpCategoryButton" id="wpCategoryButton" class="button color1" value="<?php echo wfMessage( 'createpage-addcategory' )->escaped() ?>" />
 <input type="text" name="wpCategoryInput" id="wpCategoryInput" value="" />
 </div>
 <script type="text/javascript">
@@ -55,10 +55,10 @@ foreach ( $cloud->tags as $xname => $xtag ) {
 		<input<?php echo $checked ?> type="checkbox" name="category_<?php echo $xnum ?>" id="category_<?php echo $xnum ?>" value="<?php echo $xname ?>">&nbsp;<?php echo $xname ?>
 	</span>
 <?php
-$xnum++;
+	$xnum++;
 }
 
-$display_category = array();
+$display_category = [];
 foreach ( $array_category as $xname => $visible ) {
 	if ( $visible == 1 ) {
 		$display_category[] = $xname;

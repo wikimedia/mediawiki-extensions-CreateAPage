@@ -5,7 +5,7 @@
 function axTitleExists() {
 	global $wgRequest;
 
-	$res = array( 'text' => false );
+	$res = [ 'text' => false ];
 
 	$title = $wgRequest->getVal( 'title' );
 	$mode = $wgRequest->getVal( 'mode' );
@@ -13,14 +13,14 @@ function axTitleExists() {
 
 	if ( is_object( $title_object ) ) {
 		if ( $title_object->exists() ) {
-			$res = array(
+			$res = [
 				'url'  => $title_object->getLocalURL(),
 				'text' => $title_object->getPrefixedText(),
 				'mode' => $mode,
-			);
+			];
 		}
 	} else {
-		$res = array( 'empty' => true );
+		$res = [ 'empty' => true ];
 	}
 
 	return json_encode( $res );
@@ -28,22 +28,23 @@ function axTitleExists() {
 
 function axMultiEditParse() {
 	global $wgRequest;
+
 	$me = '';
 
 	$template = $wgRequest->getVal( 'template' );
 	$title = Title::newFromText( "Createplate-{$template}", NS_MEDIAWIKI );
 
 	// transfer optional sections data
-	$optionalSections = array();
-	foreach( $_POST as $key => $value ) {
-		if( strpos( $key, 'wpOptionalInput' ) !== false ) {
+	$optionalSections = [];
+	foreach ( $_POST as $key => $value ) {
+		if ( strpos( $key, 'wpOptionalInput' ) !== false ) {
 			$optionalSections = str_replace( 'wpOptionalInput', '', $key );
 		}
 	}
 
 	if ( $title->exists() ) {
 		$rev = Revision::newFromTitle( $title );
-		$me = CreateMultiPage::multiEditParse( 10, 10, '?', $rev->getText(), $optionalSections );
+		$me = CreateMultiPage::multiEditParse( 10, 10, '?', ContentHandler::getContentText( $rev->getContent() ), $optionalSections );
 	} else {
 		$me = CreateMultiPage::multiEditParse( 10, 10, '?', '<!---blanktemplate--->' );
 	}
@@ -54,7 +55,7 @@ function axMultiEditParse() {
 function axMultiEditImageUpload() {
 	global $wgRequest;
 
-	$res = array();
+	$res = [];
 
 	$postfix = $wgRequest->getVal( 'num' );
 	$infix = '';
@@ -62,61 +63,52 @@ function axMultiEditImageUpload() {
 		$infix = $wgRequest->getVal( 'infix' );
 	}
 
+	// store these for the upload class to use
+	$wgRequest->setVal( 'wpPostFix', $postfix );
+	$wgRequest->setVal( 'wpInFix', $infix );
+	$wgRequest->setVal( 'Createtitle', $wgRequest->getText( 'Createtitle' ) );
+
 	// do the real upload
-	$uploadform = new CreatePageImageUploadForm( $wgRequest );
-	$uploadform->mTempPath       = $wgRequest->getFileTempName( 'wp' . $infix . 'UploadFile' . $postfix );
-	$uploadform->mFileSize       = $wgRequest->getFileSize( 'wp' . $infix . 'UploadFile' . $postfix );
-	$uploadform->mSrcName        = $wgRequest->getFileName( 'wp' . $infix . 'UploadFile' . $postfix );
-	$uploadform->CurlError       = $wgRequest->getUploadError( 'wp' . $infix . 'UploadFile' . $postfix );
-	$uploadform->mLastTimestamp  = $wgRequest->getText( 'wp' . $infix . 'LastTimestamp' . $postfix );
-
-	$par_name = $wgRequest->getText( 'wp' . $infix . 'ParName' . $postfix );
-	$file_ext = explode( '.', $uploadform->mSrcName );
-	$file_ext = @$file_ext[1];
-	$uploadform->mParameterExt = $file_ext;
-	if ( $infix == '' ) {
-		$uploadform->mDesiredDestName = $wgRequest->getText( 'Createtitle' ) . ' ' . trim( $par_name );
-	} else {
-		$uploadform->mDesiredDestName = $wgRequest->getText( 'Createtitle' );
-	}
-
-	$uploadform->mSessionKey     = false;
-	$uploadform->mStashed        = false;
-	$uploadform->mRemoveTempFile = false;
-
-	// some of the values are fixed, we have no need to add them to the form itself
-	$uploadform->mIgnoreWarning = 1;
-	$uploadform->mUploadDescription = wfMsg( 'createpage-uploaded-from' );
-	$uploadform->mWatchthis = 1;
-
+	$uploadform = new CreatePageImageUploadForm();
+	$uploadform->initializeFromRequest( $wgRequest );
+	$uploadform->mComment = wfMessage( 'createpage-uploaded-from' )->text();
 	$uploadedfile = $uploadform->execute();
-	if ( $uploadedfile['error'] == 0 ) {
-		$imageobj = wfLocalFile( $uploadedfile['timestamp'] );
-		$imageurl = $imageobj->createThumb( 60 );
 
-		$res = array(
+	if ( $uploadedfile['error'] == 0 ) {
+		if ( $uploadedfile['msg'] !== 'cp_no_uploaded_file' ) {
+			$imageobj = wfLocalFile( $uploadedfile['timestamp'] );
+			$imageurl = $imageobj->createThumb( 60 );
+		} else {
+			// Crappy hack, but whatever, not uploading a file is entirely valid
+			// since we have the same special page handling both the upload and the form
+			// submission
+			$imageurl = '';
+			$uploadedfile['timestamp'] = '';
+		}
+
+		$res = [
 			'error' => 0,
 			'msg' => $uploadedfile['msg'],
 			'url' => $imageurl,
 			'timestamp' => $uploadedfile['timestamp'],
 			'num' => $postfix
-		);
+		];
 	} else {
 		if ( $uploadedfile['once'] ) {
 			#if ( !$error_once ) {
-				$res = array(
+				$res = [
 					'error' => 1,
 					'msg' => $uploadedfile['msg'],
 					'num' => $postfix,
-				);
+				];
 			#}
 			$error_once = true;
 		} else {
-			$res = array(
+			$res = [
 				'error' => 1,
 				'msg' => $uploadedfile['msg'],
 				'num' => $postfix,
-			);
+			];
 		}
 	}
 
@@ -132,7 +124,7 @@ function axCreatepageAdvancedSwitch() {
 	$mCreateplate = $wgRequest->getVal( 'createplates' );
 	$editor = new CreatePageMultiEditor( $mCreateplate );
 	$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
-	wfCreatePageUnescapeKnownMarkupTags( $content );
+	CreateAPageUtils::unescapeKnownMarkupTags( $content );
 	$_SESSION['article_content'] = $content;
 
 	return json_encode( true );
