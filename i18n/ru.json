@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lockal"
+		]
+	},
+	"createpage-addcategory": "Добавить категорию",
+	"createpage-hide": "Скрыть",
+	"createpage-show": "Показать",
+	"createpage-insert-image": "Вставить изображение",
+	"createpage-infobox-legend": "Карточка",
+	"createpage-yes": "Да",
+	"createpage-no": "Нет",
+	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Карточка.*\\}\\}/is"
+}

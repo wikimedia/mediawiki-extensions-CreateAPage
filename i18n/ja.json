@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"createpage-edit-normal": "通常の編集",
+	"createpage-hide": "非表示",
+	"createpage-show": "表示",
+	"createpage": "新規記事を作成",
+	"createpage-title": "新規記事を作成",
+	"createpage-title-additional": "作成する記事のタイプを選択し、入力欄にタイトルを入力してください。",
+	"createpage-title-caption": "タイトル:",
+	"createpage-title-invalid": "有効なタイトルを指定してください",
+	"createpage-login-warning": "今ログインすると保存されていないテキストは失われます。続けますか？",
+	"createpage-yes": "はい",
+	"createpage-no": "いいえ",
+	"createpage-categories": "カテゴリ:",
+	"createpage-top-of-page": "ページトップ",
+	"createpage-uploaded-from": "[[Special:CreatePage]]よりアップロード",
+	"createplate-list": "Blank|白紙",
+	"createplate-Blank": "<!---blanktemplate--->\n\nここにテキストを入力してください。",
+	"createpage-title-check-text": "タイトルのチェックが完了しないと次へ進めません。続けるにはもう一度ボタンをクリックしてください。",
+	"createpage-preview-end": "プレビューはここまでです。以下で編集を継続できます。",
+	"createpage-insert-image": "画像を挿入",
+	"createpage-initial-run": "編集を開始",
+	"createpage-login-required": "画像をアップロードするには",
+	"createpage-login-href": "ログイン",
+	"createpage-login-required2": "する必要があります",
+	"createpage-please-wait": "お待ちください...",
+	"createpage-about-info": "シンプルなエディタです。詳細は、ウィキアのヘルプをどうぞ。"
+}

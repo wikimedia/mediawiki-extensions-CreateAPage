@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Prima klasy4na"
+		]
+	},
+	"createpage-edit-normal": "Advanced Edit",
+	"createpage-upload": "Завантажити зображення",
+	"createpage-hide": "Сховати",
+	"createpage-show": "Показати",
+	"createpage": "Створити нову статтю",
+	"createpage-title": "Створити нову статтю",
+	"createpage-title-caption": "Назва статті",
+	"createpage-yes": "Так",
+	"createpage-no": "Ні",
+	"createpage-categories": "Категорії",
+	"createpage-addcategory": "Додати категорію",
+	"createpage-login-required": "Вам необхідно ",
+	"createpage-please-wait": "Будь ласка, зачекайте...",
+	"createpage-advanced-text": "Ви можете також скористатись $1."
+}

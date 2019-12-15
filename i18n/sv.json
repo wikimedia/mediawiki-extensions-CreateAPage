@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Per"
+		]
+	},
+	"createpage-upload": "Ladda upp en bild",
+	"createpage-hide": "Göm",
+	"createpage-show": "Visa",
+	"createpage": "Skapa en ny artikel",
+	"createpage-title": "Skapa en ny artikel",
+	"createpage-title-caption": "Artikeltitel",
+	"createpage-infobox-legend": "Inforuta",
+	"createpage-yes": "Ja",
+	"createpage-no": "Nej",
+	"createpage-categories": "Kategorier",
+	"createpage-addcategory": "Lägg till kategori",
+	"createpage-top-of-page": "Överst på sidan",
+	"createpage-insert-image": "Infoga bild",
+	"createpage-login-required": "Du måste ",
+	"createpage-please-wait": "Vänligen vänta...",
+	"createpage-advanced-text": "Du kan också använda $1.",
+	"createpage-advanced-edit": "avancerad editor",
+	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Inforuta.*\\}\\}/is"
+}

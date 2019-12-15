@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"許瑜真 (Yuchen Hsu/KaurJmeb)"
+		]
+	},
+	"createpage-edit-normal": "進階編輯",
+	"createpage-upload": "上傳圖片",
+	"createpage-hide": "隱藏",
+	"createpage": "發表新文章",
+	"createpage-title": "發表新文章",
+	"createpage-title-caption": "文章標題",
+	"createpage-button-createplate-submit": "載入此模板",
+	"createpage-article-exists": "此頁面已存在",
+	"createpage-advanced-warning": "轉換編輯模式可能會影響頁面的格式，你確定要轉換嗎？",
+	"createpage-categories": "分類："
+}
