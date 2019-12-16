@@ -5,19 +5,19 @@
 		]
 	},
 	"createpage": "Skep 'n nuwe artikel",
-	"createpage-article-exists": "Hierdie bladsy bestaan reeds. Wysig",
-	"createpage-article-exists2": " of verskaf 'n ander bladsynaam.",
-	"createpage-button-createplate-submit": "Laai hierdie sjabloon",
-	"createpage-give-title": "Verskaf 'n naam",
 	"createpage-title": "Skep 'n nuwe artikel",
 	"createpage-title-caption": "Artikel se titel",
+	"createpage-button-createplate-submit": "Laai hierdie sjabloon",
+	"createpage-give-title": "Verskaf 'n naam",
 	"createpage-title-invalid": "Verskaf 'n geldige bladsynaam",
+	"createpage-article-exists": "Hierdie bladsy bestaan reeds. Wysig",
+	"createpage-article-exists2": " of verskaf 'n ander bladsynaam.",
 	"createpage-yes": "Ja",
 	"createpage-no": "Nee",
 	"createpage-categories": "Kategorieë",
 	"createpage-addcategory": "Voeg kategorie by",
-	"createpage-login-required": "U moet ",
-	"createpage-please-wait": "Wag asseblief...",
+	"createpage-uploaded-from": "Opgelaai vanuit Special:CreatePage",
 	"createpage-upload-aborted": "Invoeg van beeld was gekanselleer",
-	"createpage-uploaded-from": "Opgelaai vanuit Special:CreatePage"
+	"createpage-login-required": "U moet",
+	"createpage-please-wait": "Wag asseblief..."
 }

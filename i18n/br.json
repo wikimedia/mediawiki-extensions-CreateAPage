@@ -11,9 +11,9 @@
 	"createpage-choose-createplate": "Dibabit doare ar bajenn",
 	"createpage-yes": "Ya",
 	"createpage-no": "Nann",
-	"createpage-login-required": "Rankout a reoc'h",
-	"createpage-login-href": " kevreañ ",
 	"createpage-top-of-page": "Penn uhelañ ar bajenn",
-	"createpage-advanced-text": "Tu 'zo deoc'h implijout $1 ivez.",
-	"createpage-please-wait": "Gortozit mar plij..."
+	"createpage-login-required": "Rankout a reoc'h",
+	"createpage-login-href": " kevreañ",
+	"createpage-please-wait": "Gortozit mar plij...",
+	"createpage-advanced-text": "Tu 'zo deoc'h implijout $1 ivez."
 }

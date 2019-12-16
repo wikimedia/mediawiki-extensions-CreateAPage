@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.",
 	"createpage-alternate-creation": "Shown on Special:CreatePage (and on regular ?action=edit links as well in the \"red link mode\"), below the {{msg-mw|createpage-title-additional}} text. $1 is {{msg-mw|createpage-edit-normal}}.",
 	"createpage-edit-normal": "JavaScript dialog title; also used as a button text. Dialog contents are {{msg-mw|createpage-advanced-warning}}.",

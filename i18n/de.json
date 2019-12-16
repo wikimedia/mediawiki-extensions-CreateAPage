@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"createpage-edit-normal": "Erweiterter Editor",
 	"createpage-hide": "Ausblenden",
 	"createpage-show": "Einblenden",
@@ -24,7 +22,6 @@
 	"createpage-top-of-page": "Seitenanfang",
 	"createpage-uploaded-from": "Upload via Special:CreatePage",
 	"createplate-list": "Blank|Leer",
-	"createplate-Blank": "<!---blanktemplate--->\n\nFüge hier Text ein",
 	"createpage-title-check-header": "Du musst warten, bis der Namen überprüft wurde. Klicke dann erneut auf den Knopf zum fortfahren.",
 	"createpage-img-uploaded": "Bild erfolgreich hochgeladen",
 	"createpage-preview-end": "Ende der Vorschau. Du kannst jetzt unten mit deine Bearbeitung fortsetzen:",

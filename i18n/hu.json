@@ -6,9 +6,10 @@
 	},
 	"createpage-hide": "Elrejtés",
 	"createpage-show": "Megjelenítés",
+	"createpage": "Lap létrehozása",
 	"createpage-yes": "Igen",
 	"createpage-no": "Nem",
 	"createpage-categories": "Kategóriák",
 	"createpage-addcategory": "Kategória hozzáadása",
-	"createpage-login-href": " bejelentkezés "
+	"createpage-login-href": " bejelentkezés"
 }

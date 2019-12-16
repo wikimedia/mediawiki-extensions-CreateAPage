@@ -1,15 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lockal"
+			"Lockal",
+			"Александр Сигачёв"
 		]
 	},
-	"createpage-addcategory": "Добавить категорию",
 	"createpage-hide": "Скрыть",
 	"createpage-show": "Показать",
-	"createpage-insert-image": "Вставить изображение",
+	"createpage": "Создать страницу",
 	"createpage-infobox-legend": "Карточка",
 	"createpage-yes": "Да",
 	"createpage-no": "Нет",
+	"createpage-addcategory": "Добавить категорию",
+	"createpage-insert-image": "Вставить изображение",
 	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Карточка.*\\}\\}/is"
 }

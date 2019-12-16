@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"createpage-edit-normal": "通常の編集",
 	"createpage-hide": "非表示",
 	"createpage-show": "表示",
@@ -17,7 +15,6 @@
 	"createpage-top-of-page": "ページトップ",
 	"createpage-uploaded-from": "[[Special:CreatePage]]よりアップロード",
 	"createplate-list": "Blank|白紙",
-	"createplate-Blank": "<!---blanktemplate--->\n\nここにテキストを入力してください。",
 	"createpage-title-check-text": "タイトルのチェックが完了しないと次へ進めません。続けるにはもう一度ボタンをクリックしてください。",
 	"createpage-preview-end": "プレビューはここまでです。以下で編集を継続できます。",
 	"createpage-insert-image": "画像を挿入",

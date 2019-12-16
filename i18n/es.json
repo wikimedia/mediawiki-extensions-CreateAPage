@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"createpage-edit-normal": "Edición avanzada",
 	"createpage-upload": "Subir una imagen",
 	"createpage-hide": "Ocultar",
@@ -22,7 +20,6 @@
 	"createpage-categories": "Categorías:",
 	"createpage-top-of-page": "Parte superior de la página",
 	"createpage-uploaded-from": "Subida desde Special:CreatePage",
-	"createplate-Blank": "<!---blanktemplate--->\n\nInserta texto aquí",
 	"createpage-title-check-header": "Comprobación del título obligada",
 	"createpage-title-check-text": "No puedes realizar ninguna acción hasta que la comprobación del título haya finalizado. Por favor haz click de nuevo en el botón de acción para continuar.",
 	"createpage-img-uploaded": "Imagen cargada con éxito",

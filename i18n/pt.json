@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jesielt"
+			"Jesielt",
+			"Malafaya"
 		]
 	},
-	"createpage-no": "Não",
-	"createpage-yes": "Sim"
+	"createpage": "Criar uma página",
+	"createpage-yes": "Sim",
+	"createpage-no": "Não"
 }
