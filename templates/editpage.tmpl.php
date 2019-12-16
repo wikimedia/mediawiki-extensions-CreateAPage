@@ -75,11 +75,12 @@ foreach ( $boxes as $id => $box ) {
 			$linenum = count( explode( "\n", $box['value'] ) ) + 1;
 			$linenum = ( $linenum > 8 ) ? 8 : $linenum;
 			$value = "<textarea type=\"text\" rows=\"5\" cols=\"{$cols}\" {$html} class=\"createpage-textarea\">" . $box['value'] . '</textarea>';
-			if ( $box['toolbar'] != '' ) {
-				$value = $box['toolbar'] . $value;
-				$value .= '<a href="#" id="wpTextDecrease' . $id . '" class="createpage-controller createpage-upper"><img src="' . $imgpath . 'up.png" alt="-" /></a>';
-				$value .= '<a href="#" id="wpTextIncrease' . $id . '" class="createpage-controller createpage-lower"><img src="' . $imgpath . 'down.png" alt="+" /></a>';
-			}
+			// @todo Should these (and the associated CSS+JS) just be removed altogether?
+			// As of December 2019 all the relevant browsers have built-in support for
+			// resizing textareas on the fly, but that wasn't the case over a decade ago
+			// when this extension was initially built.
+			$value .= '<a href="#" id="wpTextDecrease' . $id . '" class="createpage-controller createpage-upper"><img src="' . $imgpath . 'up.png" alt="-" /></a>';
+			$value .= '<a href="#" id="wpTextIncrease' . $id . '" class="createpage-controller createpage-lower"><img src="' . $imgpath . 'down.png" alt="+" /></a>';
 			break;
 		}
 		default: {
