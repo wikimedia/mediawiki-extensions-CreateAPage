@@ -314,7 +314,7 @@ var CreateAPage = {
 	goToLogin: function( e ) {
 		e.preventDefault();
 		var returnto = '';
-		if ( CreateAPage.redLinkMode ) {
+		if ( CreateAPage.redLinkMode === 'Yes' ) {
 			returnto = document.getElementById( 'Createtitle' ).value;
 		} else {
 			returnto = 'Special:CreatePage';
@@ -423,13 +423,14 @@ var CreateAPage = {
 			}
 			document.getElementById( 'wpAllLastTimestamp' + oResponse.argument ).value = aResponse['timestamp'];
 		} else if ( ( aResponse['error'] === 1 ) && ( aResponse['msg'] === 'cp_no_login' ) ) {
-			// @todo FIXME: this is UGLY!
+			// Render the "you need to log in" message (in red, so that the user will
+			// definitely notice it) + show the login panel to give 'em some options
 			ProgressBar.innerHTML = '<span style="color: red">' +
-				mw.msg( 'createpage-login-required' ) +
-				'<a href="' + mw.config.get( 'wgServer' ) + mw.config.get( 'wgScript' ) + '?title=Special:Userlogin&returnto=Special:Createpage" id="createpage_login' +
-				oResponse.argument + '">' +
-					mw.msg( 'createpage-login-href' ) + '</a>' +
-					mw.msg( 'createpage-login-required2' ) +
+				mw.message(
+					'createpage-login-required',
+					mw.util.getUrl( 'Special:UserLogin', { returnto: 'Special:CreatePage' } ),
+					'createpage_login' + oResponse.argument
+				).text() +
 				'</span>';
 			$( '#createpage_login' + oResponse.argument ).click( function( e ) {
 				CreateAPage.showWarningLoginPanel( e );
@@ -601,27 +602,35 @@ var CreateAPage = {
 	 * @param {jQuery.Event} e
 	 */
 	buildWarningLoginPanel: function( e ) {
-		var editwarn = document.getElementById( 'createpage_advanced_warning' );
 		var editwarn_copy = document.createElement( 'div' );
 		editwarn_copy.id = 'createpage_warning_copy2';
-		editwarn_copy.innerHTML = editwarn.innerHTML;
-		editwarn_copy.childNodes[1].innerHTML = mw.msg( 'login' );
-		editwarn_copy.childNodes[3].innerHTML = mw.msg( 'createpage-login-warning' );
+		editwarn_copy.innerHTML = mw.msg( 'createpage-login-warning' );
 		document.body.appendChild( editwarn_copy );
 
 		CreateAPage.warningLoginPanel = $( '#createpage_warning_copy2' ).dialog( {
 			draggable: false,
 			modal: true,
 			resizable: false,
-			width: 250
-		} );
-
-		// @todo FIXME: these probably won't work
-		$( '#wpCreatepageWarningYes' ).click( function( e ) {
-			CreateAPage.goToLogin( e );
-		} );
-		$( '#wpCreatepageWarningNo' ).click( function( e ) {
-			CreateAPage.hideWarningLoginPanel( e );
+			width: 250,
+			title: mw.msg( 'login' ),
+			text: mw.msg( 'createpage-login-warning' ),
+			buttons: [
+				{
+					text: mw.msg( 'createpage-yes' ),
+					id: 'wpCreatepageWarningYes',
+					click: function () {
+						CreateAPage.goToLogin( e );
+					}
+				},
+				{
+					text: mw.msg( 'createpage-no' ),
+					id: 'wpCreatepageWarningNo',
+					click: function () {
+						CreateAPage.hideWarningLoginPanel( e );
+						$( this ).dialog( 'close' );
+					}
+				},
+			]
 		} );
 	},
 
@@ -1233,10 +1242,11 @@ var CreateAPageInfobox = {
 		} else if ( ( response.error === 1 ) && ( response.msg === 'cp_no_login' ) ) {
 			ProgressBar.html(
 				'<span style="color: red">' +
-				mw.msg( 'createpage-login-required' ) + '<a href="' + mw.config.get( 'wgServer' ) +
-					mw.config.get( 'wgScript' ) + '?title=Special:UserLogin&returnto=Special:CreatePage" id="createpage_login_infobox' +
-					response.num + '">' + mw.msg( 'createpage-login-href' ) +
-					'</a>' + mw.msg( 'createpage-login-required2' ) +
+				mw.message(
+					'createpage-login-required',
+					mw.util.getUrl( 'Special:UserLogin', { returnto: 'Special:CreatePage' } ),
+					'createpage_login_infobox' + response.num
+				).text() +
 				'</span>'
 			);
 		} else {
@@ -1404,7 +1414,7 @@ $( function() {
 	} );
 
 	// Login dialog shown to users who try to upload images w/o being logged in
-	$( 'a[id^="createpage_login_infobox"]' ).click( function ( e ) {
+	$( 'body' ).on( 'click', 'a[id^="createpage_login_infobox"]', function ( e ) {
 		CreateAPage.showWarningLoginPanel( e );
 	} );
 } );

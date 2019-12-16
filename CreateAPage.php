@@ -57,7 +57,6 @@ $wgResourceModules['ext.createAPage'] = [
 	'messages' => [
 		'createpage-insert-image', 'createpage-upload-aborted',
 		'createpage-img-uploaded', 'createpage-login-required',
-		'createpage-login-href', 'createpage-login-required2',
 		'createpage-give-title', 'createpage-img-uploaded',
 		'createpage-article-exists', 'createpage-article-exists2',
 		'createpage-title-invalid', 'createpage-please-wait',
@@ -66,9 +65,15 @@ $wgResourceModules['ext.createAPage'] = [
 		'createpage-unsaved-changes-details',
 		'createpage-edit-normal',
 		'createpage-advanced-warning',
-		'createpage-yes', 'createpage-no'
+		'createpage-yes', 'createpage-no',
+		'login', 'createpage-login-warning'
 	],
-	'dependencies' => [ 'jquery.ui', 'jquery.spinner', 'mediawiki.util' ],
+	'dependencies' => [
+		'jquery.ui',
+		'jquery.spinner',
+		'mediawiki.jqueryMsg',
+		'mediawiki.util'
+	],
 	'localBasePath' => __DIR__ . '/resources',
 	'remoteExtPath' => 'CreateAPage/resources'
 ];
