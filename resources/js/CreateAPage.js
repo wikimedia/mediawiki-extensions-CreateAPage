@@ -125,8 +125,6 @@ var CreateAPage = {
 	noCanDo: false,
 	submitEnabled: false,
 
-	disabledCr: false,
-
 	foundCategories: [],
 
 	myId: 0,
