@@ -33,8 +33,6 @@
 	"createpage-upload-aborted": "Ακυρώθηκε η εισαγωγή της εικόνας",
 	"createpage-initial-run": "Για επεξεργασία συνεχίστε",
 	"createpage-login-required": "Χρειάζεται να",
-	"createpage-login-href": " συνδεθείτε",
-	"createpage-login-required2": "για να φορτώσετε εικόνες",
 	"createpage-please-wait": "Παρακαλώ περιμένετε ...",
 	"createpage-upload-directory-read-only": "Ο κατάλογος φορτώσεων δεν είναι εγγράψιμος από το διακομιστή",
 	"createpage-advanced-text": "Μπορείτε επίσης να χρησιμοποιήσετε το $ 1.",

@@ -34,8 +34,6 @@
 	"createpage-upload-aborted": "A inserción da imaxe foi cancelada",
 	"createpage-initial-run": "Continuar a editar",
 	"createpage-login-required": "Necesita",
-	"createpage-login-href": " acceder ao sistema",
-	"createpage-login-required2": "para cargar imaxes",
 	"createpage-please-wait": "Por favor, agarde...",
 	"createpage-upload-directory-read-only": "O servidor non pode escribir no directorio de cargas",
 	"createpage-about-info": "Este é o editor simplificado. Para saber máis olla a [[s:Help:CreatePage|ShoutWiki Hub]].",

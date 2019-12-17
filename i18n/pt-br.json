@@ -1,9 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jesielt"
+			"Jesielt",
+			"Eduardo Addad de Oliveira"
 		]
 	},
-	"createpage": "Criar uma página",
-	"createpage-login-warning": "Ao fazer o login você irá perder todo o texto ainda não salvo. Deseja continuar ainda assim?"
+	"createpage-hide": "Ocultar",
+	"createpage-show": "Exibir",
+	"createpage": "Crie um novo artigo",
+	"createpage-title": "Crie um novo artigo",
+	"createpage-title-caption": "Título do artigo",
+	"createpage-login-warning": "Ao fazer o login você irá perder todo o texto ainda não salvo. Deseja continuar ainda assim?",
+	"createpage-yes": "Sim",
+	"createpage-no": "Não",
+	"createpage-categories": "Categorias",
+	"createpage-addcategory": "Adicionar categoria",
+	"createpage-insert-image": "Insira imagem",
+	"createpage-please-wait": "Por favor, aguarde...",
+	"createpage-save": "Salvar"
 }

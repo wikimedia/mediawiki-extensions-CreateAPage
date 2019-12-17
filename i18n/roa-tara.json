@@ -4,5 +4,13 @@
 			"Joetaras"
 		]
 	},
-	"createpage": "Ccreje 'na vôsce"
+	"createpage-edit-normal": "Cangiamende avanzate",
+	"createpage-upload": "Careche l'immaggine",
+	"createpage": "Ccreje 'na vôscia nove",
+	"createpage-yes": "Sìne",
+	"createpage-no": "None",
+	"createpage-categories": "Categorije",
+	"createpage-title-check-header": "Condrolle d'u titole forzate",
+	"createpage-upload-aborted": "'u 'nzerimende de l'immaggine ha state scangellate",
+	"createpage-upload-directory-read-only": "'A cartelle d'u carecamende non ge se pò fà scrivere da 'u webserver"
 }

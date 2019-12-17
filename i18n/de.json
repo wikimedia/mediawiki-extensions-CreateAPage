@@ -1,9 +1,13 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"WikiBayer"
+		]
+	},
 	"createpage-edit-normal": "Erweiterter Editor",
 	"createpage-hide": "Ausblenden",
 	"createpage-show": "Einblenden",
-	"createpage": "Neue Seite anlegen",
+	"createpage": "Neuen Artikel anlegen",
 	"createpage-title": "Neue Seite anlegen",
 	"createpage-title-additional": "Diese Seite existiert noch nicht. Um einen neuen Artikel zu erstellen, fülle das untenstehende Formular aus.",
 	"createpage-title-caption": "Seitentitel:",
@@ -29,12 +33,12 @@
 	"createpage-upload-aborted": "Einfügung des Bildes abgebrochen",
 	"createpage-initial-run": "Zur Bearbeitung",
 	"createpage-login-required": "Du musst dich",
-	"createpage-login-href": "anmelden",
-	"createpage-login-required2": "um Bilder hochzuladen",
 	"createpage-please-wait": "Bitte warten...",
 	"createpage-upload-directory-read-only": "Das Upload-Verzeichnis konnte nicht vom Webserver beschrieben werden",
 	"createpage-about-info": "Dies ist der vereinfachte Editor. Weitere Informationen darüber findest du im [[w:c:de:Hilfe:Createpage|hier]].",
 	"createpage-advanced-text": "Dir steht auch ein $1 zur Verfügung.",
 	"createpage-advanced-edit": "erweiterter Editor",
-	"createpage-optionals-text": "Füge optionale Abschnitte hinzu"
+	"createpage-optionals-text": "Füge optionale Abschnitte hinzu",
+	"createpage-save": "Speichern",
+	"createpage-unsaved-changes": "Ungespeicherte Änderungen"
 }

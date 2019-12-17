@@ -36,8 +36,6 @@
 	"createpage-upload-aborted": "Wstawianie obrazka zostało anulowane",
 	"createpage-initial-run": "Przejdź do edycji",
 	"createpage-login-required": "Musisz",
-	"createpage-login-href": " zalogować się",
-	"createpage-login-required2": "by ładować obrazki",
 	"createpage-please-wait": "Proszę czekać...",
 	"createpage-upload-directory-read-only": "Katalog ładowania obrazków nie jest zapisywalny przez serwer",
 	"createpage-about-info": "Jesteś w uproszczonym edytorze. Więcej informacji o nim znajdziesz na [[s:Help:CreatePage|ShoutWiki Hub]].",

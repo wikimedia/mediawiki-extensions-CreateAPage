@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saederup92"
+		]
+	},
+	"createpage-here": "her",
+	"createpage-hide": "Skjul",
+	"createpage-show": "Vis",
+	"createpage": "Opret en ny artikel",
+	"createpage-title": "Opret en ny artikel",
+	"createpage-title-caption": "Artikeltitel",
+	"createpage-choose-createplate": "Vælg en sidetype",
+	"createpage-button-createplate-submit": "Indlæs denne skabelon",
+	"createpage-yes": "Ja",
+	"createpage-no": "Nej",
+	"createpage-categories": "Kategorier",
+	"createpage-addcategory": "Tilføj kategori",
+	"createpage-insert-image": "Indsæt billede",
+	"createpage-please-wait": "Vent venligst...",
+	"createpage-save": "Gem",
+	"createpage-unsaved-changes": "Ugemte ændringer"
+}

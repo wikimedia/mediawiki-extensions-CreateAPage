@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"DCLXVI"
+			"DCLXVI",
+			"StanProg"
 		]
 	},
-	"createpage": "Създаване на страница",
-	"createpage-categories": "Категории:"
+	"createpage": "Създаване на нова статия",
+	"createpage-categories": "Категории"
 }

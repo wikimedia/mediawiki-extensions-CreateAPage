@@ -1,10 +1,17 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"Ihojose"
+		]
+	},
+	"createpage-here": "aquí",
+	"createpage-alternate-creation": "o clic $1 para usar el editor original",
 	"createpage-edit-normal": "Edición avanzada",
 	"createpage-upload": "Subir una imagen",
 	"createpage-hide": "Ocultar",
 	"createpage-show": "Mostrar",
 	"createpage": "Crear un nuevo artículo",
+	"createpage-desc": "[[Special:CreatePage|Interfaz fácil de usar]] para crear nuevos artículos",
 	"createpage-title": "Crear un nuevo artículo",
 	"createpage-title-additional": "Has seguido un vínculo a una página que no existe. Para crear la página, comienza a escribir en la caja de debajo",
 	"createpage-title-caption": "Título:",
@@ -16,8 +23,11 @@
 	"createpage-article-exists2": "o especifica otro título.",
 	"createpage-advanced-warning": "Cambiar el modo de edición puede romper el formato de la página, ¿quieres continuar?",
 	"createpage-login-warning": "Identificándote ahora, podrías perder todo el texto que no haya sido guardado. ¿Quieres continuar?",
+	"createpage-infobox-legend": "Infobox",
 	"createpage-yes": "Sí",
+	"createpage-no": "No",
 	"createpage-categories": "Categorías:",
+	"createpage-addcategory": "Añadir categoría",
 	"createpage-top-of-page": "Parte superior de la página",
 	"createpage-uploaded-from": "Subida desde Special:CreatePage",
 	"createpage-title-check-header": "Comprobación del título obligada",
@@ -28,12 +38,15 @@
 	"createpage-upload-aborted": "La inserción de la imagen fue cancelada",
 	"createpage-initial-run": "Proceder a editar",
 	"createpage-login-required": "Necesitas",
-	"createpage-login-href": "estar identificado",
-	"createpage-login-required2": "para subir imágenes",
 	"createpage-please-wait": "Por favor, espere...",
 	"createpage-upload-directory-read-only": "El directorio de subida no se puede escribir por el servidor de la web",
 	"createpage-about-info": "Este es un editor simplificado. Para saber más ve a la [[s:Help:CreatePage|Hub de ShoutWiki]].",
 	"createpage-advanced-text": "Puedes usar también el $1.",
 	"createpage-advanced-edit": "editor avanzado",
+	"createpage-optionals-text": "Añadir secciones opcionales:",
+	"createpage-save": "Guardar",
+	"createpage-must-specify-title": "Por favor especifica el título primero!",
+	"createpage-unsaved-changes": "Cambios sin guardar",
+	"createpage-unsaved-changes-details": "Tienes cambios sin guardar. Al hacer clic en Aceptar, se abandonará.",
 	"tog-createpage-redlinks": "Usa [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] cuando sigas enlaces rotos"
 }

@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mucalexx"
+			"Mucalexx",
+			"WikiBayer"
 		]
 	},
-	"createpage": "A neiche Seiten erstöin"
+	"createpage-upload": "Buid houchlon",
+	"createpage": "Neia Artikl oleng",
+	"createpage-yes": "Jo"
 }

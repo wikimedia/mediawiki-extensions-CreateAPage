@@ -37,8 +37,6 @@
 	"createpage-upload-aborted": "Het invoegen van de afbeelding is afgebroken",
 	"createpage-initial-run": "Doorgaan naar bewerken",
 	"createpage-login-required": "U moet",
-	"createpage-login-href": " aanmelden",
-	"createpage-login-required2": "om afbeeldingen te uploaden",
 	"createpage-please-wait": "Even geduld alstublieft...",
 	"createpage-upload-directory-read-only": "Er kan niet geschreven worden in de uploadmap van de webserver",
 	"createpage-about-info": "Dit is de vereenvoudigde tekstverwerker. Meer hulp is te vinden in [[s:Help:CreatePage|ShoutWiki Hub]].",

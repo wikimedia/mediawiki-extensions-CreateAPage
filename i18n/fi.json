@@ -37,8 +37,6 @@
 	"createpage-upload-aborted": "Kuvan lisääminen peruuttiin",
 	"createpage-initial-run": "Jatka muokkaamiseen",
 	"createpage-login-required": "Sinun tulee",
-	"createpage-login-href": " kirjautua sisään",
-	"createpage-login-required2": "tallentaaksesi kuvia",
 	"createpage-please-wait": "Odota...",
 	"createpage-upload-directory-read-only": "Web-palvelin ei voi kirjoittaa tallennuskansioon",
 	"createpage-about-info": "Tämä on yksinkertaistettu editori. Katso [[s:w:fi:Ohje:CreatePage|ShoutWikin ohjeista]] saadaksesi lisätietoja.",
