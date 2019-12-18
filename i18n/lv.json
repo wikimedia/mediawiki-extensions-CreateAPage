@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass"
+		]
+	},
+	"createpage-upload": "Augšupielādēt attēlu",
+	"createpage-hide": "Paslēpt",
+	"createpage": "Izveidot jaunu rakstu",
+	"createpage-title-caption": "Raksta nosaukums",
+	"createpage-button-createplate-submit": "Ielādēt šo veidni",
+	"createpage-infobox-legend": "Infokaste",
+	"createpage-yes": "Jā",
+	"createpage-no": "Nē",
+	"createpage-categories": "Kategorijas",
+	"createpage-addcategory": "Pievienot kategoriju",
+	"createpage-upload-aborted": "Attēla ievietošana tika atcelta",
+	"createpage-save": "Saglabāt"
+}

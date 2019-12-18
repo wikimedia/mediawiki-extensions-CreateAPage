@@ -4,7 +4,9 @@
 			"WikiBayer"
 		]
 	},
+	"createpage-here": "hier",
 	"createpage-edit-normal": "Erweiterter Editor",
+	"createpage-upload": "Bild hochladen",
 	"createpage-hide": "Ausblenden",
 	"createpage-show": "Einblenden",
 	"createpage": "Neuen Artikel anlegen",

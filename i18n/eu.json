@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"An13sa"
+			"An13sa",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Orri bat sortu"
+	"createpage": "Orri bat sortu",
+	"createpage-infobox-legend": "Infotaula"
 }

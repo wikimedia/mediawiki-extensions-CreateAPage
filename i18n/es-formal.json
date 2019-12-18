@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido"
+		]
+	},
+	"createpage-alternate-creation": "o pulse en $1 para utilizar el editor original",
+	"createpage-give-title": "Especifique un título",
+	"createpage-preview-end": "Fin de la previsualización. Puede reanudar su edición más abajo:"
+}

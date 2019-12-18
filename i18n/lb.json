@@ -4,5 +4,16 @@
 			"Robby"
 		]
 	},
-	"createpage": "Eng Säit uleeën"
+	"createpage-here": "hei",
+	"createpage-upload": "Bild eroplueden",
+	"createpage-hide": "Verstoppen",
+	"createpage-show": "Weisen",
+	"createpage": "En neien Artikel uleeën",
+	"createpage-yes": "Jo",
+	"createpage-no": "Neen",
+	"createpage-categories": "Kategorien",
+	"createpage-addcategory": "Kategorie derbäisetzen",
+	"createpage-top-of-page": "Uewen op der Säit",
+	"createpage-save": "Späicheren",
+	"createpage-unsaved-changes": "Net-gespäichert Ännerungen"
 }

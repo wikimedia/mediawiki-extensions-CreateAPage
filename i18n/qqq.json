@@ -1,10 +1,14 @@
 {
-	"@metadata": [],
-	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.",
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.\n{{Identical|Here}}",
 	"createpage-alternate-creation": "Shown on Special:CreatePage (and on regular ?action=edit links as well in the \"red link mode\"), below the {{msg-mw|createpage-title-additional}} text. $1 is {{msg-mw|createpage-edit-normal}}.",
 	"createpage-edit-normal": "JavaScript dialog title; also used as a button text. Dialog contents are {{msg-mw|createpage-advanced-warning}}.",
 	"createpage-upload": "Upload image",
-	"createpage-hide": "Clickable text shown in the fieldset legend element of the createplate chooser as well as infoboxes (if any); clicking on this hides the thing (createplate chooser or infobox) and then the text is changed into {{msg-mw|createpage-show}}.",
+	"createpage-hide": "Clickable text shown in the fieldset legend element of the createplate chooser as well as infoboxes (if any); clicking on this hides the thing (createplate chooser or infobox) and then the text is changed into {{msg-mw|createpage-show}}.\n{{Identical|Hide}}",
 	"createpage-show": "Clickable text shown in the fieldset legend element of the createplate chooser as well as infoboxes (if any); clicking on this shows the hidden thing (createplate chooser or infobox) and then the text is changed into {{msg-mw|createpage-hide}}.",
 	"createpage": "Page title for Special:CreatePage, as shown on [[Special:SpecialPages]]",
 	"createpage-desc": "Extension description shown on [[Special:Version]]",
@@ -20,9 +24,9 @@
 	"createpage-advanced-warning": "Shown via JavaScript if the user clicks either on the button or link text to use the advanced (regular wikitext) editor. The dialog contains two buttons, {{msg-mw|createpage-yes}} and {{msg-mw|createpage-no}}, which either perform the requested action or dismiss the dialog without taking any action, respectively.",
 	"createpage-login-warning": "By logging in now, you may lose all your unsaved text. Do you want to continue?",
 	"createpage-infobox-legend": "Used as legend for the infobox fieldset on Special:CreatePage (and also on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration) if a createplate has an infobox.",
-	"createpage-yes": "Used in various JavaScript dialogs together with messages like {{msg-mw|createpage-advanced-warning}} and {{msg-mw|createpage-login-warning}}. When the user clicks on this button, they may risk losing data.",
-	"createpage-no": "Used in various JavaScript dialogs together with messages like {{msg-mw|createpage-advanced-warning}} and {{msg-mw|createpage-login-warning}}. When the user clicks on this button, they dialog is dismissed and no action is taken, ensuring that the user will not lose any unsaved data.",
-	"createpage-categories": "Shown right above the category tag cloud on Special:CreatePage (and also on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration)",
+	"createpage-yes": "Used in various JavaScript dialogs together with messages like {{msg-mw|createpage-advanced-warning}} and {{msg-mw|createpage-login-warning}}. When the user clicks on this button, they may risk losing data.\n{{Identical|Yes}}",
+	"createpage-no": "Used in various JavaScript dialogs together with messages like {{msg-mw|createpage-advanced-warning}} and {{msg-mw|createpage-login-warning}}. When the user clicks on this button, they dialog is dismissed and no action is taken, ensuring that the user will not lose any unsaved data.\n{{Identical|No}}",
+	"createpage-categories": "Shown right above the category tag cloud on Special:CreatePage (and also on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration)\n{{Identical|category}}",
 	"createpage-addcategory": "Button text",
 	"createpage-top-of-page": "TODO: I'm not sure how this is used. It technically seems to be used, but I'm unsure if it's actually ever displayed to the end-user.",
 	"createpage-uploaded-from": "Summary used for images uploaded via Special:CreatePage",
@@ -42,7 +46,7 @@
 	"createpage-advanced-text": "$1 is {{msg-mw|createpage-advanced-edit}}",
 	"createpage-advanced-edit": "Link title, see {{msg-mw|createpage-advanced-text}}",
 	"createpage-optionals-text": "Shown on Special:CreatePage (and also on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration) if a createplate contains optional sections that the user can choose to add, but which aren't considered mandatory.",
-	"createpage-save": "Button text",
+	"createpage-save": "Button text\n{{Identical|Save}}",
 	"createpage-must-specify-title": "Error message displayed via JavaScript if the user tries to go the regular editing mode (?action=edit) from Special:CreatePage without specifying a title for the new page that they want to create.",
 	"createpage-unsaved-changes": "JavaScript dialog title; dialog contents are {{msg-mw|createpage-unsaved-changes-details}}.",
 	"createpage-unsaved-changes-details": "JavaScript dialog contents; the title of the dialog is {{msg-mw|createpage-unsaved-changes}}.",

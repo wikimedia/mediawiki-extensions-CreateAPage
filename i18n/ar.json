@@ -39,7 +39,7 @@
 	"createpage-insert-image": "إدراج صورة",
 	"createpage-upload-aborted": "تم إلغاء إدراج الصورة",
 	"createpage-initial-run": "تابع التعديل",
-	"createpage-login-required": "تحتاج",
+	"createpage-login-required": "يلزمك <a id=\"$2\" href=\"$1\">تسجيل الدخول</a> لرفع الصور",
 	"createpage-please-wait": "الرجاء الانتظار...",
 	"createpage-upload-directory-read-only": "دليل الرفع غير قابل للكتابة بواسطة خادم الويب",
 	"createpage-advanced-text": "يمكنك أيضا استخدام $1.",

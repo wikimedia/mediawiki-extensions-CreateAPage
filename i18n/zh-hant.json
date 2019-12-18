@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
-			"Kly"
+			"Kly",
+			"Xiplus"
 		]
 	},
 	"createpage-here": "在此",
@@ -39,7 +40,7 @@
 	"createpage-insert-image": "插入圖片",
 	"createpage-upload-aborted": "圖片插入被中斷",
 	"createpage-initial-run": "繼續編輯",
-	"createpage-login-required": "您需要",
+	"createpage-login-required": "您需要<a id=\"$2\" href=\"$1\">登入</a>以上傳圖片",
 	"createpage-please-wait": "請稍等…",
 	"createpage-upload-directory-read-only": "網頁伺服器無法寫入上傳目錄。",
 	"createpage-about-info": "此為簡易編輯器。要查找更多內容請前往 [[s:Help:CreatePage|ShoutWiki Hub]]。",

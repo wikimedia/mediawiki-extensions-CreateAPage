@@ -1,8 +1,28 @@
 {
 	"@metadata": {
 		"authors": [
-			"Darth Kule"
+			"Darth Kule",
+			"Beta16",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Crea una pagina"
+	"createpage-here": "qui",
+	"createpage-upload": "Carica immagine",
+	"createpage-hide": "Nascondi",
+	"createpage-show": "Mostra",
+	"createpage": "Crea una nuova voce",
+	"createpage-title": "Crea una nuova voce",
+	"createpage-title-caption": "Titolo della voce",
+	"createpage-give-title": "Specifica un titolo",
+	"createpage-title-invalid": "Specifica un titolo valido.",
+	"createpage-article-exists2": "o specifica un altro titolo.",
+	"createpage-infobox-legend": "Sinottico",
+	"createpage-yes": "Sì",
+	"createpage-no": "No",
+	"createpage-categories": "Categorie",
+	"createpage-addcategory": "Aggiungi categoria",
+	"createpage-insert-image": "Inserisci immagine",
+	"createpage-login-required": "Devi <a id=\"$2\" href=\"$1\">accedere</a> per caricare immagini",
+	"createpage-save": "Salva",
+	"createpage-unsaved-changes": "Modifiche non salvate"
 }

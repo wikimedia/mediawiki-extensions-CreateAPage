@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xuacu"
+			"Xuacu",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Crear una páxina"
+	"createpage": "Crear una páxina",
+	"createpage-no": "Non"
 }

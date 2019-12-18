@@ -1,8 +1,30 @@
 {
 	"@metadata": {
 		"authors": [
-			"Solde"
+			"Solde",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Crea una pàgina"
+	"createpage-edit-normal": "Edició avançada",
+	"createpage-hide": "Amaga",
+	"createpage-show": "Mostra",
+	"createpage": "Crea una pàgina nova",
+	"createpage-title": "Creació d’un article nou",
+	"createpage-title-caption": "Títol de l’article",
+	"createpage-choose-createplate": "Trieu un tipus de pàgina",
+	"createpage-button-createplate-submit": "Carrega aquesta plantilla",
+	"createpage-article-exists": "Aquest article ja existeix. Edita",
+	"createpage-infobox-legend": "Infotaula",
+	"createpage-yes": "Sí",
+	"createpage-no": "No",
+	"createpage-categories": "Categories",
+	"createpage-addcategory": "Afegeix una categoria",
+	"createpage-insert-image": "Insereix una imatge",
+	"createpage-upload-aborted": "S’ha cancel·lat la inserció de la imatge",
+	"createpage-login-required": "Cal <a id=\"$2\" href=\"$1\">iniciar una sessió</a> per a pujar imatges",
+	"createpage-please-wait": "Espereu…",
+	"createpage-advanced-text": "També podeu fer servir el $1.",
+	"createpage-advanced-edit": "editor avançat",
+	"createpage-save": "Desa",
+	"createpage-unsaved-changes": "Canvis sense desar"
 }

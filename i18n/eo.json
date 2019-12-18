@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yekrats"
+			"Yekrats",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Krei paĝon"
+	"createpage": "Krei paĝon",
+	"createpage-infobox-legend": "Informkesto"
 }

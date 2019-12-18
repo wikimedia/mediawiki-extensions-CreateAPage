@@ -1,8 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Matěj Grabovský"
+			"Matěj Grabovský",
+			"Setnicka"
 		]
 	},
-	"createpage": "Vytvořit stránku"
+	"createpage-here": "zde",
+	"createpage-upload": "Nahrát obrázek",
+	"createpage-hide": "Skrýt",
+	"createpage": "Vytvořit stránku",
+	"createpage-title-caption": "Název článku",
+	"createpage-button-createplate-submit": "Vložit tuto šablonu",
+	"createpage-infobox-legend": "Infobox",
+	"createpage-yes": "Ano",
+	"createpage-addcategory": "Přidat kategorii",
+	"createpage-insert-image": "Vložit obrázek",
+	"createpage-save": "Uložit",
+	"createpage-unsaved-changes": "Neuložené změny"
 }
