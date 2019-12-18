@@ -71,9 +71,6 @@ var CreateAPageCategoryTagCloud = {
 			for ( var j in CreateAPage.foundCategories ) {
 				if ( CreateAPage.foundCategories[j] === core_cat ) {
 					var this_button = document.getElementById( 'cloud' + j );
-					var actual_cloud = CreateAPage.foundCategories[j];
-					var cl_num = j;
-
 					this_button.onclick = CreateAPage.onclickCategoryFn( core_cat, j );
 					this_button.style.color = '#419636';
 					c_found = true;
@@ -191,9 +188,9 @@ var CreateAPage = {
 		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
 			res = eval( '(' + data + ')' );
 		}
-		if ( ( res['text'] !== false ) && ( res['empty'] !== true ) ) {
-			var url = res['url'].replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
-			var text = res['text'].replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
+		if ( ( res.text !== false ) && ( res.empty !== true ) ) {
+			var url = res.url.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
+			var text = res.text.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
 
 			document.getElementById( 'cp-title-check' ).innerHTML = '<span style="color: red;">' +
 				mw.msg( 'createpage-article-exists' ) + ' <a href="' +
@@ -206,7 +203,7 @@ var CreateAPage = {
 			} else {
 				CreateAPage.contentOverlay();
 			}
-		} else if ( res['empty'] === true ) {
+		} else if ( res.empty === true ) {
 			document.getElementById( 'cp-title-check' ).innerHTML =
 				'<span style="color: red;">' +
 				mw.msg( 'createpage-title-invalid' ) +
@@ -400,27 +397,27 @@ var CreateAPage = {
 		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
 			aResponse = eval( '(' + oResponse.responseText + ')' );
 		}
-		var ProgressBar = document.getElementById( 'createpage_upload_progress_section' + aResponse['num'] );
+		var ProgressBar = document.getElementById( 'createpage_upload_progress_section' + aResponse.num );
 
-		if ( aResponse['error'] !== 1 ) {
+		if ( aResponse.error !== 1 ) {
 			ProgressBar.innerHTML = mw.msg( 'createpage-img-uploaded' );
-			var target_info = document.getElementById( 'wpAllUploadTarget' + aResponse['num'] ).value;
+			var target_info = document.getElementById( 'wpAllUploadTarget' + aResponse.num ).value;
 			var target_tag = $( target_info );
-			target_tag.value = '[[' + aResponse['msg'] + '|thumb]]';
+			target_tag.value = '[[' + aResponse.msg + '|thumb]]';
 
-			var ImageThumbnail = document.getElementById( 'createpage_image_thumb_section' + aResponse['num'] );
-			var thumb_container = document.getElementById( 'createpage_main_thumb_section' + aResponse['num'] );
+			var ImageThumbnail = document.getElementById( 'createpage_image_thumb_section' + aResponse.num );
+			var thumb_container = document.getElementById( 'createpage_main_thumb_section' + aResponse.num );
 			var tempstamp = new Date();
-			ImageThumbnail.src = aResponse['url'] + '?' + tempstamp.getTime();
-			if ( document.getElementById( 'wpAllLastTimestamp' + aResponse['num'] ).value === 'None' ) {
+			ImageThumbnail.src = aResponse.url + '?' + tempstamp.getTime();
+			if ( document.getElementById( 'wpAllLastTimestamp' + aResponse.num ).value === 'None' ) {
 				var break_tag = document.createElement( 'br' );
 				thumb_container.style.display = '';
-				var label_node = document.getElementById( 'createpage_image_label_section' + aResponse['num'] );
+				var label_node = document.getElementById( 'createpage_image_label_section' + aResponse.num );
 				var par_node = label_node.parentNode;
 				par_node.insertBefore( break_tag, label_node );
 			}
-			document.getElementById( 'wpAllLastTimestamp' + oResponse.argument ).value = aResponse['timestamp'];
-		} else if ( ( aResponse['error'] === 1 ) && ( aResponse['msg'] === 'cp_no_login' ) ) {
+			document.getElementById( 'wpAllLastTimestamp' + oResponse.argument ).value = aResponse.timestamp;
+		} else if ( ( aResponse.error === 1 ) && ( aResponse.msg === 'cp_no_login' ) ) {
 			// Render the "you need to log in" message (in red, so that the user will
 			// definitely notice it) + show the login panel to give 'em some options
 			ProgressBar.innerHTML = '<span style="color: red">' +
@@ -434,7 +431,7 @@ var CreateAPage = {
 				CreateAPage.showWarningLoginPanel( e );
 			} );
 		} else {
-			ProgressBar.innerHTML = '<span style="color: red">' + aResponse['msg'] + '</span>';
+			ProgressBar.innerHTML = '<span style="color: red">' + aResponse.msg + '</span>';
 		}
 
 		document.getElementById( 'createpage_image_text_section' + oResponse.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
@@ -444,7 +441,7 @@ var CreateAPage = {
 	},
 
 	failureCallback: function( response ) {
-		var response = JSON.parse( response );
+		response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text_section' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress_section' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
 		document.getElementById( 'createpage_upload_file_section' + response.argument ).style.display = '';
@@ -491,7 +488,6 @@ var CreateAPage = {
 		var section = document.getElementById( 'createpage_section_' + o.num );
 		var input = document.getElementById( 'wpOptionalInput' + o.num );
 		var optionals = document.getElementById( 'wpOptionals' );
-		var ivalue = '';
 		if ( input.checked ) {
 			optionals.value = CreateAPage.restoreSection( section, optionals.value );
 		} else {
@@ -500,10 +496,9 @@ var CreateAPage = {
 	},
 
 	upload: function( e, o ) {
-		var oForm = document.getElementById( 'createpageform' );
 		e.preventDefault();
 
-		var ProgressBar = $( '#createpage_upload_progress_section' + o.num ).show().html( $.createSpinner( 'createpage' ) );
+		$( '#createpage_upload_progress_section' + o.num ).show().html( $.createSpinner( 'createpage' ) );
 
 		// Use HTML5 magic to do the file upload without having to resort to super
 		// heavy jQuery plugins or anything like that
@@ -763,9 +758,6 @@ var CreateAPage = {
 				core_cat = text_categories[i].replace( /\|.*/, '' );
 				if ( CreateAPage.foundCategories[j] === core_cat ) {
 					var this_button = document.getElementById( 'cloud' + j );
-					var actual_cloud = CreateAPage.foundCategories[j];
-					var cl_num = j;
-
 					this_button.onclick = CreateAPage.onclickCategoryFn( text_categories[i], j );
 					this_button.style.color = '#419636';
 					c_found = true;
@@ -990,6 +982,9 @@ var CreateAPage = {
 			// Make the recently selected createplate active!
 			$( '#' + CreateAPage.myId ).addClass( 'templateFrameSelected' );
 
+			// @note infobox_root, infobox_inputs, infobox_uploads and section_uploads
+			// _seem_ unused (together with the referenced methods like inputTest etc.)
+			// but they are NOT!
 			var infobox_root = document.getElementById( 'cp-infobox' );
 			var infobox_inputs = CreateAPage.getElementsBy(
 				CreateAPageInfobox.inputTest,
@@ -1147,7 +1142,7 @@ $( function () {
  */
 var CreateAPageInfobox = {
 	failureCallback: function( response ) {
-		var response = JSON.parse( response );
+		response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
 		document.getElementById( 'createpage_upload_file' + response.argument ).style.display = '';
@@ -1165,7 +1160,7 @@ var CreateAPageInfobox = {
 		if ( oForm ) {
 			e.preventDefault();
 
-			var ProgressBar = $( '#createpage_upload_progress' + o.num ).show().html( $.createSpinner( 'createpage' ) );
+			$( '#createpage_upload_progress' + o.num ).show().html( $.createSpinner( 'createpage' ) );
 
 			// Use HTML5 magic to do the file upload without having to resort to super
 			// heavy jQuery plugins or anything like that
@@ -1215,7 +1210,7 @@ var CreateAPageInfobox = {
 	},
 
 	uploadCallback: function( response ) {
-		var response = JSON.parse( response );
+		response = JSON.parse( response );
 		var ProgressBar = $( '#createpage_upload_progress' + response.num );
 
 		if ( response.error !== 1 ) {
