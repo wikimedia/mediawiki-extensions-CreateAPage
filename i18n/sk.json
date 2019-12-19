@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Helix84"
+			"Helix84",
+			"Luky001"
 		]
 	},
-	"createpage": "Vytvoriť stránku"
+	"createpage": "Vytvoriť nový článok"
 }

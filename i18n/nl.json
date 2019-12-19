@@ -2,14 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Siebrand Mazeland",
-			"Mitchel Corstjens"
+			"Mitchel Corstjens",
+			"Mainframe98"
 		]
 	},
+	"createpage-here": "hier",
+	"createpage-alternate-creation": "of click op $1 om gebruik te maken van de gewone bewerker",
 	"createpage-edit-normal": "Uitgebreid bewerken",
 	"createpage-upload": "Afbeelding uploaden",
 	"createpage-hide": "Verbergen",
 	"createpage-show": "Weergeven",
-	"createpage": "Nieuwe pagina aanmaken",
+	"createpage": "Een nieuwe artikel aanmaken",
+	"createpage-desc": "[[Special:CreatePage|Simpel te gebruiker interface]] voor het aanmaken van nieuwe artikelen",
 	"createpage-title": "Nieuwe pagina aanmaken",
 	"createpage-title-additional": "U hebt een verwijzing gevolgd naar een pagina die niet bestaat. Geef uw invoer in de velden hieronder om te pagina aan te maken.",
 	"createpage-title-caption": "Paginanaam",
@@ -36,7 +40,7 @@
 	"createpage-insert-image": "Afbeelding invoegen",
 	"createpage-upload-aborted": "Het invoegen van de afbeelding is afgebroken",
 	"createpage-initial-run": "Doorgaan naar bewerken",
-	"createpage-login-required": "U moet",
+	"createpage-login-required": "U moet zich <a id=\"$2\" href=\"$1\">aanmelden</a> om afbeeldingen te kunnen uploaden",
 	"createpage-please-wait": "Even geduld alstublieft...",
 	"createpage-upload-directory-read-only": "Er kan niet geschreven worden in de uploadmap van de webserver",
 	"createpage-about-info": "Dit is de vereenvoudigde tekstverwerker. Meer hulp is te vinden in [[s:Help:CreatePage|ShoutWiki Hub]].",
@@ -44,6 +48,7 @@
 	"createpage-advanced-edit": "uitgebreide tekstverwerker",
 	"createpage-optionals-text": "Optionele secties toevoegen:",
 	"createpage-save": "Opslaan",
+	"createpage-unsaved-changes": "Niet-opgeslagen wijzigingen",
 	"tog-createpage-redlinks": "Gebruik [http://www.shoutwiki.com/wiki/Help:CreatePage pagina aanmaken] als u verbroken verwijzigen volgt",
 	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Informatievenster.*\\}\\}/is"
 }

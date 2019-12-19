@@ -1,8 +1,29 @@
 {
 	"@metadata": {
 		"authors": [
-			"YaronSh"
+			"YaronSh",
+			"Ghsuvr"
 		]
 	},
-	"createpage": "יצירת דף"
+	"createpage-alternate-creation": "או לחץ $1 כדי להשתמש בעורך המקורי",
+	"createpage-edit-normal": "עריכה מתקדמת",
+	"createpage-upload": "העלה תמונה",
+	"createpage-show": "הראה",
+	"createpage": "יצירת ערך חדש",
+	"createpage-title": "יצירת ערך חדש",
+	"createpage-button-createplate-submit": "טען תבנית",
+	"createpage-give-title": "נא לציין כותרת",
+	"createpage-title-invalid": "נא לציין כותרת תקנית",
+	"createpage-yes": "כן",
+	"createpage-no": "לא",
+	"createpage-categories": "קטגוריות",
+	"createpage-top-of-page": "ראש העמוד",
+	"createpage-uploaded-from": "הועלה מ Special:CreatePage",
+	"createpage-title-check-header": "בדיקת כותרת מאולצת",
+	"createpage-title-check-text": "לא ניתן לעשות פעולה עד שבדיקת הכותרת מסתיימת. נא ללחוץ שוב על כפתור הפעולה כדי להמשיך.",
+	"createpage-upload-aborted": "הכנסת התמונה בוטלה",
+	"createpage-login-required": "צריך <a id=\"$2\" href=\"$1\">להתחבר</a> כדי להעלות תמונות",
+	"createpage-please-wait": "נא להמתין...",
+	"createpage-upload-directory-read-only": "שרת האינטרנט אינו יכול לכתוב בתיקיית ההעלאות.",
+	"tog-createpage-redlinks": "השתמש ב [http://www.shoutwiki.com/wiki/Help:CreatePage יצירת עמוד] כאשר יש קישורים שבורים"
 }

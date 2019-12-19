@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"KlaudiuMihaila"
+			"KlaudiuMihaila",
+			"Fitoschido"
 		]
 	},
-	"createpage": "Creează o pagină"
+	"createpage": "Creează o pagină",
+	"createpage-infobox-legend": "Infocaseta"
 }
