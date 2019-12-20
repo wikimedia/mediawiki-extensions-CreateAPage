@@ -37,7 +37,7 @@
 	border-top: 1px solid #ccc;
 	clear: both;
 	/* this looks just bad these days, so taking out */
-	/*margin-top: -12px;*/
+	/* margin-top: -12px; */
 	padding: 4px 8px;
 	text-align: right;
 }
@@ -82,11 +82,11 @@
 #createpageform .upload_submit {
 	margin-left: 132px;
 	margin-bottom: 4px;
-	background: #3366CC none repeat scroll 0%;
+	background: #36c none repeat scroll 0%;
 	border: 4px double #fff;
 	color: #fff;
 	cursor: pointer;
-	font-family: "Lucida Grande", sans-serif;
+	font-family: 'Lucida Grande', sans-serif;
 	font-size: 8pt;
 	font-weight: bold;
 	padding: 2px 5px;
@@ -129,11 +129,11 @@ legend {
 	float: left;
 	font-weight: bold;
 	/* ashley 8 December 2019: this makes it so that the "Article Title" text overflows, so taking out */
-	/*width: 85px;*/
+	/* width: 85px; */
 	padding-left: 5px;
 	padding-right: 10px;
 	text-align: left;
-	/*text-transform: capitalize;*/
+	/* text-transform: capitalize; */
 	margin-top: 3px;
 }
 
@@ -161,7 +161,7 @@ legend {
 #cp-infobox div .createpage_input_file {
 	width: auto;
 	position: relative;
-	font: x-small/160% Verdana;
+	font: x-small/160% 'Verdana';
 	margin: 0 0 4px 0;
 	zoom: 1;
 	overflow: hidden;
@@ -177,7 +177,7 @@ legend {
 	top: 0;
 	overflow: hidden;
 	cursor: pointer;
-	font-family: "Lucida Grande", sans-serif;
+	font-family: 'Lucida Grande', sans-serif;
 	font-size: 9pt;
 	font-weight: bold;
 	padding: 2px 5px;
@@ -201,7 +201,7 @@ legend {
 	line-height: 12px;
 	opacity: 0;
 	zoom: 1;
-	filter: alpha(opacity=0);
+	filter: alpha( opacity=0 );
 	cursor: pointer;
 }
 
@@ -339,7 +339,7 @@ legend {
 /* disabled on November 30, 2009
 #createpageform div.templateFrameLast {
 	border-right: none;
-}*/
+} */
 
 #createpage_warning_copy,
 #createpage_warning_copy2 {
@@ -382,7 +382,8 @@ legend {
 	display: none;
 }
 
-#wpCategoryInput, #wpCategoryButton {
+#wpCategoryInput,
+#wpCategoryButton {
 	margin: 4px 2px 0 2px;
 }
 
