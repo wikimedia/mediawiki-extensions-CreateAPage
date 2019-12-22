@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Conky77"
 		]
 	},
+	"createpage-hide": "Scondi",
 	"createpage": "Crèa na pagina"
 }

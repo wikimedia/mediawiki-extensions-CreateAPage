@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gongsoonyee",
+			"Ykhwong"
+		]
+	},
+	"createpage-here": "여기",
+	"createpage-edit-normal": "고급 편집",
+	"createpage-upload": "그림 올리기",
+	"createpage-hide": "숨기기",
+	"createpage-show": "보이기",
+	"createpage": "새 문서 만들기",
+	"createpage-title": "새 문서 만들기",
+	"createpage-title-caption": "문서 제목",
+	"createpage-choose-createplate": "페이지 종류 고르기",
+	"createpage-button-createplate-submit": "이 틀 불러오기",
+	"createpage-give-title": "제목을 지정해 주십시오",
+	"createpage-title-invalid": "유효한 제목을 지정해 주십시오",
+	"createpage-article-exists": "이 글은 이미 존재합니다. 수정하기",
+	"createpage-advanced-warning": "편집 모드를 전환하면 문서 서식이 깨질 수 있습니다. 계속하시겠습니까?",
+	"createpage-login-warning": "지금 로그인하면 저장되지 않은 모든 텍스트를 소실하게 됩니다. 계속하시겠습니까?",
+	"createpage-infobox-legend": "정보상자",
+	"createpage-yes": "예",
+	"createpage-no": "아니오",
+	"createpage-categories": "분류",
+	"createpage-addcategory": "분류 추가",
+	"createpage-title-check-header": "제목 확인 요구됨",
+	"createpage-img-uploaded": "이미지를 성공적으로 업로드했습니다",
+	"createpage-insert-image": "그림 넣기",
+	"createpage-upload-aborted": "그림 넣기가 취소되었습니다",
+	"createpage-initial-run": "계속 수정하기",
+	"createpage-please-wait": "기다려 주십시오...",
+	"createpage-advanced-text": "$1를 사용할 수도 있습니다.",
+	"createpage-advanced-edit": "고급 편집기",
+	"createpage-save": "저장",
+	"createpage-must-specify-title": "먼저 제목을 지정해 주십시오!",
+	"createpage-unsaved-changes": "저장되지 않은 변경사항",
+	"createpage-unsaved-changes-details": "저장되지 않은 변경사항이 있습니다. 확인을 클릭하면 해당 변경사항을 버립니다."
+}

@@ -6,7 +6,8 @@
 			"Peter17",
 			"Gomoko",
 			"Thibaut120094",
-			"Verdy p"
+			"Verdy p",
+			"Pols12"
 		]
 	},
 	"createpage-here": "ici",
@@ -26,7 +27,7 @@
 	"createpage-title-invalid": "Spécifiez un titre valide",
 	"createpage-article-exists": "Cet article existe déjà. Modifier",
 	"createpage-article-exists2": " ou spécifiez un autre titre.",
-	"createpage-advanced-warning": "Basculer entre les modes de modification peut casser le mise en forme de la page, voulez-vous continuer ?",
+	"createpage-advanced-warning": "Basculer entre les modes de modification peut casser la mise en forme de la page, voulez-vous continuer ?",
 	"createpage-login-warning": "En vous connectant maintenant, vous pouvez perdre votre texte non sauvegardé. Voulez-vous continuer ?",
 	"createpage-infobox-legend": "Infobox",
 	"createpage-yes": "Oui",
@@ -43,7 +44,7 @@
 	"createpage-insert-image": "Insérer une image",
 	"createpage-upload-aborted": "L’insertion de l’image a été annulée",
 	"createpage-initial-run": "Procéder à la modification",
-	"createpage-login-required": "Vous devez vous <a id=\"$2\" href=\"$1\">connecter</a> pour télécharger les images",
+	"createpage-login-required": "Vous devez vous <a id=\"$2\" href=\"$1\">connecter</a> pour mettre en ligne des images",
 	"createpage-please-wait": "Veuillez patienter...",
 	"createpage-upload-directory-read-only": "Le dossier de téléversement n’est pas inscriptible par le serveur web",
 	"createpage-about-info": "Ceci est l’éditeur simplifié. Pour en savoir plus, allez sur [[s:Help:CreatePage|ShoutWiki Hub]].",

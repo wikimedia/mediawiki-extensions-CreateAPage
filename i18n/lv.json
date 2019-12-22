@@ -4,16 +4,24 @@
 			"Papuass"
 		]
 	},
+	"createpage-here": "šeit",
 	"createpage-upload": "Augšupielādēt attēlu",
 	"createpage-hide": "Paslēpt",
+	"createpage-show": "Parādīt",
 	"createpage": "Izveidot jaunu rakstu",
+	"createpage-title": "Izveidot jaunu rakstu",
 	"createpage-title-caption": "Raksta nosaukums",
+	"createpage-choose-createplate": "Izvēlies lapas veid.",
 	"createpage-button-createplate-submit": "Ielādēt šo veidni",
+	"createpage-article-exists": "Šis raksts jau pastāv. Labot",
 	"createpage-infobox-legend": "Infokaste",
 	"createpage-yes": "Jā",
 	"createpage-no": "Nē",
 	"createpage-categories": "Kategorijas",
 	"createpage-addcategory": "Pievienot kategoriju",
+	"createpage-top-of-page": "Lapas augša",
 	"createpage-upload-aborted": "Attēla ievietošana tika atcelta",
-	"createpage-save": "Saglabāt"
+	"createpage-please-wait": "Lūdzu, uzgaidi...",
+	"createpage-save": "Saglabāt",
+	"createpage-unsaved-changes": "Nesaglabātas izmaiņas"
 }

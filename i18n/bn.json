@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bellayet"
+			"Bellayet",
+			"আফতাবুজ্জামান"
 		]
 	},
-	"createpage": "পাতা তৈরি কর"
+	"createpage": "পাতা তৈরি কর",
+	"createpage-title-caption": "নিবন্ধের শিরোনাম"
 }
