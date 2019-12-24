@@ -1,5 +1,9 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": [
+			"Omotecho"
+		]
+	},
 	"createpage-edit-normal": "通常の編集",
 	"createpage-hide": "非表示",
 	"createpage-show": "表示",
@@ -19,7 +23,7 @@
 	"createpage-preview-end": "プレビューはここまでです。以下で編集を継続できます。",
 	"createpage-insert-image": "画像を挿入",
 	"createpage-initial-run": "編集を開始",
-	"createpage-login-required": "画像をアップロードするには",
+	"createpage-login-required": "画像をアップロードするには<a id=\"$2\" href=\"$1\">ログイン</a>してください",
 	"createpage-please-wait": "お待ちください...",
 	"createpage-about-info": "シンプルなエディタです。詳細は、ウィキアのヘルプをどうぞ。"
 }

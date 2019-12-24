@@ -3,7 +3,8 @@
 		"authors": [
 			"Siebrand Mazeland",
 			"Mitchel Corstjens",
-			"Mainframe98"
+			"Mainframe98",
+			"Elroy"
 		]
 	},
 	"createpage-here": "hier",
@@ -25,7 +26,7 @@
 	"createpage-article-exists2": " of geef een andere paginaam op.",
 	"createpage-advanced-warning": "Door het wisselen van tekstverwerker kunt u de paginaopmaak stuk maken. Wilt u doorgaan?",
 	"createpage-login-warning": "Door nu aan te melden kunt u alle wijzigingen die niet zijn opgeslagen kwijt raken. Wilt u doorgaan?",
-	"createpage-infobox-legend": "Informatievenster",
+	"createpage-infobox-legend": "Infovak",
 	"createpage-yes": "Ja",
 	"createpage-no": "Nee",
 	"createpage-categories": "Categorieën",

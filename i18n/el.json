@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Περίεργος"
+			"Περίεργος",
+			"GhotuoIncubator"
 		]
 	},
 	"createpage-edit-normal": "Πρηγμένη Επεξεργασία",
 	"createpage-upload": "Φόρτωση εικόνας",
 	"createpage-hide": "Απόκρυψη",
 	"createpage-show": "Εμφάνιση",
-	"createpage": "Δημιουργήστε ένα καινούργιο άρθρο",
+	"createpage": "Δημιουργία ενός νέου άρθρου",
 	"createpage-title": "Δημιουργήστε ένα καινούργιο άρθρο",
 	"createpage-title-additional": "Έχετε ακολουθήσει ένα σύνδεσμο σε μια σελίδα που δεν υπάρχει προς το παρών. Για να τη δημιουργήσετε, ξεκινήστε να πληκρολογείτε στο παρακάτω πλαίσιο",
 	"createpage-title-caption": "Τίτλος Άρθρου",
