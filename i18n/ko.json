@@ -25,6 +25,7 @@
 	"createpage-no": "아니오",
 	"createpage-categories": "분류",
 	"createpage-addcategory": "분류 추가",
+	"createpage-top-of-page": "문서 최상단",
 	"createpage-title-check-header": "제목 확인 요구됨",
 	"createpage-img-uploaded": "이미지를 성공적으로 업로드했습니다",
 	"createpage-insert-image": "그림 넣기",

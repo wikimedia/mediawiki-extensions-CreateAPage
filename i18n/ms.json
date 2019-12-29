@@ -1,8 +1,51 @@
 {
 	"@metadata": {
 		"authors": [
-			"Anakmalaysia"
+			"Anakmalaysia",
+			"CyberTroopers",
+			"Tofeiku"
 		]
 	},
-	"createpage": "Cipta laman"
+	"createpage-here": "di sini",
+	"createpage-alternate-creation": "atau klik $1 untuk menggunakan editor asal",
+	"createpage-upload": "Muat naik gambar",
+	"createpage-hide": "Sorok",
+	"createpage-show": "Tunjuk",
+	"createpage": "Cipta laman",
+	"createpage-desc": "[[Special:CreatePage|Lebih mudah menggunakan paparan antara muka]] untuk membuat rencana baru",
+	"createpage-title": "Buat rencana baru",
+	"createpage-title-additional": "Anda telah mengikuti pautan ke halaman yang belum wujud. Untuk mencipta halaman, mulakan dengan menaip di dalam kotak di bawah",
+	"createpage-title-caption": "Tajuk Rencana",
+	"createpage-choose-createplate": "Pilih jenis halaman",
+	"createpage-button-createplate-submit": "Muatkan templat ini",
+	"createpage-give-title": "Sila tentukan tajuk",
+	"createpage-title-invalid": "Sila tentukan tajuk yang sah",
+	"createpage-article-exists": "Rencana ini sudah wujud. Sunting",
+	"createpage-article-exists2": "atau tentukan tajuk lain.",
+	"createpage-advanced-warning": "Mengubah mod penyunting boleh mengubah pemformatan halaman, adakah anda mahu meneruskan?",
+	"createpage-login-warning": "Dengan melog masuk sekarang, anda mungkin kehilangan semua teks anda yang belum disimpan. Adakah anda mahu meneruskan?",
+	"createpage-infobox-legend": "Kotak info",
+	"createpage-yes": "Ya",
+	"createpage-no": "Tidak",
+	"createpage-categories": "Kategori",
+	"createpage-addcategory": "Tambah kategori",
+	"createpage-top-of-page": "Bahagian atas halaman",
+	"createpage-uploaded-from": "Dimuat naik dari Khas:CiptaLaman",
+	"createpage-title-check-header": "Pemeriksaan tajuk dipaksa",
+	"createpage-img-uploaded": "Gambar berjaya dimuat naik",
+	"createpage-preview-end": "Pralihat berakhir. Anda boleh meneruskan penyuntingan anda di bawah:",
+	"createpage-insert-image": "Masukkan Gambar",
+	"createpage-upload-aborted": "Kemasukan gambar dibatalkan",
+	"createpage-initial-run": "Teruskan menyunting",
+	"createpage-login-required": "Anda perlu <a id=\"$2\" href=\"$1\">log masuk</a> untuk memuat naik gambar",
+	"createpage-please-wait": "Sila tunggu...",
+	"createpage-upload-directory-read-only": "Direktori muat naik tidak boleh ditulis oleh pelayan web",
+	"createpage-about-info": "Ini adalah penyuntingan ringkas. Untuk mengetahui dengan lebih lanjut pergi ke [[s:Help:CreatePage|ShoutWiki Hub]].",
+	"createpage-advanced-text": "Anda juga boleh menggunakan $1.",
+	"createpage-optionals-text": "Tambah bahagian pilihan:",
+	"createpage-save": "Simpan",
+	"createpage-must-specify-title": "Sila tentukan tajuk terlebih dahulu!",
+	"createpage-unsaved-changes": "Perubahan yang tidak disimpan",
+	"createpage-unsaved-changes-details": "Anda mempunyai perubahan yang belum disimpan. Tekan OK akan menyebabkan perubahan terabai.",
+	"tog-createpage-redlinks": "Guna [http://www.shoutwiki.com/wiki/Help:CreatePage CiptaLaman] apabila mengikuti pautan yang rosak"
 }
