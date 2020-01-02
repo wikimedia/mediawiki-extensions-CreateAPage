@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Paraw2"
+		]
+	},
+	"createpage-here": "ئێرە",
+	"createpage-edit-normal": "وێراشتەکاری پێشکەفتی",
+	"createpage-upload": "وێنە بار بکە",
+	"createpage-show": "نیشانی بیە",
+	"createpage": "وتارێگ تازە درس بکە",
+	"createpage-title": "وتارێگ تازە درس بکە",
+	"createpage-title-caption": "سەرناو وتارەگە",
+	"createpage-choose-createplate": "جوور پەڕەگە دیاری بکە",
+	"createpage-button-createplate-submit": "ئەی داڕێژە بار بکە",
+	"createpage-give-title": "سەرناوێگ دیاری بکە",
+	"createpage-title-invalid": "سەرناو شیاێگ دیاری بکە",
+	"createpage-article-exists2": "یا سەرناوێگ ترەک دیاری بکە.",
+	"createpage-yes": "ئەرێ",
+	"createpage-no": "نە",
+	"createpage-categories": "پۆلەگان",
+	"createpage-addcategory": "پۆلێگ زێدە بکە",
+	"createpage-top-of-page": "ژۊیەر پەڕەگە",
+	"createpage-insert-image": "وێنەێگ بخە تێ",
+	"createpage-please-wait": "کەمێگ پا بیە وە گەز...",
+	"createpage-advanced-text": "هەلەێوا تۊیەنید لە $1 ئسفادە بکەێد.",
+	"createpage-save": "پاشکەفت",
+	"createpage-must-specify-title": "یەکم بایەد سەرناوێگ دیاری بکەید!",
+	"createpage-unsaved-changes": "گووڕانکارییەیل پاشکەفت نەکریاێ"
+}

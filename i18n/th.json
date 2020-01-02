@@ -5,8 +5,12 @@
 		]
 	},
 	"createpage-upload": "อัปโหลดรูปภาพ",
+	"createpage-show": "แสดง",
 	"createpage": "สร้างบทความใหม่",
 	"createpage-yes": "ใช่",
 	"createpage-no": "ไม่",
-	"createpage-please-wait": "กรุณารอสักครู่..."
+	"createpage-categories": "หมวดหมู่",
+	"createpage-addcategory": "เพิ่มหมวดหมู่",
+	"createpage-please-wait": "กรุณารอสักครู่...",
+	"createpage-save": "บันทึก"
 }

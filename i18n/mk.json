@@ -38,7 +38,7 @@
 	"createpage-insert-image": "Вметни слика",
 	"createpage-upload-aborted": "Вметнувањето на слика е откажано",
 	"createpage-initial-run": "Продолжете кон уредувањето",
-	"createpage-login-required": "Треба да",
+	"createpage-login-required": "Треба да <a id=\"$2\" href=\"$1\">се најавите</a> за да подигате слики",
 	"createpage-please-wait": "Почекајте...",
 	"createpage-upload-directory-read-only": "Директориумот за подигање не е достапен за записи од веб-серверот",
 	"createpage-about-info": "Ова е упростен уредник. За да дознаете повеќе, одете на [[s:Help:CreatePage|Помош со ShoutWiki]].",

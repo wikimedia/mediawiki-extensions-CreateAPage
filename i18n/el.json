@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Περίεργος",
-			"GhotuoIncubator"
+			"GhotuoIncubator",
+			"Αντιγόνη"
 		]
 	},
 	"createpage-edit-normal": "Πρηγμένη Επεξεργασία",
@@ -33,7 +34,7 @@
 	"createpage-insert-image": "Εισαγωγή εικόνας",
 	"createpage-upload-aborted": "Ακυρώθηκε η εισαγωγή της εικόνας",
 	"createpage-initial-run": "Για επεξεργασία συνεχίστε",
-	"createpage-login-required": "Χρειάζεται να",
+	"createpage-login-required": "Χρειάζεται να <a id=\"$2\" href=\"$1\">συνδεθείτε</a>  για να ανεβάσετε εικόνες",
 	"createpage-please-wait": "Παρακαλώ περιμένετε ...",
 	"createpage-upload-directory-read-only": "Ο κατάλογος φορτώσεων δεν είναι εγγράψιμος από το διακομιστή",
 	"createpage-advanced-text": "Μπορείτε επίσης να χρησιμοποιήσετε το $ 1.",
