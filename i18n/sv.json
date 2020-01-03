@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Per",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Tölvuforritari"
 		]
 	},
 	"createpage-here": "här",
@@ -19,7 +20,9 @@
 	"createpage-choose-createplate": "Välj en sidtyp",
 	"createpage-button-createplate-submit": "Läs in denna mall",
 	"createpage-give-title": "Ange en titel",
+	"createpage-title-invalid": "Ange en giltig titel",
 	"createpage-article-exists": "Denna artikel finns redan. Redigera",
+	"createpage-article-exists2": "eller ange en annan titel.",
 	"createpage-login-warning": "Om du loggar in nu kan du förlora all osparad text. Vill du fortsätta?",
 	"createpage-infobox-legend": "Inforuta",
 	"createpage-yes": "Ja",
