@@ -2,10 +2,42 @@
 	"@metadata": {
 		"authors": [
 			"Jesielt",
-			"Malafaya"
+			"Malafaya",
+			"Hamilton Abreu",
+			"Mansil"
 		]
 	},
-	"createpage": "Criar uma página",
+	"createpage-here": "aqui",
+	"createpage-alternate-creation": "ou clicar em $1 para usar o editor original",
+	"createpage-edit-normal": "Edição avançada",
+	"createpage-upload": "Carregar imagem",
+	"createpage-hide": "Ocultar",
+	"createpage-show": "Mostrar",
+	"createpage": "Criar um artigo novo",
+	"createpage-title": "Criar um artigo novo",
+	"createpage-title-caption": "Título do artigo",
+	"createpage-choose-createplate": "Escolher um tipo de página",
+	"createpage-button-createplate-submit": "Carregar este modelo",
+	"createpage-give-title": "Por favor, especifique um título",
+	"createpage-title-invalid": "Por favor, especifique um título válido",
+	"createpage-article-exists": "Este artigo já existe. Editar",
+	"createpage-article-exists2": "ou especificar outro título.",
+	"createpage-infobox-legend": "Caixa de informação",
 	"createpage-yes": "Sim",
-	"createpage-no": "Não"
+	"createpage-no": "Não",
+	"createpage-categories": "Categorias",
+	"createpage-addcategory": "Adicionar categoria",
+	"createpage-top-of-page": "Topo da página",
+	"createpage-uploaded-from": "Carregada de Special:CreatePage",
+	"createpage-img-uploaded": "Imagem carregada",
+	"createpage-insert-image": "Inserir imagem",
+	"createpage-initial-run": "Prosseguir para a edição",
+	"createpage-please-wait": "Aguarde, por favor...",
+	"createpage-advanced-text": "Também pode utilizar $1.",
+	"createpage-advanced-edit": "o editor avançado",
+	"createpage-optionals-text": "Adicionar secções opcionais:",
+	"createpage-save": "Gravar",
+	"createpage-must-specify-title": "Por favor, especifique primeiro um título!",
+	"createpage-unsaved-changes": "Mudanças não gravadas",
+	"tog-createpage-redlinks": "Utilizar [http://www.shoutwiki.com/wiki/Help:CreatePage Criar Página] quando seguir hiperligações quebradas"
 }

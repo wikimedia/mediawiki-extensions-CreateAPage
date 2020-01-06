@@ -13,6 +13,7 @@
 	"createpage-title-caption": "Títol de l’article",
 	"createpage-choose-createplate": "Trieu un tipus de pàgina",
 	"createpage-button-createplate-submit": "Carrega aquesta plantilla",
+	"createpage-give-title": "Especifiqueu un títol",
 	"createpage-article-exists": "Aquest article ja existeix. Edita",
 	"createpage-infobox-legend": "Infotaula",
 	"createpage-yes": "Sí",
@@ -26,5 +27,6 @@
 	"createpage-advanced-text": "També podeu fer servir el $1.",
 	"createpage-advanced-edit": "editor avançat",
 	"createpage-save": "Desa",
+	"createpage-must-specify-title": "Abans heu d’especificar un títol.",
 	"createpage-unsaved-changes": "Canvis sense desar"
 }

@@ -3,7 +3,9 @@
 		"authors": [
 			"Darth Kule",
 			"Beta16",
-			"Fitoschido"
+			"Fitoschido",
+			"Dansita",
+			"JackLantern"
 		]
 	},
 	"createpage-here": "qui",
@@ -13,9 +15,11 @@
 	"createpage": "Crea una nuova voce",
 	"createpage-title": "Crea una nuova voce",
 	"createpage-title-caption": "Titolo della voce",
+	"createpage-choose-createplate": "Scegli un tipo di pagina",
 	"createpage-button-createplate-submit": "Carica questo template",
 	"createpage-give-title": "Specifica un titolo",
-	"createpage-title-invalid": "Specifica un titolo valido.",
+	"createpage-title-invalid": "Specifica un titolo valido",
+	"createpage-article-exists": "Questo articolo già esiste. Modificalo",
 	"createpage-article-exists2": "o specifica un altro titolo.",
 	"createpage-infobox-legend": "Sinottico",
 	"createpage-yes": "Sì",

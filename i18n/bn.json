@@ -5,6 +5,15 @@
 			"আফতাবুজ্জামান"
 		]
 	},
-	"createpage": "পাতা তৈরি কর",
-	"createpage-title-caption": "নিবন্ধের শিরোনাম"
+	"createpage-hide": "আড়াল করুন",
+	"createpage-show": "দেখান",
+	"createpage": "একটি নতুন নিবন্ধ তৈরি করুন",
+	"createpage-title": "একটি নতুন নিবন্ধ তৈরি করুন",
+	"createpage-title-caption": "নিবন্ধের শিরোনাম",
+	"createpage-infobox-legend": "তথ্যছক",
+	"createpage-yes": "হ্যাঁ",
+	"createpage-no": "না",
+	"createpage-categories": "বিষয়শ্রেণীসমূহ",
+	"createpage-addcategory": "বিষয়শ্রেণী যোগ করুন",
+	"createpage-save": "সংরক্ষণ করুন"
 }
