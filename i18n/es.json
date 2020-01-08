@@ -42,7 +42,7 @@
 	"createpage-please-wait": "Un momento…",
 	"createpage-upload-directory-read-only": "El servidor web no puede escribir en el directorio de cargas",
 	"createpage-about-info": "Este es un editor simplificado. Para saber más ve a la [[s:Help:CreatePage|Hub de ShoutWiki]].",
-	"createpage-advanced-text": "Puedes usar también el $1.",
+	"createpage-advanced-text": "También puede utilizarse el $1.",
 	"createpage-advanced-edit": "editor avanzado",
 	"createpage-optionals-text": "Añadir secciones opcionales:",
 	"createpage-save": "Guardar",
