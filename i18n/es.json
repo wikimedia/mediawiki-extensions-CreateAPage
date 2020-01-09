@@ -41,7 +41,7 @@
 	"createpage-login-required": "Hace falta <a id=\"$2\" href=\"$1\">acceder</a> para cargar imágenes",
 	"createpage-please-wait": "Un momento…",
 	"createpage-upload-directory-read-only": "El servidor web no puede escribir en el directorio de cargas",
-	"createpage-about-info": "Este es un editor simplificado. Para saber más ve a la [[s:Help:CreatePage|Hub de ShoutWiki]].",
+	"createpage-about-info": "Este es el editor simplificado. Para saber más, visita [[s:Help:CreatePage|ShoutWiki Hub]].",
 	"createpage-advanced-text": "También puede utilizarse el $1.",
 	"createpage-advanced-edit": "editor avanzado",
 	"createpage-optionals-text": "Añadir secciones opcionales:",
