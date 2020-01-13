@@ -289,9 +289,9 @@ var CreateAPage = {
 				window.location = mw.util.getUrl(
 					document.getElementById( 'Createtitle' ).value,
 					{
-						'action': 'edit',
-						'editmode': 'nomulti',
-						'createpage': 'true'
+						action: 'edit',
+						editmode: 'nomulti',
+						createpage: 'true'
 					}
 				);
 			}
@@ -314,7 +314,7 @@ var CreateAPage = {
 		} else {
 			returnto = 'Special:CreatePage';
 		}
-		window.location = mw.util.getUrl( 'Special:UserLogin', { 'returnto': returnto } );
+		window.location = mw.util.getUrl( 'Special:UserLogin', { returnto: returnto } );
 	},
 
 	/**
@@ -540,7 +540,7 @@ var CreateAPage = {
 
 		thisContainer.appendChild( neoInput );
 		$( '#createpage_upload_file_section' + o.num ).change( function( e ) {
-			CreateAPage.upload( e, { 'num': o.num } );
+			CreateAPage.upload( e, { num: o.num } );
 		} );
 
 		document.getElementById( 'createpage_upload_file_section' + o.num ).style.display = 'none';
@@ -715,10 +715,10 @@ var CreateAPage = {
 		var el_id = parseInt( el.id.replace( 'wpTextboxes', '' ) );
 
 		$( '#wpTextIncrease' + el_id ).click( function( e ) {
-			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': 1 } );
+			CreateAPage.resizeThisTextarea( e, { textareaId: el_id, numRows: 1 } );
 		} );
 		$( '#wpTextDecrease' + el_id ).click( function( e ) {
-			CreateAPage.resizeThisTextarea( e, { 'textareaId': el_id, 'numRows': -1 } );
+			CreateAPage.resizeThisTextarea( e, { textareaId: el_id, numRows: -1 } );
 		} );
 	},
 
@@ -1201,7 +1201,7 @@ var CreateAPageInfobox = {
 
 			thisContainer.appendChild( neoInput );
 			$( '#createpage_upload_file' + o.num ).change( function( e ) {
-				CreateAPageInfobox.upload( e, { 'num': o.num } );
+				CreateAPageInfobox.upload( e, { num: o.num } );
 			} );
 
 			document.getElementById( 'createpage_upload_file' + o.num ).style.display = 'none';
@@ -1281,7 +1281,7 @@ var CreateAPageInfobox = {
 	uploadEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file', '' ) );
 		$( '#createpage_upload_file' + j ).change( function( e ) {
-			CreateAPageInfobox.upload( e, { 'num': j } );
+			CreateAPageInfobox.upload( e, { num: j } );
 		} );
 	}
 };
@@ -1383,11 +1383,11 @@ $( function() {
 
 	// File upload stuff, main infobox image(s) and article sections
 	$( 'input[id^="createpage_upload_file"]' ).change( function ( e ) {
-		CreateAPageInfobox.upload( e, { 'num': $( this ).attr( 'id' ).replace( /createpage_upload_file/, '' ) } );
+		CreateAPageInfobox.upload( e, { num: $( this ).attr( 'id' ).replace( /createpage_upload_file/, '' ) } );
 	} );
 
 	$( 'input[id^="createpage_upload_file_section"]' ).change( function ( e ) {
-		CreateAPage.upload( e, { 'num': $( this ).attr( 'id' ).replace( /createpage_upload_file_section/, '' ) } );
+		CreateAPage.upload( e, { num: $( this ).attr( 'id' ).replace( /createpage_upload_file_section/, '' ) } );
 	} );
 
 	// Moved from infobox.tmpl.php on 8 December 2019
