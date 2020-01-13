@@ -1030,6 +1030,7 @@ var CreateAPage = {
 			// Load WikiEditor for the newly created textarea elements, provided that
 			// WikiEditor is installed an' all...
 			if ( typeof $.wikiEditor === 'object' ) {
+				// eslint-disable-next-line no-undef
 				loadWikiEditorForTextboxes();
 			}
 

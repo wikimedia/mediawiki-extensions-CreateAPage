@@ -3,7 +3,7 @@
  */
 window.loadWikiEditorForTextboxes = function () {
 	// Replace icons
-	$( 'textarea[id^="wpTextboxes"]' ).each( function ( idx ) {
+	$( 'textarea[id^="wpTextboxes"]' ).each( function () {
 		$.wikiEditor.modules.dialogs.config.replaceIcons( $( this ) );
 
 		// Add dialogs module
@@ -15,4 +15,5 @@ window.loadWikiEditorForTextboxes = function () {
 	} );
 };
 
+// eslint-disable-next-line no-undef
 $( loadWikiEditorForTextboxes );
