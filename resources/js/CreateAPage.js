@@ -177,7 +177,7 @@ var CreateAPage = {
 
 		// @todo Might be able to simply do window.location = mw.util.getUrl( title.value, { 'action': 'edit' } );
 		var fixedArticlePath = mw.config.get( 'wgArticlePath' ).replace( '$1', '' );
-		fixedArticlePath = fixedArticlePath.replace( 'index.php[^\/]', 'index.php?title=' );
+		fixedArticlePath = fixedArticlePath.replace( 'index.php[^/]', 'index.php?title=' );
 
 		window.location = fixedArticlePath + title.value + '?action=edit';
 	},
@@ -185,7 +185,7 @@ var CreateAPage = {
 	callbackTitle: function ( data ) {
 		var res = '', helperButton;
 		document.getElementById( 'cp-title-check' ).innerHTML = '';
-		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
+		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
 			res = eval( '(' + data + ')' );
 		}
 		if ( ( res.text !== false ) && ( res.empty !== true ) ) {
@@ -394,7 +394,7 @@ var CreateAPage = {
 
 	uploadCallback: function ( oResponse ) {
 		var aResponse = []; // initialize it as an empty array so that JSHint can STFU
-		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
+		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
 			aResponse = eval( '(' + oResponse.responseText + ')' );
 		}
 		var ProgressBar = document.getElementById( 'createpage_upload_progress_section' + aResponse.num );
