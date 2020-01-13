@@ -7,5 +7,37 @@
 	"globals": {
 		"mw": false,
 		"OO": false
+	},
+	"rules": {
+		"brace-style": "off",
+		"camelcase": "off",
+		"comma-dangle": "off",
+		"computed-property-spacing": "off",
+		"eol-last": "off",
+		"eqeqeq": "off",
+		"indent": "off",
+		"key-spacing": "off",
+		"keyword-spacing": "off",
+		"max-len": "off",
+		"no-alert": "off",
+		"no-eval": "off",
+		"no-implicit-globals": "off",
+		"no-jquery/no-class-state": "off",
+		"no-jquery/no-event-shorthand": "off",
+		"no-jquery/no-global-selector": "off",
+		"no-jquery/no-sizzle": "off",
+		"no-jquery/variable-pattern": "off",
+		"no-loop-func": "off",
+		"no-undef": "off",
+		"no-unneeded-ternary": "off",
+		"no-unused-vars": "off",
+		"no-use-before-define": "off",
+		"no-useless-escape": "off",
+		"one-var": "off",
+		"quote-props": "off",
+		"space-before-function-paren": "off",
+		"spaced-comment": "off",
+		"valid-jsdoc": "off",
+		"vars-on-top": "off"
 	}
 }
