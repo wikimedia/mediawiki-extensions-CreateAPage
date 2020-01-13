@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Umherirrender"
 		]
 	},
 	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.\n{{Identical|Here}}",
@@ -11,7 +12,7 @@
 	"createpage-hide": "Clickable text shown in the fieldset legend element of the createplate chooser as well as infoboxes (if any); clicking on this hides the thing (createplate chooser or infobox) and then the text is changed into {{msg-mw|createpage-show}}.\n{{Identical|Hide}}",
 	"createpage-show": "Clickable text shown in the fieldset legend element of the createplate chooser as well as infoboxes (if any); clicking on this shows the hidden thing (createplate chooser or infobox) and then the text is changed into {{msg-mw|createpage-hide}}.",
 	"createpage": "Page title for Special:CreatePage, as shown on [[Special:SpecialPages]]",
-	"createpage-desc": "Extension description shown on [[Special:Version]]",
+	"createpage-desc": "{{desc|name=CreateAPage|url=https://www.mediawiki.org/wiki/Extension:CreateAPage}}",
 	"createpage-title": "Page title for Special:CreatePage, as shown on the page itself",
 	"createpage-title-additional": "Shown on Special:CreatePage above the editor instead of {{msg-mw|newarticletext}} or {{msg-mw|newarticletextanon}}. Also shown on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration above {{msg-mw|newarticletext}} or {{msg-mw|newarticletextanon}}. (TODO: This is stupid, we should fix this.)",
 	"createpage-title-caption": "Label for the title validator input, into which the user should give the name of the page that they want to create.",
