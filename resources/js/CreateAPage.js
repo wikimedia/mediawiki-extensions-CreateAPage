@@ -46,9 +46,9 @@ var CreateAPageCategoryTagCloud = {
 
 		categories = categories.split( '|' );
 		for ( var i = 0; i < categories.length; i++ ) {
-			if ( categories[i] !== '' ) {
-				new_text += '[[' + mw.config.get( 'wgFormattedNamespaces' )[14] + ':' +
-					categories[i] + ']]';
+			if ( categories[ i ] !== '' ) {
+				new_text += '[[' + mw.config.get( 'wgFormattedNamespaces' )[ 14 ] + ':' +
+					categories[ i ] + ']]';
 			}
 		}
 
@@ -69,7 +69,7 @@ var CreateAPageCategoryTagCloud = {
 			var c_found = false;
 			var core_cat = category.replace( /\|.*/, '' );
 			for ( var j in CreateAPage.foundCategories ) {
-				if ( CreateAPage.foundCategories[j] === core_cat ) {
+				if ( CreateAPage.foundCategories[ j ] === core_cat ) {
 					var this_button = document.getElementById( 'cloud' + j );
 					this_button.onclick = CreateAPage.onclickCategoryFn( core_cat, j );
 					this_button.style.color = '#419636';
@@ -96,7 +96,7 @@ var CreateAPageCategoryTagCloud = {
 				s_cat.appendChild( n_cat );
 				s_cat.appendChild( space );
 				cat_full_section.appendChild( s_cat );
-				CreateAPage.foundCategories[n_cat_count] = core_cat;
+				CreateAPage.foundCategories[ n_cat_count ] = core_cat;
 			}
 		}
 	},
@@ -159,8 +159,8 @@ var CreateAPage = {
 			CreateAPage.textareaAddToolbar
 		);
 
-		if ( edit_textareas[0].id === 'wpTextboxes0' ) {
-			textarea = edit_textareas[0];
+		if ( edit_textareas[ 0 ].id === 'wpTextboxes0' ) {
+			textarea = edit_textareas[ 0 ];
 			textarea = textarea.replace( '<br>', '' );
 		}
 
@@ -454,7 +454,7 @@ var CreateAPage = {
 			CreateAPage.optionalContentTest, '', section
 		);
 		for ( var i = 0; i < sectionContent.length; i++ ) {
-			text = text.replace( sectionContent[i].id, '' );
+			text = text.replace( sectionContent[ i ].id, '' );
 		}
 		section.style.display = 'block';
 		return text;
@@ -467,7 +467,7 @@ var CreateAPage = {
 		var first = true;
 		var ivalue = '';
 
-		for( var i = 0; i < sectionContent.length; i++ ) {
+		for ( var i = 0; i < sectionContent.length; i++ ) {
 			if ( first ) {
 				if ( text !== '' ) {
 					ivalue += ',';
@@ -476,7 +476,7 @@ var CreateAPage = {
 			} else {
 				ivalue += ',';
 			}
-			ivalue += sectionContent[i].id;
+			ivalue += sectionContent[ i ].id;
 		}
 
 		section.style.display = 'none';
@@ -503,7 +503,7 @@ var CreateAPage = {
 		// Use HTML5 magic to do the file upload without having to resort to super
 		// heavy jQuery plugins or anything like that
 		var formData = new FormData();
-		formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[0] );
+		formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[ 0 ] );
 
 		var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
 			type: 'POST',
@@ -584,7 +584,7 @@ var CreateAPage = {
 						CreateAPage.hideWarningPanel( e );
 						$( this ).dialog( 'close' );
 					}
-				},
+				}
 			]
 		} );
 	},
@@ -622,7 +622,7 @@ var CreateAPage = {
 						CreateAPage.hideWarningLoginPanel( e );
 						$( this ).dialog( 'close' );
 					}
-				},
+				}
 			]
 		} );
 	},
@@ -706,7 +706,7 @@ var CreateAPage = {
 	uploadEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file_section', '' ) );
 		$( '#createpage_upload_file_section' + j ).change( function( e ) {
-			CreateAPage.upload( e, { num : j } );
+			CreateAPage.upload( e, { num: j } );
 		} );
 	},
 
@@ -737,7 +737,7 @@ var CreateAPage = {
 			var cloud_id = 'cloud' + i;
 			var found_category = document.getElementById( cloud_id ).innerHTML;
 			if ( found_category ) {
-				CreateAPage.foundCategories[i] = found_category;
+				CreateAPage.foundCategories[ i ] = found_category;
 			}
 		}
 
@@ -748,17 +748,17 @@ var CreateAPage = {
 
 		categories = categories.split( '|' );
 		for ( i = 0; i < categories.length; i++ ) {
-			text_categories[i] = categories[i];
+			text_categories[ i ] = categories[ i ];
 		}
 
 		for ( i = 0; i < text_categories.length; i++ ) {
 			var c_found = false;
 			var core_cat;
 			for ( var j in CreateAPage.foundCategories ) {
-				core_cat = text_categories[i].replace( /\|.*/, '' );
-				if ( CreateAPage.foundCategories[j] === core_cat ) {
+				core_cat = text_categories[ i ].replace( /\|.*/, '' );
+				if ( CreateAPage.foundCategories[ j ] === core_cat ) {
 					var this_button = document.getElementById( 'cloud' + j );
-					this_button.onclick = CreateAPage.onclickCategoryFn( text_categories[i], j );
+					this_button.onclick = CreateAPage.onclickCategoryFn( text_categories[ i ], j );
 					this_button.style.color = '#419636';
 					c_found = true;
 					break;
@@ -772,7 +772,7 @@ var CreateAPage = {
 				var cat_num = n_cat_count - 1;
 				n_cat.setAttribute( 'id', 'cloud' + cat_num );
 				n_cat.setAttribute( 'href', '#' );
-				n_cat.onclick = CreateAPage.onclickCategoryFn( text_categories[i], cat_num );
+				n_cat.onclick = CreateAPage.onclickCategoryFn( text_categories[ i ], cat_num );
 				n_cat.style.color = '#419636';
 				n_cat.style.fontSize = '10pt';
 				s_cat.setAttribute( 'id', 'tag' + n_cat_count );
@@ -816,14 +816,14 @@ var CreateAPage = {
 			);
 			var optionalsElements = document.getElementById( 'wpOptionals' );
 			for ( var i = 0; i < optionals.length; i++ ) {
-				snum = optionals[i].id.replace( 'wpOptionalInput', '' );
+				snum = optionals[ i ].id.replace( 'wpOptionalInput', '' );
 				if ( !document.getElementById( 'wpOptionalInput' + snum ).checked ) {
 					optionalsElements.value = CreateAPage.unuseSection(
 						document.getElementById( 'createpage_section_' + snum ),
 						optionalsElements.value
 					);
 				}
-				$( '#' + optionals[i] ).change( function( e ) {
+				$( '#' + optionals[ i ] ).change( function( e ) {
 					CreateAPage.toggleSection( e, { num: snum } );
 				} );
 			}
@@ -855,8 +855,8 @@ var CreateAPage = {
 			CreateAPage.textareaAddToolbar
 		);
 
-		if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
-			edit_textareas[0].focus();
+		if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[ 0 ].id === 'wpTextboxes0' ) ) {
+			edit_textareas[ 0 ].focus();
 		}
 
 		CreateAPage.multiEditSetupOptionalSections();
@@ -876,11 +876,11 @@ var CreateAPage = {
 			// throw in an extra 25px to make sure that we *really* cover all
 			// the editing buttons, the whole textarea *and* the buttons
 			height: $( '#cp-restricted' ).height() + 25,
-			//left: $( '#cp-restricted' ).offset().left, // more harmful than useful
+			// left: $( '#cp-restricted' ).offset().left, // more harmful than useful
 			opacity: 0.5,
 			overflow: 'hidden',
 			position: 'absolute',
-			//top: $( '#cp-restricted' ).offset().top, // more harmful than useful
+			// top: $( '#cp-restricted' ).offset().top, // more harmful than useful
 			width: $( '#cp-restricted' ).width(),
 			zIndex: 1000
 		} ).show();
@@ -1022,8 +1022,8 @@ var CreateAPage = {
 				CreateAPage.textareaAddToolbar
 			);
 
-			if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[0].id === 'wpTextboxes0' ) ) {
-				edit_textareas[0].focus();
+			if ( ( CreateAPage.redLinkMode === 'Yes' ) && ( edit_textareas[ 0 ].id === 'wpTextboxes0' ) ) {
+				edit_textareas[ 0 ].focus();
 			}
 
 			// Load WikiEditor for the newly created textarea elements, provided that
@@ -1063,7 +1063,7 @@ var CreateAPage = {
 			CreateAPage.submitEnabled = false;
 		} else if ( CreateAPage.noCanDo === true ) {
 			CreateAPage.warningPanel = $( '#dlg' ).dialog( {
-				//autoOpen: false,
+				// autoOpen: false,
 				draggable: false,
 				hide: 'slide',
 				modal: true,
@@ -1105,7 +1105,7 @@ var CreateAPage = {
 	getElementsBy: function( method, tag, root, apply ) {
 		tag = tag || '*';
 
-		root = ( root ) ? /*$( */root /*)*/ : null || document;
+		root = ( root ) ? /* $( */root /* )*/ : null || document;
 
 		if ( !root ) {
 			return [];
@@ -1115,11 +1115,11 @@ var CreateAPage = {
 			elements = root.getElementsByTagName( tag );
 
 		for ( var i = 0, len = elements.length; i < len; ++i ) {
-			if ( method( elements[i] ) ) {
-				nodes[nodes.length] = elements[i];
+			if ( method( elements[ i ] ) ) {
+				nodes[ nodes.length ] = elements[ i ];
 
 				if ( apply ) {
-					apply( elements[i] );
+					apply( elements[ i ] );
 				}
 			}
 		}
@@ -1164,7 +1164,7 @@ var CreateAPageInfobox = {
 			// Use HTML5 magic to do the file upload without having to resort to super
 			// heavy jQuery plugins or anything like that
 			var formData = new FormData();
-			formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[0] );
+			formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[ 0 ] );
 
 			var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
 				type: 'POST',
@@ -1281,7 +1281,7 @@ var CreateAPageInfobox = {
 	uploadEvent: function( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file', '' ) );
 		$( '#createpage_upload_file' + j ).change( function( e ) {
-			CreateAPageInfobox.upload( e, { 'num' : j } );
+			CreateAPageInfobox.upload( e, { 'num': j } );
 		} );
 	}
 };

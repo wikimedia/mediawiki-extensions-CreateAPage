@@ -10,12 +10,7 @@
 	},
 	"rules": {
 		"camelcase": "off",
-		"comma-dangle": "off",
-		"computed-property-spacing": "off",
 		"eqeqeq": "off",
-		"indent": "off",
-		"key-spacing": "off",
-		"keyword-spacing": "off",
 		"max-len": "off",
 		"no-alert": "off",
 		"no-eval": "off",
@@ -33,7 +28,6 @@
 		"one-var": "off",
 		"quote-props": "off",
 		"space-before-function-paren": "off",
-		"spaced-comment": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off"
 	}
