@@ -20,7 +20,7 @@
  * Click handlers are set up elsewhere in this huge file.
  */
 var CreateAPageCategoryTagCloud = {
-	add: function( category, num ) { // previously cloudAdd
+	add: function ( category, num ) { // previously cloudAdd
 		var category_text = document.getElementById( 'wpCategoryTextarea' );
 
 		if ( category_text.value === '' ) {
@@ -31,7 +31,7 @@ var CreateAPageCategoryTagCloud = {
 
 		var this_button = document.getElementById( 'cloud' + num );
 		if ( this_button ) {
-			this_button.onclick = function() {
+			this_button.onclick = function () {
 				CreateAPageCategoryTagCloud.remove( category, num );
 				return false;
 			};
@@ -40,7 +40,7 @@ var CreateAPageCategoryTagCloud = {
 		return false;
 	},
 
-	build: function( o ) { // previously cloudBuild
+	build: function ( o ) { // previously cloudBuild
 		var categories = o.value;
 		var new_text = '';
 
@@ -55,7 +55,7 @@ var CreateAPageCategoryTagCloud = {
 		return new_text;
 	},
 
-	inputAdd: function() { // previously cloudInputAdd
+	inputAdd: function () { // previously cloudInputAdd
 		var category_input = document.getElementById( 'wpCategoryInput' );
 		var category_text = document.getElementById( 'wpCategoryTextarea' );
 		var category = category_input.value;
@@ -101,7 +101,7 @@ var CreateAPageCategoryTagCloud = {
 		}
 	},
 
-	remove: function( category, num ) { // previously cloudRemove
+	remove: function ( category, num ) { // previously cloudRemove
 		var category_text = document.getElementById( 'wpCategoryTextarea' );
 		var this_pos = category_text.value.indexOf( decodeURIComponent( category ) );
 		if ( this_pos !== -1 ) {
@@ -109,7 +109,7 @@ var CreateAPageCategoryTagCloud = {
 				category_text.value.substr( this_pos + decodeURIComponent( category ).length );
 		}
 		var this_button = document.getElementById( 'cloud' + num );
-		this_button.onclick = function() {
+		this_button.onclick = function () {
 			CreateAPageCategoryTagCloud.add( category, num );
 			return false;
 		};
@@ -139,7 +139,7 @@ var CreateAPage = {
 	 * done via Special:CreatePage and if the answer is yes, takes them to
 	 * ?action=edit (normal edit mode).
 	 */
-	goToNormalEditMode: function() {
+	goToNormalEditMode: function () {
 		var title = document.getElementById( 'title' );
 		var errorMsg = document.getElementById( 'createpage_messenger' );
 
@@ -182,7 +182,7 @@ var CreateAPage = {
 		window.location = fixedArticlePath + title.value + '?action=edit';
 	},
 
-	callbackTitle: function( data ) {
+	callbackTitle: function ( data ) {
 		var res = '', helperButton;
 		document.getElementById( 'cp-title-check' ).innerHTML = '';
 		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
@@ -242,7 +242,7 @@ var CreateAPage = {
 	 * already exists. Edit <article name> or specify another title.") is shown
 	 * to the user.
 	 */
-	watchTitle: function() {
+	watchTitle: function () {
 		document.getElementById( 'cp-title-check' ).innerHTML =
 			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
 			'/CreateAPage/resources/images/progress_bar.gif" width="70" height="11" alt="' +
@@ -256,16 +256,16 @@ var CreateAPage = {
 				rs: 'axTitleExists',
 				title: document.getElementById( 'Createtitle' ).value
 			}
-		} ).done( function( data, textStatus, jqXHR ) {
+		} ).done( function ( data, textStatus, jqXHR ) {
 			CreateAPage.callbackTitle( data );
-		} ).fail( function() {
+		} ).fail( function () {
 			document.getElementById( 'cp-title-check' ).innerHTML = '';
 		} );
 	},
 
-	clearInput: function( o ) {
+	clearInput: function ( o ) {
 		var cDone = false;
-		$( '#wpInfoboxPar' + o.num ).on( 'focus', function() {
+		$( '#wpInfoboxPar' + o.num ).on( 'focus', function () {
 			var previewarea = $( '#createpagepreview' );
 			if ( !cDone && ( previewarea === null ) ) {
 				cDone = true;
@@ -277,7 +277,7 @@ var CreateAPage = {
 	/**
 	 * @param {jQuery.Event} e
 	 */
-	goToEdit: function( e ) {
+	goToEdit: function ( e ) {
 		e.preventDefault();
 		$.post(
 			mw.config.get( 'wgScript' ),
@@ -306,7 +306,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	goToLogin: function( e ) {
+	goToLogin: function ( e ) {
 		e.preventDefault();
 		var returnto = '';
 		if ( CreateAPage.redLinkMode === 'Yes' ) {
@@ -322,7 +322,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	hideWarningPanel: function( e ) {
+	hideWarningPanel: function ( e ) {
 		if ( CreateAPage.warningPanel ) {
 			CreateAPage.warningPanel.hide();
 		}
@@ -334,7 +334,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	showWarningPanel: function( e ) {
+	showWarningPanel: function ( e ) {
 		// e.preventDefault();
 		if ( document.getElementById( 'Createtitle' ).value !== '' ) {
 			if ( !CreateAPage.warningPanel ) {
@@ -366,7 +366,7 @@ var CreateAPage = {
 	/**
 	 * @param {jQuery.Event} e
 	 */
-	hideWarningLoginPanel: function( e ) {
+	hideWarningLoginPanel: function ( e ) {
 		if ( CreateAPage.warningLoginPanel ) {
 			CreateAPage.warningLoginPanel.hide();
 		}
@@ -375,7 +375,7 @@ var CreateAPage = {
 	/**
 	 * @param {jQuery.Event} e
 	 */
-	showWarningLoginPanel: function( e ) {
+	showWarningLoginPanel: function ( e ) {
 		e.preventDefault();
 		if ( document.getElementById( 'Createtitle' ).value !== '' ) {
 			if ( !CreateAPage.warningLoginPanel ) {
@@ -392,7 +392,7 @@ var CreateAPage = {
 		}
 	},
 
-	uploadCallback: function( oResponse ) {
+	uploadCallback: function ( oResponse ) {
 		var aResponse = []; // initialize it as an empty array so that JSHint can STFU
 		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
 			aResponse = eval( '(' + oResponse.responseText + ')' );
@@ -427,7 +427,7 @@ var CreateAPage = {
 					'createpage_login' + oResponse.argument
 				).text() +
 				'</span>';
-			$( '#createpage_login' + oResponse.argument ).click( function( e ) {
+			$( '#createpage_login' + oResponse.argument ).click( function ( e ) {
 				CreateAPage.showWarningLoginPanel( e );
 			} );
 		} else {
@@ -440,7 +440,7 @@ var CreateAPage = {
 		document.getElementById( 'createpage_image_cancel_section' + oResponse.argument ).style.display = 'none';
 	},
 
-	failureCallback: function( response ) {
+	failureCallback: function ( response ) {
 		response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text_section' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress_section' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
@@ -449,7 +449,7 @@ var CreateAPage = {
 		document.getElementById( 'createpage_image_cancel_section' + response.argument ).style.display = 'none';
 	},
 
-	restoreSection: function( section, text ) {
+	restoreSection: function ( section, text ) {
 		var sectionContent = CreateAPage.getElementsBy(
 			CreateAPage.optionalContentTest, '', section
 		);
@@ -460,7 +460,7 @@ var CreateAPage = {
 		return text;
 	},
 
-	unuseSection: function( section, text ) {
+	unuseSection: function ( section, text ) {
 		var sectionContent = CreateAPage.getElementsBy(
 			CreateAPage.optionalContentTest, '', section
 		);
@@ -484,7 +484,7 @@ var CreateAPage = {
 		return text + ivalue;
 	},
 
-	toggleSection: function( e, o ) {
+	toggleSection: function ( e, o ) {
 		var section = document.getElementById( 'createpage_section_' + o.num );
 		var input = document.getElementById( 'wpOptionalInput' + o.num );
 		var optionals = document.getElementById( 'wpOptionals' );
@@ -495,7 +495,7 @@ var CreateAPage = {
 		}
 	},
 
-	upload: function( e, o ) {
+	upload: function ( e, o ) {
 		e.preventDefault();
 
 		$( '#createpage_upload_progress_section' + o.num ).show().html( $.createSpinner( 'createpage' ) );
@@ -524,7 +524,7 @@ var CreateAPage = {
 		document.getElementById( 'createpage_image_cancel_section' + o.num ).style.display = '';
 		document.getElementById( 'createpage_image_text_section' + o.num ).style.display = 'none';
 
-		$( '#createpage_image_cancel_section' + o.num ).click( function( e ) {
+		$( '#createpage_image_cancel_section' + o.num ).click( function ( e ) {
 			sent_request.abort();
 		} );
 
@@ -539,7 +539,7 @@ var CreateAPage = {
 		neoInput.setAttribute( 'tabindex', '-1' );
 
 		thisContainer.appendChild( neoInput );
-		$( '#createpage_upload_file_section' + o.num ).change( function( e ) {
+		$( '#createpage_upload_file_section' + o.num ).change( function ( e ) {
 			CreateAPage.upload( e, { num: o.num } );
 		} );
 
@@ -553,7 +553,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	buildWarningPanel: function( e ) {
+	buildWarningPanel: function ( e ) {
 		// No longer exists in DOM, I removed it from templates-list.tmpl.php b/c
 		// we should be building the entire dialog via jQuery anyway
 		// var editwarn = document.getElementById( 'createpage_advanced_warning' );
@@ -594,7 +594,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	buildWarningLoginPanel: function( e ) {
+	buildWarningLoginPanel: function ( e ) {
 		var editwarn_copy = document.createElement( 'div' );
 		editwarn_copy.id = 'createpage_warning_copy2';
 		editwarn_copy.innerHTML = mw.msg( 'createpage-login-warning' );
@@ -627,8 +627,8 @@ var CreateAPage = {
 		} );
 	},
 
-	onclickCategoryFn: function( cat, id ) {
-		return function() {
+	onclickCategoryFn: function ( cat, id ) {
+		return function () {
 			CreateAPageCategoryTagCloud.remove( encodeURIComponent( cat ), id );
 			return false;
 		};
@@ -639,7 +639,7 @@ var CreateAPage = {
 	 *
 	 * @param e Event
 	 */
-	clearTitleMessage: function( e ) {
+	clearTitleMessage: function ( e ) {
 		e.preventDefault();
 		document.getElementById( 'cp-title-check' ).innerHTML = '';
 	},
@@ -651,7 +651,7 @@ var CreateAPage = {
 	 * @param el Element HTML element to test
 	 * @return Boolean: true if the element's ID matches, else false
 	 */
-	uploadTest: function( el ) {
+	uploadTest: function ( el ) {
 		if ( el.id.match( 'createpage_upload_file_section' ) ) {
 			return true;
 		} else {
@@ -666,7 +666,7 @@ var CreateAPage = {
 	 * @param el Element HTML element to test
 	 * @return Boolean: true if the element's ID matches, else false
 	 */
-	editTextareaTest: function( el ) {
+	editTextareaTest: function ( el ) {
 		if ( el.id.match( 'wpTextboxes' ) && ( el.style.display !== 'none' ) ) {
 			return true;
 		} else {
@@ -681,7 +681,7 @@ var CreateAPage = {
 	 * @param el Element HTML element to test
 	 * @return Boolean: true if the element's ID matches, else false
 	 */
-	optionalSectionTest: function( el ) {
+	optionalSectionTest: function ( el ) {
 		if ( el.id.match( 'wpOptionalInput' ) && ( el.style.display !== 'none' ) ) {
 			return true;
 		} else {
@@ -695,7 +695,7 @@ var CreateAPage = {
 	 * @param el Element HTML element to test
 	 * @return Boolean: true if the element's ID matches, else false
 	 */
-	optionalContentTest: function( el ) {
+	optionalContentTest: function ( el ) {
 		if ( el.id.match( 'wpTextboxes' ) ) {
 			return true;
 		} else {
@@ -703,26 +703,26 @@ var CreateAPage = {
 		}
 	},
 
-	uploadEvent: function( el ) {
+	uploadEvent: function ( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file_section', '' ) );
-		$( '#createpage_upload_file_section' + j ).change( function( e ) {
+		$( '#createpage_upload_file_section' + j ).change( function ( e ) {
 			CreateAPage.upload( e, { num: j } );
 		} );
 	},
 
 	// @todo FIXME: rename to a more descriptive name now that old toolbar stuff is gone
-	textareaAddToolbar: function( el ) {
+	textareaAddToolbar: function ( el ) {
 		var el_id = parseInt( el.id.replace( 'wpTextboxes', '' ) );
 
-		$( '#wpTextIncrease' + el_id ).click( function( e ) {
+		$( '#wpTextIncrease' + el_id ).click( function ( e ) {
 			CreateAPage.resizeThisTextarea( e, { textareaId: el_id, numRows: 1 } );
 		} );
-		$( '#wpTextDecrease' + el_id ).click( function( e ) {
+		$( '#wpTextDecrease' + el_id ).click( function ( e ) {
 			CreateAPage.resizeThisTextarea( e, { textareaId: el_id, numRows: -1 } );
 		} );
 	},
 
-	checkCategoryCloud: function() {
+	checkCategoryCloud: function () {
 		var cat_textarea = document.getElementById( 'wpCategoryTextarea' );
 		if ( !cat_textarea ) {
 			return;
@@ -794,7 +794,7 @@ var CreateAPage = {
 	 * @param o Object Object containing a textareaId (numeric ID of a #wpTextboxes<num>
 	 *   element) and numRows (amount of rows to increase or decrease)
 	 */
-	resizeThisTextarea: function( e, o ) {
+	resizeThisTextarea: function ( e, o ) {
 		e.preventDefault();
 		var r_textarea = $( '#wpTextboxes' + o.textareaId );
 
@@ -806,7 +806,7 @@ var CreateAPage = {
 		}
 	},
 
-	multiEditSetupOptionalSections: function() {
+	multiEditSetupOptionalSections: function () {
 		var snum = 0;
 		if ( document.getElementById( 'createpage_optionals_content' ) ) {
 			var optionals = CreateAPage.getElementsBy(
@@ -823,14 +823,14 @@ var CreateAPage = {
 						optionalsElements.value
 					);
 				}
-				$( '#' + optionals[ i ] ).change( function( e ) {
+				$( '#' + optionals[ i ] ).change( function ( e ) {
 					CreateAPage.toggleSection( e, { num: snum } );
 				} );
 			}
 		}
 	},
 
-	initialRound: function() {
+	initialRound: function () {
 		document.getElementById( 'Createtitle' ).setAttribute( 'autocomplete', 'off' );
 		if ( ( CreateAPage.previewMode === 'No' ) && ( CreateAPage.redLinkMode === 'No' ) ) {
 			CreateAPage.contentOverlay();
@@ -868,7 +868,7 @@ var CreateAPage = {
 	 * save/preview/view changes buttons until the user supplies a title that
 	 * does not exist yet on the wiki.
 	 */
-	contentOverlay: function() {
+	contentOverlay: function () {
 		// Based on the MIT-licensed jquery.overlay plugin by Tom McFarlin
 		CreateAPage.Overlay = $( '#createpageoverlay' ).css( {
 			background: '#000',
@@ -886,13 +886,13 @@ var CreateAPage = {
 		} ).show();
 
 		var helperButton = document.getElementById( 'wpRunInitialCheck' );
-		$( '#wpRunInitialCheck' ).click( function() {
+		$( '#wpRunInitialCheck' ).click( function () {
 			CreateAPage.watchTitle();
 		} );
 		helperButton.style.display = '';
 	},
 
-	appendHeight: function( elem_height, number ) {
+	appendHeight: function ( elem_height, number ) {
 		var x_fixed_height = elem_height.replace( 'px', '' );
 		x_fixed_height = parseFloat( x_fixed_height ) + number;
 		x_fixed_height = x_fixed_height.toString() + 'px';
@@ -905,7 +905,7 @@ var CreateAPage = {
 	 *
 	 * @param {number} [number] Amount of pixels to resize
 	 */
-	resizeOverlay: function( number ) {
+	resizeOverlay: function ( number ) {
 		var cont_elem = $( '#cp-restricted' );
 		var fixed_height;
 		var fixed_width;
@@ -926,7 +926,7 @@ var CreateAPage = {
 	/**
 	 * Initialize the createplate switcher at the top of the Special:CreatePage page.
 	 */
-	initializeMultiEdit: function() {
+	initializeMultiEdit: function () {
 		$( 'div[id^="cp-template-"]' ).click( function ( e ) {
 			CreateAPage.switchTemplate( e, $( this ).attr( 'id' ) );
 		} );
@@ -946,7 +946,7 @@ var CreateAPage = {
 	 * @param {String} [elementId] Name of the createplate template (i.e.
 	 * cp-template-Name) for a createplate named "Name"
 	 */
-	switchTemplate: function( e, elementId ) {
+	switchTemplate: function ( e, elementId ) {
 		CreateAPage.myId = elementId;
 		e.preventDefault();
 
@@ -1054,7 +1054,7 @@ var CreateAPage = {
 	 *
 	 * @param {jQuery.Event} e
 	 */
-	checkExistingTitle: function( e ) {
+	checkExistingTitle: function ( e ) {
 		if ( document.getElementById( 'Createtitle' ).value === '' ) {
 			e.preventDefault();
 			document.getElementById( 'cp-title-check' ).innerHTML = '<span style="color: red;">' +
@@ -1091,7 +1091,7 @@ var CreateAPage = {
 	/**
 	 * @param {jQuery.Event} e
 	 */
-	enableSubmit: function( e ) {
+	enableSubmit: function ( e ) {
 		CreateAPage.submitEnabled = true;
 	},
 
@@ -1102,7 +1102,7 @@ var CreateAPage = {
 	 * Code licensed under the BSD License:
 	 * http://developer.yahoo.net/yui/license.txt
 	 */
-	getElementsBy: function( method, tag, root, apply ) {
+	getElementsBy: function ( method, tag, root, apply ) {
 		tag = tag || '*';
 
 		root = ( root ) ? /* $( */root /* )*/ : null || document;
@@ -1140,7 +1140,7 @@ $( function () {
  * Class for uploading images from an infobox on the Special:CreatePage page.
  */
 var CreateAPageInfobox = {
-	failureCallback: function( response ) {
+	failureCallback: function ( response ) {
 		response = JSON.parse( response );
 		document.getElementById( 'createpage_image_text' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
 		document.getElementById( 'createpage_upload_progress' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
@@ -1153,7 +1153,7 @@ var CreateAPageInfobox = {
 	 * @param {jQuery.Event} e
 	 * @param {Object} o Object containing the number ('num') of the upload field
 	 */
-	upload: function( e, o ) {
+	upload: function ( e, o ) {
 		var n = o.num;
 		var oForm = document.getElementById( 'createpageform' );
 		if ( oForm ) {
@@ -1174,10 +1174,10 @@ var CreateAPageInfobox = {
 				cache: false,
 				processData: false,
 				timeout: 60000
-			} ).done( function( response ) {
+			} ).done( function ( response ) {
 				$.removeSpinner( 'createpage' );
 				CreateAPageInfobox.uploadCallback( response );
-			} ).fail( function( code, result ) {
+			} ).fail( function ( code, result ) {
 				$.removeSpinner( 'createpage' );
 				CreateAPageInfobox.failureCallback( result );
 			} );
@@ -1185,7 +1185,7 @@ var CreateAPageInfobox = {
 			document.getElementById( 'createpage_image_cancel' + o.num ).style.display = '';
 			document.getElementById( 'createpage_image_text' + o.num ).style.display = 'none';
 
-			$( '#createpage_image_cancel' + o.num ).click( function( e ) {
+			$( '#createpage_image_cancel' + o.num ).click( function ( e ) {
 				sent_request.abort();
 			} );
 
@@ -1200,7 +1200,7 @@ var CreateAPageInfobox = {
 			neoInput.setAttribute( 'tabindex', '-1' );
 
 			thisContainer.appendChild( neoInput );
-			$( '#createpage_upload_file' + o.num ).change( function( e ) {
+			$( '#createpage_upload_file' + o.num ).change( function ( e ) {
 				CreateAPageInfobox.upload( e, { num: o.num } );
 			} );
 
@@ -1208,7 +1208,7 @@ var CreateAPageInfobox = {
 		}
 	},
 
-	uploadCallback: function( response ) {
+	uploadCallback: function ( response ) {
 		response = JSON.parse( response );
 		var ProgressBar = $( '#createpage_upload_progress' + response.num );
 
@@ -1257,11 +1257,11 @@ var CreateAPageInfobox = {
 	 * @param {HTMLElement} el
 	 * @return {boolean} True if it is, otherwise false
 	 */
-	inputTest: function( el ) {
+	inputTest: function ( el ) {
 		return !!el.id.match( 'wpInfoboxPar' );
 	},
 
-	inputEvent: function( el ) {
+	inputEvent: function ( el ) {
 		var j = parseInt( el.id.replace( 'wpInfoboxPar', '' ) );
 		if ( $( '#wpInfoboxPar' + j ).length > 0 ) {
 			CreateAPage.clearInput( { num: j } );
@@ -1274,20 +1274,20 @@ var CreateAPageInfobox = {
 	 * @param {HTMLElement} el
 	 * @return {boolean} True if it is, otherwise false
 	 */
-	uploadTest: function( el ) {
+	uploadTest: function ( el ) {
 		return !!el.id.match( 'createpage_upload_file' );
 	},
 
-	uploadEvent: function( el ) {
+	uploadEvent: function ( el ) {
 		var j = parseInt( el.id.replace( 'createpage_upload_file', '' ) );
-		$( '#createpage_upload_file' + j ).change( function( e ) {
+		$( '#createpage_upload_file' + j ).change( function ( e ) {
 			CreateAPageInfobox.upload( e, { num: j } );
 		} );
 	}
 };
 
 // Initialize stuff when the DOM is ready
-$( function() {
+$( function () {
 	// This creates the overlay over the editor and effectively blocks the user
 	// from typing text on the textarea and thus forces them to supply the page
 	// title first.
@@ -1296,7 +1296,7 @@ $( function() {
 
 	CreateAPage.initializeMultiEdit();
 
-	$( '#createpageform' ).submit( function( e ) {
+	$( '#createpageform' ).submit( function ( e ) {
 		CreateAPage.checkExistingTitle( e );
 	} );
 
@@ -1368,13 +1368,13 @@ $( function() {
 	$( '#Createtitle' ).change( CreateAPage.watchTitle );
 	// Clicking on the "Article Title" input clears any "This article already
 	// exists" messages
-	$( '#Createtitle' ).on( 'focus', function( e ) {
+	$( '#Createtitle' ).on( 'focus', function ( e ) {
 		CreateAPage.clearTitleMessage( e );
 	} );
 
 	// Clicking on the "Advanced Edit" button shows a modal dialog asking the
 	// user, "Switching editing modes may break page formatting, do you want to continue?"
-	$( '#wpAdvancedEdit' ).on( 'click', function( e ) {
+	$( '#wpAdvancedEdit' ).on( 'click', function ( e ) {
 		// Prevent default action, which would be to follow the link to index.php
 		// (which would then likely take the user to the wiki's Main Page)
 		e.preventDefault();
@@ -1393,7 +1393,7 @@ $( function() {
 	// Moved from infobox.tmpl.php on 8 December 2019
 	var ourInfoboxElement = $( 'input[id^="wpInfoboxPar"]' );
 	if ( ourInfoboxElement.length > 0 ) {
-		$( function( e ) {
+		$( function ( e ) {
 			CreateAPage.clearInput( { num: ourInfoboxElement.attr( 'id' ).replace( /wpInfoboxPar/, '' ) } );
 		} );
 	}
