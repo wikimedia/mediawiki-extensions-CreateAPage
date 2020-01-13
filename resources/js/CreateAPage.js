@@ -1035,7 +1035,7 @@ var CreateAPage = {
 
 			var edittools_div = document.getElementById( 'createpage_editTools' );
 			if ( edittools_div ) {
-				if ( CreateAPage.myId != 'cp-template-Blank' ) {
+				if ( CreateAPage.myId !== 'cp-template-Blank' ) {
 					edittools_div.style.display = 'none';
 				} else {
 					edittools_div.style.display = '';
