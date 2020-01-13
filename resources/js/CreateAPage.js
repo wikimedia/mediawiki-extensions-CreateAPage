@@ -801,8 +801,7 @@ var CreateAPage = {
 		if (
 			!( ( r_textarea.prop( 'rows' ) < 4 ) && ( o.numRows < 0 ) ) &&
 			!( ( r_textarea.prop( 'rows' ) > 10 ) && ( o.numRows > 0 ) )
-		)
-		{
+		) {
 			r_textarea.prop( 'rows', r_textarea.prop( 'rows' ) + o.numRows );
 		}
 	},
@@ -1084,8 +1083,7 @@ var CreateAPage = {
 		if (
 			( CreateAPage.submitEnabled !== true ) ||
 			( CreateAPage.Overlay && ( !$( '#createpageoverlay' ).is( ':hidden' ) ) )
-		)
-		{
+		) {
 			e.preventDefault();
 		}
 	},

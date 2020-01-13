@@ -9,7 +9,6 @@
 		"OO": false
 	},
 	"rules": {
-		"brace-style": "off",
 		"camelcase": "off",
 		"comma-dangle": "off",
 		"computed-property-spacing": "off",
