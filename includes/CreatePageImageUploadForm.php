@@ -300,7 +300,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		 */
 		$nt = $this->getTitle();
 		$finalExt = $this->mFinalExtension;
-		if ( is_null( $nt ) ) {
+		if ( $nt === null ) {
 			$filtered = wfBaseName( $this->mDesiredDestName ? $this->mDesiredDestName . '.' . $finalExt : $this->mStoredDestName );
 			/**
 			 * Filter out illegal characters, and try to make a legible name
