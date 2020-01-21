@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"EugeneZelenko"
+			"EugeneZelenko",
+			"Renessaince"
 		]
 	},
-	"createpage": "Стварыць старонку",
-	"createpage-categories": "Катэгорыі"
+	"createpage-here": "тут",
+	"createpage": "Стварыць новы артыкул",
+	"createpage-categories": "Катэгорыі",
+	"createpage-unsaved-changes": "Незахаваныя зьмены",
+	"createpage-unsaved-changes-details": "Вы маеце незахаваныя зьмены. Націсканьне OK прывядзе да іхняй страты.",
+	"tog-createpage-redlinks": "Выкарыстоўваць [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] пры пераходзе па нядзейных спасылках"
 }
