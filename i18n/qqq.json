@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Robby",
-			"Umherirrender"
+			"Umherirrender",
+			"BaRaN6161 TURK"
 		]
 	},
 	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.\n{{Identical|Here}}",
@@ -41,7 +42,7 @@
 	"createpage-upload-aborted": "Error message shown on Special:CreatePage when the user tries to upload an image but the image upload fails for whatever reason.",
 	"createpage-initial-run": "Button text; clicking on this button dismisses the overlay and enables the editor on Special:CreatePage (and also on regular ?action=edit links when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration).",
 	"createpage-login-required": "Error message shown via JavaScript to anon users who try to upload images via the Special:CreatePage interface.\n\nParameters:\n* $1 is the URL to the login page with the proper returnto URL parameter set\n* $2 is an element ID, either <code>createpage_login_infobox&lt;number&gt;</code> or <code>createpage_login&lt;number&gt;</code; the JavaScript code sets up an event handler for that element, so when the user clicks on it, they'll be presented with an appropriate warning instead of directly being taken to the login page (which could result in them losing the data they've entered when they attempted to create a page)",
-	"createpage-please-wait": "Used as an <code>alt</code> text on a progress bar image element; realistically only users with a super-slow Internet connection will ever see this",
+	"createpage-please-wait": "Used as an <code>alt</code> text on a progress bar image element; realistically only users with a super-slow Internet connection will ever see this.\n{{Identical|Please wait}}",
 	"createpage-upload-directory-read-only": "Error message shown via JavaScript if for some reason CreateAPage is installed and a user tries to upload an image via the upload form on Special:CreatePage, but the upload directory is not writable by the webserver",
 	"createpage-about-info": "Text shown on Special:CreatePage when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration and a user follows a red link, which then takes them to the Special:CreatePage-like editor, which however is not technically Special:CreatePage, it just looks literally like Special:CreatePage.",
 	"createpage-advanced-text": "$1 is {{msg-mw|createpage-advanced-edit}}",

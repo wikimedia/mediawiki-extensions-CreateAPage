@@ -40,7 +40,7 @@
 	"createpage-upload-aborted": "Resim ekleme iptal edildi",
 	"createpage-initial-run": "Düzenlemeye devam et",
 	"createpage-login-required": "Resim yüklemek için <a id=\"$2\" href=\"$1\">giriş yapmanız</a> gerekir",
-	"createpage-please-wait": "Lütfen bekleyin...",
+	"createpage-please-wait": "Lütfen bekleyin…",
 	"createpage-upload-directory-read-only": "Yükleme dizini web sunucusu tarafından yazılamaz",
 	"createpage-about-info": "Bu basitleştirilmiş editördür. Daha fazla bilgi için [[s:Help:CreatePage|ShoutWiki Merkezi]] bölümüne gidin.",
 	"createpage-advanced-text": "$1'de kullanabilirsiniz.",
