@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"許瑜真 (Yuchen Hsu/KaurJmeb)"
+			"許瑜真 (Yuchen Hsu/KaurJmeb)",
+			"铁桶"
 		]
 	},
-	"createpage": "发表新文章",
+	"createpage": "创建新条目",
 	"createpage-title": "发表新文章",
 	"createpage-title-caption": "文章标题",
 	"createpage-categories": "分类："
