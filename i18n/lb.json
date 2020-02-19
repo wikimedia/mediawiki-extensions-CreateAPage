@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Soued031"
 		]
 	},
 	"createpage-here": "hei",
@@ -19,7 +20,7 @@
 	"createpage-addcategory": "Kategorie derbäisetzen",
 	"createpage-top-of-page": "Uewen op der Säit",
 	"createpage-insert-image": "Bild drasetzen",
-	"createpage-please-wait": "Waart w.e.g. ...",
+	"createpage-please-wait": "Waart wgl. ...",
 	"createpage-save": "Späicheren",
 	"createpage-unsaved-changes": "Net-gespäichert Ännerungen"
 }
