@@ -32,13 +32,15 @@ class CreateAPageHooks {
 	 *   false after rendering the CreateAPage form
 	 */
 	public static function onCustomEditor( $article, $user ) {
-		global $wgRequest, $wgContentNamespaces, $wgCreatePageCoverRedLinks;
+		global $wgContentNamespaces, $wgCreatePageCoverRedLinks;
 
 		if ( !$wgCreatePageCoverRedLinks ) {
 			return true;
 		}
 
-		$namespace = $article->getTitle()->getNamespace();
+		$request = $article->getContext()->getRequest();
+		$title = $article->getTitle();
+		$namespace = $title->getNamespace();
 		if (
 			( $user->getOption( 'createpage-redlinks', 1 ) == 0 ) ||
 			!in_array( $namespace, $wgContentNamespaces )
@@ -48,16 +50,16 @@ class CreateAPageHooks {
 
 		// nomulti should always bypass that (this is for AdvancedEdit mode)
 		if (
-			$article->getTitle()->exists() ||
-			( $wgRequest->getVal( 'editmode' ) == 'nomulti' )
+			$title->exists() ||
+			( $request->getVal( 'editmode' ) == 'nomulti' )
 		) {
 			return true;
 		} else {
-			if ( $wgRequest->getCheck( 'wpPreview' ) ) {
+			if ( $request->getCheck( 'wpPreview' ) ) {
 				return true;
 			}
 			$mainForm = new CreatePageCreateplateForm();
-			$mainForm->mTitle = $wgRequest->getVal( 'title' );
+			$mainForm->mTitle = $request->getVal( 'title' );
 			$mainForm->mRedLinked = true;
 			$mainForm->showForm( '' );
 			$mainForm->showCreateplate( true );
