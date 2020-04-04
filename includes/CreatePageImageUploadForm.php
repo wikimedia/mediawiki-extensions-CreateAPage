@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class CreatePageImageUploadForm extends UploadFromFile {
 	/**
 	 * @var WebRequestUpload
@@ -310,7 +312,13 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$resultDetails = [ 'filtered' => $filtered ];
 			return self::ILLEGAL_FILENAME;
 		}
-		$this->mLocalFile = wfLocalFile( $nt );
+		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
+			// MediaWiki 1.34+
+			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+		} else {
+			$repoGroup = RepoGroup::singleton();
+		}
+		$this->mLocalFile = $repoGroup->getLocalRepo()->newFile( $nt );
 		$this->mDestName = $this->mLocalFile->getName();
 
 		/**
@@ -329,7 +337,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		// here starts the interesting part...
 		// we overwrite mDestName and give it a new twist
 		$timestamp = '';
-		$img_found = wfFindFile( $this->mDestName );
+		$img_found = $repoGroup->findFile( $this->mDestName );
 		if ( $img_found ) {
 			// ehhh...
 			// we'll do it hard way then...
@@ -347,14 +355,13 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$tmpDestname = $file_ext;
 			$tempName = $tmpDestname . $tmpCount . '.' . $this->mFinalExtension;
 			$timestamp = $tempName;
-			$img_found = wfFindFile( $tempname );
+			$img_found = $repoGroup->findFile( $tempname );
 		}
 
 		if ( $tmpCount > 0 ) {
-			wfLocalFile( $nt );
 			$tempName = preg_replace( "/[^" . Title::legalChars() . "]|:/", '-', $tempName );
 			$nt = Title::makeTitleSafe( NS_FILE, $tempName );
-			$this->mLocalFile = wfLocalFile( $nt );
+			$this->mLocalFile = $repoGroup->getLocalRepo()->newFile( $nt );
 			$this->mDestName = $this->mLocalFile->getName();
 			$this->mDesiredDestName = $this->mStoredDestName . $tmpCount . '.' . $this->mFinalExtension;
 		} else { // append the extension anyway
@@ -444,9 +451,10 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		}
 
 		/* Check shared conflicts: if the local file does not exist, but
-		 * wfFindFile finds a file, it exists in a shared repository.
+		 * RepoGroup::findFile finds a file, it exists in a shared repository.
 		 */
-		$file = wfFindFile( $this->getTitle(), [ 'latest' => true ] );
+		$file = MediaWikiServices::getInstance()->getRepoGroup()
+			->findFile( $this->getTitle(), [ 'latest' => true ] );
 		if ( $file && !$user->isAllowed( 'reupload-shared' ) ) {
 			return [ 'fileexists-shared-forbidden', $file->getName() ];
 		}
