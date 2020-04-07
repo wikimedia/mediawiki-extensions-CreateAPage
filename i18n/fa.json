@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"createpage": "ایجاد مقالۀ جدید",
 	"createpage-title": "ایجاد مقالۀ جدید",
 	"createpage-title-caption": "نام",
