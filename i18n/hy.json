@@ -5,6 +5,11 @@
 		]
 	},
 	"createpage-hide": "Թաքցնել",
+	"createpage-infobox-legend": "Տեղեկաքարտ",
 	"createpage-yes": "Այո",
-	"createpage-no": "Ոչ"
+	"createpage-no": "Ոչ",
+	"createpage-categories": "Կատեգորիաներ",
+	"createpage-addcategory": "Ավելացնել կատեգորիա",
+	"createpage-insert-image": "Տեղադրել պատկեր",
+	"createpage-save": "Հիշել"
 }
