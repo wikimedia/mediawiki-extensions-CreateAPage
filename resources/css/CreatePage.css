@@ -330,6 +330,10 @@ legend {
 	cursor: pointer;
 }
 
+#templateThumbs .templateFrame > div > label {
+	cursor: pointer;
+}
+
 #createpageform div.templateFrameSelected {
 	background-color: #e7e7e7;
 	color: #000;
