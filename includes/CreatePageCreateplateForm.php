@@ -408,7 +408,7 @@ class CreatePageCreateplateForm {
 	 *                page
 	 */
 	public function submitForm() {
-		global $wgOut, $wgRequest, $wgServer, $wgScript, $wgScriptPath, $wgUser;
+		global $wgOut, $wgRequest, $wgServer, $wgScript, $wgUser;
 
 		$mainform = new CreatePageCreateplateForm();
 

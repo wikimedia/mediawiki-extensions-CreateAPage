@@ -12,10 +12,8 @@
 		<exclude name="MediaWiki.Files.ClassMatchesFilename.NotMatch" />
 		<exclude name="MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName" />
 		<exclude name="MediaWiki.NamingConventions.PrefixedGlobalFunctions.wfPrefix" />
-		<exclude name="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgTitle" />
 		<exclude name="MediaWiki.Usage.ForbiddenFunctions.extract" />
 		<exclude name="MediaWiki.Usage.SuperGlobalsUsage.SuperGlobals" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgScriptPath" />
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment" />
 		<exclude name="Generic.Files.LineLength.TooLong" />
 		<exclude name="Generic.PHP.NoSilencedErrors.Discouraged" />

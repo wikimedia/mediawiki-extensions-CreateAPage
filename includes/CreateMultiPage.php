@@ -34,7 +34,7 @@ class CreateMultiPage {
 
 	// @todo FIXME: remove $ew parameter, it appears to be always '?' and serves no purpose whatsoever
 	public static function multiEditParse( $rows, $cols, $ew, $sourceText, $optional_sections = null ) {
-		global $wgTitle, $wgExtensionAssetsPath;
+		global $wgExtensionAssetsPath;
 		global $wgMultiEditTag;
 		global $wgMultiEditPageSimpleTags, $wgMultiEditPageTags;
 
@@ -408,7 +408,6 @@ class CreateMultiPage {
 			'rows' => $rows,
 			'ew' => $ew,
 			'is_section' => $is_section,
-			'title' => $wgTitle, // @todo FIXME: I see no reason for this var to exist here
 			'imgpath' => $wgExtensionAssetsPath . '/CreateAPage/resources/images/',
 			'optional_sections' => $optional_sections
 		] );
