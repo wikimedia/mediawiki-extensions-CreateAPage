@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ameisenigel",
 			"WikiBayer"
 		]
 	},
@@ -22,6 +23,7 @@
 	"createpage-article-exists2": "oder gib einen neuen Titel an.",
 	"createpage-advanced-warning": "Der Wechsel des Editors kann die Formatierung der Seite stören - trotzdem fortfahren?",
 	"createpage-login-warning": "Wenn du dich jetzt anmeldest, verlierst du möglicherweise deinen noch nicht gespeicherten Text. Trotzdem fortfahren?",
+	"createpage-infobox-legend": "Infobox",
 	"createpage-yes": "Ja",
 	"createpage-no": "Nein",
 	"createpage-categories": "Kategorien:",
@@ -35,7 +37,7 @@
 	"createpage-insert-image": "Bild einfügen",
 	"createpage-upload-aborted": "Einfügung des Bildes abgebrochen",
 	"createpage-initial-run": "Zur Bearbeitung",
-	"createpage-login-required": "Du musst dich",
+	"createpage-login-required": "Du musst dich <a id=\"$2\" href=\"$1\">anmelden</a>, um Bilder hochzuladen",
 	"createpage-please-wait": "Bitte warten...",
 	"createpage-upload-directory-read-only": "Das Upload-Verzeichnis konnte nicht vom Webserver beschrieben werden",
 	"createpage-about-info": "Dies ist der vereinfachte Editor. Weitere Informationen darüber findest du im [[w:c:de:Hilfe:Createpage|hier]].",
@@ -43,5 +45,7 @@
 	"createpage-advanced-edit": "erweiterter Editor",
 	"createpage-optionals-text": "Füge optionale Abschnitte hinzu",
 	"createpage-save": "Speichern",
-	"createpage-unsaved-changes": "Ungespeicherte Änderungen"
+	"createpage-must-specify-title": "Bitte gib zuerst einen Titel an!",
+	"createpage-unsaved-changes": "Ungespeicherte Änderungen",
+	"createpage-unsaved-changes-details": "Du hast ungespeicherte Änderungen. Durch Klicken auf OK werden diese verworfen."
 }
