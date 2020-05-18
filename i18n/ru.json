@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Iniquity",
 			"Lockal",
 			"Александр Сигачёв"
 		]
 	},
 	"createpage-hide": "Скрыть",
 	"createpage-show": "Показать",
-	"createpage": "Создать страницу",
+	"createpage": "Создать новую статью",
 	"createpage-infobox-legend": "Карточка",
 	"createpage-yes": "Да",
 	"createpage-no": "Нет",
