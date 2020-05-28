@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bennylin"
+			"Bennylin",
+			"Diki Ananta"
 		]
 	},
-	"createpage": "Buat halaman"
+	"createpage": "Buat artikel baru"
 }
