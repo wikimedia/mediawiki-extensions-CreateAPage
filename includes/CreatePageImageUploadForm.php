@@ -312,12 +312,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$resultDetails = [ 'filtered' => $filtered ];
 			return self::ILLEGAL_FILENAME;
 		}
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
-		} else {
-			$repoGroup = RepoGroup::singleton();
-		}
+		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 		$this->mLocalFile = $repoGroup->getLocalRepo()->newFile( $nt );
 		$this->mDestName = $this->mLocalFile->getName();
 

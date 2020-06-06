@@ -79,13 +79,8 @@ function axMultiEditImageUpload() {
 
 	if ( $uploadedfile['error'] == 0 ) {
 		if ( $uploadedfile['msg'] !== 'cp_no_uploaded_file' ) {
-			if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-				// MediaWiki 1.34+
-				$imageobj = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
-					->newFile( $uploadedfile['timestamp'] );
-			} else {
-				$imageobj = wfLocalFile( $uploadedfile['timestamp'] );
-			}
+			$imageobj = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+				->newFile( $uploadedfile['timestamp'] );
 			$imageurl = $imageobj->createThumb( 60 );
 		} else {
 			// Crappy hack, but whatever, not uploading a file is entirely valid
