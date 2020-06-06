@@ -37,7 +37,10 @@ $wgExtensionMessagesFiles['CreatePageAliases'] = __DIR__ . '/CreatePage.alias.ph
 
 $wgAutoloadClasses['CreateAPageUtils'] = __DIR__ . '/includes/CreateAPageUtils.php';
 $wgAutoloadClasses['CreateAPageHooks'] = __DIR__ . '/includes/CreateAPageHooks.php';
-$wgAutoloadClasses['EasyTemplate'] = __DIR__ . '/includes/EasyTemplate.php'; // @todo FIXME: kill templates and remove this class
+
+// @todo FIXME: kill templates and remove this class
+$wgAutoloadClasses['EasyTemplate'] = __DIR__ . '/includes/EasyTemplate.php';
+
 $wgAutoloadClasses['CAP_TagCloud'] = __DIR__ . '/includes/CAP_TagCloud.php';
 $wgAutoloadClasses['CreateMultiPage'] = __DIR__ . '/includes/CreateMultiPage.php';
 $wgAutoloadClasses['CreatePage'] = __DIR__ . '/includes/specials/SpecialCreatePage.body.php';

@@ -29,11 +29,16 @@ class CAP_TagCloud {
 				'LIMIT' => $this->limit
 			]
 		);
-		Wikimedia\suppressWarnings(); // prevent PHP from bitching about strtotime()
+
+		// prevent PHP from bitching about strtotime()
+		Wikimedia\suppressWarnings();
+
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cl_to );
 			$tag_text = $tag_name->getText();
-			if ( strtotime( $tag_text ) == '' ) { // don't want dates to show up
+
+			// don't want dates to show up
+			if ( strtotime( $tag_text ) == '' ) {
 				if ( $row->count > $this->tags_highest_count ) {
 					$this->tags_highest_count = $row->count;
 				}
@@ -42,6 +47,7 @@ class CAP_TagCloud {
 				];
 			}
 		}
+
 		Wikimedia\restoreWarnings();
 
 		// sort tag array by key (tag name)

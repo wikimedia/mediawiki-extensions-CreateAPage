@@ -35,7 +35,10 @@ class EasyTemplate {
 
 	/**
 	 * Public constructor
-	 * @example new EasyTemplate( __DIR__ . '/templates/' );
+	 * Example:
+	 * @code
+	 * new EasyTemplate( __DIR__ . '/templates/' );
+	 * @endcode
 	 */
 	public function __construct( $path ) {
 		$this->mPath = rtrim( $path, '/' );

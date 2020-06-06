@@ -285,7 +285,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		global $wgUser;
 
 		/* Check for PHP error if any, requires php 4.2 or newer */
-		if ( $this->mCurlError == 1 /*UPLOAD_ERR_INI_SIZE*/ ) {
+		if ( $this->mCurlError == 1 ) {
 			return self::FILE_TOO_LARGE;
 		}
 
@@ -337,7 +337,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			// ehhh...
 			// we'll do it hard way then...
 			$timestamp = $this->mDestName;
-		} else { // this timestamp should not repeat...
+		} else {
+			// this timestamp should not repeat...
 			$timestamp = 'invalid';
 		}
 		$tempname = '';
@@ -359,7 +360,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$this->mLocalFile = $repoGroup->getLocalRepo()->newFile( $nt );
 			$this->mDestName = $this->mLocalFile->getName();
 			$this->mDesiredDestName = $this->mStoredDestName . $tmpCount . '.' . $this->mFinalExtension;
-		} else { // append the extension anyway
+		} else {
+			// append the extension anyway
 			$this->mDesiredDestName = $this->mStoredDestName . '.' . $this->mFinalExtension;
 		}
 
@@ -388,18 +390,18 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		 */
 		$pageText = SpecialUpload::getInitialPageText(
 			$this->mComment,
-			'', // $this->mLicense,
-			'', // $this->mCopyrightStatus,
-			'' // $this->mCopyrightSource
+			'',
+			'',
+			''
 		);
 
 		$status = $this->performUpload(
 			// $this->mTempPath,
 			$this->mComment,
 			$pageText,
-			$this->mWatchthis, // File::DELETE_SOURCE,
-			$wgUser, // $this->mFileProps
-			[] // $tags
+			$this->mWatchthis,
+			$wgUser,
+			[]
 		);
 
 		if ( !$status->isGood() ) {
@@ -415,7 +417,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			}
 			// Success, redirect to description page
 			$this->mReturnedTimestamp = $this->getQuickTimestamp( $this->mDestName );
-			$img = null; // @todo: added to avoid passing a ref to null - should this be defined somewhere?
+			// @todo: added to avoid passing a ref to null - should this be defined somewhere?
+			$img = null;
 			return self::SUCCESS;
 		}
 	}

@@ -10,18 +10,21 @@
  */
 
 class CreateMultiPage {
-	const SECTION_PARSE = '/\n==[^=]/s';
-	const SPECIAL_TAG_FORMAT = '<!---%s--->';
-	const ADDITIONAL_TAG_PARSE = '/\<!---(.*?)\s*=\s*(&quot;|\'|")*(.*?)(&quot;|\'|")*---\>/is';
-	const SIMPLE_TAG_PARSE = '/\<!---(.*?)---\>/is';
-	const CATEGORY_TAG_PARSE = '/\[\[Category:(.*?)\]\]/'; // @todo FIXME: This should probably be made more i18n-friendly?
-	const CATEGORY_TAG_SPECIFIC = '/\<!---categories---\>/is';
-	const IMAGEUPLOAD_TAG_SPECIFIC = '/\<!---imageupload---\>/is'; // used outside this class in templates/infobox.tmpl.php
-	const INFOBOX_SEPARATOR = '/\<!---separator---\>/is'; // used _only_ outside this class in templates/infobox.tmpl.php
-	const ISBLANK_TAG_SPECIFIC = '<!---blanktemplate--->';
-	// const TEMPLATE_INFOBOX_FORMAT = '/\{\{[^\{\}]*Infobox.*\}\}/is'; // replaced by [[MediaWiki:Createpage-template-infobox-format]]
-	//const TEMPLATE_OPENING = '/\{\{[^\{\}]*Infobox[^\|]*/i'; // literally unused
-	const TEMPLATE_CLOSING = '/\}\}/';
+	public const SECTION_PARSE = '/\n==[^=]/s';
+	public const SPECIAL_TAG_FORMAT = '<!---%s--->';
+	public const ADDITIONAL_TAG_PARSE = '/\<!---(.*?)\s*=\s*(&quot;|\'|")*(.*?)(&quot;|\'|")*---\>/is';
+	public const SIMPLE_TAG_PARSE = '/\<!---(.*?)---\>/is';
+	// @todo FIXME: This should probably be made more i18n-friendly?
+	public const CATEGORY_TAG_PARSE = '/\[\[Category:(.*?)\]\]/';
+	public const CATEGORY_TAG_SPECIFIC = '/\<!---categories---\>/is';
+	// used outside this class in templates/infobox.tmpl.php:
+	public const IMAGEUPLOAD_TAG_SPECIFIC = '/\<!---imageupload---\>/is';
+	// used _only_ outside this class in templates/infobox.tmpl.php:
+	public const INFOBOX_SEPARATOR = '/\<!---separator---\>/is';
+	public const ISBLANK_TAG_SPECIFIC = '<!---blanktemplate--->';
+	// public const TEMPLATE_INFOBOX_FORMAT = '/\{\{[^\{\}]*Infobox.*\}\}/is'; // replaced by [[MediaWiki:Createpage-template-infobox-format]]
+	//public const TEMPLATE_OPENING = '/\{\{[^\{\}]*Infobox[^\|]*/i'; // literally unused
+	public const TEMPLATE_CLOSING = '/\}\}/';
 
 	function __construct() {
 	}
@@ -167,7 +170,8 @@ class CreateMultiPage {
 			$add = '';
 			if ( ( $section[1] == 0 ) && ( empty( $section[0] ) ) ) {
 				continue;
-			} elseif ( intval( $section[1] ) > 0 ) { // add last character truncated by preg_split()
+			} elseif ( intval( $section[1] ) > 0 ) {
+				// add last character truncated by preg_split()
 				$add = substr( $sourceText, $section[1] - 1, 1 );
 			}
 
@@ -202,9 +206,11 @@ class CreateMultiPage {
 
 			# text without section name
 			if ( strlen( $section_name ) > 0 ) {
-				$text = substr( $text, strlen( $section_name ) + 1 ); // strip section name
+				// strip section name
+				$text = substr( $text, strlen( $section_name ) + 1 );
 			}
-			$text = trim( $text ); // strip unneeded newlines
+			// strip unneeded newlines
+			$text = trim( $text );
 
 			/**
 			 * <(descr|title|pagetitle)="..."> tag support
@@ -236,7 +242,8 @@ class CreateMultiPage {
 										}
 										# remove special tags
 										$text = str_replace( "<!---{$_tag}={$brt}" . $special_tags[$_tag] . "{$brt}--->", '', $text );
-										$text = trim( $text ); // strip unneeded newlines
+										// strip unneeded newlines
+										$text = trim( $text );
 										# add to display
 										$boxes[] = [
 											'type' => $type,
@@ -298,9 +305,12 @@ class CreateMultiPage {
 					'display' => 0
 				];
 				switch ( $specialTag ) {
-					case 'lbl': { // <!---lbl---> tag support
-						$text_html = str_replace( $other_tags[0], '', $text ); // strip <!---lbl---> tag
-						$text_html = trim( $text_html ); // strip unneeded newlines
+					// <!---lbl---> tag support
+					case 'lbl': {
+						// strip <!---lbl---> tag
+						$text_html = str_replace( $other_tags[0], '', $text );
+						// strip unneeded newlines
+						$text_html = trim( $text_html );
 						// this section type is non-editable, so we just rebuild its contents in JavaScript code
 						$boxes[] = [
 							'type' => 'textarea',
@@ -315,9 +325,12 @@ class CreateMultiPage {
 						];
 						break;
 					}
-					case 'pagetitle': { // <!---pagetitle---> tag support
-						$text_html = str_replace( $other_tags[0], '', $text ); // strip <!---pagetitle---> tag
-						$text_html = trim( $text_html ); // strip unneeded newlines
+					// <!---pagetitle---> tag support
+					case 'pagetitle': {
+						// strip <!---pagetitle---> tag
+						$text_html = str_replace( $other_tags[0], '', $text );
+						// strip unneeded newlines
+						$text_html = trim( $text_html );
 						// this section type is non-editable, so we just rebuild its contents in JavaScript code
 						$boxes[] = [
 							'type' => 'text',
@@ -326,8 +339,10 @@ class CreateMultiPage {
 						];
 						break;
 					}
-					case 'optional': { // <!---optional---> tag support
-						$text_html = str_replace( $other_tags[0], '', $text ); // strip the tag
+					// <!---optional---> tag support
+					case 'optional': {
+						// strip the tag
+						$text_html = str_replace( $other_tags[0], '', $text );
 						$text_html = trim( $text_html );
 						$boxes[] = [
 							'type' => 'optional_textarea',
@@ -339,7 +354,8 @@ class CreateMultiPage {
 						$optionals[] = count( $boxes ) - 1;
 						break;
 					}
-					case 'imageupload': { // <!---imageupload---> tag support
+					// <!---imageupload---> tag support
+					case 'imageupload': {
 						// do a match here, and for each do the thing, yeah
 						preg_match_all( self::IMAGEUPLOAD_TAG_SPECIFIC, $text, $image_tags );
 
@@ -384,7 +400,8 @@ class CreateMultiPage {
 						}
 					}
 				}
-			} elseif ( $specialTag == 'generic' ) { // generic textarea
+			} elseif ( $specialTag == 'generic' ) {
+				// generic textarea
 				$boxes[] = [
 					'type' => 'textarea',
 					'value' => $text,

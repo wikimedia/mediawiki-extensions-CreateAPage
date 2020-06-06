@@ -154,7 +154,7 @@ class CreatePageCreateplateForm {
 						'anonpreviewwarning'
 					);
 				}
-			} // "user is anon" check
+			}
 		}
 
 		// Add CSS & JS
@@ -561,7 +561,7 @@ class CreatePageCreateplateForm {
 			// internal stuff like mw:toc being exposed and thus it would seem to the
 			// average user who's previewing stuff that headlines etc. are duplicated.
 			// --ashley, 8 December 2019
-			$previewableText = $wgOut->parseAsContent( $pre_parsed ); // $output->mText;
+			$previewableText = $wgOut->parseAsContent( $pre_parsed );
 			$wgOut->addHTML(
 				"<div id=\"createpagepreview\">
 					$previewableText

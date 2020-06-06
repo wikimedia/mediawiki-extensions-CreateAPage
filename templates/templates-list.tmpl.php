@@ -70,12 +70,14 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 		</div>
 	</div>
 	<?php
-		} // foreach
+		// foreach
+		}
 	?>
 </div>
 
 <?php
-	} // is not preview
+	// is not preview
+	}
 ?>
 
 <div class="visualClear" style="clear: both"></div>

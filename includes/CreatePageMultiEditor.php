@@ -360,7 +360,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				// $postfix = substr( $key, 13 );
 				// $image_value['watchthis'] = $_POST['wpWatchthis' . $postfix];
 
-				$wgRequest->setVal( 'wpInFix', 'All' ); // slightly hacky but w/e
+				// slightly hacky but w/e
+				$wgRequest->setVal( 'wpInFix', 'All' );
+
 				$uploadform = new CreatePageImageUploadForm();
 				$uploadform->initializeFromRequest( $wgRequest );
 				$uploadform->mComment = wfMessage( 'createpage-uploaded-from' )->text();
