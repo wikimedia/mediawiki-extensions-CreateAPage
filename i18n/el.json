@@ -4,6 +4,7 @@
 			"Babispan",
 			"Geraki",
 			"GhotuoIncubator",
+			"Norhorn",
 			"Αντιγόνη",
 			"Περίεργος"
 		]
@@ -38,7 +39,7 @@
 	"createpage-upload-aborted": "Ακυρώθηκε η εισαγωγή της εικόνας",
 	"createpage-initial-run": "Για επεξεργασία συνεχίστε",
 	"createpage-login-required": "Χρειάζεται να <a id=\"$2\" href=\"$1\">συνδεθείτε</a>  για να μεταφορτώσετε εικόνες",
-	"createpage-please-wait": "Παρακαλώ περιμένετε ...",
+	"createpage-please-wait": "Παρακαλούμε περιμένετε...",
 	"createpage-upload-directory-read-only": "Ο κατάλογος φορτώσεων δεν είναι εγγράψιμος από το διακομιστή",
 	"createpage-advanced-text": "Μπορείτε επίσης να χρησιμοποιήσετε το $ 1.",
 	"createpage-advanced-edit": "προηγμένος συντάκτης",
