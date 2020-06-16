@@ -48,6 +48,9 @@ class CreatePage extends SpecialPage {
 		$this->setHeaders();
 
 		$mainForm = new CreatePageCreateplateForm( $par );
+		$mainForm->set( 'output', $out );
+		$mainForm->set( 'request', $request );
+		$mainForm->set( 'user', $user );
 
 		$action = $request->getVal( 'action' );
 		if ( $request->wasPosted() && $action == 'submit' ) {

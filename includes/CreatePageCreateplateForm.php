@@ -28,32 +28,102 @@ class CreatePageCreateplateForm {
 	public $mRedLinked;
 
 	/**
+	 * @var OutputPage
+	 */
+	public $output;
+
+	/**
+	 * @var WebRequest
+	 */
+	public $request;
+
+	/**
+	 * @var User
+	 */
+	public $user;
+
+	/**
 	 * Constructor
 	 *
 	 * @param mixed|null $par Parameter passed to the Special:CreatePage page in the URL, if any
 	 */
 	public function __construct( $par = null ) {
-		global $wgRequest;
+		$request = $this->getRequest();
 
 		$this->mCreateplatesLocation = 'Createplate-list';
 
-		if ( $wgRequest->getVal( 'action' ) == 'submit' ) {
-			$this->mTitle = $wgRequest->getVal( 'Createtitle' );
-			$this->mCreateplate = $wgRequest->getVal( 'createplates' );
+		if ( $request->getVal( 'action' ) == 'submit' ) {
+			$this->mTitle = $request->getVal( 'Createtitle' );
+			$this->mCreateplate = $request->getVal( 'createplates' );
 			// for preview in red link mode
-			if ( $wgRequest->getCheck( 'Redlinkmode' ) ) {
+			if ( $request->getCheck( 'Redlinkmode' ) ) {
 				$this->mRedLinked = true;
 			}
 		} else {
 			// title override
-			if ( $wgRequest->getVal( 'Createtitle' ) != '' ) {
-				$this->mTitle = $wgRequest->getVal( 'Createtitle' );
+			if ( $request->getVal( 'Createtitle' ) != '' ) {
+				$this->mTitle = $request->getVal( 'Createtitle' );
 				$this->mRedLinked = true;
 			} else {
 				$this->mTitle = '';
 			}
 			// URL override
-			$this->mCreateplate = $wgRequest->getVal( 'createplates' );
+			$this->mCreateplate = $request->getVal( 'createplates' );
+		}
+	}
+
+	/**
+	 * Hacky setter for setting global objects
+	 *
+	 * @param string $var Class member variable name ('output', 'request' or 'user')
+	 * @param OutputPage|User|WebRequest $value
+	 */
+	public function set( $var, $value ) {
+		$this->$var = $value;
+	}
+
+	/**
+	 * Get the OutputPage object to use here
+	 *
+	 * @see set()
+	 * @return OutputPage
+	 */
+	public function getOutput() {
+		if ( isset( $this->output ) && $this->output instanceof OutputPage ) {
+			return $this->output;
+		} else {
+			global $wgOut;
+			return $wgOut;
+		}
+	}
+
+	/**
+	 * Get the WebRequest object to use here
+	 *
+	 * @see set()
+	 * @return WebRequest
+	 */
+	public function getRequest() {
+		if ( isset( $this->request ) && $this->request instanceof WebRequest ) {
+			return $this->request;
+		} else {
+			global $wgRequest;
+			return $wgRequest;
+		}
+	}
+
+	/**
+	 * Get the User object to use here
+	 *
+	 * @see set()
+	 * @return User
+	 */
+	public function getUser() {
+		if ( isset( $this->user ) && $this->user instanceof User ) {
+			return $this->user;
+		} else {
+			global $wgUser;
+			return $wgUser;
 		}
 	}
 
@@ -64,35 +134,37 @@ class CreatePageCreateplateForm {
 
 	// show form
 	public function showForm( $err, $content_prev = false, $formCallback = null ) {
-		global $wgOut, $wgUser, $wgRequest;
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+		$user = $this->getUser();
 
-		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
-			$wgOut->setPageTitle( wfMessage( 'preview' )->text() );
+		if ( $request->getCheck( 'wpPreview' ) ) {
+			$out->setPageTitle( wfMessage( 'preview' )->text() );
 		} else {
 			if ( $this->mRedLinked ) {
-				$wgOut->setPageTitle( wfMessage( 'editing', $this->makePrefix( $this->mTitle ) )->text() );
+				$out->setPageTitle( wfMessage( 'editing', $this->makePrefix( $this->mTitle ) )->text() );
 			} else {
-				$wgOut->setPageTitle( wfMessage( 'createpage-title' )->text() );
+				$out->setPageTitle( wfMessage( 'createpage-title' )->text() );
 			}
 		}
 
-		$token = htmlspecialchars( $wgUser->getEditToken() );
+		$token = htmlspecialchars( $user->getEditToken() );
 		$titleObj = SpecialPage::getTitleFor( 'CreatePage' );
 		$action = htmlspecialchars( $titleObj->getLocalURL( 'action=submit' ) );
 
-		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
-			$wgOut->addHTML(
+		if ( $request->getCheck( 'wpPreview' ) ) {
+			$out->addHTML(
 				'<div class="previewnote"><p>' .
 				wfMessage( 'previewnote' )->text() .
 				'</p></div>'
 			);
 		} else {
-			$wgOut->addHTML( wfMessage( 'createpage-title-additional' )->text() );
+			$out->addHTML( wfMessage( 'createpage-title-additional' )->text() );
 		}
 
 		if ( $err != '' ) {
-			$wgOut->setSubtitle( wfMessage( 'formerror' )->text() );
-			$wgOut->addHTML( "<p class='error'>{$err}</p>\n" );
+			$out->setSubtitle( wfMessage( 'formerror' )->text() );
+			$out->addHTML( "<p class='error'>{$err}</p>\n" );
 		}
 
 		// show stuff like on normal edit page, but just for red links
@@ -100,8 +172,8 @@ class CreatePageCreateplateForm {
 			$helpLink = wfExpandUrl( Skin::makeInternalOrExternalUrl(
 				wfMessage( 'helppage' )->inContentLanguage()->text()
 			) );
-			if ( $wgUser->isLoggedIn() ) {
-				$wgOut->wrapWikiMsg(
+			if ( $user->isLoggedIn() ) {
+				$out->wrapWikiMsg(
 					// Suppress the external link icon, consider the help URL an internal one
 					"<div class=\"mw-newarticletext plainlinks\">\n$1\n</div>",
 					[
@@ -110,7 +182,7 @@ class CreatePageCreateplateForm {
 					]
 				);
 			} else {
-				$wgOut->wrapWikiMsg(
+				$out->wrapWikiMsg(
 					// Suppress the external link icon, consider the help URL an internal one
 					"<div class=\"mw-newarticletextanon plainlinks\">\n$1\n</div>",
 					[
@@ -119,21 +191,21 @@ class CreatePageCreateplateForm {
 					]
 				);
 			}
-			if ( $wgUser->isAnon() ) {
-				if ( !$wgRequest->getCheck( 'wpPreview' ) ) {
+			if ( $user->isAnon() ) {
+				if ( !$request->getCheck( 'wpPreview' ) ) {
 					$returnToQuery = array_diff_key(
-						$wgRequest->getValues(),
+						$request->getValues(),
 						[
 							'title' => false,
 							'returnto' => true,
 							'returntoquery' => true
 						]
 					);
-					$returnToPageTitle = $wgRequest->getVal( 'title' );
+					$returnToPageTitle = $request->getVal( 'title' );
 					// Note: in red link mode, regular redlink URLs behave as if they were Special:CreatePage.
 					// That's why returnto is not Special:CreatePage but the page title of the new page
 					// to be created.
-					$wgOut->wrapWikiMsg(
+					$out->wrapWikiMsg(
 						"<div id='mw-anon-edit-warning' class='warningbox'>\n$1\n</div>",
 						[ 'anoneditwarning',
 							// Log-in link
@@ -149,7 +221,7 @@ class CreatePageCreateplateForm {
 						]
 					);
 				} else {
-					$wgOut->wrapWikiMsg(
+					$out->wrapWikiMsg(
 						"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
 						'anonpreviewwarning'
 					);
@@ -158,12 +230,12 @@ class CreatePageCreateplateForm {
 		}
 
 		// Add CSS & JS
-		$wgOut->addModuleStyles( 'ext.createAPage.styles' );
-		$wgOut->addModules( 'ext.createAPage' );
+		$out->addModuleStyles( 'ext.createAPage.styles' );
+		$out->addModules( 'ext.createAPage' );
 
 		// Add WikiEditor to the textarea(s) if enabled for the current user
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $wgUser->getOption( 'usebetatoolbar' ) ) {
-			$wgOut->addModules( 'ext.createAPage.wikiEditor' );
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+			$out->addModules( 'ext.createAPage.wikiEditor' );
 		}
 
 		// @todo This was originally used by the Wikia CreatePage ([sic]! it's different from
@@ -173,14 +245,14 @@ class CreatePageCreateplateForm {
 		// remain hidden. Can we safely just ditch this? --ashley, 10 December 2019
 		$alternateLink = '<a href="#" id="createapage-go-to-normal-editor">' .
 			wfMessage( 'createpage-here' )->text() . '</a>';
-		$wgOut->addHTML(
+		$out->addHTML(
 			'<div id="createpage_subtitle" style="display:none">' .
 				wfMessage( 'createpage-alternate-creation', $alternateLink )->text() .
 			'</div>'
 		);
 
-		if ( $wgRequest->getCheck( 'wpPreview' ) ) {
-			$this->showPreview( $content_prev, $wgRequest->getVal( 'Createtitle' ) );
+		if ( $request->getCheck( 'wpPreview' ) ) {
+			$this->showPreview( $content_prev, $request->getVal( 'Createtitle' ) );
 		}
 
 		$html = "
@@ -198,10 +270,10 @@ class CreatePageCreateplateForm {
 		<input type="hidden" name="wpEditToken" value="' . $token . '" />
 		<input type="hidden" name="wpCreatePage" value="true" />';
 
-		$wgOut->addHTML( $html );
+		$out->addHTML( $html );
 		// adding this for CAPTCHAs and the like
 		if ( is_callable( $formCallback ) ) {
-			call_user_func_array( $formCallback, [ &$wgOut ] );
+			call_user_func_array( $formCallback, [ &$out ] );
 		}
 
 		$parsedTemplates = $this->getCreateplates();
@@ -210,15 +282,15 @@ class CreatePageCreateplateForm {
 			$showField = ' style="display: none";';
 		}
 
-		if ( !$wgRequest->getCheck( 'wpPreview' ) ) {
-			$wgOut->addHTML(
+		if ( !$request->getCheck( 'wpPreview' ) ) {
+			$out->addHTML(
 				'<fieldset id="cp-chooser-fieldset"' . $showField . '>
 				<legend>' . wfMessage( 'createpage-choose-createplate' )->text() .
 				'<span>[<a id="cp-chooser-toggle" title="toggle" href="#">'
 				. wfMessage( 'createpage-hide' )->text() . '</a>]</span>
 				</legend>' . "\n"
 			);
-			$wgOut->addHTML( '<div id="cp-chooser" style="display: block;">' . "\n" );
+			$out->addHTML( '<div id="cp-chooser" style="display: block;">' . "\n" );
 		}
 
 		$this->produceRadioList( $parsedTemplates );
@@ -293,7 +365,7 @@ class CreatePageCreateplateForm {
 	 * @param array $createplates Array of createplates
 	 */
 	private function produceRadioList( $createplates ) {
-		global $wgOut, $wgRequest, $wgServer, $wgScript;
+		global $wgServer, $wgScript;
 
 		// this checks radio buttons when we have no JavaScript...
 		$selected = false;
@@ -311,11 +383,10 @@ class CreatePageCreateplateForm {
 		}
 
 		if ( $this->mRedLinked ) {
-			global $wgUser;
 			$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
 			// @todo FIXME: should probably be $parserOptions = ParserOptions::newCanonical();
 			// also the second line does nothing as the method is <s>deprecated</s> gone as of MW 1.34rc1
-			$parserOptions = ParserOptions::newFromUser( $wgUser );
+			$parserOptions = ParserOptions::newFromUser( $this->getUser() );
 			// $parserOptions->setEditSection( false );
 			$rtitle = Title::newFromText( $this->mTitle );
 			$parsedInfo = $parser->parse(
@@ -339,12 +410,12 @@ class CreatePageCreateplateForm {
 			'data' => $createplates,
 			'selected' => $check,
 			'createtitle' => $this->makePrefix( $this->mTitle ),
-			'ispreview' => $wgRequest->getCheck( 'wpPreview' ),
+			'ispreview' => $this->getRequest()->getCheck( 'wpPreview' ),
 			'isredlink' => $this->mRedLinked,
 			'aboutinfo' => $aboutInfo,
 		] );
 
-		$wgOut->addHTML( $tmpl->render( 'templates-list' ) );
+		$this->getOutput()->addHTML( $tmpl->render( 'templates-list' ) );
 	}
 
 	/**
@@ -356,10 +427,8 @@ class CreatePageCreateplateForm {
 	 *                exists and we're not in AJAX mode
 	 */
 	public function checkArticleExists( $given, $ajax = false ) {
-		global $wgOut;
-
 		if ( $ajax ) {
-			$wgOut->setArticleBodyOnly( true );
+			$this->getOutput()->setArticleBodyOnly( true );
 		}
 
 		if ( empty( $given ) && !$ajax ) {
@@ -380,7 +449,7 @@ class CreatePageCreateplateForm {
 			);
 			if ( $exists != '' ) {
 				if ( $ajax ) {
-					$wgOut->addHTML( 'pagetitleexists' );
+					$this->getOutput()->addHTML( 'pagetitleexists' );
 				} else {
 					// Mimick the way AJAX version displays things and use the
 					// same two messages. 2 are needed for full i18n support.
@@ -408,28 +477,30 @@ class CreatePageCreateplateForm {
 	 *                page
 	 */
 	public function submitForm() {
-		global $wgOut, $wgRequest, $wgServer, $wgScript, $wgUser;
+		global $wgServer, $wgScript;
 
-		$mainform = new CreatePageCreateplateForm();
+		$out = $this->getOutput();
+		$request = $this->getRequest();
+		$user = $this->getUser();
 
 		// check if we are editing in red link mode
-		if ( $wgRequest->getCheck( 'wpSubmitCreateplate' ) ) {
-			$mainform->showForm( '' );
-			$mainform->showCreateplate();
+		if ( $request->getCheck( 'wpSubmitCreateplate' ) ) {
+			$this->showForm( '' );
+			$this->showCreateplate();
 			return false;
 		} else {
-			$valid = $this->checkArticleExists( $wgRequest->getVal( 'Createtitle' ) );
+			$valid = $this->checkArticleExists( $request->getVal( 'Createtitle' ) );
 			if ( $valid != '' ) {
 				// no title? this means overwriting Main Page...
-				$mainform->showForm( $valid );
+				$this->showForm( $valid );
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$editor->generateForm( $editor->glueArticle() );
 				return false;
 			}
 
-			if ( $wgRequest->getVal( 'wpSave' ) && $wgRequest->wasPosted() && $wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
+			if ( $request->getVal( 'wpSave' ) && $request->wasPosted() && $user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
-				$rtitle = Title::newFromText( $wgRequest->getVal( 'Createtitle' ) );
+				$rtitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
 				// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
 				$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
 				$editpage = new EditPage( $rarticle );
@@ -437,14 +508,14 @@ class CreatePageCreateplateForm {
 				$editpage->mArticle = $rarticle;
 
 				// ashley 8 December 2019: need this so that edits don't fail due to wpUnicodeCheck being ''...
-				$editpage->importFormData( $wgRequest );
+				$editpage->importFormData( $request );
 
 				// Order matters! importFormData overwrites textbox1 so we must define it _after_ calling it, obviously
 				$editpage->textbox1 = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 
-				$editpage->minoredit = $wgRequest->getCheck( 'wpMinoredit' );
-				$editpage->watchthis = $wgRequest->getCheck( 'wpWatchthis' );
-				$editpage->summary = $wgRequest->getVal( 'wpSummary' );
+				$editpage->minoredit = $request->getCheck( 'wpMinoredit' );
+				$editpage->watchthis = $request->getCheck( 'wpWatchthis' );
+				$editpage->summary = $request->getVal( 'wpSummary' );
 
 				$_SESSION['article_createplate'] = $this->mCreateplate;
 
@@ -478,15 +549,15 @@ class CreatePageCreateplateForm {
 					$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
 					$content = $editor->glueArticle( true, false );
 					$content_static = $editor->glueArticle( true );
-					$mainform->showForm( $errorMsg, $content_static );
+					$this->showForm( $errorMsg, $content_static );
 					$editor->generateForm( $content );
 					return false;
 				} elseif ( $status->value == EditPage::AS_SUCCESS_NEW_ARTICLE ) {
-					$wgOut->redirect( Title::newFromText( $wgRequest->getVal( 'Createtitle' ) )->getFullURL() );
+					$out->redirect( Title::newFromText( $request->getVal( 'Createtitle' ) )->getFullURL() );
 				}
 
 				return false;
-			} elseif ( $wgRequest->getVal( 'wpSave' ) && $wgRequest->wasPosted() && !$wgUser->matchEditToken( $wgRequest->getVal( 'wpEditToken' ) ) ) {
+			} elseif ( $request->getVal( 'wpSave' ) && $request->wasPosted() && !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
 				// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
 				// CSRF attempt?
 				$errorMsg = wfMessage( 'sessionfailure' )->escaped();
@@ -495,36 +566,36 @@ class CreatePageCreateplateForm {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
 				$content = $editor->glueArticle( true, false );
 				$content_static = $editor->glueArticle( true );
-				$mainform->showForm( $errorMsg, $content_static );
+				$this->showForm( $errorMsg, $content_static );
 				$editor->generateForm( $content );
 				return false;
-			} elseif ( $wgRequest->getCheck( 'wpPreview' ) ) {
+			} elseif ( $request->getCheck( 'wpPreview' ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
 				$content = $editor->glueArticle( true, false );
 				$content_static = $editor->glueArticle( true );
-				$mainform->showForm( '', $content_static );
+				$this->showForm( '', $content_static );
 				$editor->generateForm( $content );
 				return false;
-			} elseif ( $wgRequest->getCheck( 'wpAdvancedEdit' ) ) {
+			} elseif ( $request->getCheck( 'wpAdvancedEdit' ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 				CreateAPageUtils::unescapeKnownMarkupTags( $content );
 				$_SESSION['article_content'] = $content;
-				$wgOut->redirect(
+				$out->redirect(
 					$wgServer . $wgScript . '?title=' .
-					$wgRequest->getVal( 'Createtitle' ) .
+					$request->getVal( 'Createtitle' ) .
 					'&action=edit&createpage=true'
 				);
-			} elseif ( $wgRequest->getCheck( 'wpImageUpload' ) ) {
-				$mainform->showForm( '' );
+			} elseif ( $request->getCheck( 'wpImageUpload' ) ) {
+				$this->showForm( '' );
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$content = $editor->glueArticle();
 				$editor->generateForm( $content );
-			} elseif ( $wgRequest->getCheck( 'wpCancel' ) ) {
-				if ( $wgRequest->getVal( 'Createtitle' ) != '' ) {
-					$wgOut->redirect( $wgServer . $wgScript . '?title=' . $wgRequest->getVal( 'Createtitle' ) );
+			} elseif ( $request->getCheck( 'wpCancel' ) ) {
+				if ( $request->getVal( 'Createtitle' ) != '' ) {
+					$out->redirect( $wgServer . $wgScript . '?title=' . $request->getVal( 'Createtitle' ) );
 				} else {
-					$wgOut->redirect( $wgServer . $wgScript );
+					$out->redirect( $wgServer . $wgScript );
 				}
 			}
 		}
@@ -537,11 +608,12 @@ class CreatePageCreateplateForm {
 	 * @param string $title Page title of the page we're creating
 	 */
 	private function showPreview( $content, $title ) {
-		global $wgOut, $wgUser;
+		$out = $this->getOutput();
+		$user = $this->getUser();
 
 		// @todo FIXME: should probably be $parserOptions = ParserOptions::newCanonical();
 		// also the second line does nothing as the method is <s>deprecated</s> gone as of MW 1.34rc1
-		$parserOptions = ParserOptions::newFromUser( $wgUser );
+		$parserOptions = ParserOptions::newFromUser( $user );
 		// $parserOptions->setEditSection( false );
 		$rtitle = Title::newFromText( $title );
 
@@ -551,18 +623,18 @@ class CreatePageCreateplateForm {
 			$pre_parsed = $parser->preSaveTransform(
 				$content,
 				$rtitle,
-				$wgUser,
+				$user,
 				$parserOptions,
 				true
 			);
 			$output = $parser->parse( $pre_parsed, $rtitle, $parserOptions );
-			$wgOut->addParserOutputMetadata( $output );
+			$out->addParserOutputMetadata( $output );
 			// @todo CHECKME: Used to be $output->mText but that would cause parser
 			// internal stuff like mw:toc being exposed and thus it would seem to the
 			// average user who's previewing stuff that headlines etc. are duplicated.
 			// --ashley, 8 December 2019
-			$previewableText = $wgOut->parseAsContent( $pre_parsed );
-			$wgOut->addHTML(
+			$previewableText = $out->parseAsContent( $pre_parsed );
+			$out->addHTML(
 				"<div id=\"createpagepreview\">
 					$previewableText
 					<div id=\"createpage_preview_delimiter\" class=\"actionBar actionBarStrong\">" .

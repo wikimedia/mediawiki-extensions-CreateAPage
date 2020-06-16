@@ -58,7 +58,13 @@ class CreateAPageHooks {
 			if ( $request->getCheck( 'wpPreview' ) ) {
 				return true;
 			}
+
 			$mainForm = new CreatePageCreateplateForm();
+			// @todo FIXME: get this from somewhere and inject it properly
+			// $mainForm->set( 'output', $out );
+			$mainForm->set( 'request', $request );
+			$mainForm->set( 'user', $user );
+
 			$mainForm->mTitle = $request->getVal( 'title' );
 			$mainForm->mRedLinked = true;
 			$mainForm->showForm( '' );
