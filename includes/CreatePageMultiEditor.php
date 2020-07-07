@@ -34,7 +34,6 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		}
 
 		$captchaForm = '';
-		$passCaptcha = true;
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
 			$captcha = ConfirmEditHooks::getInstance();
 			if (
