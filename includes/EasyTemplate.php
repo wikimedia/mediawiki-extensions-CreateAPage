@@ -39,6 +39,7 @@ class EasyTemplate {
 	 * @code
 	 * new EasyTemplate( __DIR__ . '/templates/' );
 	 * @endcode
+	 * @param string $path
 	 */
 	public function __construct( $path ) {
 		$this->mPath = rtrim( $path, '/' );
@@ -93,7 +94,7 @@ class EasyTemplate {
 	/**
 	 * Check if template file exists
 	 *
-	 * @param $file String: path to file with template
+	 * @param string $file path to file with template
 	 * @return bool
 	 */
 	public function template_exists( $file ) {

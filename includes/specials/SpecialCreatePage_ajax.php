@@ -4,6 +4,7 @@ use MediaWiki\MediaWikiServices;
 
 /**
  * AJAX functions for CreateAPage extension.
+ * @return string
  */
 function axTitleExists() {
 	global $wgRequest;
