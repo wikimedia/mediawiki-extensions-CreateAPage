@@ -943,7 +943,7 @@ var CreateAPage = {
 	 * function is called.
 	 *
 	 * @param {jQuery.Event} e
-	 * @param {String} [elementId] Name of the createplate template (i.e.
+	 * @param {string} [elementId] Name of the createplate template (i.e.
 	 * cp-template-Name) for a createplate named "Name"
 	 */
 	switchTemplate: function ( e, elementId ) {
@@ -1101,11 +1101,16 @@ var CreateAPage = {
 	 * Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 	 * Code licensed under the BSD License:
 	 * http://developer.yahoo.net/yui/license.txt
+	 *
+	 * @param method
+	 * @param tag
+	 * @param root
+	 * @param apply
 	 */
 	getElementsBy: function ( method, tag, root, apply ) {
 		tag = tag || '*';
 
-		root = ( root ) ? /* $( */root /* )*/ : null || document;
+		root = ( root ) ? /* $( */root /* ) */ : null || document;
 
 		if ( !root ) {
 			return [];
