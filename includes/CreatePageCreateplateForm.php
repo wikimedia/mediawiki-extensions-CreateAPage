@@ -645,20 +645,19 @@ class CreatePageCreateplateForm {
 		}
 	}
 
+	/**
+	 * Render a createplate form.
+	 *
+	 * @param bool $isInitial Are we creating a new page (I think)? This just
+	 *  controls what checkboxes below the editor form are checked by default.
+	 */
 	public function showCreateplate( $isInitial = false ) {
-		if ( $this->mCreateplate ) {
-			$editor = new CreatePageMultiEditor( $this->mCreateplate );
-		} else {
-			$editor = new CreatePageMultiEditor( 'Blank' );
-		}
+		$editor = new CreatePageMultiEditor( $this->mCreateplate ?: 'Blank' );
 		$editor->mRedLinked = false;
 		if ( $this->mRedLinked ) {
 			$editor->mRedLinked = true;
 		}
-		$editor->mInitial = false;
-		if ( $isInitial ) {
-			$editor->mInitial = true;
-		}
+		$editor->mInitial = $isInitial;
 		$editor->generateForm();
 	}
 }
