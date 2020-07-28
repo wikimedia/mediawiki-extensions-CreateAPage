@@ -9,7 +9,7 @@
  * @author Bartek Łapiński <bartek@wikia-inc.com>
  * @author Jack Phoenix
  * @copyright Copyright © 2007-2008 Wikia Inc.
- * @copyright Copyright © 2009-2011, 2019 Jack Phoenix
+ * @copyright Copyright © 2009-2011, 2019-2020 Jack Phoenix
  * @license GPL-2.0-or-later
  * @link https://www.mediawiki.org/wiki/Extension:CreateAPage Documentation
  * @note Removed from Wikia's repository in February 2012 after having been unused for two years, see https://github.com/Wikia/app/commit/e52d845350c8c49c6b39a4399b3d6e8f91e0461f
@@ -74,6 +74,7 @@ $wgResourceModules['ext.createAPage'] = [
 	'dependencies' => [
 		'jquery.ui',
 		'jquery.spinner',
+		'mediawiki.api',
 		'mediawiki.jqueryMsg',
 		'mediawiki.util'
 	],

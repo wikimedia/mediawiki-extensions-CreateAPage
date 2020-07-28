@@ -182,20 +182,30 @@ var CreateAPage = {
 		window.location = fixedArticlePath + title.value + '?action=edit';
 	},
 
+	/**
+	 * Callback for the title existence check function
+	 *
+	 * @todo FIXME: clean up this awful mess
+	 *
+	 * @param {Object} data JSON data from the API
+	 */
 	callbackTitle: function ( data ) {
-		var res = '', helperButton;
+		var res = data.query, helperButton, pageExists, isInvalidTitle;
+
 		document.getElementById( 'cp-title-check' ).innerHTML = '';
-		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( data ) ) {
-			res = eval( '(' + data + ')' );
-		}
-		if ( ( res.text !== false ) && ( res.empty !== true ) ) {
-			var url = res.url.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
-			var text = res.text.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
+
+		pageExists = !!res.pages[ 0 ].pageid;
+		isInvalidTitle = ( res.pages[ 0 ].invalid && res.pages[ 0 ].invalid === true );
+
+		if ( pageExists && !isInvalidTitle ) {
+			var url = mw.util.getUrl( res.pages[ 0 ].title, { action: 'edit' } );
+			var text = res.pages[ 0 ].title;
 
 			document.getElementById( 'cp-title-check' ).innerHTML = '<span style="color: red;">' +
-				mw.msg( 'createpage-article-exists' ) + ' <a href="' +
-				url + '?action=edit" title="' + text + '">' + text +
-				'</a>' + mw.msg( 'createpage-article-exists2' ) + '</span>';
+				mw.msg( 'createpage-article-exists' ) +
+				' <a href="' + url + '" title="' + text + '">' + text + '</a>' +
+				mw.msg( 'createpage-article-exists2' ) + '</span>';
+
 			if ( CreateAPage.Overlay ) {
 				CreateAPage.Overlay.show();
 				helperButton = document.getElementById( 'wpRunInitialCheck' );
@@ -203,11 +213,14 @@ var CreateAPage = {
 			} else {
 				CreateAPage.contentOverlay();
 			}
-		} else if ( res.empty === true ) {
+		} else if ( isInvalidTitle ) {
+			// @todo Could also show the reason why the supplied title is invalid.
+			// It's stored as res.pages[ 0 ].invalidreason
 			document.getElementById( 'cp-title-check' ).innerHTML =
 				'<span style="color: red;">' +
 				mw.msg( 'createpage-title-invalid' ) +
 				'</span>';
+
 			if ( CreateAPage.Overlay ) {
 				CreateAPage.resizeOverlay( 0 );
 				CreateAPage.Overlay.show();
@@ -223,6 +236,7 @@ var CreateAPage = {
 				helperButton.style.display = 'none';
 			}
 		}
+
 		CreateAPage.noCanDo = false;
 	},
 
@@ -243,20 +257,18 @@ var CreateAPage = {
 	 * to the user.
 	 */
 	watchTitle: function () {
+		// @todo FIXME: should use the jQuery spinner library bundled with MW core, probably
 		document.getElementById( 'cp-title-check' ).innerHTML =
 			'<img src="' + mw.config.get( 'wgExtensionAssetsPath' ) +
 			'/CreateAPage/resources/images/progress_bar.gif" width="70" height="11" alt="' +
 			mw.msg( 'createpage-please-wait' ) + '" border="0" />';
 		CreateAPage.noCanDo = true;
 
-		$.ajax( { // using .ajax instead of .get for better flexibility
-			url: mw.config.get( 'wgScript' ),
-			data: {
-				action: 'ajax',
-				rs: 'axTitleExists',
-				title: document.getElementById( 'Createtitle' ).value
-			}
-		} ).done( function ( data, textStatus, jqXHR ) {
+		( new mw.Api() ).get( {
+			action: 'query',
+			titles: document.getElementById( 'Createtitle' ).value,
+			formatversion: 2
+		} ).done( function ( data ) {
 			CreateAPage.callbackTitle( data );
 		} ).fail( function () {
 			document.getElementById( 'cp-title-check' ).innerHTML = '';

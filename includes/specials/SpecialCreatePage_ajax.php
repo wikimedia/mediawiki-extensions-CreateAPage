@@ -1,34 +1,9 @@
 <?php
-
-use MediaWiki\MediaWikiServices;
-
 /**
  * AJAX functions for CreateAPage extension.
- * @return string
  */
-function axTitleExists() {
-	global $wgRequest;
 
-	$res = [ 'text' => false ];
-
-	$title = $wgRequest->getVal( 'title' );
-	$mode = $wgRequest->getVal( 'mode' );
-	$title_object = Title::newFromText( $title );
-
-	if ( is_object( $title_object ) ) {
-		if ( $title_object->exists() ) {
-			$res = [
-				'url'  => $title_object->getLocalURL(),
-				'text' => $title_object->getPrefixedText(),
-				'mode' => $mode,
-			];
-		}
-	} else {
-		$res = [ 'empty' => true ];
-	}
-
-	return json_encode( $res );
-}
+use MediaWiki\MediaWikiServices;
 
 function axMultiEditParse() {
 	global $wgRequest;
@@ -136,7 +111,6 @@ function axCreatepageAdvancedSwitch() {
 }
 
 global $wgAjaxExportList;
-$wgAjaxExportList[] = 'axTitleExists';
 $wgAjaxExportList[] = 'axMultiEditParse';
 $wgAjaxExportList[] = 'axMultiEditImageUpload';
 $wgAjaxExportList[] = 'axCreatepageAdvancedSwitch';
