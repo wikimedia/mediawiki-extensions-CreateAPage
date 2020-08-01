@@ -1,0 +1,124 @@
+{
+	"name": "CreateAPage",
+	"version": "4.01",
+	"author": [
+		"Bartek Łapiński",
+		"Piotr Molski",
+		"Łukasz Garczewski",
+		"Przemek Piotrowski",
+		"Jack Phoenix"
+	],
+	"license-name": "GPL-2.0-or-later",
+	"url": "https://www.mediawiki.org/wiki/Extension:CreateAPage",
+	"descriptionmsg": "createpage-desc",
+	"type": "specialpage",
+	"callback": "CreateAPageHooks::onRegistration",
+	"requires": {
+		"MediaWiki": ">= 1.34.0"
+	},
+	"config": {
+		"CreatePageCoverRedLinks": {
+			"value": false,
+			"path": false,
+			"description": "Use CreateAPage on redlinks? (i.e. clicking on a redlink takes you to index.php?title=Special:CreatePage&Createtitle=Title_of_our_page instead of taking you to index.php?title=Title_of_our_page&action=edit&redlink=1) If true, users will get a preference which enables them to enable this feature for their user account.",
+			"public": false
+		},
+		"MultiEditPageTags": {
+			"value": [
+				"title",
+				"descr",
+				"category"
+			],
+			"path": false,
+			"description": "Used by MultiEdit (the CreateMultiPage PHP class). There's a good chance you don't want to touch this variable.",
+			"public": false
+		},
+		"MultiEditPageSimpleTags": {
+			"value": [
+				"lbl",
+				"categories",
+				"pagetitle",
+				"imageupload",
+				"optional"
+			],
+			"path": false,
+			"description": "Used by MultiEdit (the CreateMultiPage PHP class). There's a good chance you don't want to touch this variable.",
+			"public": false
+		}
+	},
+	"SpecialPages": {
+		"CreatePage": "CreatePage"
+	},
+	"MessagesDirs": {
+		"CreateAPage": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"CreatePageAliases": "CreatePage.alias.php"
+	},
+	"AutoloadClasses": {
+		"CreateAPageUtils": "includes/CreateAPageUtils.php",
+		"CreateAPageHooks": "includes/CreateAPageHooks.php",
+		"EasyTemplate": "includes/EasyTemplate.php",
+		"CAP_TagCloud": "includes/CAP_TagCloud.php",
+		"CreateMultiPage": "includes/CreateMultiPage.php",
+		"CreatePage": "includes/specials/SpecialCreatePage.body.php",
+		"CreatePageEditor": "includes/CreatePageEditor.php",
+		"CreatePageMultiEditor": "includes/CreatePageMultiEditor.php",
+		"CreatePageCreateplateForm": "includes/CreatePageCreateplateForm.php",
+		"CreatePageImageUploadForm": "includes/CreatePageImageUploadForm.php"
+	},
+	"Hooks": {
+		"EditPage::showEditForm:initial": "CreateAPageHooks::preloadContent",
+		"CustomEditor": "CreateAPageHooks::onCustomEditor",
+		"GetPreferences": "CreateAPageHooks::onGetPreferences"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "CreateAPage/resources"
+	},
+	"ResourceModules": {
+		"ext.createAPage": {
+			"scripts": "js/CreateAPage.js",
+			"messages": [
+				"createpage-insert-image",
+				"createpage-upload-aborted",
+				"createpage-img-uploaded",
+				"createpage-login-required",
+				"createpage-give-title",
+				"createpage-img-uploaded",
+				"createpage-article-exists",
+				"createpage-article-exists2",
+				"createpage-title-invalid",
+				"createpage-please-wait",
+				"createpage-show",
+				"createpage-hide",
+				"createpage-must-specify-title",
+				"createpage-unsaved-changes",
+				"createpage-unsaved-changes-details",
+				"createpage-edit-normal",
+				"createpage-advanced-warning",
+				"createpage-yes",
+				"createpage-no",
+				"login",
+				"createpage-login-warning"
+			],
+			"dependencies": [
+				"jquery.ui",
+				"jquery.spinner",
+				"mediawiki.api",
+				"mediawiki.jqueryMsg",
+				"mediawiki.util"
+			]
+		},
+		"ext.createAPage.wikiEditor": {
+			"scripts": "js/WikiEditorIntegration.js",
+			"dependencies": "ext.wikiEditor"
+		},
+		"ext.createAPage.styles": {
+			"styles": "css/CreatePage.css"
+		}
+	},
+	"manifest_version": 2
+}
