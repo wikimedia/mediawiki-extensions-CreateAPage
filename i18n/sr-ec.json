@@ -45,7 +45,7 @@
 	"createpage-about-info": "Ово је поједностављени уређивач. Идите на [[s:Help:CreatePage|чвориште ShoutWiki]] да бисте сазнали више.",
 	"createpage-advanced-text": "Можете да користите и $1.",
 	"createpage-advanced-edit": "напредни уређивач",
-	"createpage-optionals-text": "Додај опционалне одељке:",
+	"createpage-optionals-text": "Додај изборне одељке:",
 	"createpage-save": "Сачувај",
 	"createpage-must-specify-title": "Најпре наведите наслов.",
 	"createpage-unsaved-changes": "Несачуване промене",
