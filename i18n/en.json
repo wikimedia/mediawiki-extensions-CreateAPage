@@ -33,7 +33,7 @@
 	"createpage-top-of-page": "Top of page",
 	"createpage-uploaded-from": "Uploaded from Special:CreatePage",
 	"createplate-list": "Blank|Blank",
-	"createplate-Blank": "<!---blanktemplate--->\n",
+	"createplate-Blank": "<!---blanktemplate--->",
 	"createpage-title-check-header": "Title check forced",
 	"createpage-title-check-text": "You cannot perform an action until title check has ended. Please click again on the action button to proceed.",
 	"createpage-img-uploaded": "Image uploaded successfully",
