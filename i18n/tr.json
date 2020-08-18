@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
-			"Joseph"
+			"Joseph",
+			"ToprakM"
 		]
 	},
 	"createpage-here": "burada",
@@ -12,7 +13,7 @@
 	"createpage-hide": "Gizle",
 	"createpage-show": "Göster",
 	"createpage": "Yeni bir madde oluştur",
-	"createpage-desc": "[[Special:CreatePage|Kullanımı kolay arayüz]] için yeni makaleler oluşturma",
+	"createpage-desc": "[[Special:CreatePage|Kullanımı kolay arayüz]] için yeni maddeler oluşturma",
 	"createpage-title": "Yeni bir madde oluştur",
 	"createpage-title-additional": "Henüz mevcut olmayan bir sayfanın bağlantısını takip ettiniz. Sayfayı oluşturmak için aşağıdaki kutuya yazmaya başlayın",
 	"createpage-title-caption": "Madde Başlığı",
