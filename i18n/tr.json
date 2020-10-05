@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
+			"Jack Phoenix",
 			"Joseph",
 			"MuratTheTurkish",
 			"ToprakM"
@@ -33,7 +34,7 @@
 	"createpage-addcategory": "Kategori ekle",
 	"createpage-top-of-page": "Sayfanın başı",
 	"createpage-uploaded-from": "Special:CreatePage sayfasından yüklendi",
-	"createplate-list": "Boş|Boş",
+	"createplate-list": "Blank|Boş",
 	"createpage-title-check-header": "Başlık kontrolü zorunlu",
 	"createpage-title-check-text": "Başlık kontrolü bitene kadar bir eylem gerçekleştiremezsiniz. Devam etmek için lütfen işlem düğmesine tekrar tıklayın.",
 	"createpage-img-uploaded": "Resim başarıyla yüklendi",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jack Phoenix",
 			"Mirzali",
 			"Orbot707"
 		]
@@ -18,5 +19,5 @@
 	"createpage-addcategory": "Kategori cı kerê",
 	"createpage-top-of-page": "Seraniya pele",
 	"createpage-uploaded-from": "Special:CreatePage ara bar biya.",
-	"createplate-list": "Veng|pır niya"
+	"createplate-list": "Blank|pır niya"
 }

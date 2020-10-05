@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
+			"Jack Phoenix",
 			"Robby",
 			"Umherirrender"
 		]
@@ -32,7 +33,7 @@
 	"createpage-addcategory": "Button text",
 	"createpage-top-of-page": "TODO: I'm not sure how this is used. It technically seems to be used, but I'm unsure if it's actually ever displayed to the end-user.",
 	"createpage-uploaded-from": "Summary used for images uploaded via Special:CreatePage",
-	"createplate-list": "Newline-separated listing of createplates. The format is: <code>createplate internal name|Text displayed to the user</code>. For example, <code>foo|Bar</code> would mean that the user is shown the text \"Bar\" and it loads the createplate from <code>MediaWiki:Createplate-foo</code>.",
+	"createplate-list": "Newline-separated listing of createplates. The format is: <code>createplate internal name|Text displayed to the user</code>. For example, <code>foo|Bar</code> would mean that the user is shown the text \"Bar\" and it loads the createplate from <code>MediaWiki:Createplate-foo</code>.\n\nDo '''not''' translate the '''first''' instance of \"Blank\" here, as (per above) it's the name of the createplate (in the MediaWiki: namespace); '''only translate the second instance''', as that is the text which gets shown to the used on the special page as the name of the createplate!",
 	"createplate-Blank": "{{notranslate}}",
 	"createpage-title-check-header": "Title of an error message dialog shown via JavaScript. Contents of the dialog are {{msg-mw|createpage-title-check-text}}. The dialog is shown to the user when the page title they supplied is being validated but the validation hasn't yet finished.",
 	"createpage-title-check-text": "Error message shown via the JavaScript title validator when a title is being validated but the validation hasn't yet finished. The title of the dialog is {{msg-mw|createpage-title-check-header}}.",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jack Phoenix",
 			"Ouda",
 			"ديفيد"
 		]
@@ -31,7 +32,7 @@
 	"createpage-addcategory": "إضافة تصنيف",
 	"createpage-top-of-page": "أعلى الصفحة",
 	"createpage-uploaded-from": "تم الرفع من خاص:إنشاء صفحة",
-	"createplate-list": "فارغ|فارغ",
+	"createplate-list": "Blank|فارغ",
 	"createpage-title-check-header": "التحقق من العنوان قسري",
 	"createpage-title-check-text": "لا يمكنك تنفيذ إجراء حتى ينتهي التحقق من العنوان، يُرجَى النقر مرة أخرى على زر الإجراء للمتابعة.",
 	"createpage-img-uploaded": "تم رفع الصورة بنجاح",
