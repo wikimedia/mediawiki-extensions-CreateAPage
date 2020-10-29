@@ -6,24 +6,24 @@
  */
 class CreatePageCreateplateForm {
 	/**
-	 * @var string $mCreateplatesLocation Name of the MediaWiki: msg containing the
+	 * @var string Name of the MediaWiki: msg containing the
 	 *   list of createplates (without the MediaWiki: namespace)
 	 */
 	public $mCreateplatesLocation;
 
 	/**
-	 * @var string $mTitle User-supplied name of the page to be created
+	 * @var string User-supplied name of the page to be created
 	 */
 	public $mTitle;
 
 	/**
-	 * @var string $mCreateplate Name of the createplate to use, e.g. "character"
+	 * @var string Name of the createplate to use, e.g. "character"
 	 *   for [[MediaWiki:Createplate-character]]
 	 */
 	public $mCreateplate;
 
 	/**
-	 * @var bool $mRedLinked Are we previewing a page in the "red link" mode?
+	 * @var bool Are we previewing a page in the "red link" mode?
 	 */
 	public $mRedLinked;
 
