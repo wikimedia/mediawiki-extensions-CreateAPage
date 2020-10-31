@@ -29,7 +29,7 @@ class CreatePage extends SpecialPage {
 	/**
 	 * Show the special page
 	 *
-	 * @param string|null $par Parameter passed to the page, if any
+	 * @param string|null $par Parameter passed to the page (createplate name), if any
 	 */
 	public function execute( $par ) {
 		$out = $this->getOutput();
@@ -40,8 +40,9 @@ class CreatePage extends SpecialPage {
 
 		$this->checkReadOnly();
 
-		if ( !$user->isAllowed( 'createpage' ) ) {
-			throw new PermissionsError( 'createpage' );
+		// If the user is blocked, then they have no business here...throw an error.
+		if ( $user->isBlocked() ) {
+			throw new UserBlockedError( $user->getBlock() );
 		}
 
 		// Set the page title, robot policies, etc.
