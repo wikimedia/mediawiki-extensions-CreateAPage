@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"ArenaL5",
 			"Toliño"
 		]
 	},
@@ -33,7 +34,7 @@
 	"createpage-insert-image": "Inserir unha imaxe",
 	"createpage-upload-aborted": "A inserción da imaxe foi cancelada",
 	"createpage-initial-run": "Continuar a editar",
-	"createpage-login-required": "Necesita",
+	"createpage-login-required": "Necesita <a id=\"$2\" href=\"$1\">iniciar a sesión</a> para subir imaxes",
 	"createpage-please-wait": "Por favor, agarde...",
 	"createpage-upload-directory-read-only": "O servidor non pode escribir no directorio de cargas",
 	"createpage-about-info": "Este é o editor simplificado. Para saber máis olla a [[s:Help:CreatePage|ShoutWiki Hub]].",
