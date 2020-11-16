@@ -536,7 +536,7 @@ var CreateAPage = {
 		document.getElementById( 'createpage_image_cancel_section' + o.num ).style.display = '';
 		document.getElementById( 'createpage_image_text_section' + o.num ).style.display = 'none';
 
-		$( '#createpage_image_cancel_section' + o.num ).click( function ( e ) {
+		$( '#createpage_image_cancel_section' + o.num ).click( function () {
 			sent_request.abort();
 		} );
 
@@ -551,7 +551,7 @@ var CreateAPage = {
 		neoInput.setAttribute( 'tabindex', '-1' );
 
 		thisContainer.appendChild( neoInput );
-		$( '#createpage_upload_file_section' + o.num ).change( function ( e ) {
+		$( '#createpage_upload_file_section' + o.num ).change( function () {
 			CreateAPage.upload( e, { num: o.num } );
 		} );
 
@@ -649,7 +649,7 @@ var CreateAPage = {
 	/**
 	 * Remove any and all "This article already exists" messages.
 	 *
-	 * @param e Event
+	 * @param {jQuery.Event} e
 	 */
 	clearTitleMessage: function ( e ) {
 		e.preventDefault();
@@ -660,8 +660,8 @@ var CreateAPage = {
 	 * Test whether the given element's ID matches createpage_upload_file_section
 	 * or not.
 	 *
-	 * @param el Element HTML element to test
-	 * @return Boolean: true if the element's ID matches, else false
+	 * @param {Element} el HTML element to test
+	 * @return {boolean} True if the element's ID matches, else false
 	 */
 	uploadTest: function ( el ) {
 		if ( el.id.match( 'createpage_upload_file_section' ) ) {
@@ -675,8 +675,8 @@ var CreateAPage = {
 	 * Test whether the given element's ID matches wpTextboxes and that it's
 	 * visible (i.e. display != none).
 	 *
-	 * @param el Element HTML element to test
-	 * @return Boolean: true if the element's ID matches, else false
+	 * @param {Element} el HTML element to test
+	 * @return {boolean} True if the element's ID matches, else false
 	 */
 	editTextareaTest: function ( el ) {
 		if ( el.id.match( 'wpTextboxes' ) && ( el.style.display !== 'none' ) ) {
@@ -690,8 +690,8 @@ var CreateAPage = {
 	 * Test whether the given element's ID matches wpOptionalInput and that
 	 * it's visible (i.e. display != none).
 	 *
-	 * @param el Element HTML element to test
-	 * @return Boolean: true if the element's ID matches, else false
+	 * @param {Element} el HTML element to test
+	 * @return {boolean} True if the element's ID matches, else false
 	 */
 	optionalSectionTest: function ( el ) {
 		if ( el.id.match( 'wpOptionalInput' ) && ( el.style.display !== 'none' ) ) {
@@ -704,8 +704,8 @@ var CreateAPage = {
 	/**
 	 * Test whether the given element's ID matches wpTextboxes.
 	 *
-	 * @param el Element HTML element to test
-	 * @return Boolean: true if the element's ID matches, else false
+	 * @param {Element} el HTML element to test
+	 * @return {boolean} True if the element's ID matches, else false
 	 */
 	optionalContentTest: function ( el ) {
 		if ( el.id.match( 'wpTextboxes' ) ) {
@@ -802,8 +802,8 @@ var CreateAPage = {
 	 * Onclick handler for the up/down images, for making the given textarea
 	 * either smaller or larger
 	 *
-	 * @param e Event
-	 * @param o Object Object containing a textareaId (numeric ID of a #wpTextboxes<num>
+	 * @param {jQuery.Event} e
+	 * @param {Object} o Object containing a textareaId (numeric ID of a #wpTextboxes<num>
 	 *   element) and numRows (amount of rows to increase or decrease)
 	 */
 	resizeThisTextarea: function ( e, o ) {
@@ -1114,10 +1114,12 @@ var CreateAPage = {
 	 * Code licensed under the BSD License:
 	 * http://developer.yahoo.net/yui/license.txt
 	 *
-	 * @param method
-	 * @param tag
-	 * @param root
-	 * @param apply
+	 * @param {Function} method Such as CreateAPage.editTextareaTest,
+	 * @param {string} tag e.g. 'textarea'
+	 * @param {HTMLElement} root Result of a document.getElementById() call
+	 * @param {Function|null} apply If defined, a function to call on matching elements,
+	 *   such as CreateAPage.textareaAddToolbar
+	 * @return {Object}
 	 */
 	getElementsBy: function ( method, tag, root, apply ) {
 		tag = tag || '*';
@@ -1202,7 +1204,7 @@ var CreateAPageInfobox = {
 			document.getElementById( 'createpage_image_cancel' + o.num ).style.display = '';
 			document.getElementById( 'createpage_image_text' + o.num ).style.display = 'none';
 
-			$( '#createpage_image_cancel' + o.num ).click( function ( e ) {
+			$( '#createpage_image_cancel' + o.num ).click( function () {
 				sent_request.abort();
 			} );
 
@@ -1217,7 +1219,7 @@ var CreateAPageInfobox = {
 			neoInput.setAttribute( 'tabindex', '-1' );
 
 			thisContainer.appendChild( neoInput );
-			$( '#createpage_upload_file' + o.num ).change( function ( e ) {
+			$( '#createpage_upload_file' + o.num ).change( function () {
 				CreateAPageInfobox.upload( e, { num: o.num } );
 			} );
 
