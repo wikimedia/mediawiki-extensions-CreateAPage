@@ -77,8 +77,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 * @return array Array containing keys 'error' (bool), 'msg' (string) and 'once' (bool)
 	 */
 	public function execute() {
-		global $wgUser;
-
 		# Nothing to upload?
 		# This is a special "status code" that is handled -- by which I mean silently ignored --
 		# by callers; it essentially means just that: "the user chose not to upload a file,
@@ -102,9 +100,11 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			];
 		}
 
+		$user = RequestContext::getMain()->getUser();
+
 		# Check permissions
-		if ( UploadBase::isAllowed( $wgUser ) !== true ) {
-			if ( !$wgUser->isLoggedIn() ) {
+		if ( UploadBase::isAllowed( $user ) !== true ) {
+			if ( !$user->isLoggedIn() ) {
 				return [
 					'error' => 1,
 					// [sic]! There is special handling for this "message" in the
@@ -124,7 +124,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		}
 
 		# Check blocks
-		if ( $wgUser->isBlockedFromUpload() ) {
+		if ( $user->isBlockedFromUpload() ) {
 			return [
 				'error' => 1,
 				'msg' => wfMessage( 'blockedtext' )->escaped(),
@@ -177,10 +177,13 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	}
 
 	function processUpload() {
-		global $wgOut, $wgUser;
+		$context = RequestContext::getMain();
+		$lang = $context->getLanguage();
+		$out = $context->getOutput();
+		$user = $context->getUser();
 
 		// Verify permissions for this title
-		$permErrors = $this->verifyTitlePermissions( $wgUser );
+		$permErrors = $this->verifyTitlePermissions( $user );
 		if ( $permErrors !== true ) {
 			$code = array_shift( $permErrors[0] );
 			return wfMessage( $code, $permErrors[0] )->parse();
@@ -221,18 +224,18 @@ class CreatePageImageUploadForm extends UploadFromFile {
 
 			case self::OVERWRITE_EXISTING_FILE:
 				$errorText = $details['overwrite'];
-				return Status::newFatal( $wgOut->parseAsContent( $errorText ) );
+				return Status::newFatal( $out->parseAsContent( $errorText ) );
 
 			case self::FILETYPE_MISSING:
 				return wfMessage( 'filetype-missing' )->escaped();
 
 			case self::FILETYPE_BADTYPE:
-				global $wgFileExtensions, $wgLang;
+				global $wgFileExtensions;
 				$finalExt = $details['finalExt'];
 				$extensions = array_unique( $wgFileExtensions );
 				$extensionsCount = count( $extensions );
 				return wfMessage( 'filetype-banned-type', $finalExt,
-					$wgLang->commaList( $extensions ), $extensionsCount, 1 )->escaped();
+					$lang->commaList( $extensions ), $extensionsCount, 1 )->escaped();
 
 			case self::VERIFICATION_ERROR:
 				$veri = $details['veri'];
@@ -282,8 +285,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		I'm copying this stuff too
 	*/
 	function internalProcessUpload( &$resultDetails ) {
-		global $wgUser;
-
 		/* Check for PHP error if any, requires php 4.2 or newer */
 		if ( $this->mCurlError == 1 ) {
 			return self::FILE_TOO_LARGE;
@@ -365,7 +366,9 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$this->mDesiredDestName = $this->mStoredDestName . '.' . $this->mFinalExtension;
 		}
 
-		$overwrite = $this->checkOverwrite( $wgUser );
+		$user = RequestContext::getMain()->getUser();
+
+		$overwrite = $this->checkOverwrite( $user );
 		if ( $overwrite !== true ) {
 			$resultDetails = [ 'overwrite' => $overwrite ];
 			return self::OVERWRITE_EXISTING_FILE;
@@ -400,7 +403,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$this->mComment,
 			$pageText,
 			$this->mWatchthis,
-			$wgUser,
+			$user,
 			[]
 		);
 
@@ -412,8 +415,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			return UploadBase::HOOK_ABORTED;
 		} else {
 			if ( $this->mWatchthis ) {
-				global $wgUser;
-				$wgUser->addWatch( $this->mLocalFile->getTitle() );
+				$user->addWatch( $this->mLocalFile->getTitle() );
 			}
 			// Success, redirect to description page
 			$this->mReturnedTimestamp = $this->getQuickTimestamp( $this->mDestName );

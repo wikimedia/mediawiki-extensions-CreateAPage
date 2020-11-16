@@ -11,7 +11,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 	}
 
 	function generateForm( $content = false ) {
-		global $wgOut, $wgUser, $wgRequest;
+		$context = RequestContext::getMain();
+		$out = $context->getOutput();
+		$request = $context->getRequest();
+		$user = $context->getUser();
 
 		$optional_sections = [];
 
@@ -49,13 +52,13 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					$captcha->triggersCaptcha( 'create' ) ||
 					$captcha->triggersCaptcha( 'addurl' )
 				) &&
-				!$captcha->canSkipCaptcha( $wgUser,
+				!$captcha->canSkipCaptcha( $user,
 					\MediaWiki\MediaWikiServices::getInstance()->getMainConfig() )
 			) {
 				$formInformation = $captcha->getFormInformation();
 				$formMetainfo = $formInformation;
 				unset( $formMetainfo['html'] );
-				$captcha->addFormInformationToOutput( $wgOut, $formMetainfo );
+				$captcha->addFormInformationToOutput( $out, $formMetainfo );
 				$captchaForm = $captcha->getMessage( 'edit' ) . $formInformation['html'];
 			}
 		}
@@ -72,17 +75,17 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$minorEditCheck = false;
 
 		if ( $this->mInitial ) {
-			if ( $wgUser->getOption( 'watchcreations' ) ) {
+			if ( $user->getOption( 'watchcreations' ) ) {
 				$watchThisCheck = true;
 			}
-			if ( $wgUser->getOption( 'minordefault' ) ) {
+			if ( $user->getOption( 'minordefault' ) ) {
 				$minorEditCheck = true;
 			}
 		} else {
-			if ( $wgRequest->getCheck( 'wpWatchthis' ) ) {
+			if ( $request->getCheck( 'wpWatchthis' ) ) {
 				$watchThisCheck = true;
 			}
-			if ( $wgRequest->getCheck( 'wpMinoredit' ) ) {
+			if ( $request->getCheck( 'wpMinoredit' ) ) {
 				$minorEditCheck = true;
 			}
 		}
@@ -98,7 +101,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					$wgRightsText
 				)->parse(),
 				'summary' => wfMessage( 'summary' )->text(),
-				'summaryVal' => $wgRequest->getVal( 'wpSummary' ) ?: '',
+				'summaryVal' => $request->getVal( 'wpSummary' ) ?: '',
 				'captchaForm' => $captchaForm,
 				'watchThisCheck' => $watchThisCheck,
 				'minorEditCheck' => $minorEditCheck,
@@ -115,9 +118,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			]
 		);
 
-		$wgOut->addHTML( $html );
+		$out->addHTML( $html );
 		*/
-		$wgOut->addHTML(
+		$out->addHTML(
 			'<div id="cp-restricted">
 			<div id="createpageoverlay">
 				<div class="hd"></div>
@@ -126,20 +129,20 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			</div>'
 		);
 
-		$wgOut->addHTML( "<div id=\"cp-multiedit\">{$me}</div>" );
+		$out->addHTML( "<div id=\"cp-multiedit\">{$me}</div>" );
 		// check for already submitted values - for a preview, for example
 		$summaryVal = '';
-		if ( $wgRequest->getVal( 'wpSummary' ) != '' ) {
-			$summaryVal = $wgRequest->getVal( 'wpSummary' );
+		if ( $request->getVal( 'wpSummary' ) != '' ) {
+			$summaryVal = $request->getVal( 'wpSummary' );
 		}
 		if ( $this->mInitial ) {
-			if ( $wgUser->getOption( 'watchcreations' ) ) {
+			if ( $user->getOption( 'watchcreations' ) ) {
 				$watchThisCheck = 'checked="checked"';
 			} else {
 				$watchThisCheck = '';
 			}
 
-			if ( $wgUser->getOption( 'minordefault' ) ) {
+			if ( $user->getOption( 'minordefault' ) ) {
 				$minorEditCheck = 'checked="checked"';
 			} else {
 				$minorEditCheck = '';
@@ -147,10 +150,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		} else {
 			$watchThisCheck = '';
 			$minorEditCheck = '';
-			if ( $wgRequest->getCheck( 'wpWatchthis' ) ) {
+			if ( $request->getCheck( 'wpWatchthis' ) ) {
 				$watchThisCheck = 'checked="checked"';
 			}
-			if ( $wgRequest->getCheck( 'wpMinoredit' ) ) {
+			if ( $request->getCheck( 'wpMinoredit' ) ) {
 				$minorEditCheck = 'checked="checked"';
 			}
 		}
@@ -160,7 +163,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					wfMessage( $wgRightsText ? 'copyrightwarning' : 'copyrightwarning2',
 							'[[' . wfMessage( 'copyrightpage' )->inContentLanguage()->text() . ']]',
 					$wgRightsText )->text() . "\n</div>";
-		$wgOut->addWikiTextAsInterface( $copywarn );
+		$out->addWikiTextAsInterface( $copywarn );
 
 		$editSummary = '<span id="wpSummaryLabel"><label for="wpSummary">' .
 			wfMessage( 'summary' )->escaped() . "</label></span>\n<input type='text' value=\"" .
@@ -171,7 +174,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$checkboxHTML .= '<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis" ' . $watchThisCheck . '/>' . "\n" .
 		'<label accesskey="w" title="' . wfMessage( 'tooltip-watch' )->escaped() . ' [alt-shift-w]" for="wpWatchthis">' . wfMessage( 'watchthis' )->escaped() . '</label>';
 
-		$wgOut->addHTML(
+		$out->addHTML(
 			'<div id="createpagebottom">' .
 			$editSummary .
 			$captchaForm .
@@ -179,7 +182,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			'</div>'
 		);
 
-		$wgOut->addHTML(
+		$out->addHTML(
 			'<div class="actionBar buttonBar">
 		<input type="submit" id="wpSave" name="wpSave" value="' . wfMessage( 'createpage-save' )->escaped() . '" class="button color1" />
 		<input type="submit" id="wpPreview" name="wpPreview" value="' . wfMessage( 'preview' )->escaped() . '" class="button color1" />
@@ -187,7 +190,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		</div>'
 		);
 
-		$wgOut->addHTML(
+		$out->addHTML(
 			Html::hidden( 'wpUnicodeCheck', EditPage::UNICODE_CHECK ) .
 			// Marker for detecting truncated form data. This must be the last parameter sent in order to be of use, so do not move me.
 			'<input type="hidden" value="true" name="wpUltimateParam" />'
@@ -195,15 +198,15 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		// stuff for red links - bottom edittools, to be more precise
 		if ( $this->mRedLinked && ( $this->mTemplate == 'Blank' ) ) {
-			$wgOut->addHTML( '<div id="createpage_editTools" class="mw-editTools">' );
-			$wgOut->addWikiTextAsInterface( wfMessage( 'edittools' )->inContentLanguage()->text() );
-			$wgOut->addHTML( '</div>' );
+			$out->addHTML( '<div id="createpage_editTools" class="mw-editTools">' );
+			$out->addWikiTextAsInterface( wfMessage( 'edittools' )->inContentLanguage()->text() );
+			$out->addHTML( '</div>' );
 		}
 
 		// ashley 10 December 2019: HTML validation fix
 		// the old order (</form></div>) was apparently just wrong, even if it rendered
 		// just as this one does, but it made W3C Validator barf
-		$wgOut->addHTML( "\n</div>\n<!-- #cp-restricted --></form>\n" );
+		$out->addHTML( "\n</div>\n<!-- #cp-restricted --></form>\n" );
 	}
 
 	// take given categories and glue them together
@@ -279,7 +282,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 	}
 
 	public function glueArticle( $preview = false, $render_option = true ) {
-		global $wgRequest, $wgOut;
+		$context = RequestContext::getMain();
+		$out = $context->getOutput();
+		$request = $context->getRequest();
 
 		$text = '';
 		$infoboxes = [];
@@ -308,23 +313,23 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				// $image_value = [];
 				$postfix = substr( $key, 10 );
 
-				if ( $wgRequest->getVal( 'wpNoUse' . $postfix ) == 'Yes' ) {
-					$infoboxes[] = $wgRequest->getVal( 'wpInfImg' . $postfix );
+				if ( $request->getVal( 'wpNoUse' . $postfix ) == 'Yes' ) {
+					$infoboxes[] = $request->getVal( 'wpInfImg' . $postfix );
 				} else {
 					// $image_value['watchthis'] = $_POST['wpWatchthis' . $postfix];
 
 					// store these for the upload class to use
-					$wgRequest->setVal( 'wpPostFix', $postfix );
-					$wgRequest->setVal( 'Createtitle', $wgRequest->getText( 'Createtitle' ) );
+					$request->setVal( 'wpPostFix', $postfix );
+					$request->setVal( 'Createtitle', $request->getText( 'Createtitle' ) );
 
 					// do the real upload
-					$uploadform = new CreatePageImageUploadForm();
-					$uploadform->initializeFromRequest( $wgRequest );
+					$uploadForm = new CreatePageImageUploadForm();
+					$uploadForm->initializeFromRequest( $request );
 					// some of the values are fixed, we have no need to add them to the form itself
-					$uploadform->mComment = wfMessage( 'createpage-uploaded-from' )->text();
-					$uploadedfile = $uploadform->execute();
+					$uploadForm->mComment = wfMessage( 'createpage-uploaded-from' )->text();
+					$uploadedFile = $uploadForm->execute();
 
-					if ( $uploadedfile['error'] == 0 ) {
+					if ( $uploadedFile['error'] == 0 ) {
 						// This logic is giving me a headache, but allow me to try to explain it
 						// to a future me and for the future generations...
 						// When the user chose not to upload a file despite an infobox (etc.) having
@@ -333,20 +338,20 @@ class CreatePageMultiEditor extends CreatePageEditor {
 						// $infoboxes[] = '<!---imageupload--->'; (for page preview) to ensure that
 						// the "Insert Image" button shows up when the user is previewing their page,
 						// but they chose not to upload a file. They may change their mind, you know!
-						$infoboxes[] = ( $uploadedfile['msg'] !== 'cp_no_uploaded_file' ? $uploadedfile['msg'] : '<!---imageupload--->' );
+						$infoboxes[] = ( $uploadedFile['msg'] !== 'cp_no_uploaded_file' ? $uploadedFile['msg'] : '<!---imageupload--->' );
 					} else {
 						$infoboxes[] = '<!---imageupload--->';
-						if ( $uploadedfile['once'] ) {
+						if ( $uploadedFile['once'] ) {
 							if ( !$error_once ) {
 								if ( !$preview ) {
 									// certainly they'll notice things on preview
-									$wgOut->addHTML( "<p class='error'>{$uploadedfile['msg']}</p>" );
+									$out->addHTML( "<p class='error'>{$uploadedFile['msg']}</p>" );
 								}
 							}
 							$error_once = true;
 						} else {
 							if ( !$preview ) {
-								$wgOut->addHTML( "<p class='error'>{$uploadedfile['msg']}</p>" );
+								$out->addHTML( "<p class='error'>{$uploadedFile['msg']}</p>" );
 							}
 						}
 					}
@@ -360,26 +365,26 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				// $image_value['watchthis'] = $_POST['wpWatchthis' . $postfix];
 
 				// slightly hacky but w/e
-				$wgRequest->setVal( 'wpInFix', 'All' );
+				$request->setVal( 'wpInFix', 'All' );
 
-				$uploadform = new CreatePageImageUploadForm();
-				$uploadform->initializeFromRequest( $wgRequest );
-				$uploadform->mComment = wfMessage( 'createpage-uploaded-from' )->text();
-				$uploadedfile = $uploadform->execute();
-				if ( $uploadedfile['error'] == 0 ) {
-					$all_images[] = ( $uploadedfile['msg'] !== 'cp_no_uploaded_file' ? $uploadedfile['msg'] : '' );
+				$uploadForm = new CreatePageImageUploadForm();
+				$uploadForm->initializeFromRequest( $request );
+				$uploadForm->mComment = wfMessage( 'createpage-uploaded-from' )->text();
+				$uploadedFile = $uploadForm->execute();
+				if ( $uploadedFile['error'] == 0 ) {
+					$all_images[] = ( $uploadedFile['msg'] !== 'cp_no_uploaded_file' ? $uploadedFile['msg'] : '' );
 				} else {
 					$all_images[] = '<!---imageupload--->';
-					if ( $uploadedfile['once'] ) {
+					if ( $uploadedFile['once'] ) {
 						if ( !$error_once ) {
 							if ( !$preview ) {
-								$wgOut->addHTML( "<p class='error'>{$uploadedfile['msg']}</p>" );
+								$out->addHTML( "<p class='error'>{$uploadedFile['msg']}</p>" );
 							}
 						}
 						$error_once = true;
 					} else {
 						if ( !$preview ) {
-							$wgOut->addHTML( "<p class='error'>{$uploadedfile['msg']}</p>" );
+							$out->addHTML( "<p class='error'>{$uploadedFile['msg']}</p>" );
 						}
 					}
 				}
