@@ -6,6 +6,7 @@
 		"font-family-no-missing-generic-family-keyword": null,
 		"no-duplicate-selectors": null,
 		"no-descending-specificity": null,
-		"selector-max-id": null
+		"selector-max-id": null,
+		"declaration-property-value-disallowed-list": null
 	}
 }
