@@ -3,6 +3,16 @@
 class CreateAPageHooks {
 
 	/**
+	 * Super duper hacky extension registration callback to make sure the old-school
+	 * AJAX functions are loaded and available.
+	 * They should be converted properly into API modules and the SpecialCreatePage_ajax.php
+	 * file should be removed...but easier said than done, alas, hence this.
+	 */
+	public static function onRegistration() {
+		require_once __DIR__ . '/specials/SpecialCreatePage_ajax.php';
+	}
+
+	/**
 	 * When AdvancedEdit button is used, the existing content is preloaded
 	 *
 	 * @todo Nowadays there is a hook called 'EditFormPreloadText', which is only
