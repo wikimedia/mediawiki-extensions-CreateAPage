@@ -4,6 +4,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 
 function axMultiEditParse() {
 	$me = '';
@@ -20,8 +21,8 @@ function axMultiEditParse() {
 	}
 
 	if ( $title->exists() ) {
-		$rev = Revision::newFromTitle( $title );
-		$me = CreateMultiPage::multiEditParse( 10, 10, '?', ContentHandler::getContentText( $rev->getContent() ), $optionalSections );
+		$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionByTitle( $title );
+		$me = CreateMultiPage::multiEditParse( 10, 10, '?', ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) ), $optionalSections );
 	} else {
 		$me = CreateMultiPage::multiEditParse( 10, 10, '?', '<!---blanktemplate--->' );
 	}

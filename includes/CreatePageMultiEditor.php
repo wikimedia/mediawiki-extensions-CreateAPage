@@ -1,4 +1,9 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionAccessException;
+use MediaWiki\Revision\SlotRecord;
+
 // wraps up special multi editor class
 class CreatePageMultiEditor extends CreatePageEditor {
 	public $mRedLinked, $mInitial, $mPreviewed;
@@ -26,9 +31,21 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		if ( !$content ) {
 			$title = Title::newFromText( 'Createplate-' . $this->mTemplate, NS_MEDIAWIKI );
 			if ( $title->exists() ) {
-				$rev = Revision::newFromTitle( $title );
-				// @todo FIXME: $rev can be null, at least theoretically --ashley, 8 December 2019
-				$me = CreateMultiPage::multiEditParse( 10, 10, '?', ContentHandler::getContentText( $rev->getContent() ), $optional_sections );
+				$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionByTitle( $title );
+				if ( $rev !== null ) {
+					$contentObj = null;
+					try {
+						$contentObj = $rev->getContent( SlotRecord::MAIN );
+					} catch ( RevisionAccessException $ex ) {
+						// Just ignore it for now and fall back to rendering a blank template (below)
+					}
+					if ( $contentObj !== null ) {
+						$contentText = ContentHandler::getContentText( $contentObj );
+					} else {
+						$contentText = '<!---blanktemplate--->';
+					}
+					$me = CreateMultiPage::multiEditParse( 10, 10, '?', $contentText, $optional_sections );
+				}
 			} else {
 				$me = CreateMultiPage::multiEditParse( 10, 10, '?', '<!---blanktemplate--->' );
 			}
