@@ -6,11 +6,9 @@
 use MediaWiki\MediaWikiServices;
 
 function axMultiEditParse() {
-	global $wgRequest;
-
 	$me = '';
 
-	$template = $wgRequest->getVal( 'template' );
+	$template = RequestContext::getMain()->getRequest()->getVal( 'template' );
 	$title = Title::newFromText( "Createplate-{$template}", NS_MEDIAWIKI );
 
 	// transfer optional sections data
@@ -32,53 +30,52 @@ function axMultiEditParse() {
 }
 
 function axMultiEditImageUpload() {
-	global $wgRequest;
-
 	$res = [];
 
-	$postfix = $wgRequest->getVal( 'num' );
+	$request = RequestContext::getMain()->getRequest();
+	$postfix = $request->getVal( 'num' );
 	$infix = '';
-	if ( $wgRequest->getVal( 'infix' ) != '' ) {
-		$infix = $wgRequest->getVal( 'infix' );
+	if ( $request->getVal( 'infix' ) != '' ) {
+		$infix = $request->getVal( 'infix' );
 	}
 
 	// store these for the upload class to use
-	$wgRequest->setVal( 'wpPostFix', $postfix );
-	$wgRequest->setVal( 'wpInFix', $infix );
-	$wgRequest->setVal( 'Createtitle', $wgRequest->getText( 'Createtitle' ) );
+	$request->setVal( 'wpPostFix', $postfix );
+	$request->setVal( 'wpInFix', $infix );
+	$request->setVal( 'Createtitle', $request->getText( 'Createtitle' ) );
 
 	// do the real upload
-	$uploadform = new CreatePageImageUploadForm();
-	$uploadform->initializeFromRequest( $wgRequest );
-	$uploadform->mComment = wfMessage( 'createpage-uploaded-from' )->text();
-	$uploadedfile = $uploadform->execute();
+	$uploadForm = new CreatePageImageUploadForm();
+	$uploadForm->initializeFromRequest( $request );
+	$uploadForm->mComment = wfMessage( 'createpage-uploaded-from' )->text();
+	$uploadedFile = $uploadForm->execute();
 
-	if ( $uploadedfile['error'] == 0 ) {
-		if ( $uploadedfile['msg'] !== 'cp_no_uploaded_file' ) {
+	if ( $uploadedFile['error'] == 0 ) {
+		if ( $uploadedFile['msg'] !== 'cp_no_uploaded_file' ) {
 			$imageobj = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
-				->newFile( $uploadedfile['timestamp'] );
+				->newFile( $uploadedFile['timestamp'] );
 			$imageurl = $imageobj->createThumb( 60 );
 		} else {
 			// Crappy hack, but whatever, not uploading a file is entirely valid
 			// since we have the same special page handling both the upload and the form
 			// submission
-			$imageurl = '';
-			$uploadedfile['timestamp'] = '';
+			$imageURL = '';
+			$uploadedFile['timestamp'] = '';
 		}
 
 		$res = [
 			'error' => 0,
-			'msg' => $uploadedfile['msg'],
-			'url' => $imageurl,
-			'timestamp' => $uploadedfile['timestamp'],
+			'msg' => $uploadedFile['msg'],
+			'url' => $imageURL,
+			'timestamp' => $uploadedFile['timestamp'],
 			'num' => $postfix
 		];
 	} else {
-		if ( $uploadedfile['once'] ) {
+		if ( $uploadedFile['once'] ) {
 			# if ( !$error_once ) {
 				$res = [
 					'error' => 1,
-					'msg' => $uploadedfile['msg'],
+					'msg' => $uploadedFile['msg'],
 					'num' => $postfix,
 				];
 			# }
@@ -86,7 +83,7 @@ function axMultiEditImageUpload() {
 		} else {
 			$res = [
 				'error' => 1,
-				'msg' => $uploadedfile['msg'],
+				'msg' => $uploadedFile['msg'],
 				'num' => $postfix,
 			];
 		}
@@ -99,9 +96,7 @@ function axMultiEditImageUpload() {
 }
 
 function axCreatepageAdvancedSwitch() {
-	global $wgRequest;
-
-	$mCreateplate = $wgRequest->getVal( 'createplates' );
+	$mCreateplate = RequestContext::getMain()->getRequest()->getVal( 'createplates' );
 	$editor = new CreatePageMultiEditor( $mCreateplate );
 	$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 	CreateAPageUtils::unescapeKnownMarkupTags( $content );

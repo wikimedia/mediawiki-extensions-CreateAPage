@@ -92,8 +92,7 @@ class CreatePageCreateplateForm {
 		if ( isset( $this->output ) && $this->output instanceof OutputPage ) {
 			return $this->output;
 		} else {
-			global $wgOut;
-			return $wgOut;
+			return RequestContext::getMain()->getOutput();
 		}
 	}
 
@@ -107,8 +106,7 @@ class CreatePageCreateplateForm {
 		if ( isset( $this->request ) && $this->request instanceof WebRequest ) {
 			return $this->request;
 		} else {
-			global $wgRequest;
-			return $wgRequest;
+			return RequestContext::getMain()->getRequest();
 		}
 	}
 
@@ -122,8 +120,7 @@ class CreatePageCreateplateForm {
 		if ( isset( $this->user ) && $this->user instanceof User ) {
 			return $this->user;
 		} else {
-			global $wgUser;
-			return $wgUser;
+			return RequestContext::getMain()->getUser();
 		}
 	}
 
