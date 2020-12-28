@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"01miki10",
 			"Jack Phoenix"
 		]
 	},
+	"createpage-here": "tästä",
+	"createpage-alternate-creation": "tai paina $1 käyttääksesi alkuperäistä muokkainta",
 	"createpage-edit-normal": "Kehittynyt muokkaus",
 	"createpage-upload": "Tallenna kuva",
 	"createpage-hide": "Piilota",
