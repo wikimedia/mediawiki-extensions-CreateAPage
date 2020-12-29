@@ -1,12 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
+			")8",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
 			"铁桶"
 		]
 	},
+	"createpage-here": "这里",
+	"createpage-hide": "隐藏",
+	"createpage-show": "显示",
 	"createpage": "创建新条目",
 	"createpage-title": "发表新文章",
 	"createpage-title-caption": "文章标题",
-	"createpage-categories": "分类："
+	"createpage-yes": "是",
+	"createpage-no": "否",
+	"createpage-categories": "分类：",
+	"createpage-please-wait": "请稍候……",
+	"createpage-save": "保存"
 }
