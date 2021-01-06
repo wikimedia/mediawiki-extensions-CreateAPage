@@ -240,8 +240,8 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		for ( $i = 0; $i < count( $inf_pars ); $i++ ) {
 			// this was cut out from user supplying '|' inside the parameter...
-			if ( ( strpos( $inf_pars[$i], '=' ) === false ) && ( 0 != $i ) ) {
-				$fixed_par_array[$i - ( 1 + $fix_corrector )] .= '|' . $inf_pars[$i];
+			if ( strpos( $inf_pars[$i], '=' ) === false && $i != 0 ) {
+				$fixed_par_array[$i - ( $fix_corrector + 1 )] .= '|' . $inf_pars[$i];
 				$fix_corrector++;
 			} else {
 				$fixed_par_array[] = $inf_pars[$i];
