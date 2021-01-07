@@ -83,6 +83,7 @@ class EasyTemplate {
 			$file .= '.tmpl.php';
 		}
 
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.extract
 		extract( $this->mVars );
 		ob_start();
 		include $this->mPath . '/' . $file;

@@ -1,4 +1,7 @@
 <?php
+
+// phpcs:disable MediaWiki.NamingConventions.PrefixedGlobalFunctions.wfPrefix
+
 /**
  * AJAX functions for CreateAPage extension.
  */

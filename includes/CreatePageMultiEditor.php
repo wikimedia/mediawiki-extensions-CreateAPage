@@ -256,6 +256,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			if ( is_array( $inf_par_pair ) ) {
 				$text .= '|' . $inf_par_pair[0] . ' = ' .
 					$this->escapeKnownMarkupTags(
+						// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 						trim( @$infoboxes_array[$inf_par_num] )
 					) . "\n";
 				$inf_par_num++;
@@ -417,7 +418,8 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 	// by jmack@parhelic.com from php.net
 	private function str_replace_once( $search, $replace, $subject ) {
-		if ( ( $pos = strpos( $subject, $search ) ) !== false ) {
+		$pos = strpos( $subject, $search );
+		if ( $pos !== false ) {
 			$ret = substr( $subject, 0, $pos ) . $replace . substr( $subject, $pos + strlen( $search ) );
 		} else {
 			$ret = $subject;
