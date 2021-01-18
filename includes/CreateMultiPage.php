@@ -35,7 +35,9 @@ class CreateMultiPage {
 		return $text;
 	}
 
-	// @todo FIXME: remove $ew parameter, it appears to be always '?' and serves no purpose whatsoever
+	/**
+	 * @todo FIXME: remove $ew parameter, it appears to be always '?' and serves no purpose whatsoever
+	 */
 	public static function multiEditParse( $rows, $cols, $ew, $sourceText, $optional_sections = null ) {
 		global $wgExtensionAssetsPath;
 		global $wgMultiEditTag;

@@ -281,9 +281,10 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		return $res_obj->img_timestamp;
 	}
 
-	/*	since we wanted to mess up heavily here...
-		I'm copying this stuff too
-	*/
+	/**
+	 * Since we wanted to mess up heavily here...
+	 * I'm copying this stuff too
+	 */
 	function internalProcessUpload( &$resultDetails ) {
 		/* Check for PHP error if any, requires php 4.2 or newer */
 		if ( $this->mCurlError == 1 ) {

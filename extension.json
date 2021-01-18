@@ -47,7 +47,7 @@
 		}
 	},
 	"SpecialPages": {
-		"CreatePage": "CreatePage"
+		"CreatePage": "SpecialCreatePage"
 	},
 	"MessagesDirs": {
 		"CreateAPage": [
@@ -63,7 +63,7 @@
 		"EasyTemplate": "includes/EasyTemplate.php",
 		"CAP_TagCloud": "includes/CAP_TagCloud.php",
 		"CreateMultiPage": "includes/CreateMultiPage.php",
-		"CreatePage": "includes/specials/SpecialCreatePage.body.php",
+		"SpecialCreatePage": "includes/specials/SpecialCreatePage.php",
 		"CreatePageEditor": "includes/CreatePageEditor.php",
 		"CreatePageMultiEditor": "includes/CreatePageMultiEditor.php",
 		"CreatePageCreateplateForm": "includes/CreatePageCreateplateForm.php",

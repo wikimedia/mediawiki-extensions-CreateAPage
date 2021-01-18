@@ -124,12 +124,18 @@ class CreatePageCreateplateForm {
 		}
 	}
 
+	/**
+	 * @param string $title
+	 * @return string
+	 */
 	private function makePrefix( $title ) {
 		$title = str_replace( '_', ' ', $title );
 		return $title;
 	}
 
-	// show form
+	/**
+	 * Show form
+	 */
 	public function showForm( $err, $content_prev = false, $formCallback = null ) {
 		$out = $this->getOutput();
 		$request = $this->getRequest();
@@ -336,7 +342,9 @@ class CreatePageCreateplateForm {
 		}
 	}
 
-	// return checked createplate
+	/**
+	 * Return checked createplate
+	 */
 	private function getChecked( $createplate, $current, &$checked ) {
 		if ( !$createplate ) {
 			if ( !$checked ) {

@@ -226,7 +226,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$out->addHTML( "\n</div>\n<!-- #cp-restricted --></form>\n" );
 	}
 
-	// take given categories and glue them together
+	/**
+	 * Take given categories and glue them together
+	 */
 	private function glueCategories( $checkboxes_array, $categories ) {
 		$text = '';
 		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
@@ -247,7 +249,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		return $text;
 	}
 
-	// get the infobox' text and substitute all known values...
+	/**
+	 * Get the infobox' text and substitute all known values...
+	 */
 	private function glueInfobox( $infoboxes_array, $infobox_text ) {
 		$inf_pars = preg_split( "/\|/", $infobox_text, -1 );
 
@@ -433,7 +437,9 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		return $text;
 	}
 
-	// by jmack@parhelic.com from php.net
+	/**
+	 * by jmack@parhelic.com from php.net
+	 */
 	private function str_replace_once( $search, $replace, $subject ) {
 		$pos = strpos( $subject, $search );
 		if ( $pos !== false ) {

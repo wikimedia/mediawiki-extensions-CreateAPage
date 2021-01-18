@@ -1,6 +1,6 @@
 <?php
 
-class CreatePage extends SpecialPage {
+class SpecialCreatePage extends SpecialPage {
 
 	/**
 	 * Constructor -- set up the new special page
