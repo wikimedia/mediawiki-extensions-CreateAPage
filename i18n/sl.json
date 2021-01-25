@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Dbc334"
+			"Dbc334",
+			"Eleassar"
 		]
 	},
-	"createpage": "Ustvari nov članek"
+	"createpage": "Ustvari nov članek",
+	"createpage-advanced-edit": "izboljšani urejevalnik"
 }
