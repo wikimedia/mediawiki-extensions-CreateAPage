@@ -120,7 +120,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 					'once' => true
 				];
 			}
-			return;
 		}
 
 		# Check blocks
