@@ -25,9 +25,9 @@ function axMultiEditParse() {
 
 	if ( $title->exists() ) {
 		$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionByTitle( $title );
-		$me = CreateMultiPage::multiEditParse( 10, 10, '?', ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) ), $optionalSections );
+		$me = CreateMultiPage::multiEditParse( 10, 10, ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) ), $optionalSections );
 	} else {
-		$me = CreateMultiPage::multiEditParse( 10, 10, '?', '<!---blanktemplate--->' );
+		$me = CreateMultiPage::multiEditParse( 10, 10, '<!---blanktemplate--->' );
 	}
 
 	return json_encode( $me );

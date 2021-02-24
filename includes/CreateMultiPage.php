@@ -35,10 +35,7 @@ class CreateMultiPage {
 		return $text;
 	}
 
-	/**
-	 * @todo FIXME: remove $ew parameter, it appears to be always '?' and serves no purpose whatsoever
-	 */
-	public static function multiEditParse( $rows, $cols, $ew, $sourceText, $optional_sections = null ) {
+	public static function multiEditParse( $rows, $cols, $sourceText, $optional_sections = null ) {
 		global $wgExtensionAssetsPath;
 		global $wgMultiEditTag;
 		global $wgMultiEditPageSimpleTags, $wgMultiEditPageTags;
@@ -71,7 +68,6 @@ class CreateMultiPage {
 					'num' => 0,
 					'cloud' => $cloud,
 					'cols' => $cols,
-					'ew' => $ew,
 					'text_category' => '' ,
 					'array_category' => []
 				] );
@@ -425,7 +421,6 @@ class CreateMultiPage {
 			'boxes' => $boxes,
 			'cols' => $cols,
 			'rows' => $rows,
-			'ew' => $ew,
 			'is_section' => $is_section,
 			'imgpath' => $wgExtensionAssetsPath . '/CreateAPage/resources/images/',
 			'optional_sections' => $optional_sections
@@ -456,7 +451,6 @@ class CreateMultiPage {
 				'num' => $num,
 				'cloud' => $cloud,
 				'cols' => $cols,
-				'ew' => $ew,
 				'text_category' => $text_category,
 				'array_category' => $array_category
 			] );
