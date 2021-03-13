@@ -44,13 +44,13 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					} else {
 						$contentText = '<!---blanktemplate--->';
 					}
-					$me = CreateMultiPage::multiEditParse( 10, 10, '?', $contentText, $optional_sections );
+					$me = CreateMultiPage::multiEditParse( 10, 10, $contentText, $optional_sections );
 				}
 			} else {
-				$me = CreateMultiPage::multiEditParse( 10, 10, '?', '<!---blanktemplate--->' );
+				$me = CreateMultiPage::multiEditParse( 10, 10, '<!---blanktemplate--->' );
 			}
 		} else {
-			$me = CreateMultiPage::multiEditParse( 10, 10, '?', $content, $optional_sections );
+			$me = CreateMultiPage::multiEditParse( 10, 10, $content, $optional_sections );
 		}
 
 		$captchaForm = '';

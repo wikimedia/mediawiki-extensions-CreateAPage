@@ -30,7 +30,7 @@ foreach ( $cloud->tags as $xname => $xtag ) {
 ?>
 </div>
 <?php } ?>
-<textarea accesskey="," name="wpCategoryTextarea" id="wpCategoryTextarea" rows="3" cols="<?php echo $cols ?>"<?php echo $ew ?>><?php echo $text_category ?></textarea>
+<textarea accesskey="," name="wpCategoryTextarea" id="wpCategoryTextarea" rows="3" cols="<?php echo $cols ?>"><?php echo $text_category ?></textarea>
 <input type="button" name="wpCategoryButton" id="wpCategoryButton" class="button color1" value="<?php echo wfMessage( 'createpage-addcategory' )->escaped() ?>" />
 <input type="text" name="wpCategoryInput" id="wpCategoryInput" value="" />
 </div>
@@ -67,6 +67,6 @@ $text_category = implode( ',', $display_category );
 ?>
 </div>
 <?php } ?>
-<textarea tabindex="<?php echo $num ?>" accesskey="," name="wpCategoryTextarea" id="wpCategoryTextarea" rows="3" cols="<?php echo $cols ?>"<?php echo $ew ?>><?php echo $text_category ?></textarea>
+<textarea tabindex="<?php echo $num ?>" accesskey="," name="wpCategoryTextarea" id="wpCategoryTextarea" rows="3" cols="<?php echo $cols ?>"><?php echo $text_category ?></textarea>
 </noscript>
 <!-- e:<?php echo __FILE__ ?> -->
