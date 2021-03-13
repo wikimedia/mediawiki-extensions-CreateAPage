@@ -186,10 +186,23 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			wfMessage( 'summary' )->escaped() . "</label></span>\n<input type='text' value=\"" .
 			htmlspecialchars( $summaryVal ) . '" name="wpSummary" id="wpSummary" maxlength="200" size="60" /><br />';
 
-		$checkboxHTML = '<input id="wpMinoredit" type="checkbox" accesskey="i" value="1" name="wpMinoredit" ' . $minorEditCheck . '/>' . "\n" .
+		$checkboxHTML = '';
+		// Per EditPage#importFormData's isNew check (we ignore the "is this a new section?" check b/c
+		// CAP cannot be used to add new sections)
+		// @todo FIXME: This is functionally equivalent to if ( false ) b/c CAP is not
+		// used for regular page edits but rather _literally_ only for page creations,
+		// which no longer can be marked as minor edits, no matter what (and IMHO that's
+		// just silly because short pages, redirects, etc. are a thing)
+		if ( $context->getTitle()->exists() ) {
+			$checkboxHTML = '<input id="wpMinoredit" type="checkbox" accesskey="i" value="1" name="wpMinoredit" ' . $minorEditCheck . '/>' . "\n" .
 		'<label accesskey="i" title="' . wfMessage( 'tooltip-minoredit' )->escaped() . ' [alt-shift-i]" for="wpMinoredit">' . wfMessage( 'minoredit' )->escaped() . '</label>';
-		$checkboxHTML .= '<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis" ' . $watchThisCheck . '/>' . "\n" .
+		}
+		// Per EditPage#getCheckboxesDefinition; only registered users can have a watchlist, so
+		// no point in showing this checkbox for anons
+		if ( $user->isLoggedIn() ) {
+			$checkboxHTML .= '<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis" ' . $watchThisCheck . '/>' . "\n" .
 		'<label accesskey="w" title="' . wfMessage( 'tooltip-watch' )->escaped() . ' [alt-shift-w]" for="wpWatchthis">' . wfMessage( 'watchthis' )->escaped() . '</label>';
+		}
 
 		$out->addHTML(
 			'<div id="createpagebottom">' .
