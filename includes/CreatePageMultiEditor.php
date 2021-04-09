@@ -20,6 +20,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$out = $context->getOutput();
 		$request = $context->getRequest();
 		$user = $context->getUser();
+		$services = MediaWikiServices::getInstance();
 
 		$optional_sections = [];
 
@@ -28,10 +29,11 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				$optional_sections[] = str_replace( 'wpOptionalInput', '', $key );
 			}
 		}
+
 		if ( !$content ) {
 			$title = Title::newFromText( 'Createplate-' . $this->mTemplate, NS_MEDIAWIKI );
 			if ( $title->exists() ) {
-				$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionByTitle( $title );
+				$rev = $services->getRevisionLookup()->getRevisionByTitle( $title );
 				if ( $rev !== null ) {
 					$contentObj = null;
 					try {
@@ -69,8 +71,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					$captcha->triggersCaptcha( 'create' ) ||
 					$captcha->triggersCaptcha( 'addurl' )
 				) &&
-				!$captcha->canSkipCaptcha( $user,
-					\MediaWiki\MediaWikiServices::getInstance()->getMainConfig() )
+				!$captcha->canSkipCaptcha( $user, $services->getMainConfig() )
 			) {
 				$formInformation = $captcha->getFormInformation();
 				$formMetainfo = $formInformation;
@@ -244,7 +245,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 	 */
 	private function glueCategories( $checkboxes_array, $categories ) {
 		$text = '';
-		$contLang = MediaWiki\MediaWikiServices::getInstance()->getContentLanguage();
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$ns_cat = $contLang->getFormattedNsText( NS_CATEGORY );
 
 		foreach ( $checkboxes_array as $category ) {
