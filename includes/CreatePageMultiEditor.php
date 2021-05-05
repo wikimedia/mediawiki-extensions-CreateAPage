@@ -23,6 +23,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$services = MediaWikiServices::getInstance();
 
 		$optional_sections = [];
+		$me = '';
 
 		foreach ( $_POST as $key => $value ) {
 			if ( strpos( $key, 'wpOptionalInput' ) !== false ) {
@@ -148,11 +149,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		);
 
 		$out->addHTML( "<div id=\"cp-multiedit\">{$me}</div>" );
+
 		// check for already submitted values - for a preview, for example
-		$summaryVal = '';
-		if ( $request->getVal( 'wpSummary' ) != '' ) {
-			$summaryVal = $request->getVal( 'wpSummary' );
-		}
+		$summaryVal = $request->getVal( 'wpSummary' );
+
 		if ( $this->mInitial ) {
 			if ( $user->getOption( 'watchcreations' ) ) {
 				$watchThisCheck = 'checked="checked"';
@@ -427,7 +427,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			}
 		}
 
-		if ( is_array( $all_images ) ) {
+		if ( !empty( $all_images ) ) {
 			// glue in images, replacing all image tags with content
 			foreach ( $all_images as $myImage ) {
 				if ( $myImage != '<!---imageupload--->' ) {

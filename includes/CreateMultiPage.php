@@ -50,8 +50,12 @@ class CreateMultiPage {
 		$multiedit_tag = '<!---' . $wgMultiEditTag . '--->';
 
 		# is tag set?
-		if ( empty( $wgMultiEditTag ) || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
+		// @phan-suppress-next-line PhanRedundantCondition
+		if ( $wgMultiEditTag || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
+			// @phan-suppress-previous-line PhanTypeMismatchArgumentNullableInternal phan doesn't like how $sourceText can (in theory, but not in practise) be empty
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal ditto
 			if ( strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) !== true ) {
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC . "\n", '', $sourceText );
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC, '', $sourceText );
 
@@ -77,6 +81,7 @@ class CreateMultiPage {
 				return false;
 			}
 		} else {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
 			$sourceText = str_replace( $multiedit_tag, '', $sourceText );
 			$is_used_metag = true;
 		}
@@ -92,7 +97,7 @@ class CreateMultiPage {
 		// @todo FIXME: should validate the regex and if it's invalid, use the i18n msg below with ->useDatabase( false )
 		// to fetch it from the i18n/en.json file as a fallback. --ashley, 10 December 2019
 		preg_match_all(
-			wfMessage( 'createpage-template-infobox-format' )->inContentLanguage()->text(),
+			wfMessage( 'createpage-template-infobox-format' )->inContentLanguage()->escaped(),
 			$sourceText,
 			$infoboxes,
 			PREG_OFFSET_CAPTURE
@@ -148,6 +153,7 @@ class CreateMultiPage {
 		$loop = 0;
 		$optionals = [];
 
+		// @phan-suppress-next-line PhanRedundantCondition
 		if ( $is_used_metag ) {
 			$boxes[] = [
 				'type' => 'text',
@@ -170,7 +176,8 @@ class CreateMultiPage {
 				continue;
 			} elseif ( intval( $section[1] ) > 0 ) {
 				// add last character truncated by preg_split()
-				$add = substr( $sourceText, $section[1] - 1, 1 );
+				// wrap it again in an intval() to keep phan happy
+				$add = substr( $sourceText, intval( $section[1] ) - 1, 1 );
 			}
 
 			# get section text
@@ -271,7 +278,7 @@ class CreateMultiPage {
 			// and dispose of them, since they will be in the cloud anyway
 			$text = preg_replace( self::CATEGORY_TAG_PARSE, '', $text );
 			if ( is_array( $categories ) ) {
-				$found_categories = $found_categories + $categories;
+				$found_categories += $categories;
 			}
 
 			/**

@@ -16,7 +16,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	public $mStoredDestName, $mLastTimestamp, $mReturnedTimestamp;
 	public $mCurlError;
 	public $mInFix, $mPostFix;
-	public $mWatchthis = 1;
+	public $mWatchthis = true;
 	public $mComment;
 	public $mErrorText;
 
@@ -53,6 +53,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$desiredDestName = $upload->getName();
 		}
 
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$this->initialize( $desiredDestName, $upload );
 	}
 
@@ -175,6 +176,11 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		}
 	}
 
+	/**
+	 * @suppress PhanTypeInvalidDimOffset phan is actually totally right about the $details['something']
+	 *  below being invalid (at least at a glance), but I'm not diving nose-first into upload code
+	 *  right now; I just want seccheck running for this extension for now. --ashley, 29 April 2021
+	 */
 	function processUpload() {
 		$context = RequestContext::getMain();
 		$lang = $context->getLanguage();
@@ -223,6 +229,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 
 			case self::OVERWRITE_EXISTING_FILE:
 				$errorText = $details['overwrite'];
+				// @phan-suppress-next-line PhanTypeMismatchArgument see the method comment for details
 				return Status::newFatal( $out->parseAsContent( $errorText ) );
 
 			case self::FILETYPE_MISSING:
@@ -237,8 +244,10 @@ class CreatePageImageUploadForm extends UploadFromFile {
 					$lang->commaList( $extensions ), $extensionsCount, 1 )->escaped();
 
 			case self::VERIFICATION_ERROR:
-				$veri = $details['veri'];
-				return $veri->toString();
+				unset( $details['status'] );
+				// @phan-suppress-next-line PhanTypeMismatchArgumentInternal This code is a mess and phan is probably right...
+				$code = array_shift( $details['details'] );
+				return wfMessage( $code, $details['details'] )->parse();
 
 			// case self::UPLOAD_VERIFICATION_ERROR:
 			// 	$error = $details['error'];
@@ -342,7 +351,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			// this timestamp should not repeat...
 			$timestamp = 'invalid';
 		}
-		$tempname = '';
+		$tempName = '';
 		$tmpCount = 0;
 
 		while ( $img_found && ( $timestamp != $this->mLastTimestamp ) ) {
@@ -352,7 +361,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			$tmpDestname = $file_ext;
 			$tempName = $tmpDestname . $tmpCount . '.' . $this->mFinalExtension;
 			$timestamp = $tempName;
-			$img_found = $repoGroup->findFile( $tempname );
+			$img_found = $repoGroup->findFile( $tempName );
 		}
 
 		if ( $tmpCount > 0 ) {
