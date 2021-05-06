@@ -175,7 +175,7 @@ class CreatePageCreateplateForm {
 			$helpLink = wfExpandUrl( Skin::makeInternalOrExternalUrl(
 				wfMessage( 'helppage' )->inContentLanguage()->text()
 			) );
-			if ( $user->isLoggedIn() ) {
+			if ( $user->isRegistered() ) {
 				$out->wrapWikiMsg(
 					// Suppress the external link icon, consider the help URL an internal one
 					"<div class=\"mw-newarticletext plainlinks\">\n$1\n</div>",

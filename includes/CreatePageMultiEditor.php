@@ -200,7 +200,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		}
 		// Per EditPage#getCheckboxesDefinition; only registered users can have a watchlist, so
 		// no point in showing this checkbox for anons
-		if ( $user->isLoggedIn() ) {
+		if ( $user->isRegistered() ) {
 			$checkboxHTML .= '<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis" ' . $watchThisCheck . '/>' . "\n" .
 		'<label accesskey="w" title="' . wfMessage( 'tooltip-watch' )->escaped() . ' [alt-shift-w]" for="wpWatchthis">' . wfMessage( 'watchthis' )->escaped() . '</label>';
 		}

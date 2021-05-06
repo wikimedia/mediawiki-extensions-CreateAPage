@@ -104,7 +104,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 
 		# Check permissions
 		if ( UploadBase::isAllowed( $user ) !== true ) {
-			if ( !$user->isLoggedIn() ) {
+			if ( !$user->isRegistered() ) {
 				return [
 					'error' => 1,
 					// [sic]! There is special handling for this "message" in the
