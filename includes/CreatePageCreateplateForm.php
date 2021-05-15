@@ -134,9 +134,14 @@ class CreatePageCreateplateForm {
 	}
 
 	/**
-	 * Show form
+	 * Show the main editor form
+	 *
+	 * @param string $err Error message to show, if any; should be pre-escaped, HTML-safe
+	 * @param string $content_prev Content to preview when previewing
+	 * @param callable|null $formCallback Used for CAPTCHAs and the like, allegedly;
+	 *   not sure if that's true anymore as of 2021
 	 */
-	public function showForm( $err, $content_prev = false, $formCallback = null ) {
+	public function showForm( $err = '', $content_prev = '', $formCallback = null ) {
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 		$user = $this->getUser();
@@ -158,11 +163,11 @@ class CreatePageCreateplateForm {
 		if ( $request->getCheck( 'wpPreview' ) ) {
 			$out->addHTML(
 				'<div class="previewnote"><p>' .
-				wfMessage( 'previewnote' )->text() .
+				wfMessage( 'previewnote' )->parse() .
 				'</p></div>'
 			);
 		} else {
-			$out->addHTML( wfMessage( 'createpage-title-additional' )->text() );
+			$out->addHTML( wfMessage( 'createpage-title-additional' )->escaped() );
 		}
 
 		if ( $err != '' ) {
@@ -241,19 +246,6 @@ class CreatePageCreateplateForm {
 			$out->addModules( 'ext.createAPage.wikiEditor' );
 		}
 
-		// @todo This was originally used by the Wikia CreatePage ([sic]! it's different from
-		// _this_ extension) extension, which was once a part of the Wikiwyg extension
-		// (super legacy WYSIWYG editing extension that was relevant circa 2007 or so)
-		// Nothing in CreateAPage seems to use this, i.e. this element will always
-		// remain hidden. Can we safely just ditch this? --ashley, 10 December 2019
-		$alternateLink = '<a href="#" id="createapage-go-to-normal-editor">' .
-			wfMessage( 'createpage-here' )->text() . '</a>';
-		$out->addHTML(
-			'<div id="createpage_subtitle" style="display:none">' .
-				wfMessage( 'createpage-alternate-creation', $alternateLink )->text() .
-			'</div>'
-		);
-
 		if ( $request->getCheck( 'wpPreview' ) ) {
 			$this->showPreview( $content_prev, $request->getVal( 'Createtitle' ) );
 		}
@@ -288,9 +280,9 @@ class CreatePageCreateplateForm {
 		if ( !$request->getCheck( 'wpPreview' ) ) {
 			$out->addHTML(
 				'<fieldset id="cp-chooser-fieldset"' . $showField . '>
-				<legend>' . wfMessage( 'createpage-choose-createplate' )->text() .
+				<legend>' . wfMessage( 'createpage-choose-createplate' )->escaped() .
 				'<span>[<a id="cp-chooser-toggle" title="toggle" href="#">'
-				. wfMessage( 'createpage-hide' )->text() . '</a>]</span>
+				. wfMessage( 'createpage-hide' )->escaped() . '</a>]</span>
 				</legend>' . "\n"
 			);
 			$out->addHTML( '<div id="cp-chooser" style="display: block;">' . "\n" );
@@ -437,7 +429,7 @@ class CreatePageCreateplateForm {
 		}
 
 		if ( empty( $given ) && !$ajax ) {
-			return wfMessage( 'createpage-give-title' )->text();
+			return wfMessage( 'createpage-give-title' )->escaped();
 		}
 
 		$title = Title::newFromText( $given );
@@ -458,10 +450,10 @@ class CreatePageCreateplateForm {
 				} else {
 					// Mimick the way AJAX version displays things and use the
 					// same two messages. 2 are needed for full i18n support.
-					return wfMessage( 'createpage-article-exists' )->text() . ' ' .
+					return wfMessage( 'createpage-article-exists' )->escaped() . ' ' .
 						// @todo Use LinkRenderer instead.
 						Linker::linkKnown( $title, '', [], [ 'action' => 'edit' ] ) .
-						wfMessage( 'createpage-article-exists2' )->text();
+						wfMessage( 'createpage-article-exists2' )->escaped();
 				}
 			}
 			if ( !$ajax ) {
@@ -503,7 +495,36 @@ class CreatePageCreateplateForm {
 				return false;
 			}
 
-			if ( $request->getVal( 'wpSave' ) && $request->wasPosted() && $user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
+			if ( $request->getVal( 'wpSave' ) && $request->wasPosted() ) {
+				$hasError = false;
+				$errorMsg = '';
+
+				if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
+					// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
+					// CSRF attempt?
+					$hasError = true;
+					$errorMsg = wfMessage( 'sessionfailure' )->escaped();
+				}
+
+				if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
+					$captcha = ConfirmEditHooks::getInstance();
+					if ( !$captcha->passCaptchaFromRequest( $request, $user ) ) {
+						$hasError = true;
+						$errorMsg = wfMessage( 'captcha-edit-fail' )->escaped();
+					}
+				}
+
+				if ( $hasError && $errorMsg !== '' ) {
+					// This is literally copypasted from the wpPreview loop below
+					// with one '' changed to $errorMsg, that's it
+					$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
+					$content = $editor->glueArticle( true, false );
+					$content_static = $editor->glueArticle( true );
+					$this->showForm( $errorMsg, $content_static );
+					$editor->generateForm( $content );
+					return false;
+				}
+
 				$editor = new CreatePageMultiEditor( $this->mCreateplate );
 				$rtitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
 				// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
@@ -547,7 +568,7 @@ class CreatePageCreateplateForm {
 					// Obviously 'hookaborted' is an i18n msg key and the latter is something
 					// that should be output as-is...
 					if ( !preg_match( '/</', $errorMsg ) ) {
-						$errorMsg = wfMessage( $errorMsg )->text();
+						$errorMsg = wfMessage( $errorMsg )->escaped();
 					}
 					// This is literally copypasted from the wpPreview loop below
 					// with one '' changed to $errorMsg, that's it
@@ -561,18 +582,6 @@ class CreatePageCreateplateForm {
 					$out->redirect( Title::newFromText( $request->getVal( 'Createtitle' ) )->getFullURL() );
 				}
 
-				return false;
-			} elseif ( $request->getVal( 'wpSave' ) && $request->wasPosted() && !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
-				// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
-				// CSRF attempt?
-				$errorMsg = wfMessage( 'sessionfailure' )->escaped();
-				// This is literally copypasted from the wpPreview loop below
-				// with one '' changed to $errorMsg, that's it
-				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
-				$content = $editor->glueArticle( true, false );
-				$content_static = $editor->glueArticle( true );
-				$this->showForm( $errorMsg, $content_static );
-				$editor->generateForm( $content );
 				return false;
 			} elseif ( $request->getCheck( 'wpPreview' ) ) {
 				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
