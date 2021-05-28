@@ -50,8 +50,8 @@ class CreateMultiPage {
 		$multiedit_tag = '<!---' . $wgMultiEditTag . '--->';
 
 		# is tag set?
-		// @phan-suppress-next-line PhanRedundantCondition
-		if ( $wgMultiEditTag || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
+		// @phan-suppress-next-line PhanImpossibleCondition phan doesn't like the 1st cond; it's needed for infobox parsing
+		if ( empty( $wgMultiEditTag ) || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
 			// @phan-suppress-previous-line PhanTypeMismatchArgumentNullableInternal phan doesn't like how $sourceText can (in theory, but not in practise) be empty
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal ditto
 			if ( strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) !== true ) {
