@@ -2,18 +2,27 @@
 	"@metadata": {
 		"authors": [
 			")8",
+			"Lakejason0",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
 			"铁桶"
 		]
 	},
+	"createpage-upload": "上传图片",
 	"createpage-hide": "隐藏",
 	"createpage-show": "显示",
 	"createpage": "创建新条目",
 	"createpage-title": "发表新文章",
 	"createpage-title-caption": "文章标题",
+	"createpage-choose-createplate": "选择页面类型",
+	"createpage-button-createplate-submit": "加载此模板",
+	"createpage-give-title": "请指定一个标题",
+	"createpage-title-invalid": "请指定一个有效的标题",
+	"createpage-article-exists": "此文章已存在。编辑",
+	"createpage-article-exists2": "或指定另一标题。",
 	"createpage-yes": "是",
 	"createpage-no": "否",
 	"createpage-categories": "分类：",
+	"createpage-uploaded-from": "上传自Special:CreatePage",
 	"createpage-please-wait": "请稍候……",
 	"createpage-save": "保存"
 }
