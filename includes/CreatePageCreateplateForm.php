@@ -530,6 +530,11 @@ class CreatePageCreateplateForm {
 				// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
 				$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
 				$editpage = new EditPage( $rarticle );
+				$editpage->setContextTitle( SpecialPage::getTitleFor( 'CreatePage' ) );
+
+				// @note Per core MW a154a28c7a4442a7d08689036dc54688b0867a64, public access to these is deprecated
+				// (since MW 1.30) and I don't see why these oughta be set because they get set in EditPage's
+				// constructor from the object passed to it...
 				$editpage->mTitle = $rtitle;
 				$editpage->mArticle = $rarticle;
 
