@@ -23,6 +23,9 @@
 	"createpage-no": "否",
 	"createpage-categories": "分类：",
 	"createpage-uploaded-from": "上传自Special:CreatePage",
+	"createpage-img-uploaded": "图片上传成功",
+	"createpage-preview-end": "预览结束。您可以在下方继续编辑：",
+	"createpage-insert-image": "插入图片",
 	"createpage-please-wait": "请稍候……",
 	"createpage-save": "保存"
 }
