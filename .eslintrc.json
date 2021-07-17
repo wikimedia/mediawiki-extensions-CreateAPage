@@ -20,7 +20,6 @@
 		"no-unneeded-ternary": "off",
 		"no-unused-vars": "off",
 		"no-use-before-define": "off",
-		"one-var": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
 		"no-shadow": "warn",
