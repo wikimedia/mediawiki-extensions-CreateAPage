@@ -41,8 +41,9 @@ class SpecialCreatePage extends SpecialPage {
 		$this->checkReadOnly();
 
 		// If the user is blocked, then they have no business here...throw an error.
-		if ( $user->isBlocked() ) {
-			throw new UserBlockedError( $user->getBlock() );
+		$block = $user->getBlock();
+		if ( $block ) {
+			throw new UserBlockedError( $block );
 		}
 
 		// Set the page title, robot policies, etc.
