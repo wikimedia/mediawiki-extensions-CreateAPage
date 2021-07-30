@@ -21,7 +21,6 @@
 		"no-unused-vars": "off",
 		"no-use-before-define": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off",
 		"no-shadow": "warn",
 		"block-scoped-var": "warn"
 	}
