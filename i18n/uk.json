@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Piramidion",
 			"Prima klasy4na"
 		]
@@ -22,7 +23,7 @@
 	"createpage-article-exists2": "або вкажіть іншу назву.",
 	"createpage-advanced-warning": "Перемикання між режимами редагування може пошкодити форматування сторінки, ви впевнені, що хочете продовжити?",
 	"createpage-login-warning": "Увійшовши в систему зараз, ви можете втратити весь свій незбережений текст. Ви впевнені, що хочете продовжити?",
-	"createpage-infobox-legend": "Картка",
+	"createpage-infobox-legend": "Інфобокс",
 	"createpage-yes": "Так",
 	"createpage-no": "Ні",
 	"createpage-categories": "Категорії",
