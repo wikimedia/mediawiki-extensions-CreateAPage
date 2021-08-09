@@ -49,5 +49,6 @@
 	"createpage-must-specify-title": "Будь ласка, спершу вкажіть заголовок!",
 	"createpage-unsaved-changes": "Незбережені зміни",
 	"createpage-unsaved-changes-details": "У вас є незбережені зміни. Якщо клацнете «Гаразд», ці зміни буде відкинуто.",
-	"tog-createpage-redlinks": "Використовувати [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] при переході за зламаними посиланнями"
+	"tog-createpage-redlinks": "Використовувати [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] при переході за зламаними посиланнями",
+	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Інфобокс.*\\}\\}/is"
 }
