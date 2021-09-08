@@ -146,7 +146,7 @@ class CreateMultiPage {
 
 		# check sections exist
 		$sections = preg_split( self::SECTION_PARSE, $sourceText, -1, PREG_SPLIT_OFFSET_CAPTURE );
-		$is_section = ( count( $sections ) > 1 ? true : false );
+		$is_section = ( count( $sections ) > 1 );
 
 		$boxes = [];
 		$num = 0;
