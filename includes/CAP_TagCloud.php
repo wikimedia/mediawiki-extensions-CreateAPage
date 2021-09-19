@@ -17,7 +17,7 @@ class CAP_TagCloud {
 	}
 
 	public function initialize() {
-		$dbr = wfGetDB( DB_MASTER );
+		$dbr = wfGetDB( DB_PRIMARY );
 		$res = $dbr->select(
 			'categorylinks',
 			[ 'cl_to', 'COUNT(*) AS count' ],
