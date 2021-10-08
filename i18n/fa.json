@@ -1,9 +1,37 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Jeeputer"
+		]
 	},
+	"createpage-edit-normal": "ویرایش پیشرفته",
+	"createpage-upload": "بارگذاری تصویر",
+	"createpage-hide": "نهفتن",
+	"createpage-show": "نمایش",
 	"createpage": "ایجاد مقالۀ جدید",
+	"createpage-desc": "[[Special:CreatePage|رابط کاربر با کاربرد آسان]] برای ایجاد مقاله‌های تازه",
 	"createpage-title": "ایجاد مقالۀ جدید",
 	"createpage-title-caption": "نام",
-	"createpage-categories": "رده‌ها:"
+	"createpage-choose-createplate": "نوع صفحه را انتخاب کنید",
+	"createpage-button-createplate-submit": "بارگیری این الگو",
+	"createpage-give-title": "لطفاً یک عنوان را مشخص کنید",
+	"createpage-title-invalid": "لطفاً یک عنوان معتبر را مشخص کنید",
+	"createpage-article-exists": "مقاله از پیش موجود است. ویرایش کنید",
+	"createpage-article-exists2": "یا یک عنوان دیگر را مشخص کنید",
+	"createpage-infobox-legend": "جعبه اطلاعات",
+	"createpage-yes": "بله",
+	"createpage-no": "خیر",
+	"createpage-categories": "رده‌ها:",
+	"createpage-addcategory": "افزودن رده",
+	"createpage-top-of-page": "بالای صفحه",
+	"createpage-insert-image": "درج تصویر",
+	"createpage-upload-aborted": "درج تصویر لغو شد",
+	"createpage-please-wait": "لطفاً صبر کنید...",
+	"createpage-advanced-text": "همچنین می‌توانید از $1 استفاده کنید.",
+	"createpage-advanced-edit": "ویرایشگر پیشرفته",
+	"createpage-optionals-text": "افزودن بخش‌های اختیاری:",
+	"createpage-save": "ذخیره",
+	"createpage-must-specify-title": "لطفاً ابتدا یک عنوان را مشخص کنید!",
+	"createpage-unsaved-changes": "تغییرات ذخیره‌نشده",
+	"createpage-unsaved-changes-details": "شما تغییرات ذخیره‌نشده‌ای دارید. با کلیک‌کردن روی «باشه» از آن‌ها چشم‌پوشی خواهد شد."
 }
