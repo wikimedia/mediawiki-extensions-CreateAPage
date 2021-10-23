@@ -391,10 +391,10 @@ class CreatePageCreateplateForm {
 				$rtitle,
 				$parserOptions
 			);
-			// @todo FIXME/CHECKME: Probably should _not_ use mText, @see showPreview() method
-			$aboutInfo = str_replace( '</p>', '', $parsedInfo->mText );
+			$aboutInfo = str_replace( '</p>', '', $parsedInfo->getRawText() );
 			$aboutInfo .= wfMessage(
 				'createpage-advanced-text',
+				// @phan-suppress-next-line PhanPossiblyUndeclaredVariable No, wgScript is NOT undefined here
 				'<a href="' . $wgServer . $wgScript . '" id="wpAdvancedEdit">' .
 					wfMessage( 'createpage-advanced-edit' )->text() . '</a>'
 			)->text() . '</p>';
