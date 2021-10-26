@@ -54,7 +54,7 @@ class CreateMultiPage {
 		if ( empty( $wgMultiEditTag ) || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
 			// @phan-suppress-previous-line PhanTypeMismatchArgumentNullableInternal phan doesn't like how $sourceText can (in theory, but not in practise) be empty
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal ditto
-			if ( strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) === false ) {
+			if ( !strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) ) {
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC . "\n", '', $sourceText );
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC, '', $sourceText );
