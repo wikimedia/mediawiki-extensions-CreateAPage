@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Seipinne"
+			"Seipinne",
+			"Yupik"
 		]
 	},
-	"createpage-hide": "Čievâ"
+	"createpage-hide": "Čievâ",
+	"createpage-button-createplate-submit": "Luođii taam myenster"
 }
