@@ -4,14 +4,15 @@
 			"Jack Phoenix",
 			"Kly",
 			"Xiplus",
-			"許瑜真 (Yuchen Hsu/KaurJmeb)"
+			"許瑜真 (Yuchen Hsu/KaurJmeb)",
+			"Winston Sung"
 		]
 	},
 	"createpage-edit-normal": "進階編輯",
 	"createpage-upload": "上傳圖片",
 	"createpage-hide": "隱藏",
 	"createpage-show": "顯示",
-	"createpage": "創建一個新條目",
+	"createpage": "新增頁面",
 	"createpage-desc": "用於建立新條目的[[Special:CreatePage|簡易使用介面]]",
 	"createpage-title": "建立一個新條目",
 	"createpage-title-additional": "您連結到尚未存在的頁面。要建立頁面，請在下方方框開始輸入",
