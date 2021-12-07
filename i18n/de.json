@@ -3,7 +3,8 @@
 		"authors": [
 			"Ameisenigel",
 			"Umherirrender",
-			"WikiBayer"
+			"WikiBayer",
+			"McDutchie"
 		]
 	},
 	"createpage-here": "hier",
@@ -32,7 +33,8 @@
 	"createpage-top-of-page": "Seitenanfang",
 	"createpage-uploaded-from": "Upload via Special:CreatePage",
 	"createplate-list": "Blank|Leer",
-	"createpage-title-check-header": "Du musst warten, bis der Namen überprüft wurde. Klicke dann erneut auf den Knopf zum fortfahren.",
+	"createpage-title-check-header": "Titelprüfung erzwungen",
+	"createpage-title-check-text": "Du musst warten, bis der Namen überprüft wurde. Klicke dann erneut auf den Knopf zum fortfahren.",
 	"createpage-img-uploaded": "Bild erfolgreich hochgeladen",
 	"createpage-preview-end": "Ende der Vorschau. Du kannst jetzt unten mit deine Bearbeitung fortsetzen:",
 	"createpage-insert-image": "Bild einfügen",

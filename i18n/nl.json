@@ -4,7 +4,8 @@
 			"Elroy",
 			"Mainframe98",
 			"Mitchel Corstjens",
-			"Siebrand Mazeland"
+			"Siebrand Mazeland",
+			"McDutchie"
 		]
 	},
 	"createpage-here": "hier",
@@ -50,6 +51,6 @@
 	"createpage-optionals-text": "Optionele secties toevoegen:",
 	"createpage-save": "Opslaan",
 	"createpage-unsaved-changes": "Niet-opgeslagen wijzigingen",
-	"tog-createpage-redlinks": "Gebruik [http://www.shoutwiki.com/wiki/Help:CreatePage pagina aanmaken] als u verbroken verwijzigen volgt",
+	"tog-createpage-redlinks": "[http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] gebruiken bij het volgen van verbroken koppelingen",
 	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Informatievenster.*\\}\\}/is"
 }
