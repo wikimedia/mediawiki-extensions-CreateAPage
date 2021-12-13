@@ -2,7 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Ameisenigel",
-			"WikiBayer"
+			"WikiBayer",
+			"McDutchie",
+			"Umherirrender"
 		]
 	},
 	"createpage-here": "hier",
@@ -31,14 +33,15 @@
 	"createpage-top-of-page": "Seitenanfang",
 	"createpage-uploaded-from": "Upload via Special:CreatePage",
 	"createplate-list": "Blank|Leer",
-	"createpage-title-check-header": "Du musst warten, bis der Namen überprüft wurde. Klicke dann erneut auf den Knopf zum fortfahren.",
+	"createpage-title-check-header": "Titelprüfung erzwungen",
+	"createpage-title-check-text": "Du musst warten, bis der Namen überprüft wurde. Klicke dann erneut auf den Knopf zum fortfahren.",
 	"createpage-img-uploaded": "Bild erfolgreich hochgeladen",
 	"createpage-preview-end": "Ende der Vorschau. Du kannst jetzt unten mit deine Bearbeitung fortsetzen:",
 	"createpage-insert-image": "Bild einfügen",
 	"createpage-upload-aborted": "Einfügung des Bildes abgebrochen",
 	"createpage-initial-run": "Zur Bearbeitung",
 	"createpage-login-required": "Du musst dich <a id=\"$2\" href=\"$1\">anmelden</a>, um Bilder hochzuladen",
-	"createpage-please-wait": "Bitte warten...",
+	"createpage-please-wait": "Bitte warten…",
 	"createpage-upload-directory-read-only": "Das Upload-Verzeichnis konnte nicht vom Webserver beschrieben werden",
 	"createpage-about-info": "Dies ist der vereinfachte Editor. Weitere Informationen darüber findest du im [[w:c:de:Hilfe:Createpage|hier]].",
 	"createpage-advanced-text": "Dir steht auch ein $1 zur Verfügung.",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Mirzali",
-			"Orbot707"
+			"Orbot707",
+			"Jack Phoenix"
 		]
 	},
 	"createpage-here": "tiya de",
@@ -18,5 +19,5 @@
 	"createpage-addcategory": "Kategori cı kerê",
 	"createpage-top-of-page": "Seraniya pele",
 	"createpage-uploaded-from": "Special:CreatePage ara bar biya.",
-	"createplate-list": "Veng|pır niya"
+	"createplate-list": "Blank|pır niya"
 }

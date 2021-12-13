@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Jesielt"
+			"Jesielt",
+			"Eduardoaddad"
 		]
 	},
 	"createpage-here": "aqui",
@@ -31,6 +32,7 @@
 	"createpage-addcategory": "Adicionar categoria",
 	"createpage-top-of-page": "Parte superior da página",
 	"createpage-uploaded-from": "Carregado do Special:CreatePage",
+	"createplate-list": "Blank|Branco",
 	"createpage-title-check-header": "Verificação de título forçada",
 	"createpage-title-check-text": "Você não pode executar uma ação até a verificação do título terminar. Clique novamente no botão de ação para continuar.",
 	"createpage-img-uploaded": "Imagem enviada com sucesso",

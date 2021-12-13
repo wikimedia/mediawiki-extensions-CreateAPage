@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeje Brazorf"
+		]
+	},
+	"createpage-hide": "Ammuccia",
+	"createpage-show": "Ammustra",
+	"createpage-title-caption": "Tìtulu dâ vuci",
+	"createpage-choose-createplate": "Scegghi un tipu di pàggina.",
+	"createpage-button-createplate-submit": "Càrrica stu template",
+	"createpage-yes": "Sì",
+	"createpage-no": "No",
+	"createpage-categories": "Catigurìi",
+	"createpage-addcategory": "Agghiunci catigurìa",
+	"createplate-list": "Blank|Vacanti",
+	"createpage-insert-image": "Nzirisci mmàggini",
+	"createpage-please-wait": "Aspittari pregu...",
+	"createpage-save": "Sarva"
+}

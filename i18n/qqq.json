@@ -3,7 +3,8 @@
 		"authors": [
 			"BaRaN6161 TURK",
 			"Robby",
-			"Umherirrender"
+			"Umherirrender",
+			"Jack Phoenix"
 		]
 	},
 	"createpage-here": "Used as $1 on {{msg-mw|createpage-alternate-creation}}.\n{{Identical|Here}}",
@@ -32,7 +33,7 @@
 	"createpage-addcategory": "Button text",
 	"createpage-top-of-page": "TODO: I'm not sure how this is used. It technically seems to be used, but I'm unsure if it's actually ever displayed to the end-user.",
 	"createpage-uploaded-from": "Summary used for images uploaded via Special:CreatePage",
-	"createplate-list": "Newline-separated listing of createplates. The format is: <code>createplate internal name|Text displayed to the user</code>. For example, <code>foo|Bar</code> would mean that the user is shown the text \"Bar\" and it loads the createplate from <code>MediaWiki:Createplate-foo</code>.",
+	"createplate-list": "Newline-separated listing of createplates. The format is: <code>createplate internal name|Text displayed to the user</code>. For example, <code>foo|Bar</code> would mean that the user is shown the text \"Bar\" and it loads the createplate from <code>MediaWiki:Createplate-foo</code>.\n\nDo '''not''' translate the '''first''' instance of \"Blank\" here, as (per above) it's the name of the createplate (in the MediaWiki: namespace); '''only translate the second instance''', as that is the text which gets shown to the used on the special page as the name of the createplate!",
 	"createplate-Blank": "{{notranslate}}",
 	"createpage-title-check-header": "Title of an error message dialog shown via JavaScript. Contents of the dialog are {{msg-mw|createpage-title-check-text}}. The dialog is shown to the user when the page title they supplied is being validated but the validation hasn't yet finished.",
 	"createpage-title-check-text": "Error message shown via the JavaScript title validator when a title is being validated but the validation hasn't yet finished. The title of the dialog is {{msg-mw|createpage-title-check-header}}.",
@@ -53,5 +54,5 @@
 	"createpage-unsaved-changes": "JavaScript dialog title; dialog contents are {{msg-mw|createpage-unsaved-changes-details}}.",
 	"createpage-unsaved-changes-details": "JavaScript dialog contents; the title of the dialog is {{msg-mw|createpage-unsaved-changes}}.",
 	"tog-createpage-redlinks": "Shown on [[Special:Preferences]] when <code>$wgCreatePageCoverRedLinks</code> is set to <code>true</code> in the wiki's configuration. This option enables the use of Special:CreatePage-like editor on '''all''' redlinks.",
-	"createpage-template-infobox-format": "Regular expression passed to PHP's [https://www.php.net/manual/en/function.preg-match-all.php <code>preg_match_all</code>] function; used to identify infobox templates (because especially in English infobox template naming conventions usually follow the pattern \"Infobox <subject>\")."
+	"createpage-template-infobox-format": "{{optional}}\nRegular expression passed to PHP's [https://www.php.net/manual/en/function.preg-match-all.php <code>preg_match_all</code>] function; used to identify infobox templates (because especially in English infobox template naming conventions usually follow the pattern \"Infobox <subject>\")."
 }

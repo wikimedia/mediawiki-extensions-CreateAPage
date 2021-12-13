@@ -55,5 +55,6 @@
 	"createpage-must-specify-title": "Veuillez d’abord spécifier un titre !",
 	"createpage-unsaved-changes": "Modifications non enregistrées",
 	"createpage-unsaved-changes-details": "Vous avez des modifications non enregistrées. Cliquer sur OK aura pour effet de les abandonner.",
-	"tog-createpage-redlinks": "Utiliser [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] après avoir suivi des liens cassés"
+	"tog-createpage-redlinks": "Utiliser [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] après avoir suivi des liens cassés",
+	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Infobox.*\\}\\}/is"
 }

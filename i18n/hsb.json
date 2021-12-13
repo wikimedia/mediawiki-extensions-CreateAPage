@@ -1,8 +1,50 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki"
+			"Michawiki",
+			"J budissin"
 		]
 	},
-	"createpage": "Stronu wutworić"
+	"createpage-edit-normal": "Rozšěrjeny editor",
+	"createpage-upload": "Wobraz nahrać",
+	"createpage-hide": "Schować",
+	"createpage-show": "Pokazać",
+	"createpage": "Nowy zapisk wutworić",
+	"createpage-desc": "[[Special:CreatePage|Jednory interfejs]] za wutworjenje nowych zapiskow",
+	"createpage-title": "Nowy zapisk wutworić",
+	"createpage-title-additional": "Tuta strona hišće njeeksistuje. Za wutworjenje noweho zapiska, pisaj do kašćika deleka.",
+	"createpage-title-caption": "Titul strony:",
+	"createpage-choose-createplate": "Wubjer typ strony",
+	"createpage-button-createplate-submit": "Tutu předłohu začitać",
+	"createpage-give-title": "Prošu zapodaj titul",
+	"createpage-title-invalid": "Prošu zapodaj płaćiwy titul",
+	"createpage-article-exists": "Tuta strona hižo wobsteji. Wobdźěłaj",
+	"createpage-article-exists2": "abo zapodaj nowy titul.",
+	"createpage-advanced-warning": "Změna editora móže formatěrowanje strony kóncować, chceš woprawdźe dale činić?",
+	"createpage-login-warning": "Hdyž so nětko přizjewiš, zhubiš snano twój hišće njeskładowany tekst. Chceš přiwšěm dale činić?",
+	"createpage-infobox-legend": "Infokašćik",
+	"createpage-yes": "Haj",
+	"createpage-no": "Ně",
+	"createpage-categories": "Kategorije",
+	"createpage-addcategory": "Kategoriju přidać",
+	"createpage-top-of-page": "Započatk strony",
+	"createpage-uploaded-from": "Nahraty přez Special:CreatePage",
+	"createplate-list": "Blank|prózdne",
+	"createpage-title-check-header": "Dyrbiš čakać, doniž so mjeno njeje přepruwowało. Klikń potom znowa.",
+	"createpage-img-uploaded": "Wobraz wuspěšnje nahraty",
+	"createpage-preview-end": "Kónc přehladki. Móžeš nětko deleka z wobdźěłanjom pokročować:",
+	"createpage-insert-image": "Wobraz zasunyć",
+	"createpage-upload-aborted": "Zasunjenje wobraza bu přetorhnjene",
+	"createpage-initial-run": "K wobdźěłanju",
+	"createpage-login-required": "Dyrbiš <a id=\"$2\" href=\"$1\">so přizjewić</a> za nahrawanje wobrazow",
+	"createpage-please-wait": "Prošu čakaj...",
+	"createpage-upload-directory-read-only": "Nahrawanski zapis njehodźi so přez webserwer popisować.",
+	"createpage-about-info": "Tole je zjednorjeny editor. Dalše informacije wo tym namakaš [[s:Help:CreatePage|tu]].",
+	"createpage-advanced-text": "Móžeš tež $1 wužiwać.",
+	"createpage-advanced-edit": "rozšěrjeny editor",
+	"createpage-optionals-text": "Přidaj opcionalne wotrězki:",
+	"createpage-save": "Składować",
+	"createpage-must-specify-title": "Prošu zapodaj najprjedy titul!",
+	"createpage-unsaved-changes": "Njeskładowane změny",
+	"createpage-unsaved-changes-details": "Maš njeskładowane změny. Hdyž kliknješ na OK, so tute zaćisnu."
 }

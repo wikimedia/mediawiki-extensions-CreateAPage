@@ -3,7 +3,9 @@
 		"authors": [
 			"Kly",
 			"Xiplus",
-			"許瑜真 (Yuchen Hsu/KaurJmeb)"
+			"許瑜真 (Yuchen Hsu/KaurJmeb)",
+			"Jack Phoenix",
+			"Winston Sung"
 		]
 	},
 	"createpage-here": "在此",
@@ -12,7 +14,7 @@
 	"createpage-upload": "上傳圖片",
 	"createpage-hide": "隱藏",
 	"createpage-show": "顯示",
-	"createpage": "創建一個新條目",
+	"createpage": "新增頁面",
 	"createpage-desc": "用於建立新條目的[[Special:CreatePage|簡易使用介面]]",
 	"createpage-title": "建立一個新條目",
 	"createpage-title-additional": "您連結到尚未存在的頁面。要建立頁面，請在下方方框開始輸入",
@@ -32,7 +34,7 @@
 	"createpage-addcategory": "新增分類",
 	"createpage-top-of-page": "頁面頂端",
 	"createpage-uploaded-from": "已從 Special:CreatePage 上傳",
-	"createplate-list": "空白|空白",
+	"createplate-list": "Blank|空白",
 	"createpage-title-check-header": "強制標題檢查",
 	"createpage-title-check-text": "在標題檢查完之前，您會無法執行操作。請再次點擊操作按鈕來繼續。",
 	"createpage-img-uploaded": "圖片上傳成功",

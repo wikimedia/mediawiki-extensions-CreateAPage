@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Piramidion",
-			"Prima klasy4na"
+			"Prima klasy4na",
+			"DDPAT"
 		]
 	},
 	"createpage-here": "тут",
@@ -24,7 +25,7 @@
 	"createpage-article-exists2": "або вкажіть іншу назву.",
 	"createpage-advanced-warning": "Перемикання між режимами редагування може пошкодити форматування сторінки, ви впевнені, що хочете продовжити?",
 	"createpage-login-warning": "Увійшовши в систему зараз, ви можете втратити весь свій незбережений текст. Ви впевнені, що хочете продовжити?",
-	"createpage-infobox-legend": "Картка",
+	"createpage-infobox-legend": "Інфобокс",
 	"createpage-yes": "Так",
 	"createpage-no": "Ні",
 	"createpage-categories": "Категорії",
@@ -50,5 +51,6 @@
 	"createpage-must-specify-title": "Будь ласка, спершу вкажіть заголовок!",
 	"createpage-unsaved-changes": "Незбережені зміни",
 	"createpage-unsaved-changes-details": "У вас є незбережені зміни. Якщо клацнете «Гаразд», ці зміни буде відкинуто.",
-	"tog-createpage-redlinks": "Використовувати [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] при переході за зламаними посиланнями"
+	"tog-createpage-redlinks": "Використовувати [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] при переході за зламаними посиланнями",
+	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Інфобокс.*\\}\\}/is"
 }

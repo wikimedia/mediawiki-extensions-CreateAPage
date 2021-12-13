@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
-			"KlaudiuMihaila"
+			"KlaudiuMihaila",
+			"NGC 54"
 		]
 	},
-	"createpage": "Creează o pagină",
+	"createpage": "Creează un articol nou",
 	"createpage-infobox-legend": "Infocaseta"
 }
