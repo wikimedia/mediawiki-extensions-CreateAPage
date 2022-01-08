@@ -290,12 +290,24 @@ var CreateAPage = {
 	 * @param {jQuery.Event} e
 	 */
 	goToEdit: function ( e ) {
+		var createplate;
+		if ( $( 'div.templateFrameSelected' ).length > 0 ) {
+			// Special:CreatePage, initial view
+			createplate = $( 'div.templateFrameSelected' ).attr( 'id' ).replace( /cp-template-/, '' );
+		} else {
+			// Special:CreatePage, preview mode
+			// I'm not sure why mw.util.getParamValue( 'createplates' ) isn't working here?
+			createplate = $( 'input[name="wpCreateplateName"]' ).val();
+		}
 		e.preventDefault();
+		// @todo This should use mw.Api instead, it'd likely simplify the code a bit, too
 		$.post(
-			mw.config.get( 'wgScript' ),
+			mw.util.wikiScript( 'api' ),
 			{
-				action: 'ajax',
-				rs: 'axCreatepageAdvancedSwitch'
+				action: 'createapage',
+				format: 'json',
+				what: 'switchtoadvancedediting',
+				template: createplate
 			},
 			function ( data ) {
 				window.location = mw.util.getUrl(
@@ -404,6 +416,10 @@ var CreateAPage = {
 		}
 	},
 
+	// @todo FIXME: I don't think this mess is used? But I'm so confused.
+	// The code here is different than in the infobox JS class (that one has "wpLastTimestamp" for
+	// example, this one has "wpAllLastTimestamp")...
+	// --ashley, 21 December 2021
 	uploadCallback: function ( oResponse ) {
 		var aResponse = []; // initialize it as an empty array so that JSHint can STFU
 		if ( /^("(\\.|[^"\\\n\r])*?"|[,:{}[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test( oResponse.responseText ) ) {
@@ -450,15 +466,6 @@ var CreateAPage = {
 		document.getElementById( 'createpage_upload_file_section' + oResponse.argument ).style.display = '';
 		document.getElementById( 'createpage_image_text_section' + oResponse.argument ).style.display = '';
 		document.getElementById( 'createpage_image_cancel_section' + oResponse.argument ).style.display = 'none';
-	},
-
-	failureCallback: function ( response ) {
-		response = JSON.parse( response );
-		document.getElementById( 'createpage_image_text_section' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
-		document.getElementById( 'createpage_upload_progress_section' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
-		document.getElementById( 'createpage_upload_file_section' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_text_section' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_cancel_section' + response.argument ).style.display = 'none';
 	},
 
 	restoreSection: function ( section, text ) {
@@ -517,9 +524,14 @@ var CreateAPage = {
 		var formData = new FormData();
 		formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[ 0 ] );
 
-		var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
-			type: 'POST',
-			url: mw.config.get( 'wgScript' ) + '?action=ajax&rs=axMultiEditImageUpload&infix=All&num=' + o.num,
+		var sent_request = ( new mw.Api() ).postWithEditToken( {
+			action: 'createapage-upload',
+			format: 'json',
+			infix: 'All',
+			num: o.num
+		},
+		// POST request specific parameters that we explicitly want to define here
+		{
 			data: formData,
 			contentType: false,
 			cache: false,
@@ -527,10 +539,10 @@ var CreateAPage = {
 			timeout: 240000
 		} ).done( function ( result ) {
 			$.removeSpinner( 'createpage' );
-			CreateAPageInfobox.uploadCallback( result );
+			CreateAPageInfobox.uploadCallback( result[ 'createapage-upload' ] );
 		} ).fail( function ( code, result ) {
 			$.removeSpinner( 'createpage' );
-			CreateAPageInfobox.failureCallback( result );
+			CreateAPageInfobox.failureCallback( o.num );
 		} );
 
 		document.getElementById( 'createpage_image_cancel_section' + o.num ).style.display = '';
@@ -969,19 +981,20 @@ var CreateAPage = {
 			CreateAPage.resizeOverlay( 20 );
 		}
 
+		// @todo See if we can mw.Api instead here
 		$.ajax( { // using .ajax instead of .get for better flexibility
-			url: mw.config.get( 'wgScript' ),
+			url: mw.util.wikiScript( 'api' ),
 			data: {
-				action: 'ajax',
-				rs: 'axMultiEditParse',
+				action: 'createapage',
+				format: 'json',
+				what: 'multieditparse',
 				template: elementId.replace( 'cp-template-', '' )
 			},
 			timeout: 50000
 		} ).fail( function ( code, result ) {
 			document.getElementById( 'cp-multiedit' ).innerHTML = '';
 		} ).done( function ( result ) {
-			var res = JSON.parse( result );
-			$( '#cp-multiedit' ).html( res );
+			$( '#cp-multiedit' ).html( result.createapage.result );
 
 			$( 'div[id^="cp-template-"]' ).each( function ( idx ) {
 				$( this ).addClass( 'templateFrame' );
@@ -1159,16 +1172,24 @@ $( function () {
  * Class for uploading images from an infobox on the Special:CreatePage page.
  */
 var CreateAPageInfobox = {
-	failureCallback: function ( response ) {
-		response = JSON.parse( response );
-		document.getElementById( 'createpage_image_text' + response.argument ).innerHTML = mw.msg( 'createpage-insert-image' );
-		document.getElementById( 'createpage_upload_progress' + response.argument ).innerHTML = mw.msg( 'createpage-upload-aborted' );
-		document.getElementById( 'createpage_upload_file' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_text' + response.argument ).style.display = '';
-		document.getElementById( 'createpage_image_cancel' + response.argument ).style.display = 'none';
+	/**
+	 * Reset an image upload area to its defaults and show an error message in case
+	 * if an upload failed.
+	 *
+	 * @param {Number} num
+	 */
+	failureCallback: function ( num ) {
+		document.getElementById( 'createpage_image_text' + num ).innerHTML = mw.msg( 'createpage-insert-image' );
+		document.getElementById( 'createpage_upload_progress' + num ).innerHTML = mw.msg( 'createpage-upload-aborted' );
+		document.getElementById( 'createpage_upload_file' + num ).style.display = '';
+		document.getElementById( 'createpage_image_text' + num ).style.display = '';
+		document.getElementById( 'createpage_image_cancel' + num ).style.display = 'none';
 	},
 
 	/**
+	 * Send an upload request to the ApiCreateAPageUpload PHP class and pass whatever
+	 * it returns to the correct handler function.
+	 *
 	 * @param {jQuery.Event} e
 	 * @param {Object} o Object containing the number ('num') of the upload field
 	 */
@@ -1180,27 +1201,35 @@ var CreateAPageInfobox = {
 
 			$( '#createpage_upload_progress' + o.num ).show().html( $.createSpinner( 'createpage' ) );
 
-			// Use HTML5 magic to do the file upload without having to resort to super
-			// heavy jQuery plugins or anything like that
-			var formData = new FormData();
-			formData.append( 'wpUploadFile' + o.num, document.getElementById( 'createpage_upload_file' + o.num ).files[ 0 ] );
+			var params = {
+				action: 'createapage-upload',
+				format: 'json',
+				num: n
+			};
+			params[ 'wpUploadFile' + o.num ] = document.getElementById( 'createpage_upload_file' + o.num ).files[ 0 ];
 
-			var sent_request = $.ajax( { // using .ajax instead of .post for better flexibility
-				type: 'POST',
-				url: mw.config.get( 'wgScript' ) + '?action=ajax&rs=axMultiEditImageUpload&num=' + n,
-				data: formData,
-				contentType: false,
-				cache: false,
-				processData: false,
-				timeout: 60000
-			} ).done( function ( response ) {
+			var sent_request = ( new mw.Api() ).postWithEditToken( params,
+				// POST request specific parameters that we explicitly want to define here
+				{
+					// Thank you MatmaRex! <3
+					contentType: 'multipart/form-data',
+					cache: false,
+					processData: false,
+					timeout: 60000
+				}
+			).done( function ( response ) {
 				$.removeSpinner( 'createpage' );
-				CreateAPageInfobox.uploadCallback( response );
+				CreateAPageInfobox.uploadCallback( response[ 'createapage-upload' ] );
 			} ).fail( function ( code, result ) {
 				$.removeSpinner( 'createpage' );
-				CreateAPageInfobox.failureCallback( result );
+				CreateAPageInfobox.failureCallback( o.num );
 			} );
 
+			// @todo FIXME/CHECKME: I have a feeling that a lot of this should be a part of
+			// one or both of the callback functions above.
+			// It seems logical that the "Insert Image" button is *removed* after a successful
+			// file upload, which this code tries to do (and fails, I guess?), so that would
+			// suggest this should happen in the .done() callback. --ashley, 22 December 2021
 			document.getElementById( 'createpage_image_cancel' + o.num ).style.display = '';
 			document.getElementById( 'createpage_image_text' + o.num ).style.display = 'none';
 
@@ -1227,8 +1256,12 @@ var CreateAPageInfobox = {
 		}
 	},
 
+	/**
+	 * Handle a successful response from the ApiCreateAPageUpload PHP class.
+	 *
+	 * @param {Object} response Response array from the API
+	 */
 	uploadCallback: function ( response ) {
-		response = JSON.parse( response );
 		var ProgressBar = $( '#createpage_upload_progress' + response.num );
 
 		if ( response.error !== 1 ) {
