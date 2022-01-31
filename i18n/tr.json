@@ -5,7 +5,8 @@
 			"Joseph",
 			"Jack Phoenix",
 			"MuratTheTurkish",
-			"ToprakM"
+			"ToprakM",
+			"SaldırganSincap"
 		]
 	},
 	"createpage-here": "burada",
@@ -47,7 +48,7 @@
 	"createpage-upload-directory-read-only": "Yükleme dizini web sunucusu tarafından yazılamaz",
 	"createpage-about-info": "Bu basitleştirilmiş editördür. Daha fazla bilgi için [[s:Help:CreatePage|ShoutWiki Merkezi]] sayfasına gidin.",
 	"createpage-advanced-text": "$1 ile kullanabilirsiniz.",
-	"createpage-advanced-edit": "gelişmiş editör",
+	"createpage-advanced-edit": "gelişmiş düzenleyici",
 	"createpage-optionals-text": "İsteğe bağlı bölümleri ekleyin:",
 	"createpage-save": "Kaydet",
 	"createpage-must-specify-title": "Lütfen önce bir başlık belirtin!",
