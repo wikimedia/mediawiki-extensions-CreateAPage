@@ -394,7 +394,6 @@ class CreatePageCreateplateForm {
 			$aboutInfo = str_replace( '</p>', '', $parsedInfo->getRawText() );
 			$aboutInfo .= wfMessage(
 				'createpage-advanced-text',
-				// @phan-suppress-next-line PhanPossiblyUndeclaredVariable No, wgScript is NOT undefined here
 				'<a href="' . $wgServer . $wgScript . '" id="wpAdvancedEdit">' .
 					wfMessage( 'createpage-advanced-edit' )->text() . '</a>'
 			)->text() . '</p>';

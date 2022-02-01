@@ -3,27 +3,19 @@
 class CreateAPageHooks {
 
 	/**
-	 * Super duper hacky extension registration callback to make sure the old-school
-	 * AJAX functions are loaded and available.
-	 * They should be converted properly into API modules and the SpecialCreatePage_ajax.php
-	 * file should be removed...but easier said than done, alas, hence this.
-	 */
-	public static function onRegistration() {
-		require_once __DIR__ . '/specials/SpecialCreatePage_ajax.php';
-	}
-
-	/**
-	 * When AdvancedEdit button is used, the existing content is preloaded
+	 * When the "Advanced Edit" button is used, the existing content is preloaded
 	 *
-	 * @todo Nowadays there is a hook called 'EditFormPreloadText', which is only
-	 * executed when editing nonexistent articles. Evaluate using that hook.
-	 * However it does not seem to provide access to the EditPage object...
+	 * @todo FIXME: THIS IS WOEFULLY BROKEN, see ApiCreateAPage.php, function switchToAdvancedEditing
+	 * for details.
 	 *
-	 * @param EditPage $editPage
+	 * @param string &$text EditPage#textbox1 contents
+	 * @param Title $title
 	 */
-	public static function preloadContent( $editPage ) {
-		if ( $editPage->getContext()->getRequest()->getCheck( 'createpage' ) ) {
-			$editPage->textbox1 = isset( $_SESSION['article_content'] ) && $_SESSION['article_content'] ? $_SESSION['article_content'] : null;
+	public static function preloadContent( &$text, $title ) {
+		$request = RequestContext::getMain()->getRequest();
+		if ( $request->getCheck( 'createpage' ) ) {
+			$text = isset( $_SESSION['article_content'] ) && $_SESSION['article_content'] ? $_SESSION['article_content'] : null;
+			// $text = $request->getSession()->get( 'article_content' );
 		}
 	}
 

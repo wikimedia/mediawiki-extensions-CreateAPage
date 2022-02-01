@@ -1,6 +1,6 @@
 {
 	"name": "CreateAPage",
-	"version": "4.01",
+	"version": "4.1",
 	"author": [
 		"Bartek Łapiński",
 		"Piotr Molski",
@@ -12,7 +12,6 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:CreateAPage",
 	"descriptionmsg": "createpage-desc",
 	"type": "specialpage",
-	"callback": "CreateAPageHooks::onRegistration",
 	"requires": {
 		"MediaWiki": ">= 1.35.3"
 	},
@@ -57,7 +56,23 @@
 	"ExtensionMessagesFiles": {
 		"CreatePageAliases": "CreatePage.alias.php"
 	},
+	"APIModules": {
+		"createapage": {
+			"class": "ApiCreateAPage",
+			"services": [
+				"RevisionLookup"
+			]
+		},
+		"createapage-upload": {
+			"class": "ApiCreateAPageUpload",
+			"services": [
+				"RepoGroup"
+			]
+		}
+	},
 	"AutoloadClasses": {
+		"ApiCreateAPage": "includes/api/ApiCreateAPage.php",
+		"ApiCreateAPageUpload": "includes/api/ApiCreateAPageUpload.php",
 		"CreateAPageUtils": "includes/CreateAPageUtils.php",
 		"CreateAPageHooks": "includes/CreateAPageHooks.php",
 		"EasyTemplate": "includes/EasyTemplate.php",
@@ -70,7 +85,7 @@
 		"CreatePageImageUploadForm": "includes/CreatePageImageUploadForm.php"
 	},
 	"Hooks": {
-		"EditPage::showEditForm:initial": "CreateAPageHooks::preloadContent",
+		"EditFormPreloadText": "CreateAPageHooks::preloadContent",
 		"CustomEditor": "CreateAPageHooks::onCustomEditor",
 		"GetPreferences": "CreateAPageHooks::onGetPreferences"
 	},

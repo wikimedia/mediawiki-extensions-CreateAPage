@@ -223,6 +223,8 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		$out->addHTML(
 			Html::hidden( 'wpUnicodeCheck', EditPage::UNICODE_CHECK ) .
+			// Createplate name for JS goToEdit() method
+			Html::hidden( 'wpCreateplateName', $this->mTemplate ) .
 			// Marker for detecting truncated form data. This must be the last parameter sent in order to be of use, so do not move me.
 			'<input type="hidden" value="true" name="wpUltimateParam" />'
 		);
