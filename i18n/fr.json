@@ -10,6 +10,15 @@
 			"Verdy p"
 		]
 	},
+	"apihelp-createapage-description": "Module d’API CreateAPage : obtenir le HTML createplate et gérer la bascule en mode modification de wikitexte courant sur Special:CreatePage",
+	"apihelp-createapage-summary": "Module d’API CreateAPage : obtenir le HTML createplate et gérer la bascule vers le mode de modification du wikitexte courant sur Special:CreatePage",
+	"apihelp-createapage-param-template": "Nom du createplate à charger quand le paramètre <kbd>what</kbd> est positionné à <kbd>multieditparse</kbd>",
+	"apihelp-createapage-param-what": "Nom de l’action à effectuer, soit <kbd>multieditparse</kbd> ou <kbd>switchtoadvancedediting</kbd>",
+	"apihelp-createapage-example-1": "Obtenir le HTML (pas le wikitexte) de <kbd>MediaWiki:Createplate-Actor</kbd> '''pour utilisation dans Special:CreatePage uniquement !'''",
+	"apihelp-createapage-example-2": "Stocker le wikitexte d’origine fourni par l’utilisateur, non modifié (par CreateAPage) dans la variable superglobale PHP $_SESSION['article_content'] pour une utilisation ultérieure",
+	"apihelp-createapage-upload-description": "Module d’API de téléchargement d’image de CreateAPage",
+	"apihelp-createapage-upload-summary": "Module d’API de téléchargement d’image de CreateAPage",
+	"apihelp-createapage-upload-example-1": "Télécharger une image depuis une fenêtre d’info dans l’interface Special:CreatePage en utilisant la classe PHP personnalisée CreatePageImageUploadForm ; nécessite que diveerses valeurs soient définies dans la WebRequest, comme les données du fichier téléchargeable courant, donc accéder simplement à un URL tel que celui-ci ne fonctionnera évidemment pas tout seul. En fait, la seule chose qui devrait utiliser ce point de terminaison est Special:CreatePage, et nous espérons dans le futur pouvoir le faire utiliser l’API JS « centrale » pour mes téléchargements de fichier (les patchs sont les bienvenus !).",
 	"createpage-edit-normal": "Modification avancée",
 	"createpage-upload": "Téléverser une image",
 	"createpage-hide": "Masquer",
