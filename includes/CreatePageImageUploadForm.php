@@ -132,7 +132,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			];
 		}
 
-		if ( wfReadOnly() ) {
+		if ( MediaWikiServices::getInstance()->getReadOnlyMode()->isReadOnly() ) {
 			return [
 				'error' => 1,
 				'msg' => wfMessage( 'createpage-upload-directory-read-only' )->escaped(),
