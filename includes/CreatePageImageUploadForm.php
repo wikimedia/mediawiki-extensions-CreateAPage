@@ -274,18 +274,17 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 */
 	private function getQuickTimestamp( $img_name ) {
 		$dbr = wfGetDB( DB_REPLICA );
-		$resource = $dbr->select(
+		$res_obj = $dbr->selectRow(
 			'image',
 			[ 'img_timestamp' ],
 			[ 'img_name' => $img_name ],
 			__METHOD__
 		);
 
-		if ( $dbr->numRows( $resource ) == 0 ) {
+		if ( $res_obj === false ) {
 			return false;
 		}
 
-		$res_obj = $dbr->fetchObject( $resource );
 		return $res_obj->img_timestamp;
 	}
 
