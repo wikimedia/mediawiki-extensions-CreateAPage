@@ -105,8 +105,8 @@ var CreateAPageCategoryTagCloud = {
 		var category_text = document.getElementById( 'wpCategoryTextarea' );
 		var this_pos = category_text.value.indexOf( decodeURIComponent( category ) );
 		if ( this_pos !== -1 ) {
-			category_text.value = category_text.value.substr( 0, this_pos - 1 ) +
-				category_text.value.substr( this_pos + decodeURIComponent( category ).length );
+			category_text.value = category_text.value.slice( 0, Math.max( 0, this_pos - 1 ) ) +
+				category_text.value.slice( this_pos + decodeURIComponent( category ).length );
 		}
 		var this_button = document.getElementById( 'cloud' + num );
 		this_button.onclick = function () {
@@ -1176,7 +1176,7 @@ var CreateAPageInfobox = {
 	 * Reset an image upload area to its defaults and show an error message in case
 	 * if an upload failed.
 	 *
-	 * @param {Number} num
+	 * @param {number} num
 	 */
 	failureCallback: function ( num ) {
 		document.getElementById( 'createpage_image_text' + num ).innerHTML = mw.msg( 'createpage-insert-image' );
