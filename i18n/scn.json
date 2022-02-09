@@ -6,6 +6,8 @@
 	},
 	"createpage-hide": "Ammuccia",
 	"createpage-show": "Ammustra",
+	"createpage": "Crea na vuci nova",
+	"createpage-title": "Crea na vuci nova",
 	"createpage-title-caption": "Tìtulu dâ vuci",
 	"createpage-choose-createplate": "Scegghi un tipu di pàggina.",
 	"createpage-button-createplate-submit": "Càrrica stu template",
