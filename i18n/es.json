@@ -2,9 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
-			"Ihojose"
+			"Ihojose",
+			"TehFrog"
 		]
 	},
+	"apihelp-createapage-upload-param-num": "Identificador de formulario de subida numérica para cuando una createplate tiene múltiples campos de subida; esto debería ser usado pero creo que el código usa <kbd>wpPostFix</kbd> debido a razones que no me son claras (ejemplo: ¿''Por qué no'' usa el parámetro <kbd>num</kbd> cuando está definido y en vez de eso '''requiere''' que el parámetro esté definido como <kbd>wpPostFix</kbd>?) ¡Parches bienvenidos!",
+	"apihelp-createapage-upload-param-infix": "Debería ser usado pero... no lo es; por alguna razón el código PHP de subida espera que pongas <kbd>wpInFix</kbd> en su lugar y no fui capaz de averiguar porqué. ¡Parches bienvenidos!",
+	"apihelp-createapage-upload-param-wpPostFix": "La clase de subida espera este nombre en su lugar y no fui capaz de averiguar porqué. La versión \"adecuada\" de este parámetro se llama <kbd>num</kbd>. ¡Parches bienvenidos!",
 	"createpage-edit-normal": "Edición avanzada",
 	"createpage-upload": "Subir una imagen",
 	"createpage-hide": "Ocultar",
