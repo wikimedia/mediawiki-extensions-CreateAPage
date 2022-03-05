@@ -6,7 +6,9 @@ use MediaWiki\Revision\SlotRecord;
 
 // wraps up special multi editor class
 class CreatePageMultiEditor extends CreatePageEditor {
-	public $mRedLinked, $mInitial, $mPreviewed;
+	public $mRedLinked;
+	public $mInitial;
+	public $mPreviewed;
 
 	function __construct( $template, $redlinked = false, $initial = false, $previewed = false ) {
 		$this->mTemplate = $template;

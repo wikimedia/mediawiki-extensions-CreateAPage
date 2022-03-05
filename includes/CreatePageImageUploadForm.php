@@ -13,9 +13,12 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 */
 	public $mRequest;
 
-	public $mStoredDestName, $mLastTimestamp, $mReturnedTimestamp;
+	public $mStoredDestName;
+	public $mLastTimestamp;
+	public $mReturnedTimestamp;
 	public $mCurlError;
-	public $mInFix, $mPostFix;
+	public $mInFix;
+	public $mPostFix;
 	public $mWatchthis = true;
 	public $mComment;
 	public $mErrorText;

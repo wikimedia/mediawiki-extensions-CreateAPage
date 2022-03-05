@@ -31,7 +31,8 @@
 
 class EasyTemplate {
 
-	public $mPath, $mVars;
+	public $mPath;
+	public $mVars;
 
 	/**
 	 * Public constructor

@@ -83,9 +83,8 @@ foreach ( $boxes as $id => $box ) {
 			$value .= '<a href="#" id="wpTextIncrease' . $id . '" class="createpage-controller createpage-lower"><img src="' . $imgpath . 'down.png" alt="+" /></a>';
 			break;
 		}
-		default: {
+		default:
 			$value = $box['value'];
-		}
 	}
 ?>
 <div style="display:<?php echo $display ?>"<?php echo $clear ?>><?php echo $value ?></div>
