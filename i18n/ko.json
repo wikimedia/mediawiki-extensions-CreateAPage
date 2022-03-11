@@ -5,6 +5,7 @@
 			"Ykhwong"
 		]
 	},
+	"apihelp-createapage-upload-param-comment": "업로드 요약 메시지; 설정하지 않으면 기본값은 \nkbd>MediaWiki:Createpage-uploaded-from</kbd>입니다",
 	"createpage-edit-normal": "고급 편집",
 	"createpage-upload": "그림 올리기",
 	"createpage-hide": "숨기기",
