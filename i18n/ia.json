@@ -4,6 +4,14 @@
 			"McDutchie"
 		]
 	},
+	"apihelp-createapage-description": "Modulo API CreateAPage: obtener le codice HTML \"createplate\" e gerer le cambio del modo de modification in wikitexto sur Special:CreatePage",
+	"apihelp-createapage-summary": "Modulo API CreateAPage: obtener le codice HTML \"createplate\" e gerer le cambio del modo de modification in wikitexto sur Special:CreatePage",
+	"apihelp-createapage-param-template": "Nomine del \"createplate\" a cargar quando le parametro <kbd>what</kbd> es mittite a <kbd>multieditparse</kbd>",
+	"apihelp-createapage-param-what": "Nomine del action a prender, o <kbd>multieditparse</kbd> o <kbd>switchtoadvancedediting</kbd>",
+	"apihelp-createapage-example-1": "Obtener le codice HTML (non le wikitexto) de <kbd>MediaWiki:Createplate-Actor</kbd> '''pro uso in Special:CreatePage solmente!'''",
+	"apihelp-createapage-example-2": "Immagazinar le wikitexto original fornite per le usator, non modificate (per CreateAPage), in le variabile superglobal PHP $_SESSION['article_content'] pro uso ulterior",
+	"apihelp-createapage-upload-description": "Modulo API de CreateAPage pro incargar imagines",
+	"apihelp-createapage-upload-summary": "Modulo API de CreateAPage pro incargar imagines",
 	"createpage-edit-normal": "Modification avantiate",
 	"createpage-upload": "Incargar imagine",
 	"createpage-hide": "Celar",
