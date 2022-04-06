@@ -3,6 +3,9 @@
  * @copyright Copyright © 2007, Wikia Inc.
  * @license GPL-2.0-or-later
  */
+
+use Wikimedia\AtEase\AtEase;
+
 class CAP_TagCloud {
 	public $tags_min_pts = 8;
 	public $tags_max_pts = 32;
@@ -31,7 +34,7 @@ class CAP_TagCloud {
 		);
 
 		// prevent PHP from bitching about strtotime()
-		Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cl_to );
@@ -48,7 +51,7 @@ class CAP_TagCloud {
 			}
 		}
 
-		Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 
 		// sort tag array by key (tag name)
 		if ( $this->tags_highest_count == 0 ) {
