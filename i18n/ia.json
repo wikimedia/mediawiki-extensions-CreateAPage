@@ -12,6 +12,8 @@
 	"apihelp-createapage-example-2": "Immagazinar le wikitexto original fornite per le usator, non modificate (per CreateAPage), in le variabile superglobal PHP $_SESSION['article_content'] pro uso ulterior",
 	"apihelp-createapage-upload-description": "Modulo API de CreateAPage pro incargar imagines",
 	"apihelp-createapage-upload-summary": "Modulo API de CreateAPage pro incargar imagines",
+	"apihelp-createapage-upload-param-num": "Identificator numeric de formulario de incargamento, usate quando un ''createplate'' ha plure campos de incargamento.",
+	"apihelp-createapage-upload-param-infix": "Non usate. Usa <kbd>wpInFix</kbd> in su loco.",
 	"createpage-edit-normal": "Modification avantiate",
 	"createpage-upload": "Incargar imagine",
 	"createpage-hide": "Celar",
