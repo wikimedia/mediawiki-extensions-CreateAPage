@@ -11,12 +11,12 @@
 			"Verdy p"
 		]
 	},
-	"apihelp-createapage-description": "Module d’API CreateAPage : obtenir le HTML ''createplate'' et gérer la bascule en mode modification de wikitexte courant sur Special:CreatePage",
-	"apihelp-createapage-summary": "Module d’API CreateAPage : obtenir le HTML ''createplate'' et gérer la bascule vers le mode de modification du wikitexte courant sur Special:CreatePage",
+	"apihelp-createapage-description": "Module d’API CreateAPage : obtient le HTML <em>createplate</em> et gère la bascule en mode normal de modification de wikicode sur Special:CreatePage",
+	"apihelp-createapage-summary": "Module d’API CreateAPage : obtenir le HTML ''createplate'' et gérer la bascule au mode de modification du wikicode normal sur Special:CreatePage",
 	"apihelp-createapage-param-template": "Nom du ''createplate'' à charger quand le paramètre <kbd>what</kbd> est positionné à <kbd>multieditparse</kbd>",
 	"apihelp-createapage-param-what": "Nom de l’action à effectuer : soit <kbd>multieditparse</kbd>, soit <kbd>switchtoadvancedediting</kbd>",
-	"apihelp-createapage-example-1": "Obtenir le HTML (pas le wikitexte) de <kbd>MediaWiki:Createplate-Actor</kbd> '''pour utilisation dans Special:CreatePage uniquement !'''",
-	"apihelp-createapage-example-2": "Stocker le wikitexte d’origine fourni par l’utilisateur, non modifié (par CreateAPage) dans la variable superglobale PHP <code>$_SESSION['article_content']</code> pour une utilisation ultérieure",
+	"apihelp-createapage-example-1": "Obtenir le HTML (pas le wikicode) de <kbd>MediaWiki:Createplate-Actor</kbd> '''pour utilisation dans Special:CreatePage uniquement !'''",
+	"apihelp-createapage-example-2": "Stocker le wikicode d’origine fourni par l’utilisateur et non modifié (par CreateAPage) dans la variable superglobale PHP <code>$_SESSION['article_content']</code> pour une utilisation ultérieure",
 	"apihelp-createapage-upload-description": "Module d’API de téléversement d’image de CreateAPage",
 	"apihelp-createapage-upload-summary": "Module d’API de téléversement d’image de CreateAPage",
 	"apihelp-createapage-upload-param-num": "Identifiant numérique du formulaire de téléversement utilisé quand un ''createplate'' comporte des champs de téléversement multiples ; ceci devrait être utilisé mais on peut penser que le code utilise <kbd>wpPostFix</kbd> pour des raisons qui ne nous semblent pas claires (c.-à-d. ''pourquoi'' n’utilise-t-il ''pas'' le paramètre <kbd>num</kbd> quand il est défini et à la place '''requière''' que ce paramètre soit défini comme <kbd>wpPostFix</kbd> ?). Les correctifs sont bienvenus !",
