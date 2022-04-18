@@ -14,6 +14,7 @@
 	"apihelp-createapage-upload-summary": "Modulo API de CreateAPage pro incargar imagines",
 	"apihelp-createapage-upload-param-num": "Identificator numeric de formulario de incargamento, usate quando un ''createplate'' ha plure campos de incargamento.",
 	"apihelp-createapage-upload-param-infix": "Non usate. Usa <kbd>wpInFix</kbd> in su loco.",
+	"apihelp-createapage-upload-param-comment": "Message de summario del incargamento; si non definite, prende le valor de <kbd>MediaWiki:Createpage-uploaded-from</kbd>",
 	"createpage-edit-normal": "Modification avantiate",
 	"createpage-upload": "Incargar imagine",
 	"createpage-hide": "Celar",
