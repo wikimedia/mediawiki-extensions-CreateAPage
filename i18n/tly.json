@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Patriot Kur",
 			"Гусейн"
 		]
 	},
-	"createpage": "Нујә сәһифә сохте"
+	"createpage": "Нујә сәһифә сохте",
+	"createpage-yes": "Ha",
+	"createpage-no": "Ne"
 }
