@@ -14,7 +14,7 @@
 	"createpage-yes": "Ya",
 	"createpage-no": "Nann",
 	"createpage-top-of-page": "Penn uhelañ ar bajenn",
-	"createpage-login-required": "Rankout a reoc'h",
+	"createpage-login-required": "Rankout a reoc'h <a id=\"$2\" href=\"$1\">kevreañ</a> evit enporzhiañ skeudennoù",
 	"createpage-please-wait": "Gortozit mar plij...",
 	"createpage-advanced-text": "Tu 'zo deoc'h implijout $1 ivez.",
 	"createpage-advanced-edit": "aozer araokaet"
