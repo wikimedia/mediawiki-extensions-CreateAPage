@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jeeputer"
+			"Jeeputer",
+			"Amire80"
 		]
 	},
 	"createpage-edit-normal": "ویرایش پیشرفته",
@@ -28,7 +29,7 @@
 	"createpage-addcategory": "افزودن رده",
 	"createpage-top-of-page": "بالای صفحه",
 	"createpage-uploaded-from": "بارگذاری‌شده از طریق Special:CreatePage",
-	"createplate-list": "خالی|خالی",
+	"createplate-list": "Blank|خالی",
 	"createpage-title-check-header": "الزام به بررسی عنوان",
 	"createpage-title-check-text": "تا پیش از پایان بررسی عنوان قادر به انجام هیچ عملی نیستید. لطفاً برای ادامه دوباره روی دکمهٔ عمل کلیک کنید.",
 	"createpage-img-uploaded": "تصویر با موفقیت بارگذاری شد",
