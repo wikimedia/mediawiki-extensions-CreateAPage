@@ -8,6 +8,10 @@
 			"許瑜真 (Yuchen Hsu/KaurJmeb)"
 		]
 	},
+	"apihelp-createapage-param-what": "要採取的操作名稱，<kbd>multieditparse</kbd> 或是 <kbd>switchtoadvancedediting</kbd>",
+	"apihelp-createapage-upload-description": "CreateAPage 圖片上傳 API 模組",
+	"apihelp-createapage-upload-summary": "CreateAPage 圖片上傳 API 模組",
+	"apihelp-createapage-upload-param-comment": "上傳摘要訊息，如果未設定，預設採用 <kbd>MediaWiki:Createpage-uploaded-from</kbd>",
 	"createpage-edit-normal": "進階編輯",
 	"createpage-upload": "上傳圖片",
 	"createpage-hide": "隱藏",
