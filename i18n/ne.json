@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"पर्वत सुबेदी"
+			"पर्वत सुबेदी",
+			"Bada Kaji"
 		]
 	},
 	"createpage-here": "यहाँ",
@@ -18,5 +19,5 @@
 	"createpage-categories": "श्रेणीहरू",
 	"createpage-addcategory": "श्रेणी थप्नुहोस्",
 	"createpage-please-wait": "कृपया प्रतिक्षा गर्नुहोस्…",
-	"createpage-save": "सङ्ग्रह गर्ने"
+	"createpage-save": "सङ्ग्रह गर्नुहोस्"
 }
