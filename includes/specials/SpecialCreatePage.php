@@ -54,10 +54,10 @@ class SpecialCreatePage extends SpecialPage {
 		$mainForm->set( 'request', $request );
 		$mainForm->set( 'user', $user );
 
-		$action = $request->getVal( 'action' );
-		if ( $request->wasPosted() && $action == 'submit' ) {
+		$action = $request->getRawVal( 'action' );
+		if ( $request->wasPosted() && $action === 'submit' ) {
 			$mainForm->submitForm();
-		} elseif ( $action == 'check' ) {
+		} elseif ( $action === 'check' ) {
 			$mainForm->checkArticleExists( $request->getVal( 'to_check' ), true );
 		} else {
 			$mainForm->showForm( '' );

@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class CreateAPageHooks {
 
 	/**
@@ -40,11 +42,12 @@ class CreateAPageHooks {
 			return true;
 		}
 
+		$userOptionsManager = MediaWikiServices::getInstance()->getUserOptionsManager();
 		$request = $article->getContext()->getRequest();
 		$title = $article->getTitle();
 		$namespace = $title->getNamespace();
 		if (
-			( $user->getOption( 'createpage-redlinks', 1 ) == 0 ) ||
+			$userOptionsManager->getOption( $user, 'createpage-redlinks', 1 ) == 0 ||
 			!in_array( $namespace, $wgContentNamespaces )
 		) {
 			return true;
@@ -53,26 +56,25 @@ class CreateAPageHooks {
 		// nomulti should always bypass that (this is for AdvancedEdit mode)
 		if (
 			$title->exists() ||
-			( $request->getVal( 'editmode' ) == 'nomulti' )
+			$request->getRawVal( 'editmode' ) === 'nomulti'
 		) {
 			return true;
-		} else {
-			if ( $request->getCheck( 'wpPreview' ) ) {
-				return true;
-			}
-
-			$mainForm = new CreatePageCreateplateForm();
-			// @todo FIXME: get this from somewhere and inject it properly
-			// $mainForm->set( 'output', $out );
-			$mainForm->set( 'request', $request );
-			$mainForm->set( 'user', $user );
-
-			$mainForm->mTitle = $request->getVal( 'title' );
-			$mainForm->mRedLinked = true;
-			$mainForm->showForm( '' );
-			$mainForm->showCreateplate( true );
-			return false;
 		}
+		if ( $request->getCheck( 'wpPreview' ) ) {
+			return true;
+		}
+
+		$mainForm = new CreatePageCreateplateForm();
+		// @todo FIXME: get this from somewhere and inject it properly
+		// $mainForm->set( 'output', $out );
+		$mainForm->set( 'request', $request );
+		$mainForm->set( 'user', $user );
+
+		$mainForm->mTitle = $request->getVal( 'title' );
+		$mainForm->mRedLinked = true;
+		$mainForm->showForm( '' );
+		$mainForm->showCreateplate( true );
+		return false;
 	}
 
 	/**

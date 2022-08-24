@@ -4,6 +4,9 @@
  *
  * @file
  */
+
+use MediaWiki\MediaWikiServices;
+
 class CreatePageCreateplateForm {
 	/**
 	 * @var string Name of the MediaWiki: msg containing the
@@ -52,7 +55,7 @@ class CreatePageCreateplateForm {
 
 		$this->mCreateplatesLocation = 'Createplate-list';
 
-		if ( $request->getVal( 'action' ) == 'submit' ) {
+		if ( $request->getRawVal( 'action' ) === 'submit' ) {
 			$this->mTitle = $request->getVal( 'Createtitle' );
 			$this->mCreateplate = $request->getVal( 'createplates' );
 			// for preview in red link mode
@@ -91,9 +94,8 @@ class CreatePageCreateplateForm {
 	public function getOutput() {
 		if ( isset( $this->output ) && $this->output instanceof OutputPage ) {
 			return $this->output;
-		} else {
-			return RequestContext::getMain()->getOutput();
 		}
+		return RequestContext::getMain()->getOutput();
 	}
 
 	/**
@@ -105,9 +107,8 @@ class CreatePageCreateplateForm {
 	public function getRequest() {
 		if ( isset( $this->request ) && $this->request instanceof WebRequest ) {
 			return $this->request;
-		} else {
-			return RequestContext::getMain()->getRequest();
 		}
+		return RequestContext::getMain()->getRequest();
 	}
 
 	/**
@@ -119,9 +120,8 @@ class CreatePageCreateplateForm {
 	public function getUser() {
 		if ( isset( $this->user ) && $this->user instanceof User ) {
 			return $this->user;
-		} else {
-			return RequestContext::getMain()->getUser();
 		}
+		return RequestContext::getMain()->getUser();
 	}
 
 	/**
@@ -242,7 +242,10 @@ class CreatePageCreateplateForm {
 		$out->addModules( 'ext.createAPage' );
 
 		// Add WikiEditor to the textarea(s) if enabled for the current user
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+		$userOptionsManager = MediaWikiServices::getInstance()->getUserOptionsManager();
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) &&
+			$userOptionsManager->getOption( $user, 'usebetatoolbar' )
+		) {
 			$out->addModules( 'ext.createAPage.wikiEditor' );
 		}
 
@@ -329,9 +332,8 @@ class CreatePageCreateplateForm {
 
 		if ( empty( $createplates ) ) {
 			return false;
-		} else {
-			return $createplates;
 		}
+		return $createplates;
 	}
 
 	/**
@@ -345,14 +347,12 @@ class CreatePageCreateplateForm {
 				return 'checked';
 			}
 			return '';
-		} else {
-			if ( $createplate == $current ) {
-				$this->mCreateplate = $current;
-				return 'checked';
-			} else {
-				return '';
-			}
 		}
+		if ( $createplate == $current ) {
+			$this->mCreateplate = $current;
+			return 'checked';
+		}
+		return '';
 	}
 
 	/**
@@ -484,137 +484,136 @@ class CreatePageCreateplateForm {
 			$this->showForm( '' );
 			$this->showCreateplate();
 			return false;
-		} else {
-			$valid = $this->checkArticleExists( $request->getVal( 'Createtitle' ) );
-			if ( $valid != '' ) {
-				// no title? this means overwriting Main Page...
-				$this->showForm( $valid );
-				$editor = new CreatePageMultiEditor( $this->mCreateplate );
-				$editor->generateForm( $editor->glueArticle() );
-				return false;
+		}
+		$valid = $this->checkArticleExists( $request->getVal( 'Createtitle' ) );
+		if ( $valid != '' ) {
+			// no title? this means overwriting Main Page...
+			$this->showForm( $valid );
+			$editor = new CreatePageMultiEditor( $this->mCreateplate );
+			$editor->generateForm( $editor->glueArticle() );
+			return false;
+		}
+
+		if ( $request->getVal( 'wpSave' ) && $request->wasPosted() ) {
+			$hasError = false;
+			$errorMsg = '';
+
+			if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
+				// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
+				// CSRF attempt?
+				$hasError = true;
+				$errorMsg = wfMessage( 'sessionfailure' )->escaped();
 			}
 
-			if ( $request->getVal( 'wpSave' ) && $request->wasPosted() ) {
-				$hasError = false;
-				$errorMsg = '';
-
-				if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
-					// @todo Actually, do we even need this loop? Won't EditPage#attemptSave catch CSRF for us? --ashley, 10 December 2019
-					// CSRF attempt?
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
+				$captcha = ConfirmEditHooks::getInstance();
+				if ( !$captcha->passCaptchaFromRequest( $request, $user ) ) {
 					$hasError = true;
-					$errorMsg = wfMessage( 'sessionfailure' )->escaped();
+					$errorMsg = wfMessage( 'captcha-edit-fail' )->escaped();
 				}
+			}
 
-				if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
-					$captcha = ConfirmEditHooks::getInstance();
-					if ( !$captcha->passCaptchaFromRequest( $request, $user ) ) {
-						$hasError = true;
-						$errorMsg = wfMessage( 'captcha-edit-fail' )->escaped();
-					}
-				}
-
-				if ( $hasError && $errorMsg !== '' ) {
-					// This is literally copypasted from the wpPreview loop below
-					// with one '' changed to $errorMsg, that's it
-					$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
-					$content = $editor->glueArticle( true, false );
-					$content_static = $editor->glueArticle( true );
-					$this->showForm( $errorMsg, $content_static );
-					$editor->generateForm( $content );
-					return false;
-				}
-
-				$editor = new CreatePageMultiEditor( $this->mCreateplate );
-				$rtitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
-				// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
-				$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
-				$editpage = new EditPage( $rarticle );
-				$editpage->setContextTitle( SpecialPage::getTitleFor( 'CreatePage' ) );
-
-				// @note Per core MW a154a28c7a4442a7d08689036dc54688b0867a64, public access to these is deprecated
-				// (since MW 1.30) and I don't see why these oughta be set because they get set in EditPage's
-				// constructor from the object passed to it...
-				$editpage->mTitle = $rtitle;
-				$editpage->mArticle = $rarticle;
-
-				// ashley 8 December 2019: need this so that edits don't fail due to wpUnicodeCheck being ''...
-				$editpage->importFormData( $request );
-
-				// Order matters! importFormData overwrites textbox1 so we must define it _after_ calling it, obviously
-				$editpage->textbox1 = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
-
-				$editpage->minoredit = $request->getCheck( 'wpMinoredit' );
-				$editpage->watchthis = $request->getCheck( 'wpWatchthis' );
-				$editpage->summary = $request->getVal( 'wpSummary' );
-
-				$_SESSION['article_createplate'] = $this->mCreateplate;
-
-				// pipe tags to pipes
-				CreateAPageUtils::unescapeKnownMarkupTags( $editpage->textbox1 );
-
-				$status = $editpage->attemptSave();
-
-				// Redirect to the brand new page on success or in case of a failure, display
-				// an error msg
-				// This first loop has been copied from PostComment
-				if ( !$status->isGood() ) {
-					$errors = $status->getErrorsArray();
-					$errorMsg = '';
-					foreach ( $errors as $error ) {
-						if ( is_array( $error ) ) {
-							$errorMsg = count( $error ) ? $error[0] : '';
-						}
-					}
-					// Hacks' galore continues...
-					// $errorMsg can be 'hookaborted' (e.g. the SpamRegex ext., if a user enters
-					// a SpamRegexed edit summary), but it can _also_ be something like
-					// '<div class="errorbox">Incorrect or missing CAPTCHA.</div>'
-					// Obviously 'hookaborted' is an i18n msg key and the latter is something
-					// that should be output as-is...
-					if ( !preg_match( '/</', $errorMsg ) ) {
-						$errorMsg = wfMessage( $errorMsg )->escaped();
-					}
-					// This is literally copypasted from the wpPreview loop below
-					// with one '' changed to $errorMsg, that's it
-					$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
-					$content = $editor->glueArticle( true, false );
-					$content_static = $editor->glueArticle( true );
-					$this->showForm( $errorMsg, $content_static );
-					$editor->generateForm( $content );
-					return false;
-				} elseif ( $status->value == EditPage::AS_SUCCESS_NEW_ARTICLE ) {
-					$out->redirect( Title::newFromText( $request->getVal( 'Createtitle' ) )->getFullURL() );
-				}
-
-				return false;
-			} elseif ( $request->getCheck( 'wpPreview' ) ) {
+			if ( $hasError && $errorMsg !== '' ) {
+				// This is literally copypasted from the wpPreview loop below
+				// with one '' changed to $errorMsg, that's it
 				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
 				$content = $editor->glueArticle( true, false );
 				$content_static = $editor->glueArticle( true );
-				$this->showForm( '', $content_static );
+				$this->showForm( $errorMsg, $content_static );
 				$editor->generateForm( $content );
 				return false;
-			} elseif ( $request->getCheck( 'wpAdvancedEdit' ) ) {
-				$editor = new CreatePageMultiEditor( $this->mCreateplate );
-				$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
-				CreateAPageUtils::unescapeKnownMarkupTags( $content );
-				$_SESSION['article_content'] = $content;
-				$out->redirect(
-					$wgServer . $wgScript . '?title=' .
-					$request->getVal( 'Createtitle' ) .
-					'&action=edit&createpage=true'
-				);
-			} elseif ( $request->getCheck( 'wpImageUpload' ) ) {
-				$this->showForm( '' );
-				$editor = new CreatePageMultiEditor( $this->mCreateplate );
-				$content = $editor->glueArticle();
-				$editor->generateForm( $content );
-			} elseif ( $request->getCheck( 'wpCancel' ) ) {
-				if ( $request->getVal( 'Createtitle' ) != '' ) {
-					$out->redirect( $wgServer . $wgScript . '?title=' . $request->getVal( 'Createtitle' ) );
-				} else {
-					$out->redirect( $wgServer . $wgScript );
+			}
+
+			$editor = new CreatePageMultiEditor( $this->mCreateplate );
+			$rtitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
+			// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
+			$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
+			$editpage = new EditPage( $rarticle );
+			$editpage->setContextTitle( SpecialPage::getTitleFor( 'CreatePage' ) );
+
+			// @note Per core MW a154a28c7a4442a7d08689036dc54688b0867a64, public access to these is deprecated
+			// (since MW 1.30) and I don't see why these oughta be set because they get set in EditPage's
+			// constructor from the object passed to it...
+			$editpage->mTitle = $rtitle;
+			$editpage->mArticle = $rarticle;
+
+			// ashley 8 December 2019: need this so that edits don't fail due to wpUnicodeCheck being ''...
+			$editpage->importFormData( $request );
+
+			// Order matters! importFormData overwrites textbox1 so we must define it _after_ calling it, obviously
+			$editpage->textbox1 = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
+
+			$editpage->minoredit = $request->getCheck( 'wpMinoredit' );
+			$editpage->watchthis = $request->getCheck( 'wpWatchthis' );
+			$editpage->summary = $request->getVal( 'wpSummary' );
+
+			$_SESSION['article_createplate'] = $this->mCreateplate;
+
+			// pipe tags to pipes
+			CreateAPageUtils::unescapeKnownMarkupTags( $editpage->textbox1 );
+
+			$status = $editpage->attemptSave();
+
+			// Redirect to the brand new page on success or in case of a failure, display
+			// an error msg
+			// This first loop has been copied from PostComment
+			if ( !$status->isGood() ) {
+				$errors = $status->getErrorsArray();
+				$errorMsg = '';
+				foreach ( $errors as $error ) {
+					if ( is_array( $error ) ) {
+						$errorMsg = count( $error ) ? $error[0] : '';
+					}
 				}
+				// Hacks' galore continues...
+				// $errorMsg can be 'hookaborted' (e.g. the SpamRegex ext., if a user enters
+				// a SpamRegexed edit summary), but it can _also_ be something like
+				// '<div class="errorbox">Incorrect or missing CAPTCHA.</div>'
+				// Obviously 'hookaborted' is an i18n msg key and the latter is something
+				// that should be output as-is...
+				if ( !preg_match( '/</', $errorMsg ) ) {
+					$errorMsg = wfMessage( $errorMsg )->escaped();
+				}
+				// This is literally copypasted from the wpPreview loop below
+				// with one '' changed to $errorMsg, that's it
+				$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
+				$content = $editor->glueArticle( true, false );
+				$content_static = $editor->glueArticle( true );
+				$this->showForm( $errorMsg, $content_static );
+				$editor->generateForm( $content );
+				return false;
+			} elseif ( $status->value == EditPage::AS_SUCCESS_NEW_ARTICLE ) {
+				$out->redirect( Title::newFromText( $request->getVal( 'Createtitle' ) )->getFullURL() );
+			}
+
+			return false;
+		} elseif ( $request->getCheck( 'wpPreview' ) ) {
+			$editor = new CreatePageMultiEditor( $this->mCreateplate, true );
+			$content = $editor->glueArticle( true, false );
+			$content_static = $editor->glueArticle( true );
+			$this->showForm( '', $content_static );
+			$editor->generateForm( $content );
+			return false;
+		} elseif ( $request->getCheck( 'wpAdvancedEdit' ) ) {
+			$editor = new CreatePageMultiEditor( $this->mCreateplate );
+			$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
+			CreateAPageUtils::unescapeKnownMarkupTags( $content );
+			$_SESSION['article_content'] = $content;
+			$out->redirect(
+				$wgServer . $wgScript . '?title=' .
+				$request->getVal( 'Createtitle' ) .
+				'&action=edit&createpage=true'
+			);
+		} elseif ( $request->getCheck( 'wpImageUpload' ) ) {
+			$this->showForm( '' );
+			$editor = new CreatePageMultiEditor( $this->mCreateplate );
+			$content = $editor->glueArticle();
+			$editor->generateForm( $content );
+		} elseif ( $request->getCheck( 'wpCancel' ) ) {
+			if ( $request->getVal( 'Createtitle' ) != '' ) {
+				$out->redirect( $wgServer . $wgScript . '?title=' . $request->getVal( 'Createtitle' ) );
+			} else {
+				$out->redirect( $wgServer . $wgScript );
 			}
 		}
 	}

@@ -117,13 +117,12 @@ class CreatePageImageUploadForm extends UploadFromFile {
 					'msg' => 'cp_no_login',
 					'once' => true
 				];
-			} else {
-				return [
-					'error' => 1,
-					'msg' => wfMessage( 'badaccess-group0' )->escaped(),
-					'once' => true
-				];
 			}
+			return [
+				'error' => 1,
+				'msg' => wfMessage( 'badaccess-group0' )->escaped(),
+				'once' => true
+			];
 		}
 
 		# Check blocks
@@ -162,21 +161,19 @@ class CreatePageImageUploadForm extends UploadFromFile {
 					'timestamp' => $this->mDestName,
 					'once' => false
 				];
-			} else {
-				return [
-					'error' => 0,
-					'msg' => 'File:' . wfBaseName( $this->mDesiredDestName ),
-					'timestamp' => wfBaseName( $this->mDesiredDestName ),
-					'once' => false
-				];
 			}
-		} else {
 			return [
-				'error' => 1,
-				'msg' => wfMessage( 'uploaderror' )->escaped(),
-				'once' => true
+				'error' => 0,
+				'msg' => 'File:' . wfBaseName( $this->mDesiredDestName ),
+				'timestamp' => wfBaseName( $this->mDesiredDestName ),
+				'once' => false
 			];
 		}
+		return [
+			'error' => 1,
+			'msg' => wfMessage( 'uploaderror' )->escaped(),
+			'once' => true
+		];
 	}
 
 	/**
@@ -424,23 +421,22 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			// --ashley, 8 December 2019
 			$this->mErrorText = $status->getWikiText();
 			return UploadBase::HOOK_ABORTED;
-		} else {
-			if ( $this->mWatchthis ) {
-				if ( method_exists( MediaWiki\Watchlist\WatchlistManager::class, 'addWatch' ) ) {
-					// 1.37+
-					MediaWikiServices::getInstance()->getWatchlistManager()
-						->addWatch( $user, $this->mLocalFile->getTitle() );
-				} else {
-					// @phan-suppress-next-line PhanUndeclaredMethod
-					$user->addWatch( $this->mLocalFile->getTitle() );
-				}
-			}
-			// Success, redirect to description page
-			$this->mReturnedTimestamp = $this->getQuickTimestamp( $this->mDestName );
-			// @todo: added to avoid passing a ref to null - should this be defined somewhere?
-			$img = null;
-			return self::SUCCESS;
 		}
+		if ( $this->mWatchthis ) {
+			if ( method_exists( MediaWiki\Watchlist\WatchlistManager::class, 'addWatch' ) ) {
+				// 1.37+
+				MediaWikiServices::getInstance()->getWatchlistManager()
+					->addWatch( $user, $this->mLocalFile->getTitle() );
+			} else {
+				// @phan-suppress-next-line PhanUndeclaredMethod
+				$user->addWatch( $this->mLocalFile->getTitle() );
+			}
+		}
+		// Success, redirect to description page
+		$this->mReturnedTimestamp = $this->getQuickTimestamp( $this->mDestName );
+		// @todo: added to avoid passing a ref to null - should this be defined somewhere?
+		$img = null;
+		return self::SUCCESS;
 	}
 
 	function showSuccess() {
@@ -463,9 +459,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		if ( $file->exists() ) {
 			if ( !UploadBase::userCanReUpload( $user, $file ) ) {
 				return [ 'fileexists-forbidden', $file->getName() ];
-			} else {
-				return true;
 			}
+			return true;
 		}
 
 		/* Check shared conflicts: if the local file does not exist, but

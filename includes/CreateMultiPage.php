@@ -77,14 +77,12 @@ class CreateMultiPage {
 				] );
 				$me_content .= $tmpl->render( 'categorypage' );
 				return $me_content;
-			} else {
-				return false;
 			}
-		} else {
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
-			$sourceText = str_replace( $multiedit_tag, '', $sourceText );
-			$is_used_metag = true;
+			return false;
 		}
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
+		$sourceText = str_replace( $multiedit_tag, '', $sourceText );
+		$is_used_metag = true;
 
 		$category_tags = null;
 		preg_match_all( self::CATEGORY_TAG_SPECIFIC, $sourceText, $category_tags );
@@ -227,22 +225,22 @@ class CreateMultiPage {
 			if ( isset( $me_tags ) && ( !empty( $me_tags[1] ) ) ) {
 				foreach ( $me_tags[1] as $id => $_tag ) {
 					$brt = $me_tags[2][$id];
-					$correct_brt = ( $brt == '&quot;' ) ? '"' : $brt;
+					$correct_brt = ( $brt === '&quot;' ) ? '"' : $brt;
 					if ( in_array( $_tag, $wgMultiEditPageTags ) ) {
 						switch ( $_tag ) {
 							case 'title':
 							case 'descr':
 							case 'category': {
-								if ( empty( $special_tags[$_tag] ) || ( $_tag == 'category' ) ) {
+								if ( empty( $special_tags[$_tag] ) || ( $_tag === 'category' ) ) {
 									$special_tags[$_tag] = $me_tags[3][$id];
-									if ( $_tag != 'category' ) {
-										$format_tag_text = ( $_tag == 'title' ) ? '<b>%s</b>' : '<small>%s</small>';
+									if ( $_tag !== 'category' ) {
+										$format_tag_text = ( $_tag === 'title' ) ? '<b>%s</b>' : '<small>%s</small>';
 									} else {
 										$format_tag_text = '%s';
 									}
-									if ( $_tag != 'category' ) {
+									if ( $_tag !== 'category' ) {
 										$type = '';
-										if ( $_tag == 'title' ) {
+										if ( $_tag === 'title' ) {
 											$type = 'title';
 										}
 										# remove special tags
@@ -405,7 +403,7 @@ class CreateMultiPage {
 						}
 					}
 				}
-			} elseif ( $specialTag == 'generic' ) {
+			} elseif ( $specialTag === 'generic' ) {
 				// generic textarea
 				$boxes[] = [
 					'type' => 'textarea',

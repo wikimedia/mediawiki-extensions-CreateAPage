@@ -23,6 +23,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$request = $context->getRequest();
 		$user = $context->getUser();
 		$services = MediaWikiServices::getInstance();
+		$userOptionsManager = $services->getUserOptionsManager();
 
 		$optional_sections = [];
 		$me = '';
@@ -96,10 +97,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$minorEditCheck = false;
 
 		if ( $this->mInitial ) {
-			if ( $user->getOption( 'watchcreations' ) ) {
+			if ( $userOptionsManager->getOption( $user, 'watchcreations' ) ) {
 				$watchThisCheck = true;
 			}
-			if ( $user->getOption( 'minordefault' ) ) {
+			if ( $userOptionsManager->getOption( $user, 'minordefault' ) ) {
 				$minorEditCheck = true;
 			}
 		} else {
@@ -134,7 +135,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				'preview' => wfMessage( 'preview' )->text(),
 				'cancel' => wfMessage( 'cancel' )->text(),
 				'unicodeCheck' => EditPage::UNICODE_CHECK,
-				'showEditTools' => ( $this->mRedLinked && ( $this->mTemplate == 'Blank' ) ),
+				'showEditTools' => ( $this->mRedLinked && ( $this->mTemplate === 'Blank' ) ),
 				'editTools' => wfMessage( 'edittools' )->inContentLanguage()->text(),
 			]
 		);
@@ -156,13 +157,13 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$summaryVal = $request->getVal( 'wpSummary' );
 
 		if ( $this->mInitial ) {
-			if ( $user->getOption( 'watchcreations' ) ) {
+			if ( $userOptionsManager->getOption( $user, 'watchcreations' ) ) {
 				$watchThisCheck = 'checked="checked"';
 			} else {
 				$watchThisCheck = '';
 			}
 
-			if ( $user->getOption( 'minordefault' ) ) {
+			if ( $userOptionsManager->getOption( $user, 'minordefault' ) ) {
 				$minorEditCheck = 'checked="checked"';
 			} else {
 				$minorEditCheck = '';
@@ -232,7 +233,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		);
 
 		// stuff for red links - bottom edittools, to be more precise
-		if ( $this->mRedLinked && ( $this->mTemplate == 'Blank' ) ) {
+		if ( $this->mRedLinked && ( $this->mTemplate === 'Blank' ) ) {
 			$out->addHTML( '<div id="createpage_editTools" class="mw-editTools">' );
 			$out->addWikiTextAsInterface( wfMessage( 'edittools' )->inContentLanguage()->text() );
 			$out->addHTML( '</div>' );
@@ -279,7 +280,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		for ( $i = 0; $i < count( $inf_pars ); $i++ ) {
 			// this was cut out from user supplying '|' inside the parameter...
-			if ( strpos( $inf_pars[$i], '=' ) === false && $i != 0 ) {
+			if ( strpos( $inf_pars[$i], '=' ) === false && $i !== 0 ) {
 				$fixed_par_array[$i - ( $fix_corrector + 1 )] .= '|' . $inf_pars[$i];
 				$fix_corrector++;
 			} else {
@@ -353,7 +354,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				// $image_value = [];
 				$postfix = substr( $key, 10 );
 
-				if ( $request->getVal( 'wpNoUse' . $postfix ) == 'Yes' ) {
+				if ( $request->getRawVal( 'wpNoUse' . $postfix ) === 'Yes' ) {
 					$infoboxes[] = $request->getVal( 'wpInfImg' . $postfix );
 				} else {
 					// $image_value['watchthis'] = $_POST['wpWatchthis' . $postfix];
@@ -434,7 +435,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		if ( !empty( $all_images ) ) {
 			// glue in images, replacing all image tags with content
 			foreach ( $all_images as $myImage ) {
-				if ( $myImage != '<!---imageupload--->' ) {
+				if ( $myImage !== '<!---imageupload--->' ) {
 					$text = $this->str_replace_once(
 						'<!---imageupload--->',
 						'[[' . $myImage . '|thumb]]',

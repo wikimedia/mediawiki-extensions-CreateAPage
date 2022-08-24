@@ -34,16 +34,16 @@ foreach ( $boxes as $id => $box ) {
 			while ( $i < count( $boxes ) - 1 ) {
 				$i++;
 				if (
-					( $boxes[$i]['type'] == 'title' ) ||
-					( $boxes[$i]['type'] == 'optional_textarea' )
+					( $boxes[$i]['type'] === 'title' ) ||
+					( $boxes[$i]['type'] === 'optional_textarea' )
 				) {
 					$title_found = true;
-					if ( $boxes[$i]['type'] == 'optional_textarea' ) {
+					if ( $boxes[$i]['type'] === 'optional_textarea' ) {
 						$optionalSections[] = [ $sections, $box['value'] ];
 					}
 					break;
 				}
-				if ( $boxes[$i]['type'] == 'section_display' ) {
+				if ( $boxes[$i]['type'] === 'section_display' ) {
 					break;
 				}
 			}
