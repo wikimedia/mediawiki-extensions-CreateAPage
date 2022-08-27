@@ -263,12 +263,12 @@ $specialPageAliases['sk'] = [
 	'CreatePage' => [ 'VytvoriťStránku' ],
 ];
 
-/** Serbian (Cyrillic script) (српски (ћирилица)‎) */
+/** Serbian (Cyrillic script) (српски (ћирилица)) */
 $specialPageAliases['sr-ec'] = [
 	'CreatePage' => [ 'Направи_страницу' ],
 ];
 
-/** Serbian (Latin script) (srpski (latinica)‎) */
+/** Serbian (Latin script) (srpski (latinica)) */
 $specialPageAliases['sr-el'] = [
 	'CreatePage' => [ 'Napravi_stranicu' ],
 ];
@@ -328,12 +328,12 @@ $specialPageAliases['vi'] = [
 	'CreatePage' => [ 'Tạo_trang' ],
 ];
 
-/** Simplified Chinese (中文（简体）‎) */
+/** Simplified Chinese (中文（简体）) */
 $specialPageAliases['zh-hans'] = [
 	'CreatePage' => [ '创建页面' ],
 ];
 
-/** Traditional Chinese (中文（繁體）‎) */
+/** Traditional Chinese (中文（繁體）) */
 $specialPageAliases['zh-hant'] = [
 	'CreatePage' => [ '創建頁面' ],
 ];
