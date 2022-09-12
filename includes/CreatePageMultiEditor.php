@@ -6,18 +6,30 @@ use MediaWiki\Revision\SlotRecord;
 
 // wraps up special multi editor class
 class CreatePageMultiEditor extends CreatePageEditor {
+	/** @var bool */
 	public $mRedLinked;
+	/** @var bool */
 	public $mInitial;
+	/** @var bool */
 	public $mPreviewed;
 
-	function __construct( $template, $redlinked = false, $initial = false, $previewed = false ) {
+	/**
+	 * @param string $template
+	 * @param bool $redlinked
+	 * @param bool $initial
+	 * @param bool $previewed
+	 */
+	public function __construct( $template, $redlinked = false, $initial = false, $previewed = false ) {
 		$this->mTemplate = $template;
 		$this->mRedLinked = $redlinked;
 		$this->mInitial = $initial;
 		$this->mPreviewed = $previewed;
 	}
 
-	function generateForm( $content = false ) {
+	/**
+	 * @param string|false $content
+	 */
+	public function generateForm( $content = false ) {
 		$context = RequestContext::getMain();
 		$out = $context->getOutput();
 		$request = $context->getRequest();
@@ -46,7 +58,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 						// Just ignore it for now and fall back to rendering a blank template (below)
 					}
 					if ( $contentObj !== null ) {
-						$contentText = ContentHandler::getContentText( $contentObj );
+						$contentText = (string)ContentHandler::getContentText( $contentObj );
 					} else {
 						$contentText = '<!---blanktemplate--->';
 					}
@@ -199,13 +211,15 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		// just silly because short pages, redirects, etc. are a thing)
 		if ( $context->getTitle()->exists() ) {
 			$checkboxHTML = '<input id="wpMinoredit" type="checkbox" accesskey="i" value="1" name="wpMinoredit" ' . $minorEditCheck . '/>' . "\n" .
-		'<label accesskey="i" title="' . wfMessage( 'tooltip-minoredit' )->escaped() . ' [alt-shift-i]" for="wpMinoredit">' . wfMessage( 'minoredit' )->escaped() . '</label>';
+				'<label accesskey="i" title="' . wfMessage( 'tooltip-minoredit' )->escaped() . ' [alt-shift-i]" for="wpMinoredit">' .
+				wfMessage( 'minoredit' )->escaped() . '</label>';
 		}
 		// Per EditPage#getCheckboxesDefinition; only registered users can have a watchlist, so
 		// no point in showing this checkbox for anons
 		if ( $user->isRegistered() ) {
 			$checkboxHTML .= '<input id="wpWatchthis" type="checkbox" accesskey="w" value="1" name="wpWatchthis" ' . $watchThisCheck . '/>' . "\n" .
-		'<label accesskey="w" title="' . wfMessage( 'tooltip-watch' )->escaped() . ' [alt-shift-w]" for="wpWatchthis">' . wfMessage( 'watchthis' )->escaped() . '</label>';
+				'<label accesskey="w" title="' . wfMessage( 'tooltip-watch' )->escaped() . ' [alt-shift-w]" for="wpWatchthis">' .
+				wfMessage( 'watchthis' )->escaped() . '</label>';
 		}
 
 		$out->addHTML(
@@ -247,6 +261,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 	/**
 	 * Take given categories and glue them together
+	 *
+	 * @param string[] $checkboxes_array
+	 * @param string $categories
+	 * @return string
 	 */
 	private function glueCategories( $checkboxes_array, $categories ) {
 		$text = '';
@@ -270,6 +288,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 	/**
 	 * Get the infobox' text and substitute all known values...
+	 *
+	 * @param string[] $infoboxes_array
+	 * @param string $infobox_text
+	 * @return string
 	 */
 	private function glueInfobox( $infoboxes_array, $infobox_text ) {
 		$inf_pars = preg_split( "/\|/", $infobox_text, -1 );
@@ -322,6 +344,11 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		return $text;
 	}
 
+	/**
+	 * @param bool $preview
+	 * @param bool $render_option
+	 * @return string
+	 */
 	public function glueArticle( $preview = false, $render_option = true ) {
 		$context = RequestContext::getMain();
 		$out = $context->getOutput();
@@ -331,7 +358,6 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		$infoboxes = [];
 		$categories = [];
 		$optionals = [];
-		$images = [];
 		$all_images = [];
 		$error_once = false;
 
@@ -458,6 +484,11 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 	/**
 	 * by jmack@parhelic.com from php.net
+	 *
+	 * @param string $search
+	 * @param string $replace
+	 * @param string $subject
+	 * @return string
 	 */
 	private function str_replace_once( $search, $replace, $subject ) {
 		$pos = strpos( $subject, $search );

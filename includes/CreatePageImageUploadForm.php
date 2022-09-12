@@ -66,7 +66,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 * @param string $name
 	 * @param WebRequestUpload $webRequestUpload
 	 */
-	function initialize( $name, $webRequestUpload ) {
+	public function initialize( $name, $webRequestUpload ) {
 		$this->mUpload = $webRequestUpload;
 		$this->initializePathInfo(
 			$name,
@@ -177,12 +177,14 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	}
 
 	/**
-	 * @suppress PhanTypeInvalidDimOffset,PhanTypePossiblyInvalidDimOffset
+	 * @suppress PhanTypePossiblyInvalidDimOffset
 	 *  phan is actually totally right about the $details['something']
 	 *  below being invalid (at least at a glance), but I'm not diving nose-first into upload code
 	 *  right now; I just want seccheck running for this extension for now. --ashley, 29 April 2021
+	 *
+	 * @return Status|string|void
 	 */
-	function processUpload() {
+	private function processUpload() {
 		$context = RequestContext::getMain();
 		$lang = $context->getLanguage();
 		$out = $context->getOutput();
@@ -195,7 +197,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			return wfMessage( $code, $permErrors[0] )->parse();
 		}
 
-		$details = null;
+		$details = [];
 		$value = null;
 		$value = $this->internalProcessUpload( $details );
 
@@ -245,7 +247,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 
 			case self::VERIFICATION_ERROR:
 				unset( $details['status'] );
-				// @phan-suppress-next-line PhanTypeMismatchArgumentInternal This code is a mess and phan is probably right...
 				$code = array_shift( $details['details'] );
 				return wfMessage( $code, $details['details'] )->parse();
 
@@ -291,8 +292,11 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	/**
 	 * Since we wanted to mess up heavily here...
 	 * I'm copying this stuff too
+	 *
+	 * @param array &$resultDetails
+	 * @return int
 	 */
-	function internalProcessUpload( &$resultDetails ) {
+	private function internalProcessUpload( &$resultDetails ) {
 		/* Check for PHP error if any, requires php 4.2 or newer */
 		if ( $this->mCurlError == 1 ) {
 			return self::FILE_TOO_LARGE;
@@ -437,9 +441,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		// @todo: added to avoid passing a ref to null - should this be defined somewhere?
 		$img = null;
 		return self::SUCCESS;
-	}
-
-	function showSuccess() {
 	}
 
 	/**

@@ -84,7 +84,7 @@ class ApiCreateAPage extends ApiBase {
 			}
 
 			if ( $contentObj !== null ) {
-				$text = ContentHandler::getContentText( $contentObj );
+				$text = (string)ContentHandler::getContentText( $contentObj );
 			} else {
 				$text = '<!---blanktemplate--->';
 			}

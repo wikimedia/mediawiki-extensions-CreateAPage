@@ -26,15 +26,26 @@ class CreateMultiPage {
 	//public const TEMPLATE_OPENING = '/\{\{[^\{\}]*Infobox[^\|]*/i'; // literally unused
 	public const TEMPLATE_CLOSING = '/\}\}/';
 
-	function __construct() {
+	private function __construct() {
 	}
 
+	/**
+	 * @param string $text
+	 * @return string
+	 */
 	public static function unescapeBlankMarker( $text ) {
 		$text = str_replace( "\n<!---blanktemplate--->\n", '', $text );
 		$text = str_replace( '<!---imageupload--->', '', $text );
 		return $text;
 	}
 
+	/**
+	 * @param int $rows
+	 * @param int $cols
+	 * @param string $sourceText
+	 * @param string[]|null $optional_sections
+	 * @return string|false
+	 */
 	public static function multiEditParse( $rows, $cols, $sourceText, $optional_sections = null ) {
 		global $wgExtensionAssetsPath;
 		global $wgMultiEditTag;
@@ -52,10 +63,7 @@ class CreateMultiPage {
 		# is tag set?
 		// @phan-suppress-next-line PhanImpossibleCondition phan doesn't like the 1st cond; it's needed for infobox parsing
 		if ( empty( $wgMultiEditTag ) || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
-			// @phan-suppress-previous-line PhanTypeMismatchArgumentNullableInternal phan doesn't like how $sourceText can (in theory, but not in practise) be empty
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal ditto
 			if ( !strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) ) {
-				// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC . "\n", '', $sourceText );
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC, '', $sourceText );
 
@@ -80,7 +88,6 @@ class CreateMultiPage {
 			}
 			return false;
 		}
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullableInternal
 		$sourceText = str_replace( $multiedit_tag, '', $sourceText );
 		$is_used_metag = true;
 

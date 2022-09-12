@@ -9,9 +9,13 @@
 
 // all editor-related functions will go there
 abstract class CreatePageEditor {
+	/** @var string */
 	public $mTemplate;
 
-	function __construct( $template ) {
+	/**
+	 * @param string $template
+	 */
+	public function __construct( $template ) {
 		$this->mTemplate = $template;
 	}
 

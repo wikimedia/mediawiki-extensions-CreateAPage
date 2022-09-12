@@ -298,7 +298,7 @@ class CreatePageCreateplateForm {
 	 * Get the list of createplates from a MediaWiki namespace page,
 	 * parse the content into an array and return it.
 	 *
-	 * @return array|bool Array on success, boolean false if the message is empty
+	 * @return array[]|false Array on success, boolean false if the message is empty
 	 */
 	private function getCreateplates() {
 		$createplates_txt = wfMessage( $this->mCreateplatesLocation )->inContentLanguage()->text();
@@ -338,6 +338,11 @@ class CreatePageCreateplateForm {
 
 	/**
 	 * Return checked createplate
+	 *
+	 * @param string|false $createplate
+	 * @param string $current
+	 * @param bool &$checked
+	 * @return string
 	 */
 	private function getChecked( $createplate, $current, &$checked ) {
 		if ( !$createplate ) {
@@ -359,7 +364,7 @@ class CreatePageCreateplateForm {
 	 * Produce a list of radio buttons from the given createplate array and
 	 * output the generated HTML.
 	 *
-	 * @param array $createplates Array of createplates
+	 * @param array[] $createplates Array of createplates
 	 */
 	private function produceRadioList( $createplates ) {
 		global $wgServer, $wgScript;
