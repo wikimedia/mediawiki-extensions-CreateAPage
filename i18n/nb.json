@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jon Harald Søby",
-			"Nghtwlkr"
+			"Nghtwlkr",
+			"Telaneo"
 		]
 	},
 	"createpage-edit-normal": "Avansert redigering",
@@ -38,7 +39,7 @@
 	"createpage-upload-aborted": "Innsetting av bilde ble avbrutt",
 	"createpage-initial-run": "Fortsett å redigere",
 	"createpage-login-required": "Du må <a id=\"$2\" href=\"$1\">logge inn</a> for å laste opp bilder",
-	"createpage-please-wait": "Vennligst vent …",
+	"createpage-please-wait": "Vennligst vent…",
 	"createpage-upload-directory-read-only": "Opplastingsmappa kan ikke skrives til av tjeneren",
 	"createpage-about-info": "Denne er den forenklede redigereren. For å finne ut mer, gå til [[s:Help:CreatePage|ShoutWikis nav]].",
 	"createpage-advanced-text": "Du kan også bruke $1.",
