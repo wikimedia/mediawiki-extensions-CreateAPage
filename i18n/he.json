@@ -26,6 +26,7 @@
 	"createpage-login-required": "צריך <a id=\"$2\" href=\"$1\">להתחבר</a> כדי להעלות תמונות",
 	"createpage-please-wait": "נא להמתין...",
 	"createpage-upload-directory-read-only": "שרת האינטרנט אינו יכול לכתוב בתיקיית ההעלאות.",
+	"createpage-save": "שמירה",
 	"createpage-unsaved-changes-details": "יש לך שינויים שלא נשמרו. לחיצה על אישור תגרום להם ללכת לאיבוד.",
 	"tog-createpage-redlinks": "השתמש ב [http://www.shoutwiki.com/wiki/Help:CreatePage יצירת עמוד] כאשר יש קישורים שבורים"
 }
