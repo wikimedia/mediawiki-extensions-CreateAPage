@@ -5,6 +5,7 @@
 			"Kly",
 			"Winston Sung",
 			"Xiplus",
+			"捍粵者",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)"
 		]
 	},
@@ -52,7 +53,7 @@
 	"createpage-img-uploaded": "圖片上傳成功",
 	"createpage-preview-end": "預覽結束。您可以在下方恢復您的編輯：",
 	"createpage-insert-image": "插入圖片",
-	"createpage-upload-aborted": "圖片插入被中斷",
+	"createpage-upload-aborted": "圖片插入中斷",
 	"createpage-initial-run": "繼續編輯",
 	"createpage-login-required": "您需要<a id=\"$2\" href=\"$1\">登入</a>以上傳圖片",
 	"createpage-please-wait": "請稍等…",
