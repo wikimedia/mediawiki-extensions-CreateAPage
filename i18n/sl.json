@@ -9,5 +9,6 @@
 	"apihelp-createapage-example-1": "Pridobi HTML (ne vikibesedilo) <kbd>MediaWiki:Createplate-Actor</kbd> '''Uporabljajte samo za Special:CreatePage!'''",
 	"createpage": "Ustvari nov članek",
 	"createpage-title": "Ustvari nov članek",
+	"createpage-top-of-page": "Vrh strani",
 	"createpage-advanced-edit": "izboljšani urejevalnik"
 }
