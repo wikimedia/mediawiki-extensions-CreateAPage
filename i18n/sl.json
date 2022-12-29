@@ -5,7 +5,10 @@
 			"Eleassar"
 		]
 	},
+	"apihelp-createapage-description": "API-modul CreateAPage: pridobite createplate HTML in uredite preklop na običajni način z urejanjem vikibesedila na Special:CreatePage",
+	"apihelp-createapage-example-1": "Pridobi HTML (ne vikibesedilo) <kbd>MediaWiki:Createplate-Actor</kbd> '''Uporabljajte samo za Special:CreatePage!'''",
 	"createpage": "Ustvari nov članek",
 	"createpage-title": "Ustvari nov članek",
+	"createpage-top-of-page": "Vrh strani",
 	"createpage-advanced-edit": "izboljšani urejevalnik"
 }
