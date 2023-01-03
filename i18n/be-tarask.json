@@ -2,11 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"EugeneZelenko",
-			"Renessaince"
+			"Renessaince",
+			"Vlad5250"
 		]
 	},
+	"createpage-upload": "Загрузіць выяву",
+	"createpage-hide": "Схаваць",
+	"createpage-show": "Паказаць",
 	"createpage": "Стварыць новы артыкул",
+	"createpage-desc": "[[Special:CreatePage|Просты да выкарыстаньня інтэрфэйс]] для стварэньня новых артыкулаў",
+	"createpage-title": "Стварыць новы артыкул",
+	"createpage-title-additional": "Вы прыйшлі па спасылцы на старонку, якая яшчэ не існуе. Каб стварыць яе, напішыце тэкст у полі ніжэй",
+	"createpage-title-caption": "Назва артыкулу",
+	"createpage-choose-createplate": "Выберыце тып старонкі",
 	"createpage-categories": "Катэгорыі",
+	"createpage-save": "Захаваць",
 	"createpage-unsaved-changes": "Незахаваныя зьмены",
 	"createpage-unsaved-changes-details": "Вы маеце незахаваныя зьмены. Націсканьне OK прывядзе да іхняй страты.",
 	"tog-createpage-redlinks": "Выкарыстоўваць [http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] пры пераходзе па нядзейных спасылках"
