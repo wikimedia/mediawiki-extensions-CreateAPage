@@ -17,9 +17,9 @@
 	"createpage-yes": "כן",
 	"createpage-no": "לא",
 	"createpage-categories": "קטגוריות",
-	"createpage-top-of-page": "ראש העמוד",
-	"createpage-uploaded-from": "הועלה מ Special:CreatePage",
-	"createpage-title-check-header": "בדיקת כותרת מאולצת",
+	"createpage-top-of-page": "ראש הדף",
+	"createpage-uploaded-from": "הועלה מ־Special:CreatePage",
+	"createpage-title-check-header": "בדיקת כותרת כפויה",
 	"createpage-title-check-text": "לא ניתן לעשות פעולה עד שבדיקת הכותרת מסתיימת. נא ללחוץ שוב על כפתור הפעולה כדי להמשיך.",
 	"createpage-upload-aborted": "הכנסת התמונה בוטלה",
 	"createpage-login-required": "צריך <a id=\"$2\" href=\"$1\">להתחבר</a> כדי להעלות תמונות",
@@ -27,5 +27,5 @@
 	"createpage-upload-directory-read-only": "שרת האינטרנט אינו יכול לכתוב בתיקיית ההעלאות.",
 	"createpage-save": "שמירה",
 	"createpage-unsaved-changes-details": "יש לך שינויים שלא נשמרו. לחיצה על אישור תגרום להם ללכת לאיבוד.",
-	"tog-createpage-redlinks": "השתמש ב [http://www.shoutwiki.com/wiki/Help:CreatePage יצירת עמוד] כאשר יש קישורים שבורים"
+	"tog-createpage-redlinks": "להשתמש ב[http://www.shoutwiki.com/wiki/Help:CreatePage יצירת דף] כאשר יש קישורים שבורים"
 }
