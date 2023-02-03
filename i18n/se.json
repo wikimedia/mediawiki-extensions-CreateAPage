@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kimberli Mäkäräinen (WMNO)",
 			"Yupik"
 		]
 	},
 	"createpage-hide": "Čiega",
+	"createpage-show": "Čájet",
 	"createpage-save": "Vurke"
 }
