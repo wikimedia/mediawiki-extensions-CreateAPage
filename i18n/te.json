@@ -7,5 +7,6 @@
 	},
 	"apihelp-createapage-upload-param-infix": "వాడాలి...కానీ వాడలేదు; కారణమేమైనా కావచ్చు, మీరు <kbd>wpInFix</kbd> ను సెట్ చెయ్యాలని ఎక్కింపు PHP కోడ్ కోరుకుంటోంది. కారణమేంటో నాకు తెలీడం లేదు. పాచ్‌లకు స్వాగతం!",
 	"apihelp-createapage-upload-param-comment": "ఎక్కింపు సారాంశ సందేశం; ఏదీ ఇవ్వకపోతే, డిఫాల్టుగా <kbd>MediaWiki:Createpage-uploaded-from</kbd> తీసుకుంటుంది",
+	"createpage-hide": "దాచు",
 	"createpage": "ఓ పేజీని సృష్టించండి"
 }
