@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Veeven"
+			"Veeven",
+			"Chaduvari"
 		]
 	},
+	"createpage-hide": "దాచు",
 	"createpage": "ఓ పేజీని సృష్టించండి"
 }
