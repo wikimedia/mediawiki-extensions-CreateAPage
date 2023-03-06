@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Afalau"
+			"Afalau",
+			"JonesT143"
 		]
 	},
-	"createpage": "Creu erthygl newydd"
+	"createpage": "Creu erthygl newydd",
+	"createpage-title": "Creu erthygl newydd",
+	"createpage-title-caption": "Teitl yr Erthygl",
+	"createpage-categories": "Categorïau",
+	"createpage-addcategory": "Ychwanegu categori"
 }
