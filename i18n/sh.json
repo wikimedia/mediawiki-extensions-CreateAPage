@@ -34,5 +34,16 @@
 	"createpage-preview-end": "Kraj pregleda. Možete nastaviti s uređivanjem ispod:",
 	"createpage-insert-image": "Umetni sliku",
 	"createpage-upload-aborted": "Umetanje slike je otkazano",
-	"createpage-initial-run": "Nastavi i uredi"
+	"createpage-initial-run": "Nastavi i uredi",
+	"createpage-please-wait": "Sačekajte...",
+	"createpage-upload-directory-read-only": "Veb-server ne može zapisati u direktorij za otpremanje",
+	"createpage-about-info": "Ovo je pojednostavljeni uređivač. Idite na [[s:Help:CreatePage|čvorište ShoutWiki]], da biste saznali više.",
+	"createpage-advanced-text": "Možete koristiti i $1.",
+	"createpage-advanced-edit": "napredni uređivač",
+	"createpage-optionals-text": "Dodaj izborne odjeljke:",
+	"createpage-save": "Sačuvaj",
+	"createpage-must-specify-title": "Najprije navedite naslov!",
+	"createpage-unsaved-changes": "Nesačuvane promjene",
+	"createpage-unsaved-changes-details": "Imate nesačuvane promjene. Ako kliknete na dugme OK, napustićete ih.",
+	"tog-createpage-redlinks": "Koristi [http://www.shoutwiki.com/wiki/Help:CreatePage СоздајСтраница] kada pratim prekinute linkove"
 }
