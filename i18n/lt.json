@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"createpage-upload": "Įkelti paveikslėlį",
+	"createpage-hide": "Slėpti",
+	"createpage-show": "Rodyti",
+	"createpage": "Kurti naują straipsnį",
+	"createpage-desc": "[[Specialus:CreatePage|Paprasta naudoti sąsaja]] naujiems straipsniams kurti",
+	"createpage-title": "Sukurti naują straipsnį",
+	"createpage-title-additional": "Nuoroda nukreipė į puslapį, kuris dar neegzistuojate. Kad sukurtumėte puslapį, pradėkite rašyti toliau pateiktame laukelyje",
+	"createpage-title-caption": "Straipsnio pavadinimas",
+	"createpage-choose-createplate": "Pasirinkite puslapio tipą",
+	"createpage-button-createplate-submit": "Įkelti šį šabloną",
+	"createpage-give-title": "Nurodykite pavadinimą",
+	"createpage-title-invalid": "Nurodykite galimą pavadinimą",
+	"createpage-article-exists": "Šis straipsnis jau egzistuoja. Redaguoti",
+	"createpage-article-exists2": " arba nurodykite kitą pavadinimą.",
+	"createpage-advanced-warning": "Perjungus redagavimo režimus gali sutrikti puslapio formatavimas. Ar norite tęsti?",
+	"createpage-login-warning": "Prisijungę dabar galite prarasti visą neišsaugotą tekstą. Ar norite tęsti?",
+	"createpage-yes": "Taip",
+	"createpage-no": "Ne",
+	"createpage-categories": "Kategorijos",
+	"createpage-addcategory": "Pridėti kategoriją",
+	"createpage-top-of-page": "Puslapio viršus",
+	"createpage-uploaded-from": "Įkelta iš Special:CreatePage",
+	"createpage-img-uploaded": "Paveikslėlis sėkmingai įkeltas",
+	"createpage-preview-end": "Peržiūros pabaiga. Toliau galite tęsti redagavimą:",
+	"createpage-insert-image": "Įterpti paveikslėlį",
+	"createpage-upload-aborted": "Paveikslėlio įterminas atšauktas",
+	"createpage-initial-run": "Pereiti prie redagavimo",
+	"createpage-login-required": "Norėdami įkelti paveikslėlius, turite <a id=\"$2\" href=\"$1\">prisijungti</a>",
+	"createpage-please-wait": "Prašome palaukti...",
+	"createpage-advanced-text": "Taip pat galite naudoti $1.",
+	"createpage-advanced-edit": "išplėstinis redaktorius",
+	"createpage-optionals-text": "Pridėti pasirenkamus skyrius:",
+	"createpage-save": "Išsaugoti",
+	"createpage-must-specify-title": "Pirmiausia nurodykite pavadinimą!",
+	"createpage-unsaved-changes": "Neišsaugoti pakeitimai",
+	"createpage-unsaved-changes-details": "Turite neišsaugotų pakeitimų. Spustelėjus Gerai jų bus atsisakyta."
+}
