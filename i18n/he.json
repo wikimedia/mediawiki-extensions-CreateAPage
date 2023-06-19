@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Ghsuvr",
+			"Neriah",
 			"YaronSh"
 		]
 	},
@@ -13,6 +14,7 @@
 	"createpage": "יצירת ערך חדש",
 	"createpage-title": "יצירת ערך חדש",
 	"createpage-title-caption": "כותרת הערך",
+	"createpage-choose-createplate": "נא לבחור את סוג הדף",
 	"createpage-button-createplate-submit": "טען תבנית",
 	"createpage-give-title": "נא לציין כותרת",
 	"createpage-title-invalid": "נא לציין כותרת תקנית",
@@ -26,11 +28,14 @@
 	"createplate-list": "Blank|ריק",
 	"createpage-title-check-header": "בדיקת כותרת כפויה",
 	"createpage-title-check-text": "לא ניתן לעשות פעולה עד שבדיקת הכותרת מסתיימת. נא ללחוץ שוב על כפתור הפעולה כדי להמשיך.",
+	"createpage-insert-image": "הוספת תמונה",
 	"createpage-upload-aborted": "הכנסת התמונה בוטלה",
 	"createpage-login-required": "צריך <a id=\"$2\" href=\"$1\">להתחבר</a> כדי להעלות תמונות",
 	"createpage-please-wait": "נא להמתין...",
 	"createpage-upload-directory-read-only": "שרת האינטרנט אינו יכול לכתוב בתיקיית ההעלאות.",
+	"createpage-advanced-text": "אפשר להשתמש גם ב־$1.",
 	"createpage-save": "שמירה",
+	"createpage-must-specify-title": "תחילה, נא לציין כותרת!",
 	"createpage-unsaved-changes-details": "יש לך שינויים שלא נשמרו. לחיצה על אישור תגרום להם ללכת לאיבוד.",
 	"tog-createpage-redlinks": "להשתמש ב[http://www.shoutwiki.com/wiki/Help:CreatePage יצירת דף] כאשר יש קישורים שבורים"
 }
