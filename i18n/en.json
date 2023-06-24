@@ -6,13 +6,11 @@
 			"Przemek Piotrowski"
 		]
 	},
-	"apihelp-createapage-description": "CreateAPage API module: get createplate HTML and handle switching to regular wikitext editing mode on Special:CreatePage",
 	"apihelp-createapage-summary": "CreateAPage API module: get createplate HTML and handle switching to regular wikitext editing mode on Special:CreatePage",
 	"apihelp-createapage-param-template": "Name of the createplate to load when the <kbd>what</kbd> param is set to <kbd>multieditparse</kbd>",
 	"apihelp-createapage-param-what": "Name of the action to take, either <kbd>multieditparse</kbd> or <kbd>switchtoadvancedediting</kbd>",
 	"apihelp-createapage-example-1": "Get the HTML (not wikitext) of <kbd>MediaWiki:Createplate-Actor</kbd> '''for Special:CreatePage use only!'''",
 	"apihelp-createapage-example-2": "Store the user-supplied original, unmodified (by CreateAPage) wikitext into the PHP $_SESSION['article_content'] superglobal for further use",
-	"apihelp-createapage-upload-description": "CreateAPage image upload API module",
 	"apihelp-createapage-upload-summary": "CreateAPage image upload API module",
 	"apihelp-createapage-upload-param-num": "Numeric upload form identifier for when a createplate has multiple upload fields; this should be used but I think the code uses <kbd>wpPostFix</kbd> due to reasons that aren't clear to me (i.e. ''why'' does it ''not'' use the <kbd>num</kbd> param when it is defined and instead '''requires''' the parameter to be defined as <kbd>wpPostFix</kbd>?). Patches welcome!",
 	"apihelp-createapage-upload-param-infix": "Should be used but...isn't; for some reason the upload PHP code expects you to set <kbd>wpInFix</kbd> instead and I wasn't able to figure out why. Patches welcome!",

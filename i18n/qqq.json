@@ -8,13 +8,11 @@
 			"Umherirrender"
 		]
 	},
-	"apihelp-createapage-description": "{{doc-apihelp-description|createapage}}",
 	"apihelp-createapage-summary": "{{doc-apihelp-summary|createapage}}",
 	"apihelp-createapage-param-template": "{{doc-apihelp-param|createapage|template}}\n* The ''createplate'' term in English is a contraction of \"create\" and \"template\", i.e. \"a template used when creating new pages via Special:CreatePage\"",
 	"apihelp-createapage-param-what": "{{doc-apihelp-param|createapage|what}}",
 	"apihelp-createapage-example-1": "{{doc-apihelp-example|createapage}}",
 	"apihelp-createapage-example-2": "{{doc-apihelp-example|createapage}}",
-	"apihelp-createapage-upload-description": "{{doc-apihelp-description|createapage-upload}}",
 	"apihelp-createapage-upload-summary": "{{doc-apihelp-summary|createapage-upload}}",
 	"apihelp-createapage-upload-param-num": "{{doc-apihelp-param|createapage-upload|num}}",
 	"apihelp-createapage-upload-param-infix": "{{doc-apihelp-param|createapage-upload|infix}}",
