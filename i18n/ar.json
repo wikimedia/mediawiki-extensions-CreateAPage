@@ -7,13 +7,11 @@
 			"ديفيد"
 		]
 	},
-	"apihelp-createapage-description": "وحدة CreateAPage API: احصل على إنشاء لوحة HTML وتعامل مع التبديل إلى وضع تحرير نص ويكي العادي في Special: CreatePage",
 	"apihelp-createapage-summary": "وحدة CreateAPage API: احصل على إنشاء لوحة HTML وتعامل مع التبديل إلى وضع تحرير نص ويكي العادي في Special: CreatePage",
 	"apihelp-createapage-param-template": "اسم لوحة الإنشاء المراد تحميلها عند تعيين <kbd>المعلمة</kbd> إلى <kbd>نموذج متعدد</kbd>",
 	"apihelp-createapage-param-what": "اسم الإجراء المطلوب اتخاذه ، إما <kbd>متعدد الصفحات</kbd> أو <kbd>تحرير متقدم</kbd>",
 	"apihelp-createapage-example-1": "احصل على HTML (وليس نص ويكي) من <kbd>ميدياويكي: Createplate-Actor</kbd> \"\" لـ Special: CreatePage استخدم فقط! \"\"",
 	"apihelp-createapage-example-2": "قم بتخزين نص wikitext الأصلي غير المعدل (بواسطة CreateAPage) المقدم من المستخدم في PHP $ _SESSION ['article_content'] superglobal لمزيد من الاستخدام",
-	"apihelp-createapage-upload-description": "CreateAPage صورة تحميل وحدة API",
 	"apihelp-createapage-upload-summary": "CreateAPage صورة تحميل وحدة API",
 	"apihelp-createapage-upload-param-num": "معرّف نموذج التحميل الرقمي عندما تحتوي لوحة الإنشاء على حقول تحميل متعددة ؛ يجب استخدام هذا ، لكنني أعتقد أن الكود يستخدم <kbd>wpPostFix</kbd> لأسباب غير واضحة بالنسبة لي (على سبيل المثال ، \"لماذا\" يفعل ذلك \"لا\" استخدم معلمة <kbd>num</kbd> عندما يتم تعريفها وبدلاً من ذلك \"تتطلب\" '' المعلمة المراد تعريفها على أنها <kbd>wpPostFix</kbd> ؟). نرحب بالبقع!",
 	"apihelp-createapage-upload-param-infix": "يجب استخدامه ولكن ... ليس ؛ لسبب ما ، يتوقع منك رمز PHP للتحميل أن تقوم بتعيين <kbd>wpInFix</kbd> بدلاً من ذلك ولم أتمكن من معرفة السبب. نرحب بالبقع!",

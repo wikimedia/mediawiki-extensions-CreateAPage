@@ -9,13 +9,11 @@
 			"許瑜真 (Yuchen Hsu/KaurJmeb)"
 		]
 	},
-	"apihelp-createapage-description": "CreateAPage API 模組：取得 createplate 的 HTML，並用於處理在 Special:CreatePage 上切換到常規 wikitext 編輯模式",
 	"apihelp-createapage-summary": "CreateAPage API 模組：取得 createplate 的 HTML，並用於處理在 Special:CreatePage 上切換到常規 wikitext 編輯模式",
 	"apihelp-createapage-param-template": "當參數 <kbd>what</kbd> 設定為 <kbd>multieditparse</kbd> 時要載入的 createplate 名稱",
 	"apihelp-createapage-param-what": "要採取的操作名稱，<kbd>multieditparse</kbd> 或是 <kbd>switchtoadvancedediting</kbd>",
 	"apihelp-createapage-example-1": "取得'''僅限於 Special:CreatePage 使用'''的 <kbd>MediaWiki:Createplate-Actor</kbd> 之 HTML（非 wikitext）",
 	"apihelp-createapage-example-2": "儲存使用者提供的原始、尚未被 CreateAPage 修改的 wikitext 到 PHP 超全域變數 $_SESSION['article_content'] ，以利於進一步使用",
-	"apihelp-createapage-upload-description": "CreateAPage 圖片上傳 API 模組",
 	"apihelp-createapage-upload-summary": "CreateAPage 圖片上傳 API 模組",
 	"apihelp-createapage-upload-param-num": "出自於不明原因（例如：在定義時''為什麼沒有''使用 <kbd>num</kbd> 參數，反而'''要求'''將參數定義成 <kbd>wpPostFix</kbd>？），代碼使用了 <kbd>wpPostFix</kbd>，而不是當 createplate 有多個檔案上傳時，應被使用的上傳表單數字識別碼。歡迎修正內容！",
 	"apihelp-createapage-upload-param-infix": "出於某些原因，上傳用的 PHP 程式碼希望您設定 <kbd>wpInFix</kbd> 來處理無法辨識問題。歡迎修正內容！",

@@ -7,13 +7,11 @@
 			"Mansil"
 		]
 	},
-	"apihelp-createapage-description": "Módulo da API CreateAPage: obter modelo de página em HTML (createplate) e tratar da alternância para o modo de edição normal de texto wiki em Special:CreatePage",
 	"apihelp-createapage-summary": "Módulo da API CreateAPage: obter modelo de página em HTML (createplate) e tratar da alternância para o modo de edição normal de texto wiki em Special:CreatePage",
 	"apihelp-createapage-param-template": "Nome do modelo de página (createplate) a carregar quando o parâmetro <kbd>what</kbd> tem o valor <kbd>multieditparse</kbd>",
 	"apihelp-createapage-param-what": "Nome da ação a tomar, <kbd>multieditparse</kbd> ou <kbd>switchtoadvancedediting</kbd>",
 	"apihelp-createapage-example-1": "Obter o HTML (não o texto wiki) de <kbd>MediaWiki:Createplate-Actor</kbd> '''apenas para uso em Especial:CreatePage!'''",
 	"apihelp-createapage-example-2": "Armazenar o texto wiki original fornecido pelo utilizador e não modificado (por CreateAPage), na superglobal PHP $_SESSION['article_content'] para uso posterior",
-	"apihelp-createapage-upload-description": "Módulo da API de carregamento de imagens CreateAPage",
 	"apihelp-createapage-upload-summary": "Módulo da API de carregamento de imagens CreateAPage",
 	"apihelp-createapage-upload-param-num": "Identificador numérico do formulário de carregamento para quando um modelo de criação de página (createplate) tem vários campos de carregamento; isto deve ser usado, mas acho que o código usa <kbd>wpPostFix</kbd> por razões que não são claras para mim (ou seja, ''porque'' é que ''não'' usa o parâmetro <kbd>num</kbd> quando este está definido e, antes, '''requer''' o parâmetro a ser definido como <kbd>wpPostFix</kbd> ?). Agradece-se correções!",
 	"apihelp-createapage-upload-param-infix": "Devia ser usado, mas não é; por algum motivo, o código PHP de carregamento espera que se defina antes <kbd>wpInFix</kbd> e não consegui descobrir porquê. Agradece-se correções!",
