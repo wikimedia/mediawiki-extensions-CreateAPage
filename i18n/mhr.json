@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Сай"
+			"Сай",
+			"Lifeway"
 		]
 	},
-	"createpage": "Лаштыкым ышташ"
+	"createpage": "Лаштыкым ышташ",
+	"createpage-save": "Аралаш"
 }
