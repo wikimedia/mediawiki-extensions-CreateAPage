@@ -3,10 +3,12 @@
 		"authors": [
 			")8",
 			"Lakejason0",
+			"沈澄心",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
 			"铁桶"
 		]
 	},
+	"createpage-edit-normal": "高级编辑",
 	"createpage-upload": "上传图片",
 	"createpage-hide": "隐藏",
 	"createpage-show": "显示",
@@ -19,13 +21,16 @@
 	"createpage-title-invalid": "请指定一个有效的标题",
 	"createpage-article-exists": "此文章已存在。编辑",
 	"createpage-article-exists2": "或指定另一标题。",
+	"createpage-infobox-legend": "信息框",
 	"createpage-yes": "是",
 	"createpage-no": "否",
 	"createpage-categories": "分类：",
+	"createpage-addcategory": "添加分类",
 	"createpage-uploaded-from": "上传自Special:CreatePage",
 	"createpage-img-uploaded": "图片上传成功",
 	"createpage-preview-end": "预览结束。您可以在下方继续编辑：",
 	"createpage-insert-image": "插入图片",
 	"createpage-please-wait": "请稍候……",
-	"createpage-save": "保存"
+	"createpage-save": "保存",
+	"createpage-unsaved-changes": "未保存的更改"
 }
