@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Paraw2"
+			"Paraw2",
+			"TerranBoy"
 		]
 	},
 	"createpage-edit-normal": "وێراشتەکاری پێشکەفتی",
@@ -23,7 +24,7 @@
 	"createpage-insert-image": "وێنەێگ بخە تێ",
 	"createpage-please-wait": "کەمێگ پا بیە وە گەز...",
 	"createpage-advanced-text": "هەلەێوا تۊیەنید لە $1 ئسفادە بکەێد.",
-	"createpage-save": "پاشکەفت",
+	"createpage-save": "پاشەکەفت",
 	"createpage-must-specify-title": "یەکم بایەد سەرناوێگ دیاری بکەید!",
 	"createpage-unsaved-changes": "گووڕانکارییەیل پاشکەفت نەکریاێ"
 }
