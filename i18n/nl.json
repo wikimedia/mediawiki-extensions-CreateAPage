@@ -8,6 +8,15 @@
 			"Siebrand Mazeland"
 		]
 	},
+	"apihelp-createapage-summary": "CreateAPage API-module: verkrijg createplate HTML en schakel over naar de normale wikitext-bewerkingsmodus op Special:CreatePage",
+	"apihelp-createapage-param-template": "Naam van de createplate die moet worden geladen wanneer de parameter <kbd>what</kbd> is ingesteld op <kbd>multieditparse</kbd>",
+	"apihelp-createapage-param-what": "Naam van de te verrichten handeling: <kbd>multieditparse</kbd> of <kbd>switchtoadvancedediting</kbd>",
+	"apihelp-createapage-example-1": "De HTML (niet wikitekst) ophalen van <kbd>MediaWiki:Createplate-Actor</kbd> '''alleen voor gebruik op Special:CreatePage!'''",
+	"apihelp-createapage-example-2": "De door de gebruiker aangeleverde oorspronkelijke en (door CreateAPage) ongewijzigde wikitekst opslaan in de PHP-superglobal $_SESSION['article_content'] voor verder gebruik",
+	"apihelp-createapage-upload-summary": "API-module van CreateAPage voor het uploaden van afbeeldingen",
+	"apihelp-createapage-upload-param-num": "Numerieke uploadformulier-ID voor wanneer een createplate meerdere uploadvelden heeft; dit zou moeten worden gebruikt, maar ik denk dat de code <kbd>wpPostFix</kbd> gebruikt vanwege redenen die mij niet duidelijk zijn (dwz ''waarom'' gebruikt deze ''niet'' de parameter <kbd>num</kbd> wanneer deze is gedefinieerd maar '''vereist''' deze wel de parameter die moet worden gedefinieerd als <kbd>wpPostFix</kbd>?). Patches welkom!",
+	"apihelp-createapage-upload-param-infix": "Moet worden gebruikt, maar… wordt dat niet; om de een of andere reden verwacht de geüploade PHP-code dat u in plaats daarvan <kbd>wpInFix</kbd> instelt en ik kon niet achterhalen waarom. Patches welkom!",
+	"apihelp-createapage-upload-param-comment": "Bericht voor de samenvatting van de upload; indien niet ingesteld wordt standaard de waarde van <kbd>MediaWiki:Createpage-uploaded-from</kbd> gebruikt",
 	"createpage-edit-normal": "Uitgebreid bewerken",
 	"createpage-upload": "Afbeelding uploaden",
 	"createpage-hide": "Verbergen",
@@ -48,7 +57,9 @@
 	"createpage-advanced-edit": "uitgebreide tekstverwerker",
 	"createpage-optionals-text": "Optionele secties toevoegen:",
 	"createpage-save": "Opslaan",
+	"createpage-must-specify-title": "Geef eerst een titel op!",
 	"createpage-unsaved-changes": "Niet-opgeslagen wijzigingen",
+	"createpage-unsaved-changes-details": "U hebt niet-opgeslagen wijzigingen. Als u op OK klikt, worden ze weggegooid.",
 	"tog-createpage-redlinks": "[http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] gebruiken bij het volgen van verbroken koppelingen",
 	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Informatievenster.*\\}\\}/is"
 }
