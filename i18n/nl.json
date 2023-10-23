@@ -50,7 +50,9 @@
 	"createpage-advanced-edit": "uitgebreide tekstverwerker",
 	"createpage-optionals-text": "Optionele secties toevoegen:",
 	"createpage-save": "Opslaan",
+	"createpage-must-specify-title": "Geef eerst een titel op!",
 	"createpage-unsaved-changes": "Niet-opgeslagen wijzigingen",
+	"createpage-unsaved-changes-details": "U hebt niet-opgeslagen wijzigingen. Als u op OK klikt, worden ze weggegooid.",
 	"tog-createpage-redlinks": "[http://www.shoutwiki.com/wiki/Help:CreatePage CreatePage] gebruiken bij het volgen van verbroken koppelingen",
 	"createpage-template-infobox-format": "/\\{\\{[^\\{\\}]*Informatievenster.*\\}\\}/is"
 }
