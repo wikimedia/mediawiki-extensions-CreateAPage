@@ -548,8 +548,8 @@ class CreatePageCreateplateForm {
 			// Order matters! importFormData overwrites textbox1 so we must define it _after_ calling it, obviously
 			$editpage->textbox1 = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 
-			$editpage->minoredit = $request->getCheck( 'wpMinoredit' );
-			$editpage->watchthis = $request->getCheck( 'wpWatchthis' );
+			$request->setVal( 'wpMinoredit', $request->getCheck( 'wpMinoredit' ) );
+			$request->setVal( 'wpWatchthis', $request->getCheck( 'wpWatchthis' ) );
 			$editpage->summary = $request->getVal( 'wpSummary' );
 
 			$_SESSION['article_createplate'] = $this->mCreateplate;
