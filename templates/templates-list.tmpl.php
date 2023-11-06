@@ -4,37 +4,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 ?>
 <!-- s:<?php echo __FILE__ ?> -->
-<noscript>
-<style type="text/css">
-/*<![CDATA[*/
-#wpTableMultiEdit div div .createpage_input_file label,
-#cp-infobox div .createpage_input_file label {
-	float: left !important;
-	background: #fff;
-	border: none;
-	color: #000;
-	cursor: auto;
-}
-
-#wpTableMultiEdit div div .createpage_input_file label span,
-#cp-infobox div .createpage_input_file label span {
-	display: none !important;
-}
-
-#wpTableMultiEdit div div .createpage_input_file label input,
-#cp-infobox div .createpage_input_file label input {
-	position: relative !important;
-	font-size: 9pt !important;
-	line-height: 12px !important;
-	opacity: 100 !important;
-	zoom: 1 !important;
-	filter: alpha(opacity=100) !important;
-}
-
-/*]]>*/
-</style>
-</noscript>
-
 <?php if ( !$ispreview ) { ?>
 
 <div id="templateThumbs">
