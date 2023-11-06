@@ -171,7 +171,7 @@ class CreatePageCreateplateForm {
 		}
 
 		if ( $err != '' ) {
-			$out->setSubtitle( wfMessage( 'formerror' )->text() );
+			$out->setSubtitle( wfMessage( 'formerror' )->escaped() );
 			$out->addHTML( "<p class='error'>{$err}</p>\n" );
 		}
 
