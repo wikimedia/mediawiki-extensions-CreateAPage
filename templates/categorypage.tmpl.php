@@ -13,7 +13,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 /*]]>*/
 </style>
 
-<div id="createpage_cloud_div" style="display: none;">
+<div id="createpage_cloud_div">
 <div style="font-weight: bold;"><?php echo wfMessage( 'createpage-categories' )->escaped() ?></div>
 <?php if ( isset( $cloud->tags ) ) { ?>
 <div id="createpage_cloud_section">
@@ -34,12 +34,7 @@ foreach ( $cloud->tags as $xname => $xtag ) {
 <input type="button" name="wpCategoryButton" id="wpCategoryButton" class="button color1" value="<?php echo wfMessage( 'createpage-addcategory' )->escaped() ?>" />
 <input type="text" name="wpCategoryInput" id="wpCategoryInput" value="" />
 </div>
-<script type="text/javascript">
-/*<![CDATA[*/
-var div = document.getElementById( 'createpage_cloud_div' );
-div.style.display = 'block';
-/*]]>*/
-</script>
+
 <noscript>
 <?php if ( isset( $cloud->tags ) ) { ?>
 <div id="createpage_cloud_section_njs">

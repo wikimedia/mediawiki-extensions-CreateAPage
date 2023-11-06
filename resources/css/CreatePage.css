@@ -376,6 +376,14 @@ legend {
 	margin: 0 5px;
 }
 
+.client-nojs #createpage_cloud_div {
+	display: none;
+}
+
+.client-js #createpage_cloud_div {
+	display: block;
+}
+
 #createpage_cloud_section,
 #createpage_cloud_section_njs {
 	border: 1px solid #d3d3d3;
