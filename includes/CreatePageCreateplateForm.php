@@ -512,7 +512,16 @@ class CreatePageCreateplateForm {
 
 			if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
 				$captcha = ConfirmEditHooks::getInstance();
-				if ( !$captcha->passCaptchaFromRequest( $request, $user ) ) {
+				if (
+					// Keep sorta in sync w/ CreatePageMultiEditor#generateForm, I guess
+					(
+						$captcha->triggersCaptcha( 'edit' ) ||
+						$captcha->triggersCaptcha( 'create' ) ||
+						$captcha->triggersCaptcha( 'addurl' )
+					) &&
+					!$captcha->canSkipCaptcha( $user, MediaWiki\MediaWikiServices::getInstance()->getMainConfig() ) &&
+					!$captcha->passCaptchaFromRequest( $request, $user )
+				) {
 					$hasError = true;
 					$errorMsg = wfMessage( 'captcha-edit-fail' )->escaped();
 				}
