@@ -23,6 +23,7 @@
 		"valid-jsdoc": "off",
 		"no-shadow": "warn",
 		"block-scoped-var": "warn",
-		"no-constant-binary-expression": "warn"
+		"no-constant-binary-expression": "warn",
+		"es-x/no-resizable-and-growable-arraybuffers": "warn"
 	}
 }
