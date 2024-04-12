@@ -18,7 +18,7 @@ foreach ( $inf_pars as $inf_par ) {
 	if ( is_array( $inf_par_pair ) ) {
 		if ( preg_match( CreateMultiPage::IMAGEUPLOAD_TAG_SPECIFIC, $inf_par_pair[1], $match ) ) {
 			$tmplImg = new EasyTemplate( __DIR__ );
-			$tmplImg->set_vars( [
+			$tmplImg->setVars( [
 				'image_num' => $inf_image_num,
 				'image_helper' => $inf_par,
 				'image_name' => $inf_par_pair[0]

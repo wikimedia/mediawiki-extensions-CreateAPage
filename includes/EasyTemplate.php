@@ -8,7 +8,7 @@
  * ideas taken from Template class by
  * Copyright © 2003 Brian E. Lozier (brian@massassi.net)
  *
- * set_vars() method contributed by Ricardo Garcia (Thanks!)
+ * setVars() method contributed by Ricardo Garcia (Thanks!)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -31,7 +31,9 @@
 
 class EasyTemplate {
 
+	/** @var string */
 	public $mPath;
+	/** @var array */
 	public $mVars;
 
 	/**
@@ -53,7 +55,7 @@ class EasyTemplate {
 	 * @param array $vars Variables to set
 	 * @param bool $clear Whether to completely overwrite the existing vars
 	 */
-	public function set_vars( $vars, $clear = false ) {
+	public function setVars( $vars, $clear = false ) {
 		if ( $clear ) {
 			$this->mVars = $vars;
 		} else {
@@ -99,7 +101,7 @@ class EasyTemplate {
 	 * @param string $file path to file with template
 	 * @return bool
 	 */
-	public function template_exists( $file ) {
+	public function templateExists( $file ) {
 		if ( !strstr( $file, '.tmpl.php' ) ) {
 			$file .= '.tmpl.php';
 		}

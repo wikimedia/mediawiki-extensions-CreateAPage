@@ -7,12 +7,17 @@
 use Wikimedia\AtEase\AtEase;
 
 class CAP_TagCloud {
+	/** @var int */
 	public $tags_min_pts = 8;
+	/** @var int */
 	public $tags_max_pts = 32;
+	/** @var int */
 	public $tags_highest_count = 0;
+	/** @var string */
 	public $tags_size_type = 'pt';
 	/** @var int */
 	public $limit;
+	/** @var array<string,array> */
 	public $tags = [];
 
 	/**

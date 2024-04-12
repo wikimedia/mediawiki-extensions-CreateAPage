@@ -407,7 +407,7 @@ class CreatePageCreateplateForm {
 		}
 
 		$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-		$tmpl->set_vars( [
+		$tmpl->setVars( [
 			'data' => $createplates,
 			'selected' => $check,
 			'createtitle' => $this->makePrefix( $this->mTitle ),
@@ -540,7 +540,8 @@ class CreatePageCreateplateForm {
 
 			$editor = new CreatePageMultiEditor( $this->mCreateplate );
 			$rtitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
-			// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then need the article ID? --ashley, 8 December 2019
+			// @todo FIXME/CHECKME: should prolly be WikiPage::factory( $rtitle )? but do we then
+			// need the article ID? --ashley, 8 December 2019
 			$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
 			$editpage = new EditPage( $rarticle );
 			$editpage->setContextTitle( SpecialPage::getTitleFor( 'CreatePage' ) );

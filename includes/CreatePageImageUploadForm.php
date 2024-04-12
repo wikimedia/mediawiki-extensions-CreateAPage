@@ -13,14 +13,23 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 */
 	public $mRequest;
 
+	/** @var string */
 	public $mStoredDestName;
+	/** @var string */
 	public $mLastTimestamp;
+	/** @var int */
 	public $mReturnedTimestamp;
+	/** @var int */
 	public $mCurlError;
+	/** @var string */
 	public $mInFix;
+	/** @var int */
 	public $mPostFix;
+	/** @var bool */
 	public $mWatchthis = true;
+	/** @var string */
 	public $mComment;
+	/** @var string|null */
 	public $mErrorText;
 
 	/**
@@ -456,7 +465,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	private function checkOverwrite( $user ) {
 		// First check whether the local file can be overwritten
 		$file = $this->getLocalFile();
-		$file->load( File::READ_LATEST );
+		$file->load( IDBAccessObject::READ_LATEST );
 		if ( $file->exists() ) {
 			if ( !UploadBase::userCanReUpload( $user, $file ) ) {
 				return [ 'fileexists-forbidden', $file->getName() ];

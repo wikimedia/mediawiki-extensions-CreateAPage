@@ -462,7 +462,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			// glue in images, replacing all image tags with content
 			foreach ( $all_images as $myImage ) {
 				if ( $myImage !== '<!---imageupload--->' ) {
-					$text = $this->str_replace_once(
+					$text = $this->strReplaceOnce(
 						'<!---imageupload--->',
 						'[[' . $myImage . '|thumb]]',
 						$text
@@ -490,7 +490,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 	 * @param string $subject
 	 * @return string
 	 */
-	private function str_replace_once( $search, $replace, $subject ) {
+	private function strReplaceOnce( $search, $replace, $subject ) {
 		$pos = strpos( $subject, $search );
 		if ( $pos !== false ) {
 			$ret = substr( $subject, 0, $pos ) . $replace . substr( $subject, $pos + strlen( $search ) );

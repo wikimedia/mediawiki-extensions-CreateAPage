@@ -22,8 +22,6 @@ class CreateMultiPage {
 	// used _only_ outside this class in templates/infobox.tmpl.php:
 	public const INFOBOX_SEPARATOR = '/\<!---separator---\>/is';
 	public const ISBLANK_TAG_SPECIFIC = '<!---blanktemplate--->';
-	// public const TEMPLATE_INFOBOX_FORMAT = '/\{\{[^\{\}]*Infobox.*\}\}/is'; // replaced by [[MediaWiki:Createpage-template-infobox-format]]
-	//public const TEMPLATE_OPENING = '/\{\{[^\{\}]*Infobox[^\|]*/i'; // literally unused
 	public const TEMPLATE_CLOSING = '/\}\}/';
 
 	private function __construct() {
@@ -69,14 +67,14 @@ class CreateMultiPage {
 
 				// fire off a special one textarea template
 				$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-				$tmpl->set_vars( [
+				$tmpl->setVars( [
 					'box' => $sourceText
 				] );
 				$me_content .= $tmpl->render( 'bigarea' );
 
 				$cloud = new CAP_TagCloud();
 				$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-				$tmpl->set_vars( [
+				$tmpl->setVars( [
 					'num' => 0,
 					'cloud' => $cloud,
 					'cols' => $cols,
@@ -140,7 +138,7 @@ class CreateMultiPage {
 
 			$num = 0;
 			$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-			$tmpl->set_vars( [
+			$tmpl->setVars( [
 				'num' => $num,
 				'infoboxes' => $to_parametrize,
 				'inf_pars' => $fixed_par_array,
@@ -237,7 +235,7 @@ class CreateMultiPage {
 						switch ( $_tag ) {
 							case 'title':
 							case 'descr':
-							case 'category': {
+							case 'category':
 								if ( empty( $special_tags[$_tag] ) || ( $_tag === 'category' ) ) {
 									$special_tags[$_tag] = $me_tags[3][$id];
 									if ( $_tag !== 'category' ) {
@@ -272,7 +270,6 @@ class CreateMultiPage {
 									}
 								}
 								break;
-							}
 						}
 					}
 				}
@@ -316,7 +313,7 @@ class CreateMultiPage {
 				];
 				switch ( $specialTag ) {
 					// <!---lbl---> tag support
-					case 'lbl': {
+					case 'lbl':
 						// strip <!---lbl---> tag
 						$text_html = str_replace( $other_tags[0], '', $text );
 						// strip unneeded newlines
@@ -334,9 +331,9 @@ class CreateMultiPage {
 							'display' => 1
 						];
 						break;
-					}
+
 					// <!---pagetitle---> tag support
-					case 'pagetitle': {
+					case 'pagetitle':
 						// strip <!---pagetitle---> tag
 						$text_html = str_replace( $other_tags[0], '', $text );
 						// strip unneeded newlines
@@ -348,9 +345,9 @@ class CreateMultiPage {
 							'display' => 1
 						];
 						break;
-					}
+
 					// <!---optional---> tag support
-					case 'optional': {
+					case 'optional':
 						// strip the tag
 						$text_html = str_replace( $other_tags[0], '', $text );
 						$text_html = trim( $text_html );
@@ -363,9 +360,9 @@ class CreateMultiPage {
 
 						$optionals[] = count( $boxes ) - 1;
 						break;
-					}
+
 					// <!---imageupload---> tag support
-					case 'imageupload': {
+					case 'imageupload':
 						// do a match here, and for each do the thing, yeah
 						preg_match_all( self::IMAGEUPLOAD_TAG_SPECIFIC, $text, $image_tags );
 
@@ -395,7 +392,7 @@ class CreateMultiPage {
 						$add_img_num = 0;
 						foreach ( $image_tags[0] as $image_tag ) {
 							$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-							$tmpl->set_vars( [
+							$tmpl->setVars( [
 								'imagenum' => $all_image_num,
 								'target_tag' => $current + $add_img_num
 							] );
@@ -408,7 +405,6 @@ class CreateMultiPage {
 							$add_img_num++;
 							$all_image_num++;
 						}
-					}
 				}
 			} elseif ( $specialTag === 'generic' ) {
 				// generic textarea
@@ -429,7 +425,7 @@ class CreateMultiPage {
 		}
 
 		$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-		$tmpl->set_vars( [
+		$tmpl->setVars( [
 			'boxes' => $boxes,
 			'cols' => $cols,
 			'rows' => $rows,
@@ -459,7 +455,7 @@ class CreateMultiPage {
 			$cloud = new CAP_TagCloud();
 
 			$tmpl = new EasyTemplate( __DIR__ . '/../templates/' );
-			$tmpl->set_vars( [
+			$tmpl->setVars( [
 				'num' => $num,
 				'cloud' => $cloud,
 				'cols' => $cols,

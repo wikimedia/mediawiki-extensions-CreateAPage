@@ -27,7 +27,7 @@ foreach ( $boxes as $id => $box ) {
 	$clear = ' class="createpage-clear"';
 
 	switch ( $box['type'] ) {
-		case 'section_display': {
+		case 'section_display':
 			$i = $id;
 			$title_found = false;
 			$visible = '';
@@ -61,17 +61,17 @@ foreach ( $boxes as $id => $box ) {
 			<?php
 			$sections++;
 			break;
-		}
-		case 'text': {
+
+		case 'text':
 			$value = "<input type=\"text\" size=\"50\" {$html} value=\"" . $box['value'] . '">';
 			break;
-		}
-		case 'hidden': {
+
+		case 'hidden':
 			$value = "<input type=\"hidden\" {$html} value=\"" . $box['value'] . '">';
 			break;
-		}
+
 		case 'optional_textarea':
-		case 'textarea': {
+		case 'textarea':
 			$linenum = count( explode( "\n", $box['value'] ) ) + 1;
 			$linenum = ( $linenum > 8 ) ? 8 : $linenum;
 			$value = "<textarea type=\"text\" rows=\"5\" cols=\"{$cols}\" {$html} class=\"createpage-textarea\">" . $box['value'] . '</textarea>';
@@ -82,7 +82,7 @@ foreach ( $boxes as $id => $box ) {
 			$value .= '<a href="#" id="wpTextDecrease' . $id . '" class="createpage-controller createpage-upper"><img src="' . $imgpath . 'up.png" alt="-" /></a>';
 			$value .= '<a href="#" id="wpTextIncrease' . $id . '" class="createpage-controller createpage-lower"><img src="' . $imgpath . 'down.png" alt="+" /></a>';
 			break;
-		}
+
 		default:
 			$value = $box['value'];
 	}
