@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"01miki10",
-			"Jack Phoenix"
+			"Jack Phoenix",
+			"Pyscowicz"
 		]
 	},
 	"createpage-edit-normal": "Kehittynyt muokkaus",
@@ -40,7 +41,7 @@
 	"createpage-login-required": "Sinun tulee <a id=\"$2\" href=\"$1\">kirjautua sisään</a> tallentaaksesi kuvia",
 	"createpage-please-wait": "Odota...",
 	"createpage-upload-directory-read-only": "Web-palvelin ei voi kirjoittaa tallennuskansioon",
-	"createpage-about-info": "Tämä on yksinkertaistettu editori. Katso [[s:w:fi:Ohje:CreatePage|ShoutWikin ohjeista]] saadaksesi lisätietoja.",
+	"createpage-about-info": "Tämä on yksinkertaistettu muokkain. Katso [[s:Help\n:CreatePage|ShoutWikin ohjeista]] saadaksesi lisätietoja.",
 	"createpage-advanced-text": "Voit myös käyttää $1.",
 	"createpage-advanced-edit": "kehittynyttä editoria",
 	"createpage-optionals-text": "Lisää vapaaehtoisia osioita:",
