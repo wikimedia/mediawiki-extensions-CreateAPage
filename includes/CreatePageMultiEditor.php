@@ -278,7 +278,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		// parse the textarea
 		$categories_array = preg_split( "/\|/", $categories, -1 );
 		foreach ( $categories_array as $category ) {
-			if ( !empty( $category ) ) {
+			if ( $category ) {
 				$text .= "\n[[" . $ns_cat . ':' . $category . ']]';
 			}
 		}
@@ -458,7 +458,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			}
 		}
 
-		if ( !empty( $all_images ) ) {
+		if ( $all_images ) {
 			// glue in images, replacing all image tags with content
 			foreach ( $all_images as $myImage ) {
 				if ( $myImage !== '<!---imageupload--->' ) {

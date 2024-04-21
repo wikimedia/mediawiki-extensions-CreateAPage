@@ -55,12 +55,14 @@ class CreateMultiPage {
 
 		$is_used_metag = false;
 		$is_used_category_cloud = false;
+		// @phan-suppress-next-line MediaWikiNoEmptyIfDefined
 		$wgMultiEditTag = ( empty( $wgMultiEditTag ) ) ? 'useMultiEdit' : $wgMultiEditTag;
 		$multiedit_tag = '<!---' . $wgMultiEditTag . '--->';
 
 		# is tag set?
 		// @phan-suppress-next-line PhanImpossibleCondition phan doesn't like the 1st cond; it's needed for infobox parsing
 		if ( empty( $wgMultiEditTag ) || ( strpos( $sourceText, $multiedit_tag ) === false ) ) {
+		// @phan-suppress-previous-line MediaWikiNoEmptyIfDefined
 			if ( !strpos( $sourceText, self::ISBLANK_TAG_SPECIFIC ) ) {
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC . "\n", '', $sourceText );
 				$sourceText = str_replace( self::ISBLANK_TAG_SPECIFIC, '', $sourceText );
@@ -184,16 +186,16 @@ class CreateMultiPage {
 			}
 
 			# get section text
-			$text = ( ( $num && ( !empty( $add ) ) ) ? '==' : '' ) . $add . $section[0];
+			$text = ( ( $num && ( $add !== '' ) ) ? '==' : '' ) . $add . $section[0];
 
 			preg_match( '!==(.*?)==!s', $text, $name );
 			$section_name = $section_wout_tags = '';
 			# section name
-			if ( !empty( $name ) ) {
+			if ( $name ) {
 				$section_name = $name[0];
 				$section_wout_tags = trim( $name[1] );
 			}
-			if ( !empty( $section_name ) ) {
+			if ( $section_name ) {
 				$boxes[] = [
 					'type' => 'section_display',
 					'value' => '<b>' . $section_wout_tags . '</b>',
@@ -286,7 +288,7 @@ class CreateMultiPage {
 			/**
 			 * Display section name and additional tags as hidden text
 			 */
-			if ( !empty( $main_tags ) ) {
+			if ( $main_tags ) {
 				$boxes[] = [
 					'type' => 'textarea',
 					'value' => $main_tags,
@@ -302,9 +304,9 @@ class CreateMultiPage {
 			$specialTag = ( isset( $other_tags ) && ( !empty( $other_tags[1] ) ) ) ? $other_tags[1] : 'generic';
 
 			if (
-				( !empty( $specialTag ) ) &&
-				( !empty( $wgMultiEditPageSimpleTags ) ) &&
-				( in_array( $specialTag, $wgMultiEditPageSimpleTags ) )
+				$specialTag &&
+				$wgMultiEditPageSimpleTags &&
+				in_array( $specialTag, $wgMultiEditPageSimpleTags )
 			) {
 				$boxes[] = [
 					'type' => 'text',

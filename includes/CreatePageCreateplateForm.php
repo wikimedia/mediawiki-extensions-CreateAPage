@@ -330,7 +330,7 @@ class CreatePageCreateplateForm {
 			}
 		}
 
-		if ( empty( $createplates ) ) {
+		if ( !$createplates ) {
 			return false;
 		}
 		return $createplates;
@@ -432,7 +432,7 @@ class CreatePageCreateplateForm {
 			$this->getOutput()->setArticleBodyOnly( true );
 		}
 
-		if ( empty( $given ) && !$ajax ) {
+		if ( !$given && !$ajax ) {
 			return wfMessage( 'createpage-give-title' )->escaped();
 		}
 
