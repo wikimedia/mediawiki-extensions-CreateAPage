@@ -253,6 +253,9 @@ legend {
 	padding: 2px 3px;
 }
 
+/** Not used by this extension (or, indeed, any other extension known to codesearch as of 8 November 2023)
+ * but used by many sites' on-wiki CSS styles, including those of many a Wikipedia
+ */
 .bordered {
 	border: 1px solid #808080;
 	margin-left: 20px;
