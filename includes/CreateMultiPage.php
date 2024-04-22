@@ -80,7 +80,7 @@ class CreateMultiPage {
 					'num' => 0,
 					'cloud' => $cloud,
 					'cols' => $cols,
-					'text_category' => '' ,
+					'text_category' => '',
 					'array_category' => []
 				] );
 				$me_content .= $tmpl->render( 'categorypage' );
