@@ -10,24 +10,24 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 <?php
 }
 
-	if ( !$ispreview ) {
-		foreach ( $data as $e => $element ) {
-			$name = $element['page'];
-			$label = str_replace( ' Page', '', $element['label'] );
+if ( !$ispreview ) {
+	foreach ( $data as $e => $element ) {
+		$name = $element['page'];
+		$label = str_replace( ' Page', '', $element['label'] );
 
-			$thumb = '';
-			if ( !empty( $element['preview'] ) ) {
-				$thumb = "<img id=\"cp-template-$name-thumb\" src=\"" . $element['preview'] . "\" alt=\"$name\" />";
-			}
+		$thumb = '';
+		if ( !empty( $element['preview'] ) ) {
+			$thumb = "<img id=\"cp-template-$name-thumb\" src=\"" . $element['preview'] . "\" alt=\"$name\" />";
+		}
 
-			$divClasses = 'templateFrame';
-			if ( $e == count( $data ) - 1 ) {
-				$divClasses .= ' templateFrameLast';
-			}
-			if ( $selected[$name] == 'checked' ) {
-				$divClasses .= ' templateFrameSelected';
-			}
-			?>
+		$divClasses = 'templateFrame';
+		if ( $e == count( $data ) - 1 ) {
+			$divClasses .= ' templateFrameLast';
+		}
+		if ( $selected[$name] == 'checked' ) {
+			$divClasses .= ' templateFrameSelected';
+		}
+		?>
 
 	<div class="<?php echo $divClasses ?>" id="cp-template-<?php echo $name ?>">
 		<label for="cp-template-<?php echo $name ?>-radio">
@@ -39,14 +39,14 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 		</div>
 	</div>
 	<?php
-		// foreach
-		}
+	// foreach
+	}
 	?>
 </div>
 
 <?php
-	// is not preview
-	}
+// is not preview
+}
 ?>
 
 <div class="visualClear" style="clear: both"></div>
