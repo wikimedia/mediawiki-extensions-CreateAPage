@@ -17,7 +17,7 @@
 	"apihelp-createapage-upload-param-comment": "Message de summario del incargamento; si non definite, prende le valor de <kbd>MediaWiki:Createpage-uploaded-from</kbd>",
 	"apihelp-createapage-upload-param-wpInFix": "(nulle adjuta disponibile)",
 	"apihelp-createapage-upload-param-wpPostFix": "(nulle adjuta disponibile)",
-	"apihelp-createapage-upload-example-1": "(nulle adjuta disponibile)",
+	"apihelp-createapage-upload-example-1": "Incargar un imagine ab un quadro informative in le interfacie Special:CreatePage usante le classe PHP CreatePageImageUploadForm personalisate; require que varie valores sia assignate in le WebRequest, tales como le datos incargabile real del file. Evidentemente, simplemente acceder a un URL como iste non functionara per se mesme. In facto, le sol cosa que debe usar iste puncto final es Special:CreatePage, e sperabilemente in le futuro nos potera facer que isto utilisa le API JS central “normal” pro le incargamento de files (patches benvenite!).",
 	"createpage-edit-normal": "Modification avantiate",
 	"createpage-upload": "Incargar imagine",
 	"createpage-hide": "Celar",
