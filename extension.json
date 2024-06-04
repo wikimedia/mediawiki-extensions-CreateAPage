@@ -1,6 +1,6 @@
 {
 	"name": "CreateAPage",
-	"version": "4.1",
+	"version": "4.2",
 	"author": [
 		"Bartek Łapiński",
 		"Piotr Molski",
@@ -13,7 +13,7 @@
 	"descriptionmsg": "createpage-desc",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.35.3"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"config": {
 		"CreatePageCoverRedLinks": {

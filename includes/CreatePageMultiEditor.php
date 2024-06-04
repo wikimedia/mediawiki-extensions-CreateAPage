@@ -73,7 +73,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		$captchaForm = '';
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
-			$captcha = ConfirmEditHooks::getInstance();
+			$captcha = MediaWiki\Extension\ConfirmEdit\Hooks::getInstance();
 			if (
 				// @todo I hate this conditional, but ConfirmEdit's shouldCheck() -- which,
 				// I guess, we should be using here, has an atrocious interface that assumes,

@@ -511,7 +511,7 @@ class CreatePageCreateplateForm {
 			}
 
 			if ( ExtensionRegistry::getInstance()->isLoaded( 'ConfirmEdit' ) ) {
-				$captcha = ConfirmEditHooks::getInstance();
+				$captcha = MediaWiki\Extension\ConfirmEdit\Hooks::getInstance();
 				if (
 					// Keep sorta in sync w/ CreatePageMultiEditor#generateForm, I guess
 					(
