@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kuldeepburjbhalaike"
+			"Kuldeepburjbhalaike",
+			"Cabal"
 		]
 	},
 	"createpage-infobox-legend": "ਜਾਣਕਾਰੀਡੱਬਾ",
@@ -9,6 +10,6 @@
 	"createpage-no": "ਨਹੀਂ",
 	"createpage-categories": "ਸ਼੍ਰੇਣੀਆਂ",
 	"createpage-addcategory": "ਸ਼੍ਰੇਣੀ ਜੋੜੋ",
-	"createpage-top-of-page": "ਪੰਨੇ ਦਾ ਸਿਖਰ",
+	"createpage-top-of-page": "ਸਫ਼ੇ ਦਾ ਸਿਖਰ",
 	"createpage-please-wait": "ਕਿਰਪਾ ਕਰਕੇ ਇੰਤਜ਼ਾਰ ਕਰੋ..."
 }
