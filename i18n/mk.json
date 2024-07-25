@@ -4,6 +4,7 @@
 			"Bjankuloski06"
 		]
 	},
+	"apihelp-createapage-example-2": "Погедајте го викитекстот, неизменет (од CreateAPage) доставен од корисникто во PHP $_SESSION['article_content'] суперглобално за понатамошна употреба",
 	"apihelp-createapage-upload-summary": "Приложнички модул на CreateAPage за подигање слики",
 	"createpage-edit-normal": "Напредно уредување",
 	"createpage-upload": "Подигни слика",
