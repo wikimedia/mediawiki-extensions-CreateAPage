@@ -2,8 +2,23 @@
 	"@metadata": {
 		"authors": [
 			"Avjoska",
-			"Pikne"
+			"Pikne",
+			"Jack Phoenix"
 		]
 	},
-	"createpage": "Loo uus artikkel"
+	"createpage-upload": "Laadi pilt üles",
+	"createpage-hide": "Peida",
+	"createpage-show": "Näita",
+	"createpage": "Loo uus artikkel",
+	"createpage-title": "Loo uus artikkel",
+	"createpage-title-additional": "Lehekülge, kuhu link sind suunas, pole veel. Et lehekülg luua, alusta allolevas kastis kirjutamist",
+	"createpage-infobox-legend": "Infokast",
+	"createpage-yes": "Jah",
+	"createpage-no": "Ei",
+	"createpage-categories": "Kategooriad",
+	"createpage-addcategory": "Lisa kategooria",
+	"createpage-insert-image": "Lisa pilt",
+	"createpage-login-required": "Pead <a id=\"$2\" href=\"$1\">sisse logima</a>, et piltide üles laadida",
+	"createpage-please-wait": "Palun oota...",
+	"createpage-save": "Salvesta"
 }
