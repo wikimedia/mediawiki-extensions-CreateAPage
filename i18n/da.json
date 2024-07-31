@@ -1,17 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jack Phoenix",
 			"Saederup92"
 		]
 	},
 	"createpage-edit-normal": "Avanceret redigering",
+	"createpage-upload": "Upload billede",
 	"createpage-hide": "Skjul",
 	"createpage-show": "Vis",
 	"createpage": "Opret en ny artikel",
 	"createpage-title": "Opret en ny artikel",
+	"createpage-title-additional": "Du har fulgt et link til en side som endnu ikke findes.\nFor at oprette siden skal du begynde at skrive i boksen nedenfor",
 	"createpage-title-caption": "Artikeltitel",
 	"createpage-choose-createplate": "Vælg en sidetype",
 	"createpage-button-createplate-submit": "Indlæs denne skabelon",
+	"createpage-infobox-legend": "Infoboks",
 	"createpage-yes": "Ja",
 	"createpage-no": "Nej",
 	"createpage-categories": "Kategorier",
