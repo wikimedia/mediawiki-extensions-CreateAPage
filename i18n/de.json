@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Ameisenigel",
+			"Justman10000",
 			"McDutchie",
 			"Umherirrender",
 			"WikiBayer"
 		]
 	},
+	"apihelp-createapage-summary": "CreateAPage-API-Modul: Erhalte createplate-HTML und wechsle zum regulären Wikitext-Bearbeitungsmodus auf Special:CreatePage",
 	"createpage-edit-normal": "Erweiterter Editor",
 	"createpage-upload": "Bild hochladen",
 	"createpage-hide": "Ausblenden",
