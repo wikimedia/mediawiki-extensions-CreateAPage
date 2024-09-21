@@ -438,7 +438,7 @@ class CreatePageCreateplateForm {
 
 		$title = Title::newFromText( $given );
 		if ( is_object( $title ) ) {
-			$dbr = wfGetDB( DB_REPLICA );
+			$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			$exists = $dbr->selectField(
 				'page',
 				'page_title',

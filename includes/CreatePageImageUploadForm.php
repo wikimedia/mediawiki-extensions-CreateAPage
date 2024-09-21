@@ -283,7 +283,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	 * @return bool|int Timestamp in regular TS_MW format on success, bool false on failure (no matches)
 	 */
 	private function getQuickTimestamp( $img_name ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 		$res_obj = $dbr->selectRow(
 			'image',
 			[ 'img_timestamp' ],

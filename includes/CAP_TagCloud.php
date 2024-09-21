@@ -4,6 +4,7 @@
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\MediaWikiServices;
 use Wikimedia\AtEase\AtEase;
 
 class CAP_TagCloud {
@@ -29,7 +30,7 @@ class CAP_TagCloud {
 	}
 
 	public function initialize() {
-		$dbr = wfGetDB( DB_PRIMARY );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$res = $dbr->select(
 			'categorylinks',
 			[ 'cl_to', 'COUNT(*) AS count' ],
