@@ -2,7 +2,11 @@
 
 use MediaWiki\MediaWikiServices;
 
-class CreateAPageHooks {
+class CreateAPageHooks implements
+	\MediaWiki\Hook\CustomEditorHook,
+	\MediaWiki\Hook\EditFormPreloadTextHook,
+	\MediaWiki\Preferences\Hook\GetPreferencesHook
+{
 
 	/**
 	 * When the "Advanced Edit" button is used, the existing content is preloaded
@@ -13,7 +17,7 @@ class CreateAPageHooks {
 	 * @param string &$text EditPage#textbox1 contents
 	 * @param Title $title
 	 */
-	public static function preloadContent( &$text, $title ) {
+	public function onEditFormPreloadText( &$text, $title ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getCheck( 'createpage' ) ) {
 			$text = isset( $_SESSION['article_content'] ) && $_SESSION['article_content'] ? $_SESSION['article_content'] : null;
@@ -35,7 +39,7 @@ class CreateAPageHooks {
 	 * @return bool True if we should bail out early for whatever reason,
 	 *   false after rendering the CreateAPage form
 	 */
-	public static function onCustomEditor( $article, $user ) {
+	public function onCustomEditor( $article, $user ) {
 		global $wgContentNamespaces, $wgCreatePageCoverRedLinks;
 
 		if ( !$wgCreatePageCoverRedLinks ) {
@@ -84,7 +88,7 @@ class CreateAPageHooks {
 	 * @param User $user Current User object
 	 * @param array &$preferences Array of existing preference information
 	 */
-	public static function onGetPreferences( $user, &$preferences ) {
+	public function onGetPreferences( $user, &$preferences ) {
 		global $wgCreatePageCoverRedLinks;
 		if ( $wgCreatePageCoverRedLinks ) {
 			$preferences['create-page-redlinks'] = [
