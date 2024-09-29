@@ -88,6 +88,7 @@
 		"main": {
 			"class": "CreateAPageHooks",
 			"services": [
+				"MainConfig",
 				"UserOptionsManager"
 			]
 		}
