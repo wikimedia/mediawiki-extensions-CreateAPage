@@ -436,14 +436,8 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			return UploadBase::HOOK_ABORTED;
 		}
 		if ( $this->mWatchthis ) {
-			if ( method_exists( MediaWiki\Watchlist\WatchlistManager::class, 'addWatch' ) ) {
-				// 1.37+
-				MediaWikiServices::getInstance()->getWatchlistManager()
-					->addWatch( $user, $this->mLocalFile->getTitle() );
-			} else {
-				// @phan-suppress-next-line PhanUndeclaredMethod
-				$user->addWatch( $this->mLocalFile->getTitle() );
-			}
+			MediaWikiServices::getInstance()->getWatchlistManager()
+				->addWatch( $user, $this->mLocalFile->getTitle() );
 		}
 		// Success, redirect to description page
 		$this->mReturnedTimestamp = $this->getQuickTimestamp( $this->mDestName );
