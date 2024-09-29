@@ -84,10 +84,15 @@
 		"CreatePageCreateplateForm": "includes/CreatePageCreateplateForm.php",
 		"CreatePageImageUploadForm": "includes/CreatePageImageUploadForm.php"
 	},
+	"HookHandlers": {
+		"main": {
+			"class": "CreateAPageHooks"
+		}
+	},
 	"Hooks": {
-		"EditFormPreloadText": "CreateAPageHooks::preloadContent",
-		"CustomEditor": "CreateAPageHooks::onCustomEditor",
-		"GetPreferences": "CreateAPageHooks::onGetPreferences"
+		"EditFormPreloadText": "main",
+		"CustomEditor": "main",
+		"GetPreferences": "main"
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources",
