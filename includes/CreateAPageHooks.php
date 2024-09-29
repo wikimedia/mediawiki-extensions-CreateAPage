@@ -1,12 +1,20 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserOptionsManager;
 
 class CreateAPageHooks implements
 	\MediaWiki\Hook\CustomEditorHook,
 	\MediaWiki\Hook\EditFormPreloadTextHook,
 	\MediaWiki\Preferences\Hook\GetPreferencesHook
 {
+
+	private UserOptionsManager $userOptionsManager;
+
+	public function __construct(
+		UserOptionsManager $userOptionsManager
+	) {
+		$this->userOptionsManager = $userOptionsManager;
+	}
 
 	/**
 	 * When the "Advanced Edit" button is used, the existing content is preloaded
@@ -46,12 +54,11 @@ class CreateAPageHooks implements
 			return true;
 		}
 
-		$userOptionsManager = MediaWikiServices::getInstance()->getUserOptionsManager();
 		$request = $article->getContext()->getRequest();
 		$title = $article->getTitle();
 		$namespace = $title->getNamespace();
 		if (
-			$userOptionsManager->getOption( $user, 'createpage-redlinks', 1 ) == 0 ||
+			$this->userOptionsManager->getOption( $user, 'createpage-redlinks', 1 ) == 0 ||
 			!in_array( $namespace, $wgContentNamespaces )
 		) {
 			return true;

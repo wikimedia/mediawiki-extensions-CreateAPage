@@ -86,7 +86,10 @@
 	},
 	"HookHandlers": {
 		"main": {
-			"class": "CreateAPageHooks"
+			"class": "CreateAPageHooks",
+			"services": [
+				"UserOptionsManager"
+			]
 		}
 	},
 	"Hooks": {
