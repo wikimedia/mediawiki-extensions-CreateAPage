@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\User\UserOptionsManager;
 
 class CreateAPageHooks implements
@@ -8,11 +9,14 @@ class CreateAPageHooks implements
 	\MediaWiki\Preferences\Hook\GetPreferencesHook
 {
 
+	private Config $config;
 	private UserOptionsManager $userOptionsManager;
 
 	public function __construct(
+		Config $config,
 		UserOptionsManager $userOptionsManager
 	) {
+		$this->config = $config;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
@@ -48,9 +52,7 @@ class CreateAPageHooks implements
 	 *   false after rendering the CreateAPage form
 	 */
 	public function onCustomEditor( $article, $user ) {
-		global $wgContentNamespaces, $wgCreatePageCoverRedLinks;
-
-		if ( !$wgCreatePageCoverRedLinks ) {
+		if ( !$this->config->get( 'CreatePageCoverRedLinks' ) ) {
 			return true;
 		}
 
@@ -59,7 +61,7 @@ class CreateAPageHooks implements
 		$namespace = $title->getNamespace();
 		if (
 			$this->userOptionsManager->getOption( $user, 'createpage-redlinks', 1 ) == 0 ||
-			!in_array( $namespace, $wgContentNamespaces )
+			!in_array( $namespace, $this->config->get( MainConfigNames::ContentNamespaces ) )
 		) {
 			return true;
 		}
@@ -96,8 +98,7 @@ class CreateAPageHooks implements
 	 * @param array &$preferences Array of existing preference information
 	 */
 	public function onGetPreferences( $user, &$preferences ) {
-		global $wgCreatePageCoverRedLinks;
-		if ( $wgCreatePageCoverRedLinks ) {
+		if ( $this->config->get( 'CreatePageCoverRedLinks' ) ) {
 			$preferences['create-page-redlinks'] = [
 				'type' => 'toggle',
 				'section' => 'editing/advancedediting',
