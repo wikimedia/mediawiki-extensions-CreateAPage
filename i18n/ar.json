@@ -4,7 +4,8 @@
 			"Alshamiri1",
 			"Jack Phoenix",
 			"Ouda",
-			"ديفيد"
+			"ديفيد",
+			"Meno25"
 		]
 	},
 	"apihelp-createapage-summary": "وحدة CreateAPage API: احصل على إنشاء لوحة HTML وتعامل مع التبديل إلى وضع تحرير نص ويكي العادي في Special: CreatePage",
@@ -51,7 +52,7 @@
 	"createpage-login-required": "يلزمك <a id=\"$2\" href=\"$1\">تسجيل الدخول</a> لرفع الصور",
 	"createpage-please-wait": "الرجاء الانتظار...",
 	"createpage-upload-directory-read-only": "دليل الرفع غير قابل للكتابة بواسطة خادم الويب",
-	"createpage-about-info": "هذا هو المحرر المبسط. لمعرفة المزيد ، انتقل إلى [[s: Help: CreatePage | ShoutWiki Hub]].",
+	"createpage-about-info": "هذا هو المحرر المبسّط. لمعرفة المزيد، انتقل إلى [[s:Help:CreatePage|ShoutWiki Hub]].",
 	"createpage-advanced-text": "يمكنك أيضا استخدام $1.",
 	"createpage-advanced-edit": "محرر متقدم",
 	"createpage-optionals-text": "إضافة أقسام اختيارية:",
