@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
+		]
+	},
+	"createpage-edit-normal": "پرمختللی سمون",
+	"createpage-upload": "انځور پورته کړئ",
+	"createpage-hide": "پټول",
+	"createpage-show": "ښکاره کول",
+	"createpage": "يوه نوې ليکنه ليکل",
+	"createpage-title": "يوه نوې ليکنه ليکل",
+	"createpage-title-additional": "تاسې یوه داسې تړنه څارلې چې لا تر اوسه نه شته. که همدا مخ ليکل غواړۍ، نو په لانديني چوکاټ کې مو متن وټاپئ",
+	"createpage-title-caption": "د ليکنې سرليک",
+	"createpage-choose-createplate": "يو مخ ډول وټاکئ",
+	"createpage-button-createplate-submit": "دا کينډۍ برسېرول",
+	"createpage-give-title": "لطفاً يو سرليک ځانگړی کړئ",
+	"createpage-title-invalid": "لطفاً يو سم سرليک ځانگړی کړئ",
+	"createpage-article-exists": "دا ليکنه له پخوا څخه شته. سم يې کړئ",
+	"createpage-article-exists2": "یا بل سرليک وټاکئ",
+	"createpage-infobox-legend": "مالومات‌بکس",
+	"createpage-yes": "هو",
+	"createpage-no": "نه",
+	"createpage-categories": "وېشنيزې",
+	"createpage-addcategory": "وېشنيزه ورگډول",
+	"createpage-top-of-page": "د پاڼې سر",
+	"createpage-uploaded-from": "له ځانگړې:CreatePage څخه پورته شوی",
+	"createplate-list": "تش|تش",
+	"createpage-img-uploaded": "انځور په بریالیتوب سره پورته شو",
+	"createpage-insert-image": "انځور ورټومبل",
+	"createpage-upload-aborted": "انځور ورگډول مو ناگاره‌ شو",
+	"createpage-initial-run": "سمولو ته ورشئ",
+	"createpage-please-wait": "لطفاً تم شئ …",
+	"createpage-advanced-text": "تاسو کولی شئ $1 هم وکاروئ.",
+	"createpage-advanced-edit": "پرمختللی سمونگر",
+	"createpage-optionals-text": "اختياري برخې ورگډول:",
+	"createpage-save": "خوندي کول",
+	"createpage-must-specify-title": "لطفاً لومړی يو سرليک ځانگړی کړئ",
+	"createpage-unsaved-changes": "ناخوندي بدلونونه",
+	"tog-createpage-redlinks": "کله چې مو ماتې تړنې څارلې نو[http://www.shoutwiki.com/wiki/Help:CreatePage مخ‌جوړول] وکاروئ"
+}
