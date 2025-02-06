@@ -239,10 +239,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			// case self::PROTECTED_PAGE:
 			//	return wfMessage( 'protectedpage' )->escaped();
 
-			case self::OVERWRITE_EXISTING_FILE:
-				$errorText = $details['overwrite'];
-				return Status::newFatal( $out->parseAsContent( $errorText ) );
-
 			case self::FILETYPE_MISSING:
 				return wfMessage( 'filetype-missing' )->escaped();
 
@@ -388,12 +384,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		}
 
 		$user = RequestContext::getMain()->getUser();
-
-		$overwrite = $this->checkOverwrite( $user );
-		if ( $overwrite !== true ) {
-			$resultDetails = [ 'overwrite' => $overwrite ];
-			return self::OVERWRITE_EXISTING_FILE;
-		}
 
 		/**
 		 * Look at the contents of the file; if we can recognize the
