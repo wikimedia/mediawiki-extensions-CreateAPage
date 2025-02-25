@@ -191,12 +191,21 @@ class CreatePageMultiEditor extends CreatePageEditor {
 			}
 		}
 
+		$pageTitle = $context->getTitle();
+		if ( !$pageTitle ) {
+			// @note This is per CreatepageCreateplateForm#submitForm, the variable called $rtitle in that method
+			$pageTitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
+		}
+		// Need this to not break random extensions which might be calling getTitle() on an OutputPage object
+		// and apparently somehow (???) be triggered on Special:CreatePage...
+		$context->setTitle( $pageTitle );
+
 		global $wgRightsText;
 		$copywarn = "<div id=\"editpage-copywarn\">\n" .
 					wfMessage( $wgRightsText ? 'copyrightwarning' : 'copyrightwarning2',
 							'[[' . wfMessage( 'copyrightpage' )->inContentLanguage()->text() . ']]',
 					$wgRightsText )->text() . "\n</div>";
-		$out->addWikiTextAsInterface( $copywarn );
+		$out->addWikiTextAsInterface( $copywarn, true, $pageTitle );
 
 		$editSummary = '<span id="wpSummaryLabel"><label for="wpSummary">' .
 			wfMessage( 'summary' )->escaped() . "</label></span>\n<input type='text' value=\"" .
@@ -209,7 +218,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		// used for regular page edits but rather _literally_ only for page creations,
 		// which no longer can be marked as minor edits, no matter what (and IMHO that's
 		// just silly because short pages, redirects, etc. are a thing)
-		if ( $context->getTitle()->exists() ) {
+		if ( $pageTitle->exists() ) {
 			$checkboxHTML = '<input id="wpMinoredit" type="checkbox" accesskey="i" value="1" name="wpMinoredit" ' . $minorEditCheck . '/>' . "\n" .
 				'<label accesskey="i" title="' . wfMessage( 'tooltip-minoredit' )->escaped() . ' [alt-shift-i]" for="wpMinoredit">' .
 				wfMessage( 'minoredit' )->escaped() . '</label>';
@@ -249,7 +258,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		// stuff for red links - bottom edittools, to be more precise
 		if ( $this->mRedLinked && ( $this->mTemplate === 'Blank' ) ) {
 			$out->addHTML( '<div id="createpage_editTools" class="mw-editTools">' );
-			$out->addWikiTextAsInterface( wfMessage( 'edittools' )->inContentLanguage()->text() );
+			$out->addWikiTextAsInterface( wfMessage( 'edittools' )->inContentLanguage()->text(), true, $pageTitle );
 			$out->addHTML( '</div>' );
 		}
 
