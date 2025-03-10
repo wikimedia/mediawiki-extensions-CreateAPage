@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Robby",
-			"Soued031"
+			"Soued031",
+			"Volvox"
 		]
 	},
+	"createpage-edit-normal": "Erweidert Ännerung",
 	"createpage-upload": "Bild eroplueden",
 	"createpage-hide": "Verstoppen",
 	"createpage-show": "Weisen",
@@ -20,6 +22,8 @@
 	"createpage-top-of-page": "Uewen op der Säit",
 	"createpage-insert-image": "Bild drasetzen",
 	"createpage-please-wait": "Waart wgl. ...",
+	"createpage-advanced-text": "Dir kënnt och den $1 benotzen.",
+	"createpage-advanced-edit": "erweiderten Editeur",
 	"createpage-save": "Späicheren",
 	"createpage-unsaved-changes": "Net-gespäichert Ännerungen"
 }
