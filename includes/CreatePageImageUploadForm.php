@@ -425,7 +425,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			// method, which in the day, when it existed, used to use OutputPage to display the error...
 			// --ashley, 8 December 2019
 			$this->mErrorText = $status->getWikiText();
-			return UploadBase::HOOK_ABORTED;
+			return self::VERIFICATION_ERROR;
 		}
 		if ( $this->mWatchthis ) {
 			MediaWikiServices::getInstance()->getWatchlistManager()
