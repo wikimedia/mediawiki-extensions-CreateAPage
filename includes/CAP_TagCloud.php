@@ -5,6 +5,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Wikimedia\AtEase\AtEase;
 
 class CAP_TagCloud {

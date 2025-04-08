@@ -1,8 +1,11 @@
 <?php
 
+use MediaWiki\EditPage\EditPage;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
 
 // wraps up special multi editor class
 class CreatePageMultiEditor extends CreatePageEditor {
