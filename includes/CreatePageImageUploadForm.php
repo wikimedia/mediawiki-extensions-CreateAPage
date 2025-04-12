@@ -1,6 +1,8 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\WebRequestUpload;
+use MediaWiki\Title\Title;
 
 class CreatePageImageUploadForm extends UploadFromFile {
 	/**

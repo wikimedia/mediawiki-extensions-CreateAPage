@@ -9,6 +9,7 @@
 
 use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
 
 class ApiCreateAPage extends ApiBase {
 
