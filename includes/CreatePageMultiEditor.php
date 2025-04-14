@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\Content\TextContent;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
@@ -60,8 +61,8 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					} catch ( RevisionAccessException $ex ) {
 						// Just ignore it for now and fall back to rendering a blank template (below)
 					}
-					if ( $contentObj !== null ) {
-						$contentText = (string)ContentHandler::getContentText( $contentObj );
+					if ( $contentObj !== null && $contentObj instanceof TextContent ) {
+						$contentText = (string)$contentObj->getText();
 					} else {
 						$contentText = '<!---blanktemplate--->';
 					}
@@ -198,6 +199,10 @@ class CreatePageMultiEditor extends CreatePageEditor {
 		if ( !$pageTitle ) {
 			// @note This is per CreatepageCreateplateForm#submitForm, the variable called $rtitle in that method
 			$pageTitle = Title::newFromText( $request->getVal( 'Createtitle' ) );
+		}
+		if ( $pageTitle === null ) {
+			// Still? Weeeeeeeeeird.
+			throw new ErrorPageError( 'badtitle', 'badtitletext' );
 		}
 		// Need this to not break random extensions which might be calling getTitle() on an OutputPage object
 		// and apparently somehow (???) be triggered on Special:CreatePage...

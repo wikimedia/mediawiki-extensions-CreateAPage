@@ -388,7 +388,7 @@ class CreatePageCreateplateForm {
 		}
 
 		if ( $this->mRedLinked ) {
-			$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+			$parser = MediaWikiServices::getInstance()->getParser();
 			// @todo FIXME: should probably be $parserOptions = ParserOptions::newCanonical();
 			// also the second line does nothing as the method is <s>deprecated</s> gone as of MW 1.34rc1
 			$parserOptions = ParserOptions::newFromUser( $this->getUser() );
@@ -522,7 +522,7 @@ class CreatePageCreateplateForm {
 						$captcha->triggersCaptcha( 'create' ) ||
 						$captcha->triggersCaptcha( 'addurl' )
 					) &&
-					!$captcha->canSkipCaptcha( $user, MediaWiki\MediaWikiServices::getInstance()->getMainConfig() ) &&
+					!$captcha->canSkipCaptcha( $user, MediaWikiServices::getInstance()->getMainConfig() ) &&
 					!$captcha->passCaptchaFromRequest( $request, $user )
 				) {
 					$hasError = true;
@@ -548,12 +548,6 @@ class CreatePageCreateplateForm {
 			$rarticle = new Article( $rtitle, $rtitle->getArticleID() );
 			$editpage = new EditPage( $rarticle );
 			$editpage->setContextTitle( SpecialPage::getTitleFor( 'CreatePage' ) );
-
-			// @note Per core MW a154a28c7a4442a7d08689036dc54688b0867a64, public access to these is deprecated
-			// (since MW 1.30) and I don't see why these oughta be set because they get set in EditPage's
-			// constructor from the object passed to it...
-			$editpage->mTitle = $rtitle;
-			$editpage->mArticle = $rarticle;
 
 			// ashley 8 December 2019: need this so that edits don't fail due to wpUnicodeCheck being ''...
 			$editpage->importFormData( $request );
@@ -654,7 +648,7 @@ class CreatePageCreateplateForm {
 
 		if ( is_object( $rtitle ) ) {
 			CreateAPageUtils::unescapeKnownMarkupTags( $content );
-			$parser = MediaWiki\MediaWikiServices::getInstance()->getParser();
+			$parser = MediaWikiServices::getInstance()->getParser();
 			$pre_parsed = $parser->preSaveTransform(
 				$content,
 				$rtitle,
