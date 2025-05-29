@@ -93,7 +93,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 				) &&
 				!$captcha->canSkipCaptcha( $user, $services->getMainConfig() )
 			) {
-				$formInformation = $captcha->getFormInformation();
+				$formInformation = $captcha->getFormInformation( 1, $out );
 				$formMetainfo = $formInformation;
 				unset( $formMetainfo['html'] );
 				$captcha->addFormInformationToOutput( $out, $formMetainfo );
