@@ -217,7 +217,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 
 		$editSummary = '<span id="wpSummaryLabel"><label for="wpSummary">' .
 			wfMessage( 'summary' )->escaped() . "</label></span>\n<input type='text' value=\"" .
-			htmlspecialchars( $summaryVal ) . '" name="wpSummary" id="wpSummary" maxlength="200" size="60" /><br />';
+			htmlspecialchars( $summaryVal ?? '' ) . '" name="wpSummary" id="wpSummary" maxlength="200" size="60" /><br />';
 
 		$checkboxHTML = '';
 		// Per EditPage#importFormData's isNew check (we ignore the "is this a new section?" check b/c
