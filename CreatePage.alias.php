@@ -328,6 +328,11 @@ $specialPageAliases['vi'] = [
 	'CreatePage' => [ 'Tạo_trang' ],
 ];
 
+/** Chinese (中文) */
+$specialPageAliases['zh'] = [
+	'CreatePage' => [ 'CreatePage' ],
+];
+
 /** Simplified Chinese (中文（简体）) */
 $specialPageAliases['zh-hans'] = [
 	'CreatePage' => [ '创建页面' ],
@@ -335,5 +340,5 @@ $specialPageAliases['zh-hans'] = [
 
 /** Traditional Chinese (中文（繁體）) */
 $specialPageAliases['zh-hant'] = [
-	'CreatePage' => [ '創建頁面' ],
+	'CreatePage' => [ '建立頁面', '創建頁面' ],
 ];
