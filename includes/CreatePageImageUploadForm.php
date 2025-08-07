@@ -202,10 +202,9 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		$user = $context->getUser();
 
 		// Verify permissions for this title
-		$permErrors = $this->verifyTitlePermissions( $user );
-		if ( $permErrors !== true ) {
-			$code = array_shift( $permErrors[0] );
-			return wfMessage( $code, $permErrors[0] )->parse();
+		$status = $this->authorizeUpload( $user );
+		if ( !$status->isGood() ) {
+			return wfMessage( $status->getMessages()[0] )->parse();
 		}
 
 		$details = [];
