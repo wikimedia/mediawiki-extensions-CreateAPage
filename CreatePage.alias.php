@@ -98,6 +98,11 @@ $specialPageAliases['fi'] = [
 	'CreatePage' => [ 'Luo_sivu', 'LuoSivu' ],
 ];
 
+/** French (français) */
+$specialPageAliases['fr'] = [
+	'CreatePage' => [ 'Créer_page', 'CréerPage', 'Creer_page', 'CreerPage' ],
+];
+
 /** Franco-Provençal (arpetan) */
 $specialPageAliases['frp'] = [
 	'CreatePage' => [ 'Fâre_una_pâge', 'FâreUnaPâge' ],
