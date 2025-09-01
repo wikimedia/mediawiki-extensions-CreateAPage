@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"Winston Sung"
 		]
 	},
-	"createpage-upload": "Otpremi sliku",
+	"createpage-upload": "Postavi sliku",
 	"createpage-hide": "Sakrij",
 	"createpage-show": "Prikaži",
 	"createpage": "Napravi novi članak",
