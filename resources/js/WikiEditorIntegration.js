@@ -6,7 +6,7 @@ window.loadWikiEditorForTextboxes = function () {
 	$( 'textarea[id^="wpTextboxes"]' ).each( function () {
 		// @todo FIXME: using mw.loader.moduleRegistry like this feels like a filthy hack
 		// *but* it works, unlike anything related to require()...
-		var dialogsConfig = mw.loader.moduleRegistry[ 'ext.wikiEditor' ].packageExports[ 'jquery.wikiEditor.dialogs.config.js' ];
+		const dialogsConfig = mw.loader.moduleRegistry[ 'ext.wikiEditor' ].packageExports[ 'jquery.wikiEditor.dialogs.config.js' ];
 
 		dialogsConfig.replaceIcons( $( this ) );
 
