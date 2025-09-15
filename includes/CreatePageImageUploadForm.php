@@ -202,9 +202,18 @@ class CreatePageImageUploadForm extends UploadFromFile {
 		$user = $context->getUser();
 
 		// Verify permissions for this title
-		$status = $this->authorizeUpload( $user );
-		if ( !$status->isGood() ) {
-			return wfMessage( $status->getMessages()[0] )->parse();
+		if ( method_exists( $this, 'authorizeUpload' ) ) {
+			$status = $this->authorizeUpload( $user );
+			if ( !$status->isGood() ) {
+				return wfMessage( $status->getMessages()[0] )->parse();
+			}
+		} elseif ( method_exists( $this, 'verifyTitlePermissions' ) ) {
+			// @phan-suppress-next-line PhanUndeclaredMethod Might be gone in 1.44+, still exists in <=1.43
+			$permErrors = $this->verifyTitlePermissions( $user );
+			if ( $permErrors !== true ) {
+				$code = array_shift( $permErrors[0] );
+				return wfMessage( $code, $permErrors[0] )->parse();
+			}
 		}
 
 		$details = [];
