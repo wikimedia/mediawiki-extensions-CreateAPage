@@ -559,7 +559,7 @@ class CreatePageCreateplateForm {
 			$request->setVal( 'wpWatchthis', $request->getCheck( 'wpWatchthis' ) );
 			$editpage->summary = $request->getVal( 'wpSummary' );
 
-			$_SESSION['article_createplate'] = $this->mCreateplate;
+			$request->getSession()->set( 'article_createplate', $this->mCreateplate );
 
 			// pipe tags to pipes
 			CreateAPageUtils::unescapeKnownMarkupTags( $editpage->textbox1 );
@@ -610,7 +610,9 @@ class CreatePageCreateplateForm {
 			$editor = new CreatePageMultiEditor( $this->mCreateplate );
 			$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 			CreateAPageUtils::unescapeKnownMarkupTags( $content );
-			$_SESSION['article_content'] = $content;
+
+			$request->getSession()->set( 'article_content', $content );
+
 			$out->redirect(
 				$wgServer . $wgScript . '?title=' .
 				$request->getVal( 'Createtitle' ) .

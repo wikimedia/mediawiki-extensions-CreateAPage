@@ -118,8 +118,7 @@ class ApiCreateAPage extends ApiBase {
 		$content = CreateMultiPage::unescapeBlankMarker( $editor->glueArticle() );
 		CreateAPageUtils::unescapeKnownMarkupTags( $content );
 
-		// RequestContext::getMain()->getRequest()->getSession()->set( 'article_content', $content );
-		$_SESSION['article_content'] = $content;
+		RequestContext::getMain()->getRequest()->getSession()->set( 'article_content', $content );
 
 		return true;
 	}
