@@ -229,7 +229,7 @@ class CreateMultiPage {
 			$special_tags = [];
 			preg_match_all( self::ADDITIONAL_TAG_PARSE, $text, $me_tags );
 
-			if ( isset( $me_tags ) && ( !empty( $me_tags[1] ) ) ) {
+			if ( !empty( $me_tags[1] ) ) {
 				foreach ( $me_tags[1] as $id => $_tag ) {
 					$brt = $me_tags[2][$id];
 					$correct_brt = ( $brt === '&quot;' ) ? '"' : $brt;
@@ -301,7 +301,7 @@ class CreateMultiPage {
 			 * other tags - lbl, pagetitle, optional, imageupload
 			 */
 			preg_match( self::SIMPLE_TAG_PARSE, $text, $other_tags );
-			$specialTag = ( isset( $other_tags ) && ( !empty( $other_tags[1] ) ) ) ? $other_tags[1] : 'generic';
+			$specialTag = !empty( $other_tags[1] ) ? $other_tags[1] : 'generic';
 
 			if (
 				$specialTag &&

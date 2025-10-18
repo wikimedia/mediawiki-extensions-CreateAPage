@@ -58,7 +58,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					$contentObj = null;
 					try {
 						$contentObj = $rev->getContent( SlotRecord::MAIN );
-					} catch ( RevisionAccessException $ex ) {
+					} catch ( RevisionAccessException ) {
 						// Just ignore it for now and fall back to rendering a blank template (below)
 					}
 					if ( $contentObj !== null && $contentObj instanceof TextContent ) {
@@ -91,6 +91,7 @@ class CreatePageMultiEditor extends CreatePageEditor {
 					$captcha->triggersCaptcha( 'create' ) ||
 					$captcha->triggersCaptcha( 'addurl' )
 				) &&
+				// @phan-suppress-next-line PhanParamTooMany -- Pass config for compat with earlier versions
 				!$captcha->canSkipCaptcha( $user, $services->getMainConfig() )
 			) {
 				$formInformation = $captcha->getFormInformation( 1, $out );

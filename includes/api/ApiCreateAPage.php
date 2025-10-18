@@ -7,6 +7,7 @@
  * @date 28 July 2020 (revised December 2021)
  */
 
+use MediaWiki\Content\TextContent;
 use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
@@ -80,12 +81,12 @@ class ApiCreateAPage extends ApiBase {
 			$contentObj = null;
 			try {
 				$contentObj = $rev->getContent( SlotRecord::MAIN );
-			} catch ( RevisionAccessException $ex ) {
+			} catch ( RevisionAccessException ) {
 				// Just ignore it for now and fall back to rendering a blank template (below)
 			}
 
-			if ( $contentObj !== null ) {
-				$text = (string)ContentHandler::getContentText( $contentObj );
+			if ( $contentObj instanceof TextContent ) {
+				$text = $contentObj->getText();
 			} else {
 				$text = '<!---blanktemplate--->';
 			}

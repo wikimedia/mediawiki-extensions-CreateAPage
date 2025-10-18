@@ -278,7 +278,7 @@ class CreatePageImageUploadForm extends UploadFromFile {
 			__METHOD__ . ": Unknown value `{$value}`" .
 			// Ugly hack, but whatever...
 			// @todo FIXME
-			( isset( $this->mErrorText ) ? "Details: {$this->mErrorText}" : '' )
+			( $this->mErrorText !== null ? "Details: {$this->mErrorText}" : '' )
 		);
 	}
 

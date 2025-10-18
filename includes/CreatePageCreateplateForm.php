@@ -95,7 +95,7 @@ class CreatePageCreateplateForm {
 	 * @return OutputPage
 	 */
 	public function getOutput() {
-		if ( isset( $this->output ) && $this->output instanceof OutputPage ) {
+		if ( $this->output instanceof OutputPage ) {
 			return $this->output;
 		}
 		return RequestContext::getMain()->getOutput();
@@ -108,7 +108,7 @@ class CreatePageCreateplateForm {
 	 * @return WebRequest
 	 */
 	public function getRequest() {
-		if ( isset( $this->request ) && $this->request instanceof WebRequest ) {
+		if ( $this->request instanceof WebRequest ) {
 			return $this->request;
 		}
 		return RequestContext::getMain()->getRequest();
@@ -121,7 +121,7 @@ class CreatePageCreateplateForm {
 	 * @return User
 	 */
 	public function getUser() {
-		if ( isset( $this->user ) && $this->user instanceof User ) {
+		if ( $this->user instanceof User ) {
 			return $this->user;
 		}
 		return RequestContext::getMain()->getUser();
@@ -522,6 +522,7 @@ class CreatePageCreateplateForm {
 						$captcha->triggersCaptcha( 'create' ) ||
 						$captcha->triggersCaptcha( 'addurl' )
 					) &&
+					// @phan-suppress-next-line PhanParamTooMany -- Pass config for compat with earlier versions
 					!$captcha->canSkipCaptcha( $user, MediaWikiServices::getInstance()->getMainConfig() ) &&
 					!$captcha->passCaptchaFromRequest( $request, $user )
 				) {

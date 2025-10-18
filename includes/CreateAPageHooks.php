@@ -33,7 +33,7 @@ class CreateAPageHooks implements
 	public function onEditFormPreloadText( &$text, $title ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getCheck( 'createpage' ) ) {
-			$text = $request->getSession()->get( 'article_content' ) ?? null;
+			$text = $request->getSession()->get( 'article_content' );
 		}
 	}
 
