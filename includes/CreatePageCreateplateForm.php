@@ -148,6 +148,7 @@ class CreatePageCreateplateForm {
 		$out = $this->getOutput();
 		$request = $this->getRequest();
 		$user = $this->getUser();
+		$serviceInstance = MediaWikiServices::getInstance();
 
 		if ( $request->getCheck( 'wpPreview' ) ) {
 			$out->setPageTitle( wfMessage( 'preview' )->text() );
@@ -180,7 +181,7 @@ class CreatePageCreateplateForm {
 
 		// show stuff like on normal edit page, but just for red links
 		if ( $this->mRedLinked ) {
-			$helpLink = wfExpandUrl( Skin::makeInternalOrExternalUrl(
+			$helpLink = $serviceInstance->getUrlUtils()->expand( Skin::makeInternalOrExternalUrl(
 				wfMessage( 'helppage' )->inContentLanguage()->text()
 			) );
 			if ( $user->isRegistered() ) {
@@ -245,7 +246,7 @@ class CreatePageCreateplateForm {
 		$out->addModules( 'ext.createAPage' );
 
 		// Add WikiEditor to the textarea(s) if enabled for the current user
-		$userOptionsManager = MediaWikiServices::getInstance()->getUserOptionsManager();
+		$userOptionsManager = $serviceInstance->getUserOptionsManager();
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) &&
 			$userOptionsManager->getOption( $user, 'usebetatoolbar' )
 		) {
