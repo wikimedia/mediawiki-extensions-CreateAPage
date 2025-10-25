@@ -33,22 +33,28 @@ class CAP_TagCloud {
 	public function initialize() {
 		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$res = $dbr->select(
-			'categorylinks',
-			[ 'cl_to', 'COUNT(*) AS count' ],
+			[ 'categorylinks', 'linktarget' ],
+			[ 'cl_target_id',
+				'COUNT(*) AS count',
+				'lt_id',
+				'lt_title' ],
 			[],
 			__METHOD__,
 			[
-				'GROUP BY' => 'cl_to',
+				'GROUP BY' => 'cl_target_id, lt_id, lt_title',
 				'ORDER BY' => 'count DESC',
 				'LIMIT' => $this->limit
-			]
+			],
+			[ 'linktarget' => [
+				'JOIN', 'cl_target_id = lt_id'
+			] ]
 		);
 
 		// prevent PHP from bitching about strtotime()
 		AtEase::suppressWarnings();
 
 		foreach ( $res as $row ) {
-			$tag_name = Title::makeTitle( NS_CATEGORY, $row->cl_to );
+			$tag_name = Title::makeTitle( NS_CATEGORY, $row->lt_title );
 			$tag_text = $tag_name->getText();
 
 			// don't want dates to show up
