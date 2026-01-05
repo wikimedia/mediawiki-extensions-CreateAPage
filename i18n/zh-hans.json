@@ -5,7 +5,8 @@
 			"Lakejason0",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
 			"铁桶",
-			"沈澄心"
+			"沈澄心",
+			"Peterxy12"
 		]
 	},
 	"createpage-edit-normal": "高级编辑",
@@ -26,11 +27,19 @@
 	"createpage-no": "否",
 	"createpage-categories": "分类：",
 	"createpage-addcategory": "添加分类",
+	"createpage-top-of-page": "页面顶部",
 	"createpage-uploaded-from": "上传自Special:CreatePage",
+	"createplate-list": "Blank|空白",
+	"createpage-title-check-header": "强制标题检查",
 	"createpage-img-uploaded": "图片上传成功",
 	"createpage-preview-end": "预览结束。您可以在下方继续编辑：",
 	"createpage-insert-image": "插入图片",
+	"createpage-upload-aborted": "图片插入中断",
+	"createpage-initial-run": "继续编辑",
 	"createpage-please-wait": "请稍候……",
+	"createpage-advanced-edit": "高级编辑器",
+	"createpage-optionals-text": "添加额外段落：",
 	"createpage-save": "保存",
+	"createpage-must-specify-title": "请先指定标题！",
 	"createpage-unsaved-changes": "未保存的更改"
 }
