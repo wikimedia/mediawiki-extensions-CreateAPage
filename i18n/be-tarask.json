@@ -3,14 +3,15 @@
 		"authors": [
 			"EugeneZelenko",
 			"Renessaince",
-			"Vlad5250"
+			"Vlad5250",
+			"Ucukor"
 		]
 	},
 	"createpage-upload": "Загрузіць выяву",
 	"createpage-hide": "Схаваць",
 	"createpage-show": "Паказаць",
 	"createpage": "Стварыць новы артыкул",
-	"createpage-desc": "[[Special:CreatePage|Просты да выкарыстаньня інтэрфэйс]] для стварэньня новых артыкулаў",
+	"createpage-desc": "[[Special:CreatePage|Просты да ўжытку інтэрфэйс]] для стварэньня новых артыкулаў",
 	"createpage-title": "Стварыць новы артыкул",
 	"createpage-title-additional": "Вы прыйшлі па спасылцы на старонку, якая яшчэ не існуе. Каб стварыць яе, напішыце тэкст у полі ніжэй",
 	"createpage-title-caption": "Назва артыкулу",
