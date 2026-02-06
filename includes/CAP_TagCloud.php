@@ -6,7 +6,6 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
-use Wikimedia\AtEase\AtEase;
 
 class CAP_TagCloud {
 	/** @var int */
@@ -50,15 +49,13 @@ class CAP_TagCloud {
 			] ]
 		);
 
-		// prevent PHP from bitching about strtotime()
-		AtEase::suppressWarnings();
-
 		foreach ( $res as $row ) {
 			$tag_name = Title::makeTitle( NS_CATEGORY, $row->lt_title );
 			$tag_text = $tag_name->getText();
 
 			// don't want dates to show up
-			if ( strtotime( $tag_text ) == '' ) {
+			// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+			if ( @strtotime( $tag_text ) == '' ) {
 				if ( $row->count > $this->tags_highest_count ) {
 					$this->tags_highest_count = $row->count;
 				}
@@ -67,8 +64,6 @@ class CAP_TagCloud {
 				];
 			}
 		}
-
-		AtEase::restoreWarnings();
 
 		// sort tag array by key (tag name)
 		if ( $this->tags_highest_count == 0 ) {
