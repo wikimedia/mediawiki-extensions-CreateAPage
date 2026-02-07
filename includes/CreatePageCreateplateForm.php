@@ -572,21 +572,10 @@ class CreatePageCreateplateForm {
 			// an error msg
 			// This first loop has been copied from PostComment
 			if ( !$status->isGood() ) {
-				$errors = $status->getErrorsArray();
+				$messages = $status->getMessages();
 				$errorMsg = '';
-				foreach ( $errors as $error ) {
-					if ( is_array( $error ) ) {
-						$errorMsg = count( $error ) ? $error[0] : '';
-					}
-				}
-				// Hacks' galore continues...
-				// $errorMsg can be 'hookaborted' (e.g. the SpamRegex ext., if a user enters
-				// a SpamRegexed edit summary), but it can _also_ be something like
-				// '<div class="errorbox">Incorrect or missing CAPTCHA.</div>'
-				// Obviously 'hookaborted' is an i18n msg key and the latter is something
-				// that should be output as-is...
-				if ( !preg_match( '/</', $errorMsg ) ) {
-					$errorMsg = wfMessage( $errorMsg )->escaped();
+				foreach ( $messages as $msg ) {
+					$errorMsg .= wfMessage( $msg )->parse();
 				}
 				// This is literally copypasted from the wpPreview loop below
 				// with one '' changed to $errorMsg, that's it
