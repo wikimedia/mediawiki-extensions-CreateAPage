@@ -188,11 +188,6 @@ class CreatePageImageUploadForm extends UploadFromFile {
 	}
 
 	/**
-	 * @suppress PhanTypePossiblyInvalidDimOffset
-	 *  phan is actually totally right about the $details['something']
-	 *  below being invalid (at least at a glance), but I'm not diving nose-first into upload code
-	 *  right now; I just want seccheck running for this extension for now. --ashley, 29 April 2021
-	 *
 	 * @return Status|string|void
 	 */
 	private function processUpload() {
