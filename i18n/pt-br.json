@@ -6,6 +6,9 @@
 			"Jesielt"
 		]
 	},
+	"apihelp-createapage-summary": "Módulo da API CreateAPage: obter modelo de página em HTML (createplate) e tratar da alternância para o modo de edição normal de texto wiki em Special:CreatePage",
+	"apihelp-createapage-param-template": "Nome do modelo de página (createplate) a carregar quando o parâmetro <kbd>what</kbd> tem o valor <kbd>multieditparse</kbd>",
+	"apihelp-createapage-param-what": "Nome da ação a tomar, <kbd>multieditparse</kbd> ou <kbd>switchtoadvancedediting</kbd>",
 	"createpage-edit-normal": "Edição avançada",
 	"createpage-upload": "Enviar imagem",
 	"createpage-hide": "Ocultar",
