@@ -6,7 +6,12 @@ class SpecialCreatePage extends SpecialPage {
 	 * Constructor -- set up the new special page
 	 */
 	public function __construct() {
-		parent::__construct( 'CreatePage', 'createpage' );
+		parent::__construct( 'CreatePage' );
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'createpage';
 	}
 
 	/**
