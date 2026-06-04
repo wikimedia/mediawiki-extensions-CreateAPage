@@ -6,7 +6,8 @@
 			"沈澄心",
 			"許瑜真 (Yuchen Hsu/KaurJmeb)",
 			"铁桶",
-			"Peterxy12"
+			"Peterxy12",
+			"Peterxy"
 		]
 	},
 	"apihelp-createapage-summary": "CreateAPage API模组：获取createplate的HTML，并用于处理在Special:CreatePage上切换到常规wikitext编辑模式",
