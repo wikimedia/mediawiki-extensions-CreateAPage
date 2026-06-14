@@ -8,6 +8,7 @@
 		"no-descending-specificity": null,
 		"selector-max-id": null,
 		"declaration-property-unit-disallowed-list": null,
-		"function-no-unknown": null
+		"function-no-unknown": null,
+		"declaration-property-value-no-unknown": null
 	}
 }
