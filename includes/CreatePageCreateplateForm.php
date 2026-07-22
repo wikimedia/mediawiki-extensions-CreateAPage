@@ -400,7 +400,7 @@ class CreatePageCreateplateForm {
 				$rtitle,
 				$parserOptions
 			);
-			$aboutInfo = str_replace( '</p>', '', $parsedInfo->getRawText() );
+			$aboutInfo = str_replace( '</p>', '', $parsedInfo->getContentHolderText() );
 			$aboutInfo .= wfMessage(
 				'createpage-advanced-text',
 				'<a href="' . $wgServer . $wgScript . '" id="wpAdvancedEdit">' .
