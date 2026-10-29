@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"شاه زمان پټان"
 		]
 	},
+	"apihelp-createapage-upload-summary": "د يومخ‌جوړول انځور راپورته‌کولو کاريال‌مخبڼې‌بهير چلنوال",
 	"createpage-edit-normal": "پرمختللی سمون",
 	"createpage-upload": "انځور پورته کړئ",
 	"createpage-hide": "پټول",
@@ -26,16 +28,23 @@
 	"createpage-top-of-page": "د پاڼې سر",
 	"createpage-uploaded-from": "له ځانگړې:CreatePage څخه پورته شوی",
 	"createplate-list": "تش|تش",
+	"createpage-title-check-header": "سرليک سم‌کتنه خامخا کول",
+	"createpage-title-check-text": "تاسو تر هغې هېڅ چاره نشئ ترسره کولی؛ ترڅو چې د سرليک سم‌کتنه پای ته نه وې رسېدلې. مهرباني وکړئ د دوام ورکولو لپاره د چارې تڼۍ بيا کېکاږئ.",
 	"createpage-img-uploaded": "انځور په بریالیتوب سره پورته شو",
+	"createpage-preview-end": "د مخکتنې پای. تاسو کولی شئ خپل سمون لاندې بيا پيل کړئ:",
 	"createpage-insert-image": "انځور ورټومبل",
 	"createpage-upload-aborted": "انځور ورگډول مو ناگاره‌ شو",
 	"createpage-initial-run": "سمولو ته ورشئ",
+	"createpage-login-required": "د انځورونو راپورته‌کولو لپاره تاسو بايد <a id=\"$2\" href=\"$1\"> غونډال ته ننوځئ</a>",
 	"createpage-please-wait": "لطفاً تم شئ …",
+	"createpage-upload-directory-read-only": "د راپورته‌کولو تگلوری د وېب‌پالنگر له خوا د ليکنې‌وړ نه دی.",
+	"createpage-about-info": "دا ساده شوی سمونگر دی. د نورو مالوماتو لپاره [[s:Help:CreatePage|ShoutWiki Hub]] ته لاړ شئ.",
 	"createpage-advanced-text": "تاسو کولی شئ $1 هم وکاروئ.",
 	"createpage-advanced-edit": "پرمختللی سمونگر",
 	"createpage-optionals-text": "اختياري برخې ورگډول:",
 	"createpage-save": "خوندي کول",
 	"createpage-must-specify-title": "لطفاً لومړی يو سرليک ځانگړی کړئ",
 	"createpage-unsaved-changes": "ناخوندي بدلونونه",
+	"createpage-unsaved-changes-details": "تاسو ناخوندي شوې بدلونونه لرئ. د \"سمه‌ده\" کېکاږل به د هغې د پرېښودو لامل شي.",
 	"tog-createpage-redlinks": "کله چې مو ماتې تړنې څارلې نو[http://www.shoutwiki.com/wiki/Help:CreatePage مخ‌جوړول] وکاروئ"
 }
